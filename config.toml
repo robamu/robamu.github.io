@@ -13,14 +13,27 @@ theme = "beautifulhugo"
   keyword = "coding, rust, c++, python, aerospace, satellites"
   about_me = true
   omit_categories = false
+  socialShare = true
+  # Footer section
+  [params.footer]
+    enable = true
 
-  [[params.addtional_menus]]
-  sidebar_about_description = "Aerospace engineer and software developer"
-  title =  "ABOUT"
-  href =  "/top/about/"
+[Author]
+name = "Robin Mueller"
+github = "robamu"
+linkedin = "robin-mueller-m"
 
-  [params.social]
-  rss            = true
-  email          = "robin.mueller.m@gmail.com"
-  linkedin       = "https://www.linkedin.com/in/robin-mueller-m/"
-  github         = "https://github.com/robamu"
+[[menu.main]]
+name = "Home"
+url = ""
+weight = 1
+
+[[menu.main]]
+name = "About"
+url = "about"
+weight = 2
+
+[[menu.main]]
+name = "Contact"
+url = "contact"
+weight = 3

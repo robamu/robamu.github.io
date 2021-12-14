@@ -17,5 +17,25 @@
 At that point of time, I was an aerospace engineer doing my graduate studies at the University of Stuttgart. I&amp;rsquo;m still active in the small satellite society KSat but I am doing more of a supporting role now that I started working the University as a PhD student.</description>
     </item>
     
+    <item>
+      <title>About Me</title>
+      <link>https://robamu.github.io/about/</link>
+      <pubDate>Tue, 27 Apr 2021 21:53:29 +0500</pubDate>
+      
+      <guid>https://robamu.github.io/about/</guid>
+      <description>My name is Robin Mueller and I love to code! I studied aerospace engineering at the University Stuttgart and have started working as a PhD student at the Institute of Space Systems.
+I am currently working on the EIVE and SOURCE CubeSat projects, but my research focus will be on investigating Rust as a modern and safe alternative to C/C++ for satellite software.</description>
+    </item>
+    
+    <item>
+      <title>Get in touch</title>
+      <link>https://robamu.github.io/contact/</link>
+      <pubDate>Tue, 27 Apr 2021 21:53:29 +0500</pubDate>
+      
+      <guid>https://robamu.github.io/contact/</guid>
+      <description>Name      E-mail address      Message    Send   (Powered by Un-static Forms)
+ </description>
+    </item>
+    
   </channel>
 </rss>

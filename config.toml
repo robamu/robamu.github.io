@@ -13,7 +13,6 @@ theme = "beautifulhugo"
   keyword = "coding, rust, c++, python, aerospace, satellites"
   about_me = true
   omit_categories = false
-  socialShare = true
   # Footer section
   [params.footer]
     enable = true

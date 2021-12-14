@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on robs blog</title>
+    <link>https://robamu.github.io/tags/</link>
+    <description>Recent content in Tags on robs blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 14 Dec 2021 19:29:58 +0100</lastBuildDate><atom:link href="https://robamu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>device-handler</title>
+      <link>https://robamu.github.io/tags/device-handler/</link>
+      <pubDate>Tue, 14 Dec 2021 19:29:58 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/device-handler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>eclipse</title>
+      <link>https://robamu.github.io/tags/eclipse/</link>
+      <pubDate>Tue, 14 Dec 2021 19:29:58 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/eclipse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gsoc</title>
+      <link>https://robamu.github.io/tags/gsoc/</link>
+      <pubDate>Tue, 14 Dec 2021 19:29:58 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/gsoc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sensors</title>
+      <link>https://robamu.github.io/tags/sensors/</link>
+      <pubDate>Tue, 14 Dec 2021 19:29:58 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/sensors/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

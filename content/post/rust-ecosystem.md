@@ -287,7 +287,9 @@ soon.
 
 In the meantime, I also managed to procure a
 [PEB1 development board](https://www.voragotech.com/products/peb1va416x0-development-kit) for
-the [VA416xx familyof devices](https://www.voragotech.com/products/va416xx/bga) and I am also
-trying to get the industry version of
-the [SAMRH71](http://ww1.microchip.com/downloads/en/DeviceDoc/00003161A.pdf) MCU. Time to write more
+the [VA416xx familyof devices](https://www.voragotech.com/products/va416xx/bga). I also want to
+thank [Thales Alenia Space](https://www.thalesgroup.com/en/global/activities/space) for providing
+me with this expensive hardware.
+I am also trying to get the industry version of the
+[SAMRH71](http://ww1.microchip.com/downloads/en/DeviceDoc/00003161A.pdf) MCU. Time to write more
 Rust code!

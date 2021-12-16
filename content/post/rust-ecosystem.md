@@ -17,8 +17,8 @@ projects to further learn the language. I've tried to combine this with the usua
 the research institute I work now as well.
 
 Working at an insitute which builds small satellites gives me access to unique hardware like
-the radiation hardened Vorago MCUs which are not used by hobbyist because of their price tag.
-3-4 digits are very common even for basic radiation hardened components.
+the radiation hardened Vorago MCUs which are usually not used by hobbyist because of their
+price tag. 3-4 digits are very common even for basic radiation hardened components.
 Some of these MCUs are used in our CubeSat projects and I was
 curious whether I could set up Rust for some of the MCUs, namely the VA10820 Cortex-M0 based MCU.
 Vorago sells some of their chips on a Vorago development board named REB1 and I was able to get my

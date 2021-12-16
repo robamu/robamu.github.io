@@ -41,8 +41,13 @@ than just making a few sensors work with something like an Arduino.
  software. A lot of work went into making the Makefiles readable to allow for easy tweaking.
  The project can be developed on Linux and on Windows, as long as the ARM toolchain is installed. 
 
-![Fully featured MCU development environment in Eclipse
-](/img/gsoc-post/eclipse.png "Fully featured MCU development environment in Eclipse")
+<center>
+{{< figure
+    src="/img/gsoc-post/eclipse.png"
+    alt="Development board setup"
+    caption="Fully featured MCU development environment in Eclipse"
+>}}
+</center>
 
 I worked with a specific framework designed  for small satellite missions called the [Flight
 Software Framework](https://egit.irs.uni-stuttgart.de/fsfw/fsfw). It was initially
@@ -98,11 +103,21 @@ which also contains sun sensors and SPI slave select expanders (decoders). The t
 pictures show the set-up. The large board on the left is the AT91SAM9G20-EK development board,
 which has the same chip as the iOBC, which is the on-board computer of the SOURCE project.
 
-![Development board setup
-](/img/gsoc-post/dev-board-setup.jpg "General setup with the AT91SAM9G20-EK development board")
+<center>
+{{< figure
+    src="/img/gsoc-post/dev-board-setup.jpg"
+    alt="Development board setup"
+    caption="General setup with the AT91SAM9G20-EK development board"
+>}}
+</center>
 
-![HKB Board
-](/img/gsoc-post/hkb-board.jpg "Housekeeping board prototype (engineering model) with various sensors")
+<center>
+{{< figure
+    src="/img/gsoc-post/hkb-board.jpg"
+    alt="HKB board"
+    caption="Housekeeping board prototype (engineering model) with various sensors"
+>}}
+</center>
 
  The sensors are generally read and configured by reading certain registers, according  to the
  sensors' datasheet. The basic test for the gyro involved taking  the housekeeping board (HKB) 
@@ -132,8 +147,13 @@ which has the same chip as the iOBC, which is the on-board computer of the SOURC
  to be sent to the host computer for display. This is used for the AT91. A sample output is show,
  which shows the two sensors being polled regularly.
 
- ![Debug Output
-](/img/gsoc-post/eclipse_console.png "Eclipse internal serial console, showing debug output from the AT91")
+<center>
+{{< figure
+    src="/img/gsoc-post/eclipse_console.png"
+    alt="Development board setup"
+    caption="Eclipse internal serial console, showing debug output from the AT91"
+>}}
+</center>
 
 I also started to work on a CoreController component, which takes care of monitoring the on-board
 computer itself. As a first step, I also took all necessary steps to enable communication with the
@@ -158,8 +178,13 @@ FreeRTOS was chosen for SOURCE because the provided driver functions by the OBC 
 use FreeRTOS. The Controller uses the FreeRTOS API to monitor the stack usage of programs, and
 generate general CPU statistics and downlink them (in CSV format).
 
- ![FreeRTOS Task Statistics
-](/img/gsoc-post/TaskStats.png "FreeRTOS Task Statistics printed out")
+<center>
+{{< figure
+    src="/img/gsoc-post/TaskStats.png"
+    alt="Development board setup"
+    caption="FreeRTOS Task Statistics printed out"
+>}}
+</center>
 
 Another important task of the core controller is the scrubbing of non-volatile memories on the
 on-board computer. Space is a hostile environment, and the strong radiation can cause bit flips
@@ -178,5 +203,10 @@ format which is also accessible for other subsystem and stakeholders which are i
 success of the project. It also exists in similar form to visualize the architecture of the whole
 system (in therms of hardware).
 
- ![SOURCE Software Schematic
-](/img/gsoc-post/software_schematic.png "SOURCE Software Schematic")
+<center>
+{{< figure
+    src="/img/gsoc-post/software_schematic.png"
+    alt="Development board setup"
+    caption="SOURCE Software Schematic"
+>}}
+</center>

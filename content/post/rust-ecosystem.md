@@ -29,7 +29,13 @@ libraries for these MCUs yet. I thought this was an excellent opportunity to lea
 aspects of Embedded Rust. The Rust book had an excellent picture of what a ecosystem for a particular
 MCU family or board might look like
 
-![rust embedded ecosystem](/img/rust-ecosystem/crates.png)
+<center>
+{{< figure
+    src="/img/rust-ecosystem/crates.png"
+    alt="Embedded Rust Abstraction Layers"
+    caption="Embedded Rust Abstraction Layers"
+>}}
+</center>
 
 I started with the lowest necessary level to build higher level abstractions:
 The Peripheral Access Crate (PAC). After a few tweaks to the vendor supplied SVD file and the
@@ -91,7 +97,13 @@ and then flashed the board with
 cargo run -p va108xx-hal --example blinky-pac
 ```
 
-![](/gif/rust-ecosystem/vor-blinky.gif)
+<center>
+{{< figure
+    src="/gif/rust-ecosystem/vor-blinky.gif"
+    alt="Blinky GIF"
+    caption="Blinky in action"
+>}}
+</center>
 
 Looking good!
 
@@ -278,7 +290,13 @@ and an example `tasks.json` file like this
 
 with this, we can soon use the Run & Debug tab of VS code to debug our applications
 
-![Debugging with VS Code](/img/rust-ecosystem/vs-code.png)
+<center>
+{{< figure
+    src="/img/rust-ecosystem/vs-code.png"
+    alt="Debugging with VS Code"
+    caption="Debugging with VS Code"
+>}}
+</center>
 
 Implementing a full Rust ecosystem for the VA10820 has been a challenging but satisfying task. I
 think Rust offers excellent features which are really useful to write safe code for space

@@ -238,7 +238,7 @@ cargo run --example adt75-temp-sensor
 ![Reading a temperature sensor in Rust
 ](/img/rust-ecosystem/temp-sensor.png "Reading a temperature sensor in Rust")
 
-I also want to write a bit about the development workflow I am using. It is possible doing
+I would also like to write a bit about the development workflow I am using. It is possible doing
 debugging using a graphical user interface which is important for any application which is more
 complex in my opinion. I am using VS code for this and I'm really happy with the development
 workflow. All that is required is the `Cortex-Debug` plugin.

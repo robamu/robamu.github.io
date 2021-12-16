@@ -33,9 +33,8 @@ which makes testing convenient.
 >}}
 </center>
 
-From the schematic, we can see that the CNVST pin is not connected so we can not test
+From the schematic, I saw that the CNVST pin is not connected so I could not really test
 any of the ADC functions using that pin, but everything else should work.
-
 
 I used the knowledge I gained from programming type-safe APIs for the VA108xx HAL and BSP to
 code a type-safe API for the MAX116xx device. The ADC device has different modes and configuration
@@ -68,6 +67,15 @@ as well.
 This is the example function to use the first shown configuration and using different API
 options to read the channels. The full example can be found
 [here](https://egit.irs.uni-stuttgart.de/rust/vorago-reb1/src/branch/main/examples/max11619-adc.rs).
+Provided that a `JLinkGDBServer` is running, flashing the software can be done with this simple
+command:
+
+```sh
+cargo run --example max11619-adc --release
+```
+
+I also used `release` here because I checked the correct timing and an optimized build is best for
+that.
 
 ```rs
 /// Use the SPI clock as the conversion clock

@@ -91,7 +91,7 @@ and then flashed the board with
 cargo run -p va108xx-hal --example blinky-pac
 ```
 
-![](/gif/vor-blinky.gif)
+![](/gif/rust-ecosystem/vor-blinky.gif)
 
 Looking good!
 

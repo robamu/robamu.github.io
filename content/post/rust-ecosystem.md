@@ -10,19 +10,23 @@ categories: []
 ---
 
 The last few weeks I have been busy diving into the Rust ecosystem and learning the language
-through practical projects. After finishing the excellent [Rust book](https://doc.rust-lang.org/book/)
-, [Rust Embedded Book](https://docs.rust-embedded.org/book/) and tinkering with Rust on some STM32
-MCUs I was looking for practical projects to further learn the language. I've tried to combine this
-with the usual activities at the research institute I work now as well.
+through practical projects. I finishing the excellent
+[Rust book](https://doc.rust-lang.org/book/) and the [Rust Embedded Book](https://docs.rust-embedded.org/book/)
+first and then tinkered with Rust on some STM32 MCUs. As a next step, I was looking for practical
+projects to further learn the language. I've tried to combine this with the usual activities at
+the research institute I work now as well.
 
-Working at an insitute which builds small satellites also gives me access to unique hardware like
-the radiation hardened Vorago MCUs. Some of these MCUs are used in our CubeSat projects and I was
+Working at an insitute which builds small satellites gives me access to unique hardware like
+the radiation hardened Vorago MCUs which are not used by hobbyist because of their price tag.
+3-4 digits are very common even for basic radiation hardened components.
+Some of these MCUs are used in our CubeSat projects and I was
 curious whether I could set up Rust for some of the MCUs, namely the VA10820 Cortex-M0 based MCU.
-Vorago sells some of their chips on a Vorago development board named REB1.
+Vorago sells some of their chips on a Vorago development board named REB1 and I was able to get my
+hands on one.
 
 Browsing the internet a bit, I quickly found out that nobody attempted to create supporting
 libraries for these MCUs yet. I thought this was an excellent opportunity to learn a lot of
-aspects of Rust. The Rust book had an excellent picture of what a ecosystem for a particular
+aspects of Embedded Rust. The Rust book had an excellent picture of what a ecosystem for a particular
 MCU family or board might look like
 
 ![rust embedded ecosystem](/img/rust-ecosystem/crates.png)
@@ -89,6 +93,7 @@ cargo run -p va108xx-hal --example blinky-pac
 
 ![](/gif/vor-blinky.gif)
 
+Looking good!
 
 Now, the next challenge was to write the next level of abstraction: A Hardware Abstraction
 Layer (HAL) crate. I started browsing some of the HALs like the
@@ -140,13 +145,14 @@ fn main() -> ! {
 }
 ```
 
-A lot more readble and neat that the low level PAC version :-)
+A lot more readble and neat that the low level PAC version.
 
 Equipped with a lot more knowledge, I implemented a HAL for all other peripherals, using
 what I saw in different HALs like the ATSAMD HAL or the STM32 HALs. Writing the basic blocking API
 was mostly straighforward once I got more familiar with  writing HAL code. I still have to
-write code which is able to use interrupts to efficiently clear the various FIFOs the VA10820 uses
-to perform IO with a minimum of CPU intervention.
+write code which is able to use interrupts to efficiently clear the various FIFOs. Using these FIFOs
+reduces CPU load is the only sensible for peripherals like the UART to efficiently receive all
+arriving RX data.
 
 As a final step, I also implemented a Board Support Package targeted towards the REB1 development
 board. This also was an excellent way for me to test the I2C implementation because that board
@@ -276,7 +282,7 @@ with this, we can soon use the Run & Debug tab of VS code to debug our applicati
 
 Implementing a full Rust ecosystem for the VA10820 has been a challenging but satisfying task. I
 think Rust offers excellent features which are really useful to write safe code for space
-applications and I hope that some of the code I've written will be used to run awesome missions
+applications and I hope that some of the code I have written will be used to run awesome missions
 soon.
 
 In the meantime, I also managed to procure a

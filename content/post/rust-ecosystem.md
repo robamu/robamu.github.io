@@ -5,8 +5,8 @@ date: 2021-12-15T23:31:00+01:00
 draft: true
 toc: false
 image: ""
-tags: []
-categories: []
+tags: ["rust", "embedded", "space", "va10820"]
+categories: ["rust", "embedded"]
 ---
 
 The last few weeks I have been busy diving into the Rust ecosystem and learning the language

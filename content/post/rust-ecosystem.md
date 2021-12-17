@@ -235,8 +235,13 @@ And this is what the output looks like after flashing the board with
 cargo run --example adt75-temp-sensor
 ```
 
-![Reading a temperature sensor in Rust
-](/img/rust-ecosystem/temp-sensor.png "Reading a temperature sensor in Rust")
+<center>
+{{< figure
+    src="/img/rust-ecosystem/temp-sensor.png"
+    alt="Reading a temperature sensor in Rust"
+    caption="Reading a temperature sensor in Rust"
+>}}
+</center>
 
 I would also like to write a bit about the development workflow I am using. It is possible doing
 debugging using a graphical user interface which is important for any application which is more

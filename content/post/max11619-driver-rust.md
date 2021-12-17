@@ -9,7 +9,7 @@ tags: ["rust", "driver", "adc", "max11619"]
 categories: ["rust", "embedded", "coding"]
 ---
 
-In my [last blog post](http://localhost:1313/post/rust-ecosystem/), I described how I set up a
+In my [last blog post](https://robamu.github.io/post/rust-ecosystem/), I described how I set up a
 small Rust ecosystem for the Vorago REB1 development board. This development board also
 has a MAX11619 10-bit ADC device by Maxim devices. I thought this was a good opportunity
 to develop my first device driver crate because there isn't one for this device yet.

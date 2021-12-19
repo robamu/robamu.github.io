@@ -48,9 +48,9 @@ options to specify the clock source and the voltage reference source. Some examp
 
 There are a lot other configurations, and the Rust typesystem prevents using a wrong API for a
 given configuration. [`Max116xx10Bit`](https://docs.rs/max116xx-10bit/latest/max116xx_10bit/struct.Max116xx10Bit.html)
-is now initially create as an externally clocked device with an external voltage reference.
-This is also a valid configuration to read the ADC
-on our board as the reference is pin is tied to the system voltage.
+is now initially created as an externally clocked device with an external voltage reference.
+This is also a valid configuration to read the ADC on the REB1 board,
+as the reference is pin is tied to the system voltage.
 
 If another configuration is desired, the device struct needs to be converted into a different
 configuration using the `into_*()` API common to Rust. The [driver docs](https://docs.rs/max116xx-10bit/latest/max116xx_10bit/)

@@ -2,6 +2,7 @@ baseURL = "https://robamu.github.io"
 languageCode = 'en-us'
 title = 'robs blog'
 theme = "beautifulhugo"
+disqusShortname = "https-robamu-github-io"
 
 [markup]
   [markup.goldmark]

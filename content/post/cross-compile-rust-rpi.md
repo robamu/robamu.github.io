@@ -1,5 +1,5 @@
 ---
-title: "Cross-Compile Rust for the Raspberry Pi"
+title: "Cross-Compile and Debug Rust for the Raspberry Pi"
 #description: <descriptive text here>
 date: 2021-12-27T12:31:51+01:00
 draft: true
@@ -42,16 +42,17 @@ is the following:
 3. There are only 1-2 of the On-Board Computers available. For example, one is a
    Flight Model which remains packaged until satellite asembly while the other one is the
    Engineering Model which has to stay in the clean room. Allowing convenient development
-   requires remote deployment of the application. Otherwise, I would have to go
+   requires remote deployment of the application. Otherwise, one would have to go
    into the cleanroom for every small test and change I want to introduce.
 4. The software is complex and debugging can become complex too. Printouts and LEDs
-   are not sufficient anymore to debug the software, a full debugger is required.
+   are not sufficient anymore to debug the software, a full debugger is required additionally.
 
 For that reason, convenient cross-compilation and debugging is a must for me when considering
 Rust as an alternative to C/C++ on systems like the [Q7S](https://xiphos.com/products/q7-processor/).
 I have only found bits and pieces in the Internet on how to properly do this. Therefore, I have
-created a template repository which gathers all those bits and pieces into one package.
-I specifically targetted debugging with the command line and with VS Code as those tools are most
+created a [template repository](https://github.com/robamu-org/rpi-rs-crosscompile) which gathers
+all those bits and pieces into one package.
+I specifically targeted debugging with the command line and with VS Code as those tools are most
 commonly used in Rust development from what I have seen so far.
 The instrutions provided here have been tested on Linux (Ubuntu 21.04) and Windows 10, but I really
 recommend to use a Linux development hosted when developing anything for an Embedded Linux board.
@@ -149,11 +150,6 @@ permanently, for example like shown here:
 
 
 If you use `git bash`, you can also use the Linux way shown above.
-
-You can create a cross-compiler built with crosstool-ng
-from [here](https://www.dropbox.com/sh/hkn4lw87zr002fh/AAAO-HxFQzfmmPQQ9KVmoooGa?dl=0). There is one
-available for the Raspberry Pi 3 and the Raspberry Pi 4.
-
 Test with `arm-linux-gnueabihf-gcc --version`:
 
 ```ps
@@ -276,6 +272,8 @@ Warning: Permanently added the ED25519 host key for IP address '...' to the list
           '_   -   _'
           / '-----' \
 ```
+
+As you can see, all commands executed by the Python scripts are shown as well.
 
 ## Debugging the application on the Command Line
 
@@ -414,13 +412,15 @@ Child exited with status 0
 
 ## Debugging the application with VS Code and `CodeLLDB`
 
+I think the best debugging experience is still provided by GUI tools like Eclipse or VS Code.
 The following examples are shown for Linux. The second one should work for Windows as well,
 but I had issues getting the first configuration to work on Windows.
 
 ### GDB server started by VS Code
 
 Unfortunately, I have not found a way to get the debug output produced by an application
-when starting the GDB server with VS code.
+when starting the GDB server with VS code. Feel free to investigate how this could be solved
+using VS Code tasks.
 
 You can simply select and run the `Remote Debugging With Server` configuration
 in VS Code. The result should look something like the following:
@@ -436,8 +436,8 @@ in VS Code. The result should look something like the following:
 ### GDB server started externally
 
 The only difference is that the GDB server is now started in an external shell
-instance, which also allows to see debug output produces by the application.
-I configured the `.cargo/config.toml` to simply use `cargo run`:
+instance, which also allows to see debug output produced by the application.
+Configuring `.cargo/config.toml` correctlys allows simply using `cargo run`:
 
 ```toml
 # Requires Python3 installation. Takes care of transferring and running the application

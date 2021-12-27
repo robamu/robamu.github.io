@@ -4,27 +4,33 @@ title = 'robs blog'
 theme = "beautifulhugo"
 disqusShortname = "https-robamu-github-io"
 
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+
+enableGitInfo = true
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
 
-[params]
+[Params]
   title = "robs blog"
   keyword = "coding, rust, c++, python, aerospace, satellites"
   about_me = true
-  omit_categories = false
+  commit = false
+  comments = true
+  useHLJS = false
+  socialShare = true
+  showRelatedPosts = true
+  delayDisqus = true
+  # Google Programmable Search Engine
+  gcse = "49f27010d1fda4554"
   # Footer section
   [params.footer]
     enable = true
-  # Comment config
-  [params.page.comment]
-    enable = true
-    # Disqus comment config (https://disqus.com/)
-    [params.page.comment.disqus]
-      enable = true
-      # Disqus shortname to use Disqus in posts
-      shortname = "https-robamu-github-io"
+
 [Author]
 name = "Robin Mueller"
 github = "robamu"

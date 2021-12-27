@@ -396,7 +396,7 @@ Running start command: arm-linux-gnueabihf-gdb -q -x gdb.gdb target\armv7-unknow
 Reading symbols from target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile...done.
 warning: Unsupported auto-load script at offset 0 in section .debug_gdb_scripts
 of file C:\Users\Robin\Documents\Rust\rpi-rs-crosscompile\target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile.
-Use `info auto-load python-scripts [REGEXP]' to list them.
+Use `info auto-load python-scripts [REGEXP]` to list them.
 Remote debugging from host 127.0.0.1
 0xb6fcea30 in ?? () from c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot/lib/ld-linux-armhf.so.3
 Breakpoint 1 at 0x40a7e4

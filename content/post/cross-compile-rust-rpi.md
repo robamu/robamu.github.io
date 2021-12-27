@@ -16,6 +16,16 @@ which support Embedded Linux, for example the [Beagle Bone Black](https://beagle
 Xilinx hybrid CPU / FPGA solutions like the
 [Zynq 7020](https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html).
 
+<center>
+{{< figure
+    src="/img/rpi-rs-crosscompile/RPI.jpg"
+    alt="Embedded Linux Boards: Raspberry Pi"
+    caption="Embedded Linux Boards: Raspberry Pi"
+>}}
+</center>
+
+[Image Source](https://en.wikipedia.org/wiki/Raspberry_Pi#/media/File:Raspberry_Pi_4_Model_B_-_Side.jpg)
+
 I am especially interested in potential of Rust to develop more complex applications and allow
 remote development for Linux boards. All of this generally requires cross-compiling. For most
 use-cases and simpler projects, compiling and running the applications on the Linux boards directly
@@ -148,6 +158,13 @@ Add the binary path of your installed cross-toolchain for your path.
 You can add the toolchain binary path to your system environmental variables
 permanently, for example like shown here:
 
+<center>
+{{< figure
+    src="/img/rpi-rs-crosscompile/win-path.png"
+    alt="Windows Environmental Variables Example"
+    caption="Windows Environmental Variables Example"
+>}}
+</center>
 
 If you use `git bash`, you can also use the Linux way shown above.
 Test with `arm-linux-gnueabihf-gcc --version`:

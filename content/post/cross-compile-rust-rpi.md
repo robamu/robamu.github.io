@@ -11,8 +11,10 @@ categories: ["rust", "cross-compile", "coding"]
 
 After exploring Rust for smaller bare-metal systems like Cortex-M based microcontrollers, I am
 trying to learn using Rust when using a Linux runtime. The most common example for this is the
-Raspberry Pi, but there are a lot of other boards out there which support Embedded Linux, for
-example the Beagle Bone Black or Xilinx hybrid CPU / FPGA solutions like the Zynq 7020.
+[Raspberry Pi](https://www.raspberrypi.org/), but there are a lot of other boards out there
+which support Embedded Linux, for example the [Beagle Bone Black](https://beagleboard.org/black) or
+Xilinx hybrid CPU / FPGA solutions like the
+[Zynq 7020](https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html).
 
 I am especially interested in potential of Rust to develop more complex applications and allow
 remote development for Linux boards. All of this generally requires cross-compiling. For most

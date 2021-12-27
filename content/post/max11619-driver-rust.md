@@ -2,7 +2,7 @@
 title: "Rust driver for the 10-bit MAX11619 ADCs"
 #description: <descriptive text here>
 date: 2021-12-16T22:51:15+01:00
-draft: true
+draft: false
 toc: false
 image: ""
 tags: ["rust", "driver", "adc", "max11619"]

@@ -2,7 +2,7 @@
 title: "Throwback - GSoC 2020 | Device handler development for the SOURCE project"
 #description: <descriptive text here>
 date: 2021-12-14T19:29:58+01:00
-draft: true
+draft: false
 toc: false
 image: ""
 tags: ["gsoc", "device-handler", "sensors", "eclipse"]

@@ -2,7 +2,7 @@
 title: "Bringing Rust to Space - Setting up a Rust ecosystem for the VA108XX MCU family"
 #description: <descriptive text here>
 date: 2021-12-15T23:31:00+01:00
-draft: true
+draft: false
 toc: false
 image: ""
 tags: ["rust", "embedded", "space", "va10820"]

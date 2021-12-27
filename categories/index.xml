@@ -6,13 +6,31 @@
     <description>Recent content in Categories on robs blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Dec 2021 22:51:15 +0100</lastBuildDate><atom:link href="https://robamu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Dec 2021 12:31:51 +0100</lastBuildDate><atom:link href="https://robamu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>coding</title>
       <link>https://robamu.github.io/categories/coding/</link>
-      <pubDate>Thu, 16 Dec 2021 22:51:15 +0100</pubDate>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
       
       <guid>https://robamu.github.io/categories/coding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cross-compile</title>
+      <link>https://robamu.github.io/categories/cross-compile/</link>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/categories/cross-compile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>https://robamu.github.io/categories/rust/</link>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/categories/rust/</guid>
       <description></description>
     </item>
     
@@ -22,15 +40,6 @@
       <pubDate>Thu, 16 Dec 2021 22:51:15 +0100</pubDate>
       
       <guid>https://robamu.github.io/categories/embedded/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rust</title>
-      <link>https://robamu.github.io/categories/rust/</link>
-      <pubDate>Thu, 16 Dec 2021 22:51:15 +0100</pubDate>
-      
-      <guid>https://robamu.github.io/categories/rust/</guid>
       <description></description>
     </item>
     

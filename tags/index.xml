@@ -6,7 +6,52 @@
     <description>Recent content in Tags on robs blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Dec 2021 22:51:15 +0100</lastBuildDate><atom:link href="https://robamu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Dec 2021 12:31:51 +0100</lastBuildDate><atom:link href="https://robamu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cli</title>
+      <link>https://robamu.github.io/tags/cli/</link>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/cli/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cross-compile</title>
+      <link>https://robamu.github.io/tags/cross-compile/</link>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/cross-compile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raspberrypi</title>
+      <link>https://robamu.github.io/tags/raspberrypi/</link>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/raspberrypi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>https://robamu.github.io/tags/rust/</link>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vscode</title>
+      <link>https://robamu.github.io/tags/vscode/</link>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/tags/vscode/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>adc</title>
       <link>https://robamu.github.io/tags/adc/</link>
@@ -31,15 +76,6 @@
       <pubDate>Thu, 16 Dec 2021 22:51:15 +0100</pubDate>
       
       <guid>https://robamu.github.io/tags/max11619/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rust</title>
-      <link>https://robamu.github.io/tags/rust/</link>
-      <pubDate>Thu, 16 Dec 2021 22:51:15 +0100</pubDate>
-      
-      <guid>https://robamu.github.io/tags/rust/</guid>
       <description></description>
     </item>
     

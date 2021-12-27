@@ -6,7 +6,17 @@
     <description>Recent content in coding on robs blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Dec 2021 22:51:15 +0100</lastBuildDate><atom:link href="https://robamu.github.io/categories/coding/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Dec 2021 12:31:51 +0100</lastBuildDate><atom:link href="https://robamu.github.io/categories/coding/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cross-Compile and Debug Rust Applications for the Raspberry Pi</title>
+      <link>https://robamu.github.io/post/cross-compile-rust-rpi/</link>
+      <pubDate>Mon, 27 Dec 2021 12:31:51 +0100</pubDate>
+      
+      <guid>https://robamu.github.io/post/cross-compile-rust-rpi/</guid>
+      <description>After exploring Rust for smaller bare-metal systems like Cortex-M based microcontrollers, I am trying to learn using Rust when using a Linux runtime. The most common example for this is the Raspberry Pi, but there are a lot of other boards out there which support Embedded Linux, for example the Beagle Bone Black or Xilinx hybrid CPU / FPGA solutions like the Zynq 7020.
+Embedded Linux Boards: Raspberry Pi</description>
+    </item>
+    
     <item>
       <title>Rust driver for the 10-bit MAX11619 ADCs</title>
       <link>https://robamu.github.io/post/max11619-driver-rust/</link>

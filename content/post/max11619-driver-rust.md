@@ -4,7 +4,10 @@ title: "Rust driver for the 10-bit MAX11619 ADCs"
 date: 2021-12-16T22:51:15+01:00
 draft: false
 toc: false
+# Unfortunately, the preview image looks too large in my opinion..
+# Need to adapt beautifulhugo for that
 image: ""
+# image: "/img/max11619-driver/setup-rotated.jpg"
 tags: ["rust", "driver", "adc", "max11619"]
 categories: ["rust", "embedded", "coding"]
 ---

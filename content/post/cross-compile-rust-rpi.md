@@ -14,17 +14,17 @@ trying to learn using Rust when using a Linux runtime. The most common example f
 Raspberry Pi, but there are a lot of other boards out there which support Embedded Linux, for
 example the Beagle Bone Black or Xilinx hybrid CPU / FPGA solutions like the Zynq 7020.
 
-## Some Background Information
-
-If you're only interested in the result and on how to quickly cross-develop applications for your
-Linux board, go to the next section.
-
 I am especially interested in potential of Rust to develop more complex applications and allow
 remote development for Linux boards. All of this generally requires cross-compiling. For most
 use-cases and simpler projects, compiling and running the applications on the Linux boards directly
 is a lot simpler then the effort of setting up a cross-compiling environment on a host machine.
 
-However, my experiences when developing something like satellite software
+## Some Background Information
+
+If you're only interested in the result and on how to quickly cross-develop applications for your
+Linux board, go to the [next section](#crossbuild).
+
+My experiences when developing something like satellite software for an Embedded Linux Software
 is the following:
 
 1. Even though there is a Linux runtime, it might not support compiling
@@ -38,9 +38,9 @@ is the following:
    the compilation times are long. Even if the Linux boards support
    compilation, compiling the primary software on the board becomes unfeasable.
 3. There are only 1-2 of the On-Board Computers available. For example, one is a
-   Flight Model which remains packaged, the other one is the Engineering Model
-   which has to stay in the clean room. Allowing convenient development
-   requires remote deployment of the application. Otherwise, I'd have to go
+   Flight Model which remains packaged until satellite asembly while the other one is the
+   Engineering Model which has to stay in the clean room. Allowing convenient development
+   requires remote deployment of the application. Otherwise, I would have to go
    into the cleanroom for every small test and change I want to introduce.
 4. The software is complex and debugging can become complex too. Printouts and LEDs
    are not sufficient anymore to debug the software, a full debugger is required.
@@ -50,11 +50,11 @@ Rust as an alternative to C/C++ on systems like the [Q7S](https://xiphos.com/pro
 I have only found bits and pieces in the Internet on how to properly do this. Therefore, I have
 created a template repository which gathers all those bits and pieces into one package.
 I specifically targetted debugging with the command line and with VS Code as those tools are most
-commonly used in Rust development. The instrutions provided here have been tested on
-Linux (Ubuntu 21.04) and Windows 10, but I really recommend to use a Linux development hosted when
-developing anything for an Embedded Linux board.
+commonly used in Rust development from what I have seen so far.
+The instrutions provided here have been tested on Linux (Ubuntu 21.04) and Windows 10, but I really
+recommend to use a Linux development hosted when developing anything for an Embedded Linux board.
 
-## Cross-Building a Rust application for the Raspberry Pi
+## <a name="crossbuild"></a>  Cross-Building a Rust application for the Raspberry Pi
 
 The instructions here are based on
 [this excellent guide](https://chacin.dev/blog/cross-compiling-rust-for-the-raspberry-pi/).
@@ -143,9 +143,8 @@ It is recommended to install the cross-toolchain provided by
 Add the binary path of your installed cross-toolchain for your path.
 
 You can add the toolchain binary path to your system environmental variables
-permanently, for example like shown in the following picture:
+permanently, for example like shown here:
 
-Image here
 
 If you use `git bash`, you can also use the Linux way shown above.
 
@@ -297,6 +296,51 @@ runner = "python3 bld-deploy-remote.py -t -d --source"
 
 Console output:
 
+```console
+[Raspberry Pi 4] rmueller@power-pinguin:~/Rust/rpi-rs-crosscompile(main)$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `python3 bld-deploy-remote.py -t -d -s --source target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile`
+Running transfer command: sshpass  scp target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile pi@raspberrypi.local:"/tmp/rpi-rs-crosscompile"
+Running debug command: sshpass  ssh -f -L 17777:localhost:17777 pi@raspberrypi.local "sh -c 'killall -q gdbserver; gdbserver *:17777 /tmp/rpi-rs-crosscompile'"
+Process /tmp/rpi-rs-crosscompile created; pid = 7343
+Listening on port 17777
+Running start command: gdb-multiarch -q -x gdb.gdb target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile
+Reading symbols from target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile...
+warning: Missing auto-load script at offset 0 in section .debug_gdb_scripts
+of file /home/rmueller/Rust/rpi-rs-crosscompile/target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile.
+Use `info auto-load python-scripts [REGEXP]' to list them.
+Remote debugging from host 127.0.0.1
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+warning: File transfers from remote targets can be slow. Use "set sysroot" to access files locally instead.
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+...
+0xb6fcea30 in ?? () from target:/lib/ld-linux-armhf.so.3
+Breakpoint 1 at 0x40ce70: main. (2 locations)
+Reading /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so from remote target...
+...
+
+Breakpoint 1, 0x0040cf48 in main ()
+(gdb) c
+Continuing.
+
+Breakpoint 1, rpi_rs_crosscompile::main () at src/main.rs:5
+5       let out = b"Hello fellow Rustaceans!";
+(gdb) c
+Continuing.
+ __________________________
+< Hello fellow Rustaceans! >
+ --------------------------
+        \
+         \
+            _~^~^~_
+        \) /  o o  \ (/
+          '_   -   _'
+          / '-----' \
+
+Child exited with status 0
+[Inferior 1 (process 7343) exited normally]
+(gdb) 
+```
 
 **Windows**:
 
@@ -374,7 +418,78 @@ but I had issues getting the first configuration to work on Windows.
 ### GDB server started by VS Code
 
 Unfortunately, I have not found a way to get the debug output produced by an application
-when starting the GDB server with VS code. Furthermore, I found this to be rather unreliable
-on Windows. The instructions here are shown for Linux:
+when starting the GDB server with VS code.
+
+You can simply select and run the `Remote Debugging With Server` configuration
+in VS Code. The result should look something like the following:
+
+<center>
+{{< figure
+    src="/img/rpi-rs-crosscompile/debug-vscode-with-server.png"
+    alt="Debugging with VS Code with GDB Server started by VS Code"
+    caption="Debugging with VS Code with GDB Server started by VS Code"
+>}}
+</center>
 
 ### GDB server started externally
+
+The only difference is that the GDB server is now started in an external shell
+instance, which also allows to see debug output produces by the application.
+I configured the `.cargo/config.toml` to simply use `cargo run`:
+
+```toml
+# Requires Python3 installation. Takes care of transferring and running the application
+# to the Raspberry Pi
+# runner = "py bld-deploy-remote.py -t -r --source"
+# runner = "python3 bld-deploy-remote.py -t -r --source"
+...
+# runner = "py bld-deploy-remote.py -t -d --source"
+runner = "python3 bld-deploy-remote.py -t -d --source"
+...
+# runner = "py bld-deploy-remote.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source"
+# runner = "python3 bld-deploy-remote.py -t -d --source"
+```
+
+After using `cargo run`, you can run the `Remote Debugging External Server`
+configuration in VS Code. The result should look something like the following:
+
+<center>
+{{< figure
+    src="/img/rpi-rs-crosscompile/debug-vscode-external-server.png"
+    alt="Debugging with VS Code with externally startred GDB server"
+    caption="Debugging with VS Code with externally startred GDB server"
+>}}
+</center>
+
+## Under the hood
+
+If you're interested how exactly this is done in VS Code, you can have a look at the
+[`launch.json`](https://github.com/robamu-org/rpi-rs-crosscompile/blob/main/.vscode/launch.json)
+and [`tasks.json`](https://github.com/robamu-org/rpi-rs-crosscompile/blob/main/.vscode/tasks.json)
+provided in the [template repository](https://github.com/robamu-org/rpi-rs-crosscompile/tree/main/.vscode).
+
+These generally call the `bld-deploy-remote.py` script, which can be found
+[here](https://github.com/robamu-org/rpi-rs-crosscompile/blob/main/bld-deploy-remote.py).
+This script automates one to all of the following steps which are generally required to deploy and
+debug a cross-compiled application:
+
+1. Build the application. When using a Cargo runner, Cargo will take care of this step
+2. Transfer the application to the Raspberry Pi using the `-t` flag. The default destination
+   is the `/tmp` folder, but this can be customized with the `--dest` flag
+3. Start the `gdbserver` on the Raspberry Pi. The script also sets up port forwarding on the port
+   17777 so that the development host can simply connect to `localhost:17777`
+4. Start the GDB application to debug the software
+
+Using Python to perform these steps provides a little bit more flexiblity and portability in
+my opinion. It also makes it easier to adapt the script to custom requirements, because
+Python has the most easiest and most readable syntax of all automation tools I have worked with.
+
+This script can also be easily ported to other Embedded Linux board by tweaking the
+`DEFAULT_*` parameters found at the top of the Python script.
+
+## Room for Impovements
+
+I have not really looked into how tools like [`cross`](https://github.com/rust-embedded/cross)
+could be used to simplify this process. I think some steps might become easier but using `cross`
+also requires `docker`. I think the ways to run and deploy cross-compiled software shown here
+are sufficient for most use-cases. I might try out cross in the future though.

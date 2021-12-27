@@ -60,7 +60,7 @@
   "headline": "Cross-Compile and Debug Rust Applications for the Raspberry Pi",
   "description" : "After exploring Rust for smaller bare-metal systems like Cortex-M based microcontrollers, I am trying to learn using Rust when using a Linux runtime. The most common example for this is the Raspberry Pi, but there are a lot of other boards out there which support Embedded Linux, for example the Beagle Bone Black or Xilinx hybrid CPU \/ FPGA solutions like the Zynq 7020.\n\r\r\r\rEmbedded Linux Boards: Raspberry Pi",
   "inLanguage" : "en",
-  "wordCount":  2605 ,
+  "wordCount":  2610 ,
   "datePublished" : "2021-12-27T12:31:51",
   "dateModified" : "2021-12-27T12:31:51",
   "image" : "https:\/\/robamu.github.io",
@@ -688,12 +688,13 @@ is the <code>/tmp</code> folder, but this can be customized with the <code>--des
 17777 so that the development host can simply connect to <code>localhost:17777</code></li>
 <li>Start the GDB application to debug the software</li>
 </ol>
-<p>Using Python to perform these steps provides a little bit more flexiblity and portability in
-my opinion. It also makes it easier to adapt the script to custom requirements, because
-Python has the most easiest and most readable syntax of all automation tools I have worked with.</p>
+<p>Using Python instead of a shell script to perform these steps provides a little bit more flexiblity
+and portability in my opinion. It also makes it easier to adapt the script to custom requirements,
+because Python has the most easiest and most readable syntax of all automation tools I have
+worked with.</p>
 <p>This script can also be easily ported to other Embedded Linux board by tweaking the
 <code>DEFAULT_*</code> parameters found at the top of the Python script.</p>
-<h2 id="room-for-impovements">Room for Impovements</h2>
+<h2 id="room-for-improvements">Room for Improvements</h2>
 <p>I have not really looked into how tools like <a href="https://github.com/rust-embedded/cross"><code>cross</code></a>
 could be used to simplify this process. I think some steps might become easier but using <code>cross</code>
 also requires <code>docker</code>. I think the ways to run and deploy cross-compiled software shown here

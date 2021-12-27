@@ -53,15 +53,16 @@ are the following:
    Flight Model which remains packaged until satellite asembly while the other one is the
    Engineering Model which has to stay in the clean room. Allowing convenient development
    requires remote deployment of the application. Otherwise, one would have to go
-   into the cleanroom for every small test and change I want to introduce.
+   into the cleanroom for every small test or change to the software.
 4. The software is complex and debugging can become complex too. Printouts and LEDs
    are not sufficient anymore to debug the software, a full debugger is required additionally.
 
-For that reason, convenient cross-compilation and debugging is a must for me when considering
-Rust as an alternative to C/C++ on systems like the [Q7S](https://xiphos.com/products/q7-processor/).
-I have only found bits and pieces in the Internet on how to properly do this. Therefore, I have
-created a [template repository](https://github.com/robamu-org/rpi-rs-crosscompile) which gathers
-all those bits and pieces into one package.
+For that reason, convenient cross-compilation and debugging are very important for me when
+considering Rust as an alternative to C/C++ on systems like the
+[Q7S](https://xiphos.com/products/q7-processor/).
+I have only found bits and pieces in the Internet on how to properly do these tasks. Therefore, I
+have created a [template repository](https://github.com/robamu-org/rpi-rs-crosscompile) which
+gathers all those bits and pieces into one package.
 I specifically targeted debugging with the command line and with VS Code as those tools are most
 commonly used in Rust development from what I have seen so far.
 The instrutions provided here have been tested on Linux (Ubuntu 21.04) and Windows 10, but I really

@@ -499,14 +499,15 @@ debug a cross-compiled application:
    17777 so that the development host can simply connect to `localhost:17777`
 4. Start the GDB application to debug the software
 
-Using Python to perform these steps provides a little bit more flexiblity and portability in
-my opinion. It also makes it easier to adapt the script to custom requirements, because
-Python has the most easiest and most readable syntax of all automation tools I have worked with.
+Using Python instead of a shell script to perform these steps provides a little bit more flexiblity
+and portability in my opinion. It also makes it easier to adapt the script to custom requirements,
+because Python has the most easiest and most readable syntax of all automation tools I have
+worked with.
 
 This script can also be easily ported to other Embedded Linux board by tweaking the
 `DEFAULT_*` parameters found at the top of the Python script.
 
-## Room for Impovements
+## Room for Improvements
 
 I have not really looked into how tools like [`cross`](https://github.com/rust-embedded/cross)
 could be used to simplify this process. I think some steps might become easier but using `cross`

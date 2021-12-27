@@ -26,8 +26,8 @@ Xilinx hybrid CPU / FPGA solutions like the
 
 [Image Source](https://en.wikipedia.org/wiki/Raspberry_Pi#/media/File:Raspberry_Pi_4_Model_B_-_Side.jpg)
 
-I am especially interested in potential of Rust to develop more complex applications and allow
-remote development for Linux boards. All of this generally requires cross-compiling. For most
+I am especially interested in the potential of Rust to develop more complex applications and allow
+remote development on Linux boards. All of this generally requires cross-compiling. For most
 use-cases and simpler projects, compiling and running the applications on the Linux boards directly
 is a lot simpler then the effort of setting up a cross-compiling environment on a host machine.
 
@@ -37,7 +37,7 @@ If you're only interested in the result and on how to quickly cross-develop appl
 Linux board, go to the [next section](#crossbuild).
 
 My experiences when developing something like satellite software for an Embedded Linux Software
-is the following:
+are the following:
 
 1. Even though there is a Linux runtime, it might not support compiling
    applications on the board directly. For example, the

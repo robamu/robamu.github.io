@@ -1,4 +1,4 @@
-Robs blog
+Hugo Commands
 =========
 
 Create new post
@@ -7,8 +7,14 @@ Create new post
 hugo new post/<postName>.md
 ```
 
-Serve locally
+Serve locally with drafts
 
 ```sh
-hugo serve -D && firefox localhost:1313
+hugo serve -D
+```
+
+Build regular page
+
+```sh
+hugo
 ```

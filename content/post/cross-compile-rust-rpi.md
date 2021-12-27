@@ -84,7 +84,13 @@ Python 3.9.7
 **Windows**:
 
 ```console
+Robin@DESKTOP-7KSTH01 MSYS ~/Documents/Rust/rpi-rs-crosscompile (main)
+$ py --version
+Python 3.9.0
 ```
+
+You need to install `scp` and `ssh` for the Python script to work. There are different ways to
+do this, for example by installing Puttty or by installing these tools with MinGW64.
 
 ### Setting up the Raspberry Pi
 
@@ -127,6 +133,40 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
+Proceed with the generic setup.
+
+### Setup Windows
+
+It is recommended to install the cross-toolchain provided by
+[SysProgs](https://gnutoolchains.com/raspberry/).
+
+Add the binary path of your installed cross-toolchain for your path.
+
+You can add the toolchain binary path to your system environmental variables
+permanently, for example like shown in the following picture:
+
+Image here
+
+If you use `git bash`, you can also use the Linux way shown above.
+
+You can create a cross-compiler built with crosstool-ng
+from [here](https://www.dropbox.com/sh/hkn4lw87zr002fh/AAAO-HxFQzfmmPQQ9KVmoooGa?dl=0). There is one
+available for the Raspberry Pi 3 and the Raspberry Pi 4.
+
+Test with `arm-linux-gnueabihf-gcc --version`:
+
+```ps
+C:\Users\Robin\Documents\Rust\rpi-rs-crosscompile [main ≡]> arm-linux-gnueabihf-gcc --version
+arm-linux-gnueabihf-gcc.exe (Raspbian 8.3.0-6+rpi1) 8.3.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+Proceed with the generic setup.
+
+### Generic Setup
+
 Now you are ready to build the first application for the Raspberry Pi.
 The `.cargo/def-config.toml` file is a template for a Cargo configuration
 to perform flashing conveniently. Copy it to `.cargo/config.toml` first:
@@ -137,16 +177,35 @@ cp def-config.toml config.toml
 ```
 
 Then open the `config.toml` with a text editor of your choice and select
-the correct linker first, for example with `armv8-rpi4-linux-gnueabihf-gcc`:
+the correct linker first, for example with `armv8-rpi4-linux-gnueabihf-gcc` on Linux or
+`arm-linux-gnueabihf-gcc` on Windows:
 
 ```toml
 # If you use a different cross-compiler, adapt this flag accordingly.
-linker = "armv8-rpi4-linux-gnueabihf-gcc"
+# linker = "armv8-rpi4-linux-gnueabihf-gcc"
 # linker = "arm-linux-gnueabihf-gcc"
 # linker = "arm-none-linux-gnueabihf-gcc"
 ```
 
-Then select the correct runner to run the application instead of debugging it
+Then select the correct runner to run the application instead of debugging it. For Windows,
+select a runner using `py`.
+
+**Linux**:
+
+```toml
+# Requires Python3 installation. Takes care of transferring and running the application
+# to the Raspberry Pi
+# runner = "py bld-deploy-remote.py -t -r --source"
+runner = "python3 bld-deploy-remote.py -t -r --source"
+...
+# runner = "py bld-deploy-remote.py -t -d --source"
+# runner = "python3 bld-deploy-remote.py -t -d --source"
+...
+# runner = "py bld-deploy-remote.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source"
+# runner = "python3 bld-deploy-remote.py -t -d --source"
+```
+
+**Windows**:
 
 ```toml
 # Requires Python3 installation. Takes care of transferring and running the application
@@ -164,26 +223,16 @@ runner = "py bld-deploy-remote.py -t -r --source"
 Finally select the correct builder depending on whether you have a Raspberry Pi 0/1
 or a Raspberry Pi 2/3/4
 
-### Setup Windows
+### Building the application
 
-It is recommended to install the cross-toolchain provided by
-[SysProgs](https://gnutoolchains.com/raspberry/).
-
-Add the binary path of your installed cross-toolchain for your path.
-
-You can add the toolchain binary path to your system environmental variables
-permanently, for example like shown in the following picture:
-
-Image here
-
-If you use `git bash`, you can also use the Linux way shown above.
-
-blablabla
+Everything should be ready to build the application.
+Simply use `cargo build`.
 
 ### Running the application
 
 Everything should be ready to run the application remotely now.
-Running the application is very simple now: Use `cargo run`
+Running the application is very simple now: Use `cargo run`, which will also build the application
+automatically:
 
 **Linux**:
 
@@ -207,6 +256,125 @@ Running target application: sshpass  ssh pi@raspberrypi.local /tmp/rpi-rs-crossc
 
 **Windows**:
 
+```console
+C:\Users\Robin\Documents\Rust\rpi-rs-crosscompile [main ≡]> cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `python3 bld-deploy-remote.py -t -r --source target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile`
+Running transfer command:  scp target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile pi@raspberrypi.local:"/tmp/rpi-rs-crosscompile"
+Warning: Permanently added the ED25519 host key for IP address '...' to the list of known hosts.
+rpi-rs-crosscompile                                                                   100% 4448KB  10.2MB/s   00:00
+Running target application:  ssh pi@raspberrypi.local /tmp/rpi-rs-crosscompile
+Warning: Permanently added the ED25519 host key for IP address '...' to the list of known hosts.
+ __________________________
+< Hello fellow Rustaceans! >
+ --------------------------
+        \
+         \
+            _~^~^~_
+        \) /  o o  \ (/
+          '_   -   _'
+          / '-----' \
+```
 
 ## Debugging the application on the Command Line
 
+You can switch to the debugging configuration by changing the runner accordingly
+
+**Linux**:
+
+```toml
+# Requires Python3 installation. Takes care of transferring and running the application
+# to the Raspberry Pi
+# runner = "py bld-deploy-remote.py -t -r --source"
+# runner = "python3 bld-deploy-remote.py -t -r --source"
+...
+# runner = "py bld-deploy-remote.py -t -d --source"
+# runner = "python3 bld-deploy-remote.py -t -d --source"
+...
+# runner = "py bld-deploy-remote.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source"
+runner = "python3 bld-deploy-remote.py -t -d --source"
+```
+
+Console output:
+
+
+**Windows**:
+
+```toml
+# Requires Python3 installation. Takes care of transferring and running the application
+# to the Raspberry Pi
+runner = "py bld-deploy-remote.py -t -r --source"
+# runner = "python3 bld-deploy-remote.py -t -r --source"
+...
+# runner = "py bld-deploy-remote.py -t -d --source"
+# runner = "python3 bld-deploy-remote.py -t -d --source"
+...
+runner = "py bld-deploy-remote.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source"
+# runner = "python3 bld-deploy-remote.py -t -d --source"
+```
+
+Now, you can use `cargo run` like before, but this time the Python helper program will
+start a GDB server on the Pi and then launch a GDB application locally to debug the program.
+
+Console Output, using `git bash` here with `scp` and `ssh` installed via MinGW64:
+
+```console
+Robin@DESKTOP-7KSTH01 MSYS ~/Documents/Rust/rpi-rs-crosscompile (main)
+$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `py bld-deploy-remote.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source 'target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile'`
+Running transfer command:  scp target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile pi@raspberrypi.local:"/tmp/rpi-rs-crosscompile"
+Enter passphrase for key '/c/Users/Robin/.ssh/id_rsa':
+target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile                        100% 4448KB   5.4MB/s   00:00
+Running debug command:  ssh -f -L 17777:localhost:17777 pi@raspberrypi.local "sh -c 'killall -q gdbserver; gdbserver *:17777 /tmp/rpi-rs-crosscompile'"
+Enter passphrase for key '/c/Users/Robin/.ssh/id_rsa':
+Process /tmp/rpi-rs-crosscompile created; pid = 29621
+Listening on port 17777
+Running start command: arm-linux-gnueabihf-gdb -q -x gdb.gdb target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile
+Reading symbols from target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile...done.
+warning: Unsupported auto-load script at offset 0 in section .debug_gdb_scripts
+of file C:\Users\Robin\Documents\Rust\rpi-rs-crosscompile\target\armv7-unknown-linux-gnueabihf\debug\rpi-rs-crosscompile.
+Use `info auto-load python-scripts [REGEXP]' to list them.
+Remote debugging from host 127.0.0.1
+0xb6fcea30 in ?? () from c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot/lib/ld-linux-armhf.so.3
+Breakpoint 1 at 0x40a7e4
+
+Breakpoint 1, 0x0040a7e4 in main ()
+(gdb) b 6
+Breakpoint 2 at 0x40a718: file src\main.rs, line 6.
+(gdb) c
+Continuing.
+
+Breakpoint 2, rpi_rs_crosscompile::main () at src\main.rs:6
+6           let width = 24;
+(gdb) s
+8           let mut writer = BufWriter::new(stdout());
+(gdb) c
+Continuing.
+ __________________________
+< Hello fellow Rustaceans! >
+ --------------------------
+        \
+         \
+            _~^~^~_
+        \) /  o o  \ (/
+          '_   -   _'
+          / '-----' \
+
+Child exited with status 0
+[Inferior 1 (process 29621) exited normally]
+(gdb)
+```
+
+## Debugging the application with VS Code and `CodeLLDB`
+
+The following examples are shown for Linux. The second one should work for Windows as well,
+but I had issues getting the first configuration to work on Windows.
+
+### GDB server started by VS Code
+
+Unfortunately, I have not found a way to get the debug output produced by an application
+when starting the GDB server with VS code. Furthermore, I found this to be rather unreliable
+on Windows. The instructions here are shown for Linux:
+
+### GDB server started externally

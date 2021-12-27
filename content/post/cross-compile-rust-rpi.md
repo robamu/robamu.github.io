@@ -326,7 +326,7 @@ Running start command: gdb-multiarch -q -x gdb.gdb target/armv7-unknown-linux-gn
 Reading symbols from target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile...
 warning: Missing auto-load script at offset 0 in section .debug_gdb_scripts
 of file /home/rmueller/Rust/rpi-rs-crosscompile/target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile.
-Use `info auto-load python-scripts [REGEXP]' to list them.
+Use `info auto-load python-scripts [REGEXP]` to list them.
 Remote debugging from host 127.0.0.1
 Reading /lib/ld-linux-armhf.so.3 from remote target...
 warning: File transfers from remote targets can be slow. Use "set sysroot" to access files locally instead.
@@ -455,7 +455,7 @@ in VS Code. The result should look something like the following:
 
 The only difference is that the GDB server is now started in an external shell
 instance, which also allows to see debug output produced by the application.
-Configuring `.cargo/config.toml` correctlys allows simply using `cargo run`:
+Configuring `.cargo/config.toml` correctly allows simply using `cargo run` to start the GDB server:
 
 ```toml
 # Requires Python3 installation. Takes care of transferring and running the application
@@ -476,8 +476,8 @@ configuration in VS Code. The result should look something like the following:
 <center>
 {{< figure
     src="/img/rpi-rs-crosscompile/debug-vscode-external-server.png"
-    alt="Debugging with VS Code with externally startred GDB server"
-    caption="Debugging with VS Code with externally startred GDB server"
+    alt="Debugging with VS Code with externally started GDB server"
+    caption="Debugging with VS Code with externally started GDB server"
 >}}
 </center>
 

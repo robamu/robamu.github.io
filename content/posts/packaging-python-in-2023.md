@@ -47,14 +47,18 @@ Here is the python code:
 from __future__ import annotations
 from crcmod.predefined import PredefinedCrc
 
+
+def get_catlifier_crc_calculator() -> PredefinedCrc:
+    return PredefinedCrc("crc-ccitt-false")
+
+
 class Catlifier:
     def __init__(self, base_text: str):
         self.base_text = base_text
         self.crc_calculator = PredefinedCrc("crc-ccitt-false")
 
     def catlify(self) -> str:
-        """"Catlify a gven string. Also updates internal CRC calculator with
-        catlified data."""
+        """"Catlify a given string. Also updates internal CRC calculator with catlified data."""
         catlified = self.base_text + "🐈"
         self.crc_calculator.new()
         self.crc_calculator.update(catlified.encode())
@@ -150,6 +154,17 @@ pip install build
 python3 -m build .
 ```
 
+I still add a `requirements.txt` file to the package, but I simply forward the requirements
+to `pyproject.toml` because this is a pure library. If your are working on a project with a binary
+where exact pinning of dependency versions is important, for example for a deployment, you should
+adapt the `requirements.txt` for your needs.
+
+The content of the `requirements.txt` file for my case is simple:
+
+```sh
+.
+```
+
 ## Adding unittests
 
 Next, we add some tests for out catlifier module. These will also be automatically executed
@@ -205,5 +220,187 @@ python3 -m pytest .
 Pytest should be able to find all the tests inside the `tests` directory as long as they
 use the `test_*` naming convention.
 
-## Add Sphinx documentation
+## Adding Sphinx documentation
+
+Next, we set up Sphinx to generate documentation for out Catlifier from the source code
+automatically. This can be done using the [`autodoc`](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html)
+extension. We also want to use the [`intersphinx`] extension to provide cross-referencing
+to external packages like `crcmod`, the [`doctest`] extension to automatically test code examples
+inside the documentation which we marked specifically.
+
+Finally, I also added the [`shinx_rtd_theme`](https://sphinx-rtd-theme.readthedocs.io/en/stable/)
+which looks a lot cleaner and is more readable than the default [`Alabaster`](https://alabaster.readthedocs.io/en/latest/)
+theme provided by Sphinx by default.
+
+We create a documentation folder first and install all required packages.
+
+```sh
+pip install sphinx-rtd-theme
+mkdir docs
+cd docs
+sphinx-quickstart --no-sep -p "Catlifier" -a "Robin Mueller" -r "0.1.0" -l en
+```
+
+This gives us a good starting point with a `conf.py` lookling like this:
+
+```py
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+# -- Project information -----------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+from importlib.metadata import version
+
+project = 'Catlifier'
+copyright = '2023, Robin Mueller'
+author = 'Robin Mueller'
+release = "0.1.0"
+
+# -- General configuration ---------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+extensions = []
+
+templates_path = ['_templates']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+language = 'en'
+
+# -- Options for HTML output -------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+
+html_theme = 'alabaster'
+html_static_path = ['_static']
+```
+
+Next, we make all the necessary adaptions to the configuration file:
+
+```py
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+# -- Project information -----------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+from importlib.metadata import version
+
+project = 'Catlifier'
+copyright = '2023, Robin Mueller'
+author = 'Robin Mueller'
+# Use importlib.metadata API to extract version automatically
+version = release = version("catlifier")
+
+# -- General configuration ---------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.doctest",
+    "sphinx_rtd_theme",
+]
+
+# Disable the doctests of the full package because those would require the explicit specification
+# of imports. The doctests inside the source code are covered by pytest, using the --doctest-modules
+# configuration option.
+doctest_test_doctest_blocks = ""
+
+templates_path = ['_templates']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+# Mapping for external packages
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "crcmod": ("https://crcmod.sourceforge.net/", None)
+}
+
+language = 'en'
+
+# -- Options for HTML output -------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+
+html_theme = "sphinx_rtd_theme"
+html_static_path = ['_static']
+```
+
+Next, we add example code, which will be automatically tested by the `doctest` extension.
+We create a new `examples.rst` inside the `docs` folder with the following content:
+
+```rst
+Examples
+===========
+
+Example usage
+
+.. testcode:: catlifier
+
+    from catlifier import Catlifier
+    
+    test_string = "hello world" 
+    catlifier = Catlifier(test_string)
+    print(catlifier.catlify())
+    
+Output:
+
+.. testoutput:: catlifier
+
+    hello world🐈
+
+```
+
+We would also like to document our API, and generate that documentation automatically
+from the source code. For this, we create a new `api.rst` with the following content:
+
+```rst
+API
+======
+
+.. automodule:: catlifier
+ :members:
+ :undoc-members:
+ :show-inheritance:
+```
+
+Then, we create a new documentation table of content inside the `index.rst` file:
+
+```rst
+Welcome to Catlifer's documentation!
+====================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+.. toctree::
+   :maxdepth: 3
+
+   examples
+   api
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+```
+
+We can now build the documentation using `make html` inside the `docs` folder.
+
+```sh
+make docs
+firefox _build/html/index.html
+```
+
+If you check the API documentation, you should also see that the [`PredefinedCrc`](https://crcmod.sourceforge.net/crcmod.predefined.html#crcmod.predefined.PredefinedCrc)
+cross-reference is working properly.
+
+You can test the examples using
+
+```sh
+make doctest
+```
 

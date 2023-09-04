@@ -410,6 +410,7 @@ where you can host the documentation of your package for free.
 
 ## Testing the upload of the package
 
+Most of the following steps are based on the official [packaging tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 We have the most important components of our package and would like to upload it to PyPI now.
 We build the package first like already shown.
 
@@ -427,4 +428,62 @@ python3 -m twine upload --repository testpypi dist/*
 ```
 
 If everything goes well, you should see your package on the Test PyPI.
+
+## Adding GitHub CI
+
+Finally, assuming that your project is hosted on GitHub, it is relatively easy to add a CI
+configuration for your Python project.
+
+Our CI configuration will install the package, run the tests, build the documentation and
+lint the code with `flake8`. Add a `.github/workflows/package.yml` file to your project:
+
+```yml
+name: package
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.8', '3.9', '3.10', '3.11']
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip setuptools wheel
+        pip install flake8
+        pip install -r docs/requirements.txt
+        pip install .
+ 
+    - name: Build documentation and examples
+      run: |
+        sphinx-build -b html docs docs/_build
+        sphinx-build -b doctest docs docs/_build
+
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings.
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
+
+    - name: Run tests and generate coverage data
+      run: |
+        python3 -m pip install coverage pytest
+        coverage run -m pytest
+```
+
+## Conclusion
+
 

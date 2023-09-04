@@ -404,3 +404,11 @@ You can test the examples using
 make doctest
 ```
 
+This is a good starting point for providing useful documentation for users 🎉. If you work on
+an open-source project, you should also consider a service like [readthedocs](https://docs.readthedocs.io/en/stable/)
+where you can host the documentation of your package for free.
+
+## Testing the upload of the package
+
+We have the most important components of our package and would like to upload it to PyPI now.
+

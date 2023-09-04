@@ -411,4 +411,20 @@ where you can host the documentation of your package for free.
 ## Testing the upload of the package
 
 We have the most important components of our package and would like to upload it to PyPI now.
+We build the package first like already shown.
+
+```sh
+python3 -m build .
+```
+
+After that, you can create an account on [Test PyPI](https://test.pypi.org) to test your package
+upload without affecting the normal package index.
+
+With everything in place, you can upload with
+
+```sh
+python3 -m twine upload --repository testpypi dist/*
+```
+
+If everything goes well, you should see your package on the Test PyPI.
 

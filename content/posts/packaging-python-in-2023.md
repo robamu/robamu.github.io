@@ -4,11 +4,10 @@ date: 2023-09-04T16:32:41+02:00
 draft: false
 ---
 
-Clean package management with Pyhon is still a tricky subject even though there are a lot of
-resources available online. This is also because a lot of the resources found online
-still make recommendations which are becoming slowly obsolete, for example by still using
-`setup.py`. I think there is also a lack of resources which cover all topics which might be relevant
-for setting up a new package. In this post, I will show how to set up a new package in Python from
+Learning clean package management with Pyhon is still a tricky subject even though there are a lot
+of resources available online. A lot of the resources found online only cover partial topics while
+others make recommendations which are becoming slowly obsolete, for example by still using
+`setup.py`. In this post, I will show how to set up a new package in Python from
 scratch with all features I consider useful and important for a good Python package. I really like
 the packaging blogpost [Bastian Venthur](https://venthur.de/2022-12-18-python-packaging.html) about
 the current best practices of Python packaging, whch is worth a read as well.

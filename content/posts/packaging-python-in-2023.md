@@ -28,6 +28,7 @@ The package will have following properties, which can be adapted based on prefer
 - Has examples inside the documentation which can also be automatically tested using `doctest`.
 - Has a `.flake8` configuration to be used with the `flake8` linter.
 - Has a working GitHub CI/CD configuration.
+- Uses a uniform line width of 100 for both `black` (my preferred auto-formatter) and `flake8`.
 
 ## Writing the source code
 
@@ -72,7 +73,7 @@ class Catlifier:
         """
         stripped_text = catlified_text.rstrip("🐈")
         instance = cls(stripped_text)
-        instance.crc_calculator.update(catlified_text)
+        instance.crc_calculator.update(catlified_text.encode())
         return instance
 ```
 
@@ -125,6 +126,9 @@ dependencies = [
 
 [project.urls]
 "Homepage" = "https://github.com/robamu/catlifier"
+
+[tool.black]
+line-length = 100
 ```
 
 There are various ways of single-sourcing the Python version, and the most common ways
@@ -168,6 +172,34 @@ The content of the `requirements.txt` file for my case is simple:
 
 I usually also add the [GitHub Python `.gitignore`](https://github.com/github/gitignore/blob/main/Python.gitignore)
 to my Python projects, which contains everything that should not be part of version control.
+
+I also add a `.flake8` linter confguraion file. Ideally, I would like this configuration to be
+part of the `pyproject.toml`, similarly to how `black` is configured there as well. However,
+`.flake8` still does not support specifying configuration there. However, this might change
+in the future. You can track the [corrensponding GitHub issue](https://github.com/PyCQA/flake8/issues/234)
+for the state of `pyproject.toml` support.
+
+`.flake8`:
+
+```txt
+[flake8]
+max-line-length = 100
+ignore = D203, W503
+per-file-ignores =
+    */__init__.py: F401
+exclude =
+    .git,
+    __pycache__,
+    docs/conf.py,
+    old,
+    build,
+    dist,
+    venv
+max-complexity = 10
+extend-ignore =
+    # See https://github.com/PyCQA/pycodestyle/issues/373
+    E203,
+```
 
 ## Adding unittests
 
@@ -414,6 +446,15 @@ becoming out of data, for example when the API changes.
 This is a good starting point for providing useful documentation for users 🎉. If you work on
 an open-source project, you should also consider a service like [readthedocs](https://docs.readthedocs.io/en/stable/)
 where you can host the documentation of your package for free.
+
+As a final step, I also like to add a `docs` specific `requirements.txt` file which only includes
+the dependencies for building the documentation with the following content.
+
+`docs/requirements.txt`:
+
+```txt
+sphinx-rtd-theme==1.2.0
+```
 
 ## Testing the upload of the package
 

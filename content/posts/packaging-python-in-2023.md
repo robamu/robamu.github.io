@@ -8,10 +8,10 @@ Clean package management with Pyhon is still a tricky subject even though there 
 resources available online. This is also because a lot of the resources found online
 still make recommendations which are becoming slowly obsolete, for example by still using
 `setup.py`. There is also a lack of resources which cover all topics which might be relevant
-for setting up a new package. In this post, I will show how to set up a new package in Python with
-all features I consider useful and important for a good Python package. I really like the packaging
-blogpost binary[Bastian Venthur](https://venthur.de/2022-12-18-python-packaging.html) about the
-current best practices of Python packaging, whch is worth a read as well.
+for setting up a new package. In this post, I will show how to set up a new package in Python from
+scratch with all features I consider useful and important for a good Python package. I really like
+the packaging blogpost [Bastian Venthur](https://venthur.de/2022-12-18-python-packaging.html) about
+the current best practices of Python packaging, whch is worth a read as well.
 
 The package will have following properties, which can be adapted based on preference and use-case:
 

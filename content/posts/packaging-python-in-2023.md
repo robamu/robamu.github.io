@@ -22,6 +22,7 @@ The package will have following properties, which can be adapted based on prefer
   and the [`sphinx-rtd-theme`](https://pypi.org/project/sphinx-rtd-theme/) for writing, building
   and rendering the documentation.
 - Has a single-sourced version inside the `pyproject.toml` file.
+- Is licensed using the permissive MIT license.
 - Has a `CHANGELOG` to list all changes between versions.
 - Has a unittest folder with tests which can be executed with `pytest` or any other test framework.
 - Has examples inside the documentation which can also be automatically tested using `doctest`.
@@ -103,6 +104,7 @@ build-backend = "setuptools.build_meta"
 name = "catlifier"
 description = "My catlifier library"
 readme = "README.md"
+license = "MIT"
 version = "0.1.0"
 requires-python = ">=3.8"
 authors = [
@@ -205,6 +207,13 @@ extend-ignore =
     # See https://github.com/PyCQA/pycodestyle/issues/373
     E203,
 ```
+
+Finally, I also add a LICENSE file for the MIT license. If you are thinking about publishing
+your work, I strongly recommend adding a LICENSE to your project. The MIT license is one of the more
+permissive onces, so I added this in the example project.
+
+For something like MIT, all you need to do is to add the [license text](https://opensource.org/license/mit/)
+as part of a LICENSE file and replace the placeholders for year and the copyright holder.
 
 ## Adding unittests
 

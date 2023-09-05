@@ -7,14 +7,15 @@ draft: true
 Clean package management with Pyhon is still a tricky subject even though there are a lot of
 resources available online. This is also because a lot of the resources found online
 still make recommendations which are becoming slowly obsolete, for example by still using
-`setup.py`. In this post, I want to show how to set up a new package in Python
-with all features I consider useful and important for a good Python package.
-I really like the packaging blogpost by [Bastian Venthur](https://venthur.de/2022-12-18-python-packaging.html)
-about the current best practices of Python packaging, whch is worth a read as well.
+`setup.py`. There is also a lack of resources which cover all topics which might be relevant
+for setting up a new package. In this post, I will show how to set up a new package in Python with
+all features I consider useful and important for a good Python package. I really like the packaging
+blogpost binary[Bastian Venthur](https://venthur.de/2022-12-18-python-packaging.html) about the
+current best practices of Python packaging, whch is worth a read as well.
 
 The package will have following properties, which can be adapted based on preference and use-case:
 
-- Uses `pyproject.toml`, which is the recommended standard by PyPA, and makes integration with
+- Uses `pyproject.toml`, which is now the recommended standard by PyPA, and makes integration with
   other tools inside the Pyton ecosystem a lot easier.
 - Uses [`setuptools`](https://setuptools.pypa.io/en/latest/setuptools.html) as the distibution
   and build tool.
@@ -23,15 +24,16 @@ The package will have following properties, which can be adapted based on prefer
   and rendering the documentation.
 - Has a single-sourced version inside the `pyproject.toml` file.
 - Has a `CHANGELOG` to list all changes between versions.
-- Has examples inside the documentation which can also be automatically tested using `doctest`.
 - Has a unittest folder with tests which can be executed with `pytest` or any other test framework.
+- Has examples inside the documentation which can also be automatically tested using `doctest`.
 - Has a `.flake8` configuration to be used with the `flake8` linter.
-- Has a working github CI/CD configuration.
+- Has a working GitHub CI/CD configuration.
 
 ## Writing the source code
 
 We will write a `Catlifier` class first which is then packaged. The `Catlifier` uses the `crcmod`
-package to do some magic.
+package because I would also like to showcase cross-referencing other libraries in the
+documentation at a later stage.
 
 Let's create the project folder and some python code first:
 
@@ -111,7 +113,6 @@ classifiers = [
     "Operating System :: POSIX",
     "Operating System :: Microsoft :: Windows",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Topic :: Communications",
@@ -164,6 +165,9 @@ The content of the `requirements.txt` file for my case is simple:
 ```sh
 .
 ```
+
+I usually also add the [GitHub Python `.gitignore`](https://github.com/github/gitignore/blob/main/Python.gitignore)
+to my Python projects, which contains everything that should not be part of version control.
 
 ## Adding unittests
 
@@ -356,7 +360,7 @@ from the source code. For this, we create a new `api.rst` with the following con
 
 ```rst
 API
-======
+====
 
 .. automodule:: catlifier
  :members:
@@ -403,6 +407,9 @@ You can test the examples using
 ```sh
 make doctest
 ```
+
+The best thing about this is that this can be checked in the CI, so you can catch your examples
+becoming out of data, for example when the API changes.
 
 This is a good starting point for providing useful documentation for users 🎉. If you work on
 an open-source project, you should also consider a service like [readthedocs](https://docs.readthedocs.io/en/stable/)
@@ -486,4 +493,8 @@ jobs:
 
 ## Conclusion
 
+We have written a complete small package contaning all the features I consider important
+for a good Python package. I hope that this mini-workshop can help some people who are considering
+publishing their project to PyPI or are looking for a general guide on how to set up a Python
+package.
 

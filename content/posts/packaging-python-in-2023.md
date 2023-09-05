@@ -105,14 +105,12 @@ description = "My catlifier library"
 readme = "README.md"
 version = "0.1.0"
 requires-python = ">=3.8"
-license = {text = "Apache-2.0"}
 authors = [
   {name = "Robin Mueller", email = "robin.mueller.m@gmail.com"}
 ]
 keywords = ["cats", "purr", "packaging"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: Apache Software License",
     "Natural Language :: English",
     "Operating System :: POSIX",
     "Operating System :: Microsoft :: Windows",

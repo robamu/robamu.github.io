@@ -104,7 +104,7 @@ build-backend = "setuptools.build_meta"
 name = "catlifier"
 description = "My catlifier library"
 readme = "README.md"
-license = "MIT"
+license = { text = "MIT" }
 version = "0.1.0"
 requires-python = ">=3.8"
 authors = [

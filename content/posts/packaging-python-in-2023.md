@@ -477,6 +477,10 @@ python3 -m twine upload --repository testpypi dist/*
 
 If everything goes well, you should see your package on the Test PyPI.
 
+Before uploading any package and doing releases in general, I really like to add a [CHANGELOG] to
+a project so it becomes easier for users to figure out what changed between versions. I usually use
+the CHANGELOG format proposed by [Keep A Changelog](https://keepachangelog.com/en/1.1.0/).
+
 ## Adding GitHub CI
 
 Finally, assuming that your project is hosted on GitHub, it is relatively easy to add a CI

@@ -1,13 +1,12 @@
 ---
 title: "Packaging Python Projects in 2023"
 date: 2023-09-04T16:32:41+02:00
-draft: true
 ---
 
 Clean package management with Pyhon is still a tricky subject even though there are a lot of
 resources available online. This is also because a lot of the resources found online
 still make recommendations which are becoming slowly obsolete, for example by still using
-`setup.py`. There is also a lack of resources which cover all topics which might be relevant
+`setup.py`. I think there is also a lack of resources which cover all topics which might be relevant
 for setting up a new package. In this post, I will show how to set up a new package in Python from
 scratch with all features I consider useful and important for a good Python package. I really like
 the packaging blogpost [Bastian Venthur](https://venthur.de/2022-12-18-python-packaging.html) about
@@ -26,9 +25,13 @@ The package will have following properties, which can be adapted based on prefer
 - Has a `CHANGELOG` to list all changes between versions.
 - Has a unittest folder with tests which can be executed with `pytest` or any other test framework.
 - Has examples inside the documentation which can also be automatically tested using `doctest`.
-- Has a `.flake8` configuration to be used with the `flake8` linter.
+- Has a `.flake8` configuration to be used with the [`flake8`](https://flake8.pycqa.org/en/latest/) linter.
 - Has a working GitHub CI/CD configuration.
-- Uses a uniform line width of 100 for both `black` (my preferred auto-formatter) and `flake8`.
+- Uses a uniform line width of 100 for both [`black`](https://github.com/psf/black) (my preferred
+  auto-formatter) and `flake8`.
+
+All the shell instructions were written for an Ubuntu system, so those might need adaptions
+if your are using Windows or another OS.
 
 ## Writing the source code
 
@@ -135,8 +138,9 @@ There are various ways of single-sourcing the Python version, and the most commo
 were listed [here](https://packaging.python.org/en/latest/guides/single-sourcing-package-version/).
 
 I really like the variant 5, which puts the version information into the package configuration
-and uses the new `import.metadata` API to retrieve the version if this becomes necessary.
-This means I don't have to make changes inside the source code for version bumps anymore.
+and uses the new [`import.metadata`](https://docs.python.org/3/library/importlib.metadata.html) API
+to retrieve the version if this becomes necessary. This means I don't have to make changes inside
+the source code for version bumps anymore.
 
 The directory tree should look like this now:
 
@@ -150,7 +154,7 @@ catlifier-py
 
 This is all that is required for a package which can be re-distributed and uploaded to a package
 index! You can test building your package using `build`. We also set up a virtual environment
-to keep the system python clean:
+inside a `venv` folder to keep the system python clean:
 
 ```sh
 python3 -m venv venv
@@ -158,6 +162,8 @@ python3 -m venv venv
 pip install build
 python3 -m build .
 ```
+
+All following shell commands will assume an active virtual environment.
 
 I still add a `requirements.txt` file to the package, but I simply forward the requirements
 to `pyproject.toml` because this is a pure library. If your are working on a project with a binary
@@ -173,11 +179,12 @@ The content of the `requirements.txt` file for my case is simple:
 I usually also add the [GitHub Python `.gitignore`](https://github.com/github/gitignore/blob/main/Python.gitignore)
 to my Python projects, which contains everything that should not be part of version control.
 
-I also add a `.flake8` linter confguraion file. Ideally, I would like this configuration to be
-part of the `pyproject.toml`, similarly to how `black` is configured there as well. However,
-`.flake8` still does not support specifying configuration there. However, this might change
-in the future. You can track the [corrensponding GitHub issue](https://github.com/PyCQA/flake8/issues/234)
-for the state of `pyproject.toml` support.
+All of my projects also have a `.flake8` linter configuraion file to my projects. Ideally, I would
+like this configuration to be part of the `pyproject.toml`, similarly to how `black` is configured
+there as well. However, `.flake8` still does not support specifying configuration there. However,
+this might change in the future. You can track
+[corrensponding GitHub issue](https://github.com/PyCQA/flake8/issues/234) for the state of
+`pyproject.toml` support.
 
 `.flake8`:
 
@@ -205,7 +212,7 @@ extend-ignore =
 
 Next, we add some tests for out catlifier module. These will also be automatically executed
 by the CI at a later stage. We will keep our tests outside the source code.
-The [pytest](https://docs.pytest.org/en/stable/explanation/goodpractices.html) provides
+The [pytest documentation](https://docs.pytest.org/en/stable/explanation/goodpractices.html) provides
 a bit of reasoning why it makes sense to keep the tests seperated from the source code.
 
 Please note that the `test_` prefix for the test module names is necessary for `pytest` to
@@ -259,14 +266,16 @@ use the `test_*` naming convention.
 ## Adding Sphinx documentation
 
 Next, we set up Sphinx to generate documentation for out Catlifier from the source code
-automatically. This can be done using the [`autodoc`](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html)
-extension. We also want to use the [`intersphinx`] extension to provide cross-referencing
-to external packages like `crcmod`, the [`doctest`] extension to automatically test code examples
-inside the documentation which we marked specifically.
+automatically. This can be done using the
+[`autodoc`](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html) extension. We also
+want to use the [`intersphinx`](https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html)
+extension to provide cross-referencing to external packages like `crcmod` and the
+[`doctest`](https://www.sphinx-doc.org/en/master/usage/extensions/doctest.html) extension to
+automatically test code examples inside the documentation which we marked specifically.
 
 Finally, I also added the [`shinx_rtd_theme`](https://sphinx-rtd-theme.readthedocs.io/en/stable/)
-which looks a lot cleaner and is more readable than the default [`Alabaster`](https://alabaster.readthedocs.io/en/latest/)
-theme provided by Sphinx by default.
+which is a bit cleaner and and more readable than the default [`Alabaster`](https://alabaster.readthedocs.io/en/latest/)
+theme provided by Sphinx by default in my opinion.
 
 We create a documentation folder first and install all required packages.
 
@@ -387,6 +396,11 @@ Output:
 
 ```
 
+`doctest` will automatically `testcode` sections and verify their output against the
+`testoutput` section. You can also add [doctests](https://docs.python.org/3/library/doctest.html)
+inside the documentation blocks of your source code, but for those it might be better to test
+them with another tool like `pytest`.
+
 We would also like to document our API, and generate that documentation automatically
 from the source code. For this, we create a new `api.rst` with the following content:
 
@@ -427,7 +441,8 @@ Indices and tables
 We can now build the documentation using `make html` inside the `docs` folder.
 
 ```sh
-make docs
+cd docs
+make html 
 firefox _build/html/index.html
 ```
 
@@ -437,6 +452,7 @@ cross-reference is working properly.
 You can test the examples using
 
 ```sh
+cd docs
 make doctest
 ```
 
@@ -477,7 +493,7 @@ python3 -m twine upload --repository testpypi dist/*
 
 If everything goes well, you should see your package on the Test PyPI.
 
-Before uploading any package and doing releases in general, I really like to add a [CHANGELOG] to
+Before uploading any package and doing releases in general, I really like to add a CHANGELOG to
 a project so it becomes easier for users to figure out what changed between versions. I usually use
 the CHANGELOG format proposed by [Keep A Changelog](https://keepachangelog.com/en/1.1.0/).
 
@@ -536,6 +552,8 @@ jobs:
         coverage run -m pytest
 ```
 
+If you push your package to GitHub now, The GitHub code actions CI should trigger automatically.
+
 ## Conclusion
 
 We have written a complete small package contaning all the features I consider important
@@ -543,3 +561,5 @@ for a good Python package. I hope that this mini-workshop can help some people w
 publishing their project to PyPI or are looking for a general guide on how to set up a Python
 package.
 
+You can find the full resulting source code on [GitHub](https://github.com/robamu/catlifier-py)
+as well.

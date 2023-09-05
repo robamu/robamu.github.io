@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://robamu.github.io/posts/packaging-python-in-2023/</loc>
+    <lastmod>2023-09-05T14:18:04+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/posts/</loc>
+    <lastmod>2023-09-05T14:18:04+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/</loc>
+    <lastmod>2023-09-05T14:18:04+02:00</lastmod>
+  </url><url>
     <loc>https://robamu.github.io/categories/</loc>
     <lastmod>2023-09-04T16:35:05+02:00</lastmod>
   </url><url>
@@ -20,13 +29,7 @@
     <loc>https://robamu.github.io/posts/cross-compile-rust-rpi/</loc>
     <lastmod>2023-09-04T16:35:05+02:00</lastmod>
   </url><url>
-    <loc>https://robamu.github.io/posts/</loc>
-    <lastmod>2023-09-04T16:35:05+02:00</lastmod>
-  </url><url>
     <loc>https://robamu.github.io/tags/raspberrypi/</loc>
-    <lastmod>2023-09-04T16:35:05+02:00</lastmod>
-  </url><url>
-    <loc>https://robamu.github.io/</loc>
     <lastmod>2023-09-04T16:35:05+02:00</lastmod>
   </url><url>
     <loc>https://robamu.github.io/tags/rust/</loc>

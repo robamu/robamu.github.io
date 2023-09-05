@@ -63,7 +63,7 @@
   "headline": "Packaging Python Projects in 2023",
   "description" : "Learning clean package management with Pyhon is still a tricky subject even though there are a lot of resources available online. A lot of the resources found online only cover partial topics while others make recommendations which are becoming slowly obsolete, for example by still using setup.py. In this post, I will show how to set up a new package in Python from scratch with all features I consider useful and important for a good Python package.",
   "inLanguage" : "en",
-  "wordCount":  2227 ,
+  "wordCount":  2314 ,
   "datePublished" : "2023-09-04T16:32:41",
   "dateModified" : "2023-09-04T16:32:41",
   "image" : "https:\/\/robamu.github.io",
@@ -278,6 +278,7 @@ and build tool.</li>
 and the <a href="https://pypi.org/project/sphinx-rtd-theme/"><code>sphinx-rtd-theme</code></a> for writing, building
 and rendering the documentation.</li>
 <li>Has a single-sourced version inside the <code>pyproject.toml</code> file.</li>
+<li>Is licensed using the permissive MIT license.</li>
 <li>Has a <code>CHANGELOG</code> to list all changes between versions.</li>
 <li>Has a unittest folder with tests which can be executed with <code>pytest</code> or any other test framework.</li>
 <li>Has examples inside the documentation which can also be automatically tested using <code>doctest</code>.</li>
@@ -341,6 +342,7 @@ source layout and flat layout <a href="https://packaging.python.org/en/latest/di
 </span></span><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;catlifier&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">description</span> <span class="p">=</span> <span class="s2">&#34;My catlifier library&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">readme</span> <span class="p">=</span> <span class="s2">&#34;README.md&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">license</span> <span class="p">=</span> <span class="s2">&#34;MIT&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.1.0&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">requires-python</span> <span class="p">=</span> <span class="s2">&#34;&gt;=3.8&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">authors</span> <span class="p">=</span> <span class="p">[</span>
@@ -420,7 +422,12 @@ this might change in the future. You can track
 </span></span><span class="line"><span class="cl">extend-ignore =
 </span></span><span class="line"><span class="cl">    # See https://github.com/PyCQA/pycodestyle/issues/373
 </span></span><span class="line"><span class="cl">    E203,
-</span></span></code></pre></div><h2 id="adding-unittests">Adding unittests</h2>
+</span></span></code></pre></div><p>Finally, I also add a LICENSE file for the MIT license. If you are thinking about publishing
+your work, I strongly recommend adding a LICENSE to your project. The MIT license is one of the more
+permissive onces, so I added this in the example project.</p>
+<p>For something like MIT, all you need to do is to add the <a href="https://opensource.org/license/mit/">license text</a>
+as part of a LICENSE file and replace the placeholders for year and the copyright holder.</p>
+<h2 id="adding-unittests">Adding unittests</h2>
 <p>Next, we add some tests for out catlifier module. These will also be automatically executed
 by the CI at a later stage. We will keep our tests outside the source code.
 The <a href="https://docs.pytest.org/en/stable/explanation/goodpractices.html">pytest documentation</a> provides

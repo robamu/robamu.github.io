@@ -10,13 +10,13 @@ others make recommendations which are becoming slowly obsolete, for example by s
 `setup.py`. In this post, I will show how to set up a new package in Python from
 scratch with all features I consider useful and important for a good Python package. I really like
 the packaging blogpost [Bastian Venthur](https://venthur.de/2022-12-18-python-packaging.html) about
-the current best practices of Python packaging, whch is worth a read as well.
+the current best practices of Python packaging, which is worth a read as well.
 
 The package will have following properties, which can be adapted based on preference and use-case:
 
 - Uses `pyproject.toml`, which is now the recommended standard by PyPA, and makes integration with
-  other tools inside the Pyton ecosystem a lot easier.
-- Uses [`setuptools`](https://setuptools.pypa.io/en/latest/setuptools.html) as the distibution
+  other tools inside the Pyton ecosystem easier.
+- Uses [`setuptools`](https://setuptools.pypa.io/en/latest/setuptools.html) as the distribution
   and build tool.
 - Uses [`Sphinx`](https://www.sphinx-doc.org/en/master/), [`reStructuredText`](https://docutils.sourceforge.io/rst.html)
   and the [`sphinx-rtd-theme`](https://pypi.org/project/sphinx-rtd-theme/) for writing, building
@@ -562,4 +562,5 @@ publishing their project to PyPI or are looking for a general guide on how to se
 package.
 
 You can find the full resulting source code on [GitHub](https://github.com/robamu/catlifier-py)
-as well.
+as well. You can also have a look at [the py-pkgs](https://py-pkgs.org/00-preface) project
+which goes more indepth than this mini-workshop goes.

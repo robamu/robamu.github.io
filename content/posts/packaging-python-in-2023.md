@@ -28,7 +28,7 @@ The package will have following properties, which can be adapted based on prefer
 - Has examples inside the documentation which can also be automatically tested using `doctest`.
 - Has a working GitHub CI/CD configuration.
 - Uses a uniform line width of 100 for both [`black`](https://github.com/psf/black) (my preferred
-  auto-formatter) and `ruff`.
+  auto-formatter) and [`ruff`](https://github.com/astral-sh/ruff).
 
 All the shell instructions were written for an Ubuntu system, so those might need adaptions
 if your are using Windows or another OS.
@@ -127,7 +127,7 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/robamu/catlifier"
+"Homepage" = "https://github.com/robamu/catlifier-py"
 
 [tool.ruff]
 ignore = ["E501"]

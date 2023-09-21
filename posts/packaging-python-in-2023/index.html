@@ -63,7 +63,7 @@
   "headline": "Packaging Python Projects in 2023",
   "description" : "Learning clean package management with Pyhon is still a tricky subject even though there are a lot of resources available online. A lot of the resources found online only cover partial topics while others make recommendations which are becoming slowly obsolete, for example by still using setup.py. In this post, I will show how to set up a new package in Python from scratch with all features I consider useful and important for a good Python package.",
   "inLanguage" : "en",
-  "wordCount":  2202 ,
+  "wordCount":  2206 ,
   "datePublished" : "2023-09-04T16:32:41",
   "dateModified" : "2023-09-04T16:32:41",
   "image" : "https:\/\/robamu.github.io",
@@ -283,8 +283,9 @@ and rendering the documentation.</li>
 <li>Has a unittest folder with tests which can be executed with <code>pytest</code> or any other test framework.</li>
 <li>Has examples inside the documentation which can also be automatically tested using <code>doctest</code>.</li>
 <li>Has a working GitHub CI/CD configuration.</li>
-<li>Uses a uniform line width of 100 for both <a href="https://github.com/psf/black"><code>black</code></a> (my preferred
-auto-formatter) and <a href="https://github.com/astral-sh/ruff"><code>ruff</code></a>.</li>
+<li>I recommend <a href="https://github.com/psf/black"><code>black</code></a> as the auto-formatter and
+<a href="https://github.com/astral-sh/ruff"><code>ruff</code></a> as a linter. The <code>pyproject.toml</code> has some basic
+configuration for <code>ruff</code>.</li>
 </ul>
 <p>All the shell instructions were written for an Ubuntu system, so those might need adaptions
 if your are using Windows or another OS.</p>
@@ -824,7 +825,7 @@ which goes more indepth than this mini-workshop goes.</p>
         
         <p class="credits theme-by text-muted">
           <a href="https://gohugo.io">Hugo v0.118.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
-          &nbsp;&bull;&nbsp;[<a href="false104e4396bd029850836fe23461b1ae92185fb199">104e4396</a>]
+          &nbsp;&bull;&nbsp;[<a href="false3b3015ae35fc94bed195ce12fc2e1291484d79ea">3b3015ae</a>]
         </p>
       </div>
     </div>

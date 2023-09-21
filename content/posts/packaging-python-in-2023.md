@@ -26,10 +26,9 @@ The package will have following properties, which can be adapted based on prefer
 - Has a `CHANGELOG` to list all changes between versions.
 - Has a unittest folder with tests which can be executed with `pytest` or any other test framework.
 - Has examples inside the documentation which can also be automatically tested using `doctest`.
-- Has a `.flake8` configuration to be used with the [`flake8`](https://flake8.pycqa.org/en/latest/) linter.
 - Has a working GitHub CI/CD configuration.
 - Uses a uniform line width of 100 for both [`black`](https://github.com/psf/black) (my preferred
-  auto-formatter) and `flake8`.
+  auto-formatter) and `ruff`.
 
 All the shell instructions were written for an Ubuntu system, so those might need adaptions
 if your are using Windows or another OS.
@@ -130,8 +129,10 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/robamu/catlifier"
 
-[tool.black]
-line-length = 100
+[tool.ruff]
+ignore = ["E501"]
+[tool.ruff.extend-per-file-ignores]
+"__init__.py" = ["F401"]
 ```
 
 There are various ways of single-sourcing the Python version, and the most common ways
@@ -142,7 +143,8 @@ and uses the new [`import.metadata`](https://docs.python.org/3/library/importlib
 to retrieve the version if this becomes necessary. This means I don't have to make changes inside
 the source code for version bumps anymore.
 
-The directory tree should look like this now:
+The `pyproject.toml` includes also some basic configuration for the `ruff` Python linter to make
+it play nice with re-exports. The directory tree should look like this now:
 
 ```sh
 catlifier-py
@@ -178,35 +180,6 @@ The content of the `requirements.txt` file for my case is simple:
 
 I usually also add the [GitHub Python `.gitignore`](https://github.com/github/gitignore/blob/main/Python.gitignore)
 to my Python projects, which contains everything that should not be part of version control.
-
-All of my projects also have a `.flake8` linter configuraion file to my projects. Ideally, I would
-like this configuration to be part of the `pyproject.toml`, similarly to how `black` is configured
-there as well. However, `.flake8` still does not support specifying configuration there. However,
-this might change in the future. You can track
-[corrensponding GitHub issue](https://github.com/PyCQA/flake8/issues/234) for the state of
-`pyproject.toml` support.
-
-`.flake8`:
-
-```txt
-[flake8]
-max-line-length = 100
-ignore = D203, W503
-per-file-ignores =
-    */__init__.py: F401
-exclude =
-    .git,
-    __pycache__,
-    docs/conf.py,
-    old,
-    build,
-    dist,
-    venv
-max-complexity = 10
-extend-ignore =
-    # See https://github.com/PyCQA/pycodestyle/issues/373
-    E203,
-```
 
 Finally, I also add a LICENSE file for the MIT license. If you are thinking about publishing
 your work, I strongly recommend adding a LICENSE to your project. The MIT license is one of the more
@@ -510,10 +483,10 @@ Finally, assuming that your project is hosted on GitHub, it is relatively easy t
 configuration for your Python project.
 
 Our CI configuration will install the package, run the tests, build the documentation and
-lint the code with `flake8`. Add a `.github/workflows/package.yml` file to your project:
+lint the code with `ruff`. Add a `.github/workflows/ci.yml` file to your project:
 
 ```yml
-name: package
+name: ci
 
 on: [push]
 
@@ -534,24 +507,19 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
+    - name: Install package and dependencies
       run: |
         python3 -m pip install --upgrade pip setuptools wheel
-        pip install flake8
-        pip install -r docs/requirements.txt
         pip install .
  
     - name: Build documentation and examples
       run: |
+        pip install -r docs/requirements.txt
         sphinx-build -b html docs docs/_build
         sphinx-build -b doctest docs docs/_build
 
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings.
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
+    - name: Lint with Ruff
+      uses: chartboost/ruff-action@v1
 
     - name: Run tests and generate coverage data
       run: |

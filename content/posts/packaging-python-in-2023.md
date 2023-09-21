@@ -27,8 +27,9 @@ The package will have following properties, which can be adapted based on prefer
 - Has a unittest folder with tests which can be executed with `pytest` or any other test framework.
 - Has examples inside the documentation which can also be automatically tested using `doctest`.
 - Has a working GitHub CI/CD configuration.
-- Uses a uniform line width of 100 for both [`black`](https://github.com/psf/black) (my preferred
-  auto-formatter) and [`ruff`](https://github.com/astral-sh/ruff).
+- I recommend [`black`](https://github.com/psf/black) as the auto-formatter and
+  [`ruff`](https://github.com/astral-sh/ruff) as a linter. The `pyproject.toml` has some basic
+  configuration for `ruff`.
 
 All the shell instructions were written for an Ubuntu system, so those might need adaptions
 if your are using Windows or another OS.

@@ -6,7 +6,43 @@
     <description>Recent content in Tags on robs blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Dec 2021 12:31:51 +0100</lastBuildDate><atom:link href="https://robamu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Sep 2023 16:32:41 +0200</lastBuildDate><atom:link href="https://robamu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>packaging</title>
+      <link>https://robamu.github.io/tags/packaging/</link>
+      <pubDate>Mon, 04 Sep 2023 16:32:41 +0200</pubDate>
+      
+      <guid>https://robamu.github.io/tags/packaging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pip</title>
+      <link>https://robamu.github.io/tags/pip/</link>
+      <pubDate>Mon, 04 Sep 2023 16:32:41 +0200</pubDate>
+      
+      <guid>https://robamu.github.io/tags/pip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://robamu.github.io/tags/python/</link>
+      <pubDate>Mon, 04 Sep 2023 16:32:41 +0200</pubDate>
+      
+      <guid>https://robamu.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>workshop</title>
+      <link>https://robamu.github.io/tags/workshop/</link>
+      <pubDate>Mon, 04 Sep 2023 16:32:41 +0200</pubDate>
+      
+      <guid>https://robamu.github.io/tags/workshop/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>cli</title>
       <link>https://robamu.github.io/tags/cli/</link>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>robs blog</title>
+    <title>Robins blog</title>
     <link>https://robamu.github.io/</link>
-    <description>Recent content on robs blog</description>
+    <description>Recent content on Robins blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 04 Sep 2023 16:32:41 +0200</lastBuildDate><atom:link href="https://robamu.github.io/index.xml" rel="self" type="application/rss+xml" />

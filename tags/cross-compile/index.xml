@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>cross-compile on robs blog</title>
+    <title>cross-compile on Robins blog</title>
     <link>https://robamu.github.io/tags/cross-compile/</link>
-    <description>Recent content in cross-compile on robs blog</description>
+    <description>Recent content in cross-compile on Robins blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Dec 2021 12:31:51 +0100</lastBuildDate><atom:link href="https://robamu.github.io/tags/cross-compile/index.xml" rel="self" type="application/rss+xml" />

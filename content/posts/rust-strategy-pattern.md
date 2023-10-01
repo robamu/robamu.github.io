@@ -54,7 +54,7 @@ my first thought was to use the [template method pattern](https://refactoring.gu
 inheritance, so I quickly determined that the [strategy pattern](https://refactoring.guru/design-patterns/strategy)
 would be the best fit here.
 If you do not know what the strategy pattern is, I recommend reading the [article by Refactoring Guru](https://refactoring.guru/design-patterns/strategy).
-The following graph, which is taken from the article as well, shows the basic idea: 
+The following graph, which is taken from the article as well [^1], shows the basic idea: 
 
 <center>
 {{< figure
@@ -391,3 +391,5 @@ the examples and resources are contrived or only applicable for very simple prob
 This post showed how to apply the strategy pattern in Rust for a TCP server to reduce duplicate
 code and allow flexbily adding new ways to parse packets received for that server, and to send
 telemetry.
+
+[^1]: https://refactoring.guru/images/patterns/diagrams/strategy/structure.png?id=c6aa910c94960f35d100bfca02810ea1

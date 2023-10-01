@@ -1,20 +1,28 @@
 ---
-title: "Implementing a TCP server for space applications in Rust using the Strategy Pattern"
+title: "Implementing a TCP server for Space Applications in Rust using the Strategy Pattern"
 date: 2023-09-29T15:17:13+02:00
+tags: ["rust", "design-pattern", "tcp", "space"]
+categories: ["rust", "design-pattern", "tcp"]
 draft: true
 ---
+
+Even for space systems, TCP/IP is oftentimes an important component in some shape or form because
+the majority of development might still occur on ground where an internet connection is still
+available. The special thing about space is that instead of using newline and/or UTF-8 based
+data, the data is generally in binary format and packet based. The most prevalent of the space
+packet standards is probably the [CCSDS Space Packet Protocol](https://public.ccsds.org/Pubs/133x0b2e1.pdf).
 
 TCP is always a tricky protocol when exchanging something like CCSDS space packets. UDP is
 generally a better fit because a packet can simply be exchanged as a datagram. However, there
 are special cases where TCP is simply more convenient, for example when using something like
-SSH tunneling, which would require some `socat` trickery to use UDP.
+SSH tunneling, which would require some `socat` trickery to use UDP. Sometimes, we would also like
+to have the additional guarantees that TCP has in comparison to UDP.
 
 ## What I already have
 
 I already implemented a [TCP server implementation for C++](https://egit.irs.uni-stuttgart.de/fsfw/fsfw/src/branch/master/src/fsfw/osal/common/TcpTmTcServer.h)
 which is able to exchange tightly packed CCSDS space packets. The only thing all CCSDS space
 packets have in common is a six byte header, shown in the following image:
-
 
 <center>
 {{< figure
@@ -385,9 +393,10 @@ logic with a few adaption point that should be user-configurable.
 
 # Conclusion
 
-I think learning Rust and transferring object oriented design patterns can be tricky when coming
-from object oriented languages like Java, C++ or Python. I oftentimes have the issue that a lot of
-the examples and resources are contrived or only applicable for very simple problems.
+I think transferring object oriented design patterns to Rust can be tricky when coming
+from object oriented languages like Java, C++ or Python, because Rust has not classic inheritance.
+I oftentimes have the issue that a lot of the examples and resources are contrived or only
+applicable for very simple problems.
 This post showed how to apply the strategy pattern in Rust for a TCP server to reduce duplicate
 code and allow flexbily adding new ways to parse packets received for that server, and to send
 telemetry.

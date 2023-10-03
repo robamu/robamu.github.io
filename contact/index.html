@@ -61,7 +61,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://robamu.github.io/contact/" /><meta property="article:section" content="" />
 <meta property="article:published_time" content="2021-04-27T21:53:29+05:00" />
-<meta property="article:modified_time" content="2021-12-15T00:20:30+01:00" /><meta property="og:site_name" content="robs blog" />
+<meta property="article:modified_time" content="2023-10-03T12:40:49+02:00" /><meta property="og:site_name" content="robins blog" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Get in touch"/>
@@ -96,7 +96,7 @@
   "wordCount" : "9",
   "inLanguage": "en",
   "datePublished": "2021-04-27T21:53:29+05:00",
-  "dateModified": "2021-12-15T00:20:30+01:00",
+  "dateModified": "2023-10-03T12:40:49+02:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://robamu.github.io/contact/"
@@ -179,9 +179,6 @@
     <h1 class="post-title">
       Get in touch
     </h1>
-    <div class="post-meta"><span title='2021-04-27 21:53:29 +0500 +0500'>April 27, 2021</span>
-
-</div>
   </header> 
   <div class="post-content"><form id="contactform" method="post" action="https://formspree.io/f/mzbobjzr">
   <div class="form-group row">
@@ -225,34 +222,18 @@
   <input type="text" name="_gotcha" style="display:none" />
 </form>
 
+
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
     </ul>
-  </footer><div id="disqus_thread"></div>
-<script type="application/javascript">
-    window.disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "https-robamu-github-io" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
+  </footer>
 </article>
     </main>
+        <script data-goatcounter="https://robamu.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
     
 <footer class="footer">
     <span>&copy; 2023 <a href="https://robamu.github.io">Robins blog</a></span>
@@ -321,6 +302,53 @@
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

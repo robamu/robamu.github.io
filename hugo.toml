@@ -17,17 +17,18 @@ enableGitInfo = true
       unsafe = true
 
 [Params]
-  title = "robs blog"
+  title = "robins blog"
   keyword = "coding, rust, c++, python, aerospace, satellites"
-  about_me = true
   commit = false
   comments = true
-  # useHLJS = false
-  useHLJS = true
-  readingTime = true
+  goatcounter = "robamu"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowWordCount = false
+  ShowPageViews = true
+  ShowCodeCopyButtons = true
   socialShare = true
   showRelatedPosts = true
-  delayDisqus = true
   # Google Programmable Search Engine
   gcse = "49f27010d1fda4554"
   # Footer section
@@ -38,6 +39,8 @@ enableGitInfo = true
 name = "Robin Mueller"
 github = "robamu"
 linkedin = "robin-mueller-m"
+
+[menu]
 
 [[menu.main]]
 name = "Home"

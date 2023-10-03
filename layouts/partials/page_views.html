@@ -2,11 +2,3 @@
     <span id="{{ .File.UniqueID }}" title="{{ i18n "article.page_views" }}">
     </span>
 </span>
-<script>
-    var t = setInterval(function() {
-        if (window.goatcounter && window.goatcounter.visit_count) {
-            clearInterval(t)
-            window.goatcounter.visit_count({append: 'body'})
-        }
-    }, 100)
-</script>

@@ -5,7 +5,6 @@ disableShare = true
 comments = false
 hideMeta = true
 +++
-
 My name is Robin Mueller and I love to code! I studied aerospace engineering at the University
 Stuttgart and have started working as a PhD student at the
 [Institute of Space Systems](https://www.irs.uni-stuttgart.de/en/).

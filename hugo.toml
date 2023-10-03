@@ -10,6 +10,7 @@ pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
 
 enableGitInfo = true
+# mainSections = "main"
 # sectionPagesMenu = 'main'
 
 [markup]

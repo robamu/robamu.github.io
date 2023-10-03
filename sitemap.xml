@@ -3,7 +3,40 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://robamu.github.io/categories/</loc>
-    <lastmod>2023-09-26T11:40:11+02:00</lastmod>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/tags/design-pattern/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/categories/design-pattern/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/posts/rust-strategy-pattern/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/posts/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/tags/rust/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/categories/rust/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/tags/space/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/tags/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/tags/tcp/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
+  </url><url>
+    <loc>https://robamu.github.io/categories/tcp/</loc>
+    <lastmod>2023-10-03T16:03:58+02:00</lastmod>
   </url><url>
     <loc>https://robamu.github.io/tags/packaging/</loc>
     <lastmod>2023-09-26T11:40:11+02:00</lastmod>
@@ -17,19 +50,10 @@
     <loc>https://robamu.github.io/tags/pip/</loc>
     <lastmod>2023-09-26T11:40:11+02:00</lastmod>
   </url><url>
-    <loc>https://robamu.github.io/posts/</loc>
-    <lastmod>2023-09-26T11:40:11+02:00</lastmod>
-  </url><url>
     <loc>https://robamu.github.io/tags/python/</loc>
     <lastmod>2023-09-26T11:40:11+02:00</lastmod>
   </url><url>
     <loc>https://robamu.github.io/categories/python/</loc>
-    <lastmod>2023-09-26T11:40:11+02:00</lastmod>
-  </url><url>
-    <loc>https://robamu.github.io/</loc>
-    <lastmod>2023-09-26T11:40:11+02:00</lastmod>
-  </url><url>
-    <loc>https://robamu.github.io/tags/</loc>
     <lastmod>2023-09-26T11:40:11+02:00</lastmod>
   </url><url>
     <loc>https://robamu.github.io/tags/workshop/</loc>
@@ -51,12 +75,6 @@
     <lastmod>2023-09-04T16:35:05+02:00</lastmod>
   </url><url>
     <loc>https://robamu.github.io/tags/raspberrypi/</loc>
-    <lastmod>2023-09-04T16:35:05+02:00</lastmod>
-  </url><url>
-    <loc>https://robamu.github.io/tags/rust/</loc>
-    <lastmod>2023-09-04T16:35:05+02:00</lastmod>
-  </url><url>
-    <loc>https://robamu.github.io/categories/rust/</loc>
     <lastmod>2023-09-04T16:35:05+02:00</lastmod>
   </url><url>
     <loc>https://robamu.github.io/tags/vscode/</loc>
@@ -81,9 +99,6 @@
     <lastmod>2023-09-04T16:35:05+02:00</lastmod>
   </url><url>
     <loc>https://robamu.github.io/tags/embedded/</loc>
-    <lastmod>2023-09-04T16:35:05+02:00</lastmod>
-  </url><url>
-    <loc>https://robamu.github.io/tags/space/</loc>
     <lastmod>2023-09-04T16:35:05+02:00</lastmod>
   </url><url>
     <loc>https://robamu.github.io/tags/va10820/</loc>

@@ -6,7 +6,16 @@
     <description>Recent content on Robins blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Sep 2023 16:32:41 +0200</lastBuildDate><atom:link href="https://robamu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Sep 2023 15:17:13 +0200</lastBuildDate><atom:link href="https://robamu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Implementing a TCP server for Space Applications in Rust using the Strategy Pattern</title>
+      <link>https://robamu.github.io/posts/rust-strategy-pattern/</link>
+      <pubDate>Fri, 29 Sep 2023 15:17:13 +0200</pubDate>
+      
+      <guid>https://robamu.github.io/posts/rust-strategy-pattern/</guid>
+      <description>Even for space systems, TCP/IP is oftentimes an important component in some shape or form because the majority of development might still occur on ground where an internet connection is still available. The special thing about space is that instead of using newline and/or UTF-8 based data, the data is generally in binary format and packet based. The most prevalent of the space packet standards is probably the CCSDS Space Packet Protocol.</description>
+    </item>
+    
     <item>
       <title>Packaging Python Projects in 2023</title>
       <link>https://robamu.github.io/posts/packaging-python-in-2023/</link>

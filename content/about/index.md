@@ -2,6 +2,9 @@
 title: 'About Me'
 date: 2021-04-27T21:53:29+05:00
 draft: false
+disableShare: true
+comments: false
+hideMeta: true
 ---
 
 My name is Robin Mueller and I love to code! I studied aerospace engineering at the University

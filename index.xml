@@ -80,8 +80,8 @@ At that point of time, I was an aerospace engineer doing my graduate studies at 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://robamu.github.io/projects/</guid>
-      <description>Here is a list of projects I am currently working on or contributing to.
-EIVE satellite project and the corresponding EIVE On-Board Software. I wrote large parts of the software which are now running on the EIVE satellite launched in June 2023. FSFW: I contributed a lot to the Flight Software Framework which is the framework used for both the SOURCE and EIVE project. sat-rs framework: I am working on the Rust port of the FSFW as part of my PhD thesis.</description>
+      <description>sat-rs I am currently working on the sat-rs framework. In large parts, this will be a Rust port of the FSFW, but the goal will also be to leverage the incredible language features and the ecosystem of Rust to alleviate the weak spots of the FSFW.
+EIVE satellite project I worked and I am still working on the EIVE satellite project and the corresponding EIVE On-Board Software. I wrote large parts of the software which are now running on the EIVE satellite launched in June 2023.</description>
     </item>
     
   </channel>

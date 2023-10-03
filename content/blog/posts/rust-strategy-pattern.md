@@ -1,10 +1,11 @@
----
-title: "Implementing a TCP server for Space Applications in Rust using the Strategy Pattern"
-date: 2023-09-29T15:17:13+02:00
-tags: ["rust", "design-pattern", "tcp", "space"]
-categories: ["rust", "design-pattern", "tcp"]
-draft: false
----
++++
+title = "Implementing a TCP server for Space Applications in Rust using the Strategy Pattern"
+menu = "blog"
+date = 2023-09-29T15:17:13+02:00
+tags = ["rust", "design-pattern", "tcp", "space"]
+categories = ["rust", "design-pattern", "tcp"]
+draft = false
++++
 
 Even for space systems, TCP/IP is oftentimes an important component in some shape or form because
 the majority of development might still occur on ground where an internet connection is still

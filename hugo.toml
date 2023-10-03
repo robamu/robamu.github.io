@@ -1,6 +1,6 @@
 baseURL = "https://robamu.github.io"
 languageCode = 'en-us'
-title = 'Robins blog'
+title = 'Robins website'
 theme = "PaperMod"
 disqusShortname = "https-robamu-github-io"
 
@@ -10,6 +10,7 @@ pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
 
 enableGitInfo = true
+# sectionPagesMenu = 'main'
 
 [markup]
   [markup.goldmark]
@@ -17,7 +18,7 @@ enableGitInfo = true
       unsafe = true
 
 [Params]
-  title = "robins blog"
+  title = "robins website"
   keyword = "coding, rust, c++, python, aerospace, satellites"
   commit = false
   comments = true
@@ -44,15 +45,20 @@ linkedin = "robin-mueller-m"
 
 [[menu.main]]
 name = "Home"
-url = ""
+url = "/"
 weight = 1
 
 [[menu.main]]
-name = "About"
-url = "about"
+name = "Projects"
+url = "/projects"
 weight = 2
 
 [[menu.main]]
-name = "Contact"
-url = "contact"
+name = "Blog"
+url = "/blog"
 weight = 3
+
+[[menu.main]]
+name = "Contact"
+url = "/contact"
+weight = 4

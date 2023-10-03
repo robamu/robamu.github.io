@@ -1,11 +1,11 @@
----
-title: 'Get in touch'
-date: 2021-04-27T21:53:29+05:00
-draft: false
-disableShare: true
-comments: false
-hideMeta: true
----
++++
+title = 'Get in touch'
+date = "2021-04-27T21:53:29+05:00"
+draft = false
+disableShare = true
+comments = false
+hideMeta = true
++++
 
 <form id="contactform" method="post" action="https://formspree.io/f/mzbobjzr">
   <div class="form-group row">

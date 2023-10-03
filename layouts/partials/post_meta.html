@@ -13,6 +13,7 @@
 {{- end }}
 
 {{- if (.Param "ShowPageViews") -}}
+{{- $scratch.Add "meta" "<span id='page-views'>Unknown Views</span>" }}
   {{- partial "page_views.html" . -}}
 {{ end }}
 
@@ -25,3 +26,4 @@
 {{- with ($scratch.Get "meta") }}
 {{- delimit . "&nbsp;·&nbsp;" -}}
 {{- end -}}
+

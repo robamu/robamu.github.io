@@ -3,7 +3,7 @@ title: "Implementing a TCP server for Space Applications in Rust using the Strat
 date: 2023-09-29T15:17:13+02:00
 tags: ["rust", "design-pattern", "tcp", "space"]
 categories: ["rust", "design-pattern", "tcp"]
-draft: true
+draft: false
 ---
 
 Even for space systems, TCP/IP is oftentimes an important component in some shape or form because
@@ -72,11 +72,12 @@ The following graph, which is taken from the article as well [^1], shows the bas
 >}}
 </center>
 
-This can be mapped on our problem and to Rust: The context object will be our generic TCP server
-which has some common logic to read TCs from a client and send back telemetry to the client. The
-Strategy interface is some trait which supplies all information required to parse telecommands from
-a raw bytestream or send telemetry back to the client. A concrete implementation would then for
-example be a COBS decoder object.
+The strategy pattern allows to have a base algorithm with flexible adaption points which are called
+strategies. This pattern can be mapped on our problem and to Rust: The context object will be our
+generic TCP server which has some common logic to read TCs from a client and send back telemetry
+to the client. The Strategy interface is some trait which supplies all information required to
+parse telecommands from a raw bytestream or send telemetry back to the client. A concrete
+implementation would then for example be a COBS decoder object.
 
 ## The generic TCP server
 
@@ -394,9 +395,10 @@ logic with a few adaption point that should be user-configurable.
 # Conclusion
 
 I think transferring object oriented design patterns to Rust can be tricky when coming
-from object oriented languages like Java, C++ or Python, because Rust has not classic inheritance.
-I oftentimes have the issue that a lot of the examples and resources are contrived or only
-applicable for very simple problems.
+from object oriented languages like Java, C++ or Python, because Rust does has not classic
+inheritance. It is still possible to apply most design patterns in Rust as well, using composition,
+generics and trait, but I oftentimes have the issue that a lot of the examples and resources
+available are contrived or only applicable for very simple problems.
 This post showed how to apply the strategy pattern in Rust for a TCP server to reduce duplicate
 code and allow flexbily adding new ways to parse packets received for that server, and to send
 telemetry.

@@ -25,6 +25,7 @@ enableGitInfo = true
   ShowReadingTime = true
   ShowShareButtons = true
   ShowWordCount = false
+  ShowPageViews = true
   ShowCodeCopyButtons = true
   socialShare = true
   showRelatedPosts = true

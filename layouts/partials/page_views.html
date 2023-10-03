@@ -1,4 +1,5 @@
-<span id="{{ .File.UniqueID }}" title="{{ i18n "article.page_views" }}"></span>
+{{- if or .Params.author site.Params.author (.Param "ShowReadingTime") (not .Date.IsZero) .IsTranslated }}&nbsp;·&nbsp;{{- end -}}
+<span id="{{ .File.UniqueID }}" title="{{ i18n "article.page_views" }}">? Views</span>
 <script>
     var r = new XMLHttpRequest();
     r.addEventListener('load', function() {

@@ -14,6 +14,6 @@ My name is Robin Mueller and I love to code! I studied aerospace engineering at 
 Stuttgart and have started working as a PhD student at the
 [Institute of Space Systems](https://www.irs.uni-stuttgart.de/en/).
 
-My research focus is the investion of Rust as a modern and safe alternative to C/C++ for
+My research focus is the investigation of Rust as a modern and safe alternative to C/C++ for
 satellite software. You can see an overview of all my projects at the
 [project page]({{< ref "/projects" >}}).

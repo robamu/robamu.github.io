@@ -4,17 +4,36 @@ comments = false
 hideMeta = true
 +++
 
-Here is a list of projects I am currently working on or contributing to.
+## sat-rs
 
-- [EIVE satellite project](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/)
-   and the corresponding
-   [EIVE On-Board Software](https://egit.irs.uni-stuttgart.de/eive/eive-obsw/). I wrote large parts
-   of the software which are now running on the EIVE satellite launched in June 2023.
-- [FSFW](https://egit.irs.uni-stuttgart.de/fsfw/fsfw): I contributed a lot to the Flight Software
-   Framework which is the framework used for both the [SOURCE](https://www.ksat-stuttgart.de/en/our-projects/source/)
-   and [EIVE](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/) project.
-- [sat-rs framework](https://documentation.irs.uni-stuttgart.de/sat-rs.html): I am working on the
-   Rust port of the FSFW as part of my PhD thesis.
-- spacepackets open source libraries: I wrote a [Python](https://github.com/us-irs/spacepackets-py)
-   and a [Rust](https://github.com/us-irs/spacepackets-rs) library for CCSDS and ECSS packet
-   standards
+I am currently working on the
+[sat-rs framework](https://documentation.irs.uni-stuttgart.de/sat-rs.html). In large parts,
+this will be a Rust port of the [FSFW](#flight-softwre-framework-fsfw-contributor), but the goal
+will also be to leverage the incredible language features and the ecosystem of Rust to alleviate
+the weak spots of the FSFW.
+
+## EIVE satellite project
+
+I worked and I am still working on the
+[EIVE satellite project](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/)
+and the corresponding [EIVE On-Board Software](https://egit.irs.uni-stuttgart.de/eive/eive-obsw/).
+I wrote large parts of the software which are now running on the EIVE satellite launched in June
+2023.
+
+## Flight Softwre Framework (FSFW) Contributor
+
+I contributed a lot to the [FSFW](https://documentation.irs.uni-stuttgart.de/index.html), a
+framework which is used for both the [SOURCE](https://www.ksat-stuttgart.de/en/our-projects/source/)
+and [EIVE](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/) project. A lot of the architecture and design of the FSFW will also be transferred to
+the `sat-rs` Rust framework which is part of my PhD thesis.
+
+## Spacepackets and tmtccmd libraries
+
+I wrote the [Python spacepackets](https://github.com/us-irs/spacepackets-py) and the
+[Rust spacepackets](https://github.com/us-irs/spacepackets-rs) library, which offer a convenient
+API for various CCSDS and ECSS packet
+standards.
+
+I have also written a Python program which allows satellite software developers to quickly
+test TMTC handling in their software. The program was refactored into a format which makes it
+easier to adapt it to other missions.

@@ -1,5 +1,6 @@
 ---
 title: "Cross-Compile and Debug Rust Applications for the Raspberry Pi"
+menu: 'blog'
 #description: <descriptive text here>
 date: 2021-12-27T12:31:51+01:00
 draft: false

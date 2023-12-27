@@ -437,10 +437,6 @@ but I had issues getting the first configuration to work on Windows.
 
 ### GDB server started by VS Code
 
-Unfortunately, I have not found a way to get the debug output produced by an application
-when starting the GDB server with VS code. Feel free to investigate how this could be solved
-using VS Code tasks.
-
 You can simply select and run the `Remote Debugging With Server` configuration
 in VS Code. The result should look something like the following:
 
@@ -471,7 +467,7 @@ runner = "python3 bld-deploy-remote.py -t -d --source"
 # runner = "python3 bld-deploy-remote.py -t -d --source"
 ```
 
-After using `cargo run`, you can run the `Remote Debugging External Server`
+After using `cargo run` in a terminal, you can run the `Remote Debugging External Server`
 configuration in VS Code. The result should look something like the following:
 
 <center>

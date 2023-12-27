@@ -7,7 +7,7 @@ hideMeta = true
 ## sat-rs
 
 I am currently working on the
-[sat-rs framework](https://documentation.irs.uni-stuttgart.de/sat-rs.html). In large parts,
+[sat-rs framework](https://absatsw.irs.uni-stuttgart.de/projects/sat-rs.html). In large parts,
 this will be a Rust port of the [FSFW](#flight-softwre-framework-fsfw-contributor), but the goal
 will also be to leverage the incredible language features and the ecosystem of Rust to alleviate
 the weak spots of the FSFW.
@@ -21,7 +21,7 @@ I wrote large parts of the software which are now running on the EIVE satellite 
 
 ## Flight Software Framework (FSFW) Contributor
 
-I contributed a lot to the [FSFW](https://documentation.irs.uni-stuttgart.de/index.html), a
+I contributed a lot to the [FSFW](https://absatsw.irs.uni-stuttgart.de/projects/fsfw.html), a
 framework which is used for both the [SOURCE](https://www.ksat-stuttgart.de/en/our-projects/source/)
 and [EIVE](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/) project.
 A lot of the architecture and design of the FSFW will also be transferred to the `sat-rs` Rust

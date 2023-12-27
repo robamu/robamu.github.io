@@ -17,15 +17,15 @@ the weak spots of the FSFW.
 I worked and I am still working on the
 [EIVE satellite project](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/)
 and the corresponding [EIVE On-Board Software](https://egit.irs.uni-stuttgart.de/eive/eive-obsw/).
-I wrote large parts of the software which are now running on the EIVE satellite launched in June
-2023.
+I wrote large parts of the software which are now running on the EIVE satellite launched in June 2023.
 
-## Flight Softwre Framework (FSFW) Contributor
+## Flight Software Framework (FSFW) Contributor
 
 I contributed a lot to the [FSFW](https://documentation.irs.uni-stuttgart.de/index.html), a
 framework which is used for both the [SOURCE](https://www.ksat-stuttgart.de/en/our-projects/source/)
-and [EIVE](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/) project. A lot of the architecture and design of the FSFW will also be transferred to
-the `sat-rs` Rust framework which is part of my PhD thesis.
+and [EIVE](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/) project.
+A lot of the architecture and design of the FSFW will also be transferred to the `sat-rs` Rust
+framework which is part of my PhD thesis.
 
 ## Spacepackets and tmtccmd libraries
 

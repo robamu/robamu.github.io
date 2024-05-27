@@ -15,9 +15,9 @@ the weak spots of the FSFW.
 
 ## SOURCE satellite project
 
-I worked on the on-board software of thesis[SOURCE student satellite project](https://git.ksat-stuttgart.de/source/sourceobsw)
+I worked on the [on-board software](https://git.ksat-stuttgart.de/source/sourceobsw) of the [SOURCE student satellite project](https://www.ksat-stuttgart.de/en/our-projects/source/)
 for a few years and still regularly contribute to the
-project. 
+project.
 
 ## EIVE satellite project
 

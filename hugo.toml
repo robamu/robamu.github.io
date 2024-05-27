@@ -1,6 +1,6 @@
 baseURL = "https://robamu.github.io"
 languageCode = 'en-us'
-title = 'Robins website'
+title = 'hi, I am robin'
 theme = "PaperMod"
 disqusShortname = "https-robamu-github-io"
 
@@ -37,7 +37,7 @@ mainSections = "main"
   [params.footer]
     enable = true
 
-[Author]
+[params.author]
 name = "Robin Mueller"
 github = "robamu"
 linkedin = "robin-mueller-m"

@@ -7,10 +7,17 @@ hideMeta = true
 ## sat-rs
 
 I am currently working on the
-[sat-rs framework](https://absatsw.irs.uni-stuttgart.de/projects/sat-rs.html). In large parts,
-this will be a Rust port of the [FSFW](#flight-softwre-framework-fsfw-contributor), but the goal
+[sat-rs library](https://absatsw.irs.uni-stuttgart.de/projects/sat-rs) as part of my PhD thesis.
+
+In large parts, this will be a Rust port of the [FSFW](#flight-softwre-framework-fsfw-contributor), but the goal
 will also be to leverage the incredible language features and the ecosystem of Rust to alleviate
 the weak spots of the FSFW.
+
+## SOURCE satellite project
+
+I worked on the on-board software of thesis[SOURCE student satellite project](https://git.ksat-stuttgart.de/source/sourceobsw)
+for a few years and still regularly contribute to the
+project. 
 
 ## EIVE satellite project
 

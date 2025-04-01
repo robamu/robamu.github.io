@@ -61,7 +61,7 @@ weight = 3
 
 [[menu.main]]
 name = "sat-rs book"
-url = "/satrs-book/"
+url = "/sat-rs/book/"
 weight = 4
 
 [[menu.main]]

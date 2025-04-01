@@ -9,6 +9,15 @@ tags: ["rust", "embedded", "space", "va10820"]
 categories: ["rust", "embedded"]
 ---
 
+# UPDATE 2024
+
+I have recently converted the VA108xx Rust support into monocrates which can now be found
+[here](https://egit.irs.uni-stuttgart.de/rust/va108xx-rs). I have also started working on the
+support for the VA416XX family of devices which can be found [here](https://egit.irs.uni-stuttgart.de/rust/va416xx-rs).
+The new repositories also now use the `embedded-hal` v1 release.
+
+# Blogpost
+
 The last few weeks I have been busy diving into the Rust ecosystem and learning the language
 through practical projects. I finishing the excellent
 [Rust book](https://doc.rust-lang.org/book/) and the [Rust Embedded Book](https://docs.rust-embedded.org/book/)

@@ -19,6 +19,5 @@ Build regular page
 hugo
 ```
 
-This will also update the files in the `public` submodule. To update the blog, checkout
-`main` inside the submodule first, then build the page and commit and push the newly generated
-website.
+This will also update the files in the `public` submodule. The CI will automatically update
+the `gh-pages` branch, which will contain the static website.

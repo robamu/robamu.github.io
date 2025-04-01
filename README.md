@@ -19,5 +19,5 @@ Build regular page
 hugo
 ```
 
-This will also update the files in the `public` submodule. The CI will automatically update
+This will build the website in the `./public` folder. The CI will automatically update
 the `gh-pages` branch, which will contain the static website.

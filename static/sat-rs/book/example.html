@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The satrs-example application - The sat-rs book</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">2.</strong> Design</a></li><li class="chapter-item expanded affix "><li class="part-title">Basic concepts and components</li><li class="chapter-item expanded "><a href="communication.html"><strong aria-hidden="true">3.</strong> Communication with Space Systems</a></li><li class="chapter-item expanded "><a href="constrained-systems.html"><strong aria-hidden="true">4.</strong> Working with Constrained Systems</a></li><li class="chapter-item expanded "><a href="actions.html"><strong aria-hidden="true">5.</strong> Actions</a></li><li class="chapter-item expanded "><a href="modes-and-health.html"><strong aria-hidden="true">6.</strong> Modes and Health</a></li><li class="chapter-item expanded "><a href="housekeeping.html"><strong aria-hidden="true">7.</strong> Housekeeping Data</a></li><li class="chapter-item expanded "><a href="events.html"><strong aria-hidden="true">8.</strong> Events</a></li><li class="chapter-item expanded affix "><li class="part-title">Example project</li><li class="chapter-item expanded "><a href="example.html" class="active"><strong aria-hidden="true">9.</strong> The satrs-example application</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The sat-rs book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="sat-rs-example-application"><a class="header" href="#sat-rs-example-application">sat-rs Example Application</a></h1>
+<p>The <code>sat-rs</code> library includes a monolithic example application which can be found inside
+the <a href="https://egit.irs.uni-stuttgart.de/rust/sat-rs/src/branch/main/satrs-example"><code>satrs-example</code></a>
+subdirectory of the repository. The primary purpose of this example application is to show how
+the various components of the sat-rs framework could be used as part of a larger on-board
+software application.</p>
+<h2 id="structure-of-the-example-project"><a class="header" href="#structure-of-the-example-project">Structure of the example project</a></h2>
+<p>The example project contains components which could also be expected to be part of a production
+On-Board Software. A structural diagram of the example application is given to provide
+a brief high-level view of the components used inside the example application:</p>
+<p><img src="images/satrs-example/satrs-example-structure.png" alt="satrs-example component structure" /></p>
+<p>The dotted lines are used to denote optional components. In this case, the static pool components
+are optional because the heap can be used as a simpler mechanism to store TMTC packets as well.
+Some additional explanation is provided for the various components.</p>
+<h3 id="tcpip-server-components"><a class="header" href="#tcpip-server-components">TCP/IP server components</a></h3>
+<p>The example includes a UDP and TCP server to receive telecommands and poll telemetry from. This
+might be an optional component for an OBSW which is only used during the development phase on
+ground. The UDP server is strongly based on the
+<a href="https://docs.rs/satrs/latest/satrs/hal/std/udp_server/struct.UdpTcServer.html">UDP TC server</a>.
+This server component is wrapped by a TMTC server which handles all telemetry to the last connected
+client.</p>
+<p>The TCP server is based on the <a href="https://docs.rs/satrs/latest/satrs/hal/std/tcp_server/struct.TcpSpacepacketsServer.html">TCP Spacepacket Server</a>
+class. It parses space packets by using the CCSDS space packet ID as the packet
+start delimiter. All available telemetry will be sent back to a client after having read all
+telecommands from the client.</p>
+<h3 id="tmtc-infrastructure"><a class="header" href="#tmtc-infrastructure">TMTC Infrastructure</a></h3>
+<p>The most important components of the TMTC infrastructure include the following components:</p>
+<ul>
+<li>A TC source component which demultiplexes and routes telecommands based on parameters like
+packet APID or PUS service and subservice type.</li>
+<li>A TM sink sink component which is the target of all sent telemetry and sends it to downlink
+handlers like the UDP and TCP server.</li>
+</ul>
+<p>You can read the <a href="./communication.html">Communications chapter</a> for more
+background information on the chosen TMTC infrastructure approach.</p>
+<h3 id="pus-service-components"><a class="header" href="#pus-service-components">PUS Service Components</a></h3>
+<p>A PUS service stack is provided which exposes some functionality conformant with the ECSS PUS
+services. This currently includes the following services:</p>
+<ul>
+<li>Service 1 for telecommand verification. The verification handling is handled locally: Each
+component which generates verification telemetry in some shape or form receives a
+<a href="https://docs.rs/satrs/latest/satrs/pus/verification/struct.VerificationReporterWithSender.html">reporter</a>
+object which can be used to send PUS 1 verification telemetry to the TM funnel.</li>
+<li>Service 3 for housekeeping telemetry handling.</li>
+<li>Service 5 for management and downlink of on-board events.</li>
+<li>Service 8 for handling on-board actions.</li>
+<li>Service 11 for scheduling telecommands to be released at a specific time. This component
+uses the <a href="https://docs.rs/satrs/latest/satrs/pus/scheduler/alloc_mod/struct.PusScheduler.html">PUS scheduler class</a>
+which performs the core logic of scheduling telecommands. All telecommands released by the
+scheduler are sent to the central TC source using a message.</li>
+<li>Service 17 for test purposes like pings.</li>
+</ul>
+<h3 id="event-management-component"><a class="header" href="#event-management-component">Event Management Component</a></h3>
+<p>An event manager based on the sat-rs
+<a href="https://docs.rs/satrs/latest/satrs/event_man/index.html">event manager component</a>
+is provided to handle the event IPC and FDIR mechanism. The event message are converted to PUS 5
+telemetry by the
+<a href="https://docs.rs/satrs/latest/satrs/pus/event_man/alloc_mod/struct.PusEventDispatcher.html">PUS event dispatcher</a>.</p>
+<p>You can read the <a href="./events.html">events</a> chapter for more in-depth information about event management.</p>
+<h3 id="sample-application-components"><a class="header" href="#sample-application-components">Sample Application Components</a></h3>
+<p>These components are example mission specific. They provide an idea how mission specific modules
+would look like the sat-rs context. It currently includes the following components:</p>
+<ul>
+<li>An Attitute and Orbit Control (AOCS) example task which can also process some PUS commands.</li>
+</ul>
+<h2 id="dataflow"><a class="header" href="#dataflow">Dataflow</a></h2>
+<p>The interaction of the various components is provided in the following diagram:</p>
+<p><img src="images/satrs-example/satrs-example-dataflow.png" alt="satrs-example dataflow diagram" /></p>
+<p>It should be noted that an arrow coming out of a component group refers to multiple components
+in that group. An explanation for important component groups will be given.</p>
+<h4 id="tmtc-component-group"><a class="header" href="#tmtc-component-group">TMTC component group</a></h4>
+<p>This groups is the primary interface for clients to communicate with the on-board software
+using a standardized TMTC protocol. The example uses the
+<a href="https://ecss.nl/standard/ecss-e-st-70-41c-space-engineering-telemetry-and-telecommand-packet-utilization-15-april-2016/">ECSS PUS protocol</a>.
+In the future, this might be extended with the
+<a href="https://public.ccsds.org/Pubs/727x0b5.pdf">CCSDS File Delivery Protocol</a>.</p>
+<p>A client can connect to the UDP or TCP server to send these PUS packets to the on-board software.
+These servers then forward the telecommads to a centralized TC source component using a dedicated
+message abstraction.</p>
+<p>This TC source component then demultiplexes the message and forwards it to the relevant components.
+Right now, it forwards all PUS requests to the respective PUS service handlers using the PUS
+receiver component. The individual PUS services are running in a separate thread. In the future,
+additional forwarding to components like a CFDP handler might be added as well. It should be noted
+that PUS11 commands might contain other PUS commands which should be scheduled in the future.
+These wrapped commands are forwarded to the PUS11 handler. When the schedule releases those
+commands, it forwards the released commands to the TC source again. This allows the scheduler
+and the TC source to run in separate threads and keeps them cleanly separated.</p>
+<p>All telemetry generated by the on-board software is sent to a centralized TM funnel. This component
+also performs a demultiplexing step to forward all telemetry to the relevant TM recipients.
+In the example case, this is the last UDP client, or a connected TCP client. In the future,
+forwarding to a persistent telemetry store and a simulated communication component might be
+added here as well. The centralized TM funnel also takes care of some packet processing steps which
+need to be applied for each ECSS PUS packet, for example CCSDS specific APID incrementation and
+PUS specific message counter incrementation.</p>
+<h4 id="application-group"><a class="header" href="#application-group">Application Group</a></h4>
+<p>The application components generally do not receive raw PUS packets directly, even though
+this is certainly possible. Instead, they receive internalized messages from the PUS service
+handlers. For example, instead of receiving a PUS 8 Action Telecommand directly, an application
+component will receive a special <code>ActionRequest</code> message type reduced to the basic important
+information required to execute a request. These special requests are denoted by the blue arrow
+in the diagram.</p>
+<p>It should be noted that the arrow pointing towards the event manager points in both directions.
+This is because the application components might be interested in events generated by other
+components as well. This mechanism is oftentimes used to implement the FDIR functionality on system
+and component level.</p>
+<h4 id="shared-components-and-functional-interfaces"><a class="header" href="#shared-components-and-functional-interfaces">Shared components and functional interfaces</a></h4>
+<p>It should be noted that sometimes, a functional interface is used instead of a message. This
+is used for the generation of verification telemetry. The verification reporter is a clonable
+component which generates and sends PUS1 verification telemetry directly to the TM funnel. This
+introduces a loose coupling to the PUS standard but was considered the easiest solution for
+a project which utilizes PUS as the main communication protocol. In the future, a generic
+verification abstraction might be introduced to completely decouple the application layer from
+PUS.</p>
+<p>The same concept is applied if the backing store of TMTC packets are shared pools. Every
+component which needs to read telecommands inside that shared pool or generate new telemetry
+into that shared pool will received a clonable shared handle to that pool.</p>
+<p>The same concept could be extended to power or thermal handling. For example, a shared power helper
+component might be used to retrieve power state information and send power switch commands through
+a functional interface. The actual implementation of the functional interface might still use
+shared memory and/or messages, but the functional interface makes using and testing the interaction
+with these components easier.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="events.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="events.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

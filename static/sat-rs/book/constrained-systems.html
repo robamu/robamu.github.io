@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Working with Constrained Systems - The sat-rs book</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">2.</strong> Design</a></li><li class="chapter-item expanded affix "><li class="part-title">Basic concepts and components</li><li class="chapter-item expanded "><a href="communication.html"><strong aria-hidden="true">3.</strong> Communication with Space Systems</a></li><li class="chapter-item expanded "><a href="constrained-systems.html" class="active"><strong aria-hidden="true">4.</strong> Working with Constrained Systems</a></li><li class="chapter-item expanded "><a href="actions.html"><strong aria-hidden="true">5.</strong> Actions</a></li><li class="chapter-item expanded "><a href="modes-and-health.html"><strong aria-hidden="true">6.</strong> Modes and Health</a></li><li class="chapter-item expanded "><a href="housekeeping.html"><strong aria-hidden="true">7.</strong> Housekeeping Data</a></li><li class="chapter-item expanded "><a href="events.html"><strong aria-hidden="true">8.</strong> Events</a></li><li class="chapter-item expanded affix "><li class="part-title">Example project</li><li class="chapter-item expanded "><a href="example.html"><strong aria-hidden="true">9.</strong> The satrs-example application</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The sat-rs book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="working-with-constrained-systems"><a class="header" href="#working-with-constrained-systems">Working with Constrained Systems</a></h1>
+<p>Software for space systems oftentimes has different requirements than the software for host
+systems or servers. Currently, most space systems are considered embedded systems.</p>
+<p>For these systems, the computation power and the available heap are the most important resources
+which are constrained. This might make completeley heap based memory management schemes which
+are oftentimes used on host and server based systems unfeasable. Still, completely forbidding
+heap allocations might make software development unnecessarilly difficult, especially in a
+time where the OBSW might be running on Linux based systems with hundreds of MBs of RAM.</p>
+<p>A useful pattern used commonly in space systems is to limit heap allocations to program
+initialization time and avoid frequent run-time allocations. This prevents issues like
+running out of memory (something even Rust can not protect from) or heap fragmentation on systems
+without a MMU.</p>
+<h1 id="using-pre-allocated-pool-structures"><a class="header" href="#using-pre-allocated-pool-structures">Using pre-allocated pool structures</a></h1>
+<p>A huge candidate for heap allocations is the TMTC and  handling. TC, TMs and IPC data are all
+candidates where the data size might vary greatly. The regular solution for host systems
+might be to send around this data as a <code>Vec&lt;u8&gt;</code> until it is dropped. <code>sat-rs</code> provides
+another solution to avoid run-time allocations by offering pre-allocated static
+pools. These pools are split into subpools where each subpool can have different page sizes.
+For example, a very small telecommand (TC) pool might look like this:</p>
+<p><img src="images/pools/static-pools.png" alt="Example Pool" /></p>
+<p>The core of the pool abstractions is the
+<a href="https://docs.rs/satrs/latest/satrs/pool/trait.PoolProvider.html">PoolProvider trait</a>.
+This trait specifies the general API a pool structure should have without making assumption
+of how the data is stored.</p>
+<p>This trait is implemented by a static memory pool implementation.
+The code to generate this static pool would look like this:</p>
+<!-- Would be nice to test this code sample, but need to wait
+for https://github.com/rust-lang/mdBook/issues/706 to be merged.. -->
+<pre><code class="language-rust  ignore">use satrs::pool::{StaticMemoryPool, StaticPoolConfig};
+
+let tc_pool = StaticMemoryPool::new(StaticPoolConfig::new(vec![
+    (6, 16),
+    (4, 32),
+    (2, 64),
+    (1, 128)
+]));
+</code></pre>
+<p>It should be noted that the buckets only show the maximum size of data being stored inside them.
+The store will keep a separate structure to track the actual size of the data being stored.
+A TC entry inside this pool has a store address which can then be sent around without having
+to dynamically allocate memory. The same principle can also be applied to the telemetry (TM) and
+inter-process communication (IPC) data.</p>
+<p>You can read</p>
+<ul>
+<li><a href="https://docs.rs/satrs/latest/satrs/pool/struct.StaticPoolConfig.html"><code>StaticPoolConfig</code> API</a></li>
+<li><a href="https://docs.rs/satrs/latest/satrs/pool/struct.StaticMemoryPool.html"><code>StaticMemoryPool</code> API</a></li>
+</ul>
+<p>for more details.</p>
+<p>In the future, optimized pool structures which use standard containers or are
+<a href="https://doc.rust-lang.org/std/marker/trait.Sync.html"><code>Sync</code></a> by default might be added as well.</p>
+<h1 id="using-special-crates-to-prevent-smaller-allocations"><a class="header" href="#using-special-crates-to-prevent-smaller-allocations">Using special crates to prevent smaller allocations</a></h1>
+<p>Another common way to use the heap on host systems is using containers like <code>String</code> and <code>Vec&lt;u8&gt;</code>
+to work with data where the size is not known beforehand. The most common solution for embedded
+systems is to determine the maximum expected size and then use a pre-allocated <code>u8</code> buffer and a
+size variable. Alternatively, you can use the following crates for more convenience or a smart
+behaviour which at the very least reduces heap allocations:</p>
+<ol>
+<li><a href="https://docs.rs/smallvec/latest/smallvec/"><code>smallvec</code></a>.</li>
+<li><a href="https://docs.rs/arrayvec/latest/arrayvec/index.html"><code>arrayvec</code></a> which also contains an
+<a href="https://docs.rs/arrayvec/latest/arrayvec/struct.ArrayString.html"><code>ArrayString</code></a> helper type.</li>
+<li><a href="https://docs.rs/tinyvec/latest/tinyvec/"><code>tinyvec</code></a>.</li>
+</ol>
+<h1 id="using-a-fixed-amount-of-threads"><a class="header" href="#using-a-fixed-amount-of-threads">Using a fixed amount of threads</a></h1>
+<p>On host systems, it is a common practice to dynamically spawn new threads to handle workloads.
+On space systems this is generally considered an anti-pattern as this is considered undeterministic
+and might lead to similar issues like when dynamically using the heap. For example, spawning a new
+thread might use up the remaining heap of a system, leading to undeterministic errors.</p>
+<p>The most common way to avoid this is to simply spawn all required threads at program initialization
+time. If a thread is done with its task, it can go back to sleeping regularly, only occasionally
+checking for new jobs. If a system still needs to handle bursty concurrent loads, another possible
+way commonly used for host systems as well would be to use a threadpool, for example by using the
+<a href="https://crates.io/crates/threadpool"><code>threadpool</code></a> crate.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="communication.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="actions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="communication.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="actions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

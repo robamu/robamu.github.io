@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Modes and Health - The sat-rs book</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">2.</strong> Design</a></li><li class="chapter-item expanded affix "><li class="part-title">Basic concepts and components</li><li class="chapter-item expanded "><a href="communication.html"><strong aria-hidden="true">3.</strong> Communication with Space Systems</a></li><li class="chapter-item expanded "><a href="constrained-systems.html"><strong aria-hidden="true">4.</strong> Working with Constrained Systems</a></li><li class="chapter-item expanded "><a href="actions.html"><strong aria-hidden="true">5.</strong> Actions</a></li><li class="chapter-item expanded "><a href="modes-and-health.html" class="active"><strong aria-hidden="true">6.</strong> Modes and Health</a></li><li class="chapter-item expanded "><a href="housekeeping.html"><strong aria-hidden="true">7.</strong> Housekeeping Data</a></li><li class="chapter-item expanded "><a href="events.html"><strong aria-hidden="true">8.</strong> Events</a></li><li class="chapter-item expanded affix "><li class="part-title">Example project</li><li class="chapter-item expanded "><a href="example.html"><strong aria-hidden="true">9.</strong> The satrs-example application</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The sat-rs book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="modes"><a class="header" href="#modes">Modes</a></h1>
+<p>Modes are an extremely useful concept to model complex systems. They allow simplified
+system reasoning for both system operators and OBSW developers. They also provide a way to alter
+the behaviour of a component and also provide observability of a system. A few examples of how to
+model the mode of different components within a space system with modes will be given.</p>
+<h2 id="pyhsical-device-component-with-modes"><a class="header" href="#pyhsical-device-component-with-modes">Pyhsical device component with modes</a></h2>
+<p>The following simple mode scheme with the following three mode</p>
+<ul>
+<li><code>OFF</code></li>
+<li><code>ON</code></li>
+<li><code>NORMAL</code></li>
+</ul>
+<p>can be applied to a large number of simpler device controllers of a remote system, for example
+sensors.</p>
+<ol>
+<li><code>OFF</code> means that a device is physically switched off, and the corresponding software component
+does not poll the device regularly.</li>
+<li><code>ON</code> means that a device is pyhsically switched on, but the device is not polled perically.</li>
+<li><code>NORMAL</code> means that a device is powered on and polled periodically.</li>
+</ol>
+<p>If a devices is <code>OFF</code>, the device handler will deny commands which include physical communication
+with the connected devices. In <code>NORMAL</code> mode, it will autonomously perform periodic polling
+of a connected physical device in addition to handling remote commands by the operator.
+Using these three basic modes, there are two important transitions which need to be taken care of
+for the majority of devices:</p>
+<ol>
+<li><code>OFF</code> to <code>ON</code> or <code>NORMAL</code>: The device first needs to be powered on. After that, the
+device initial startup configuration must be performed.</li>
+<li><code>NORMAL</code> or <code>ON</code> to <code>OFF</code>: Any important shutdown configuration or handling must be performed
+before powering off the device.</li>
+</ol>
+<h2 id="controller-components-with-modes"><a class="header" href="#controller-components-with-modes">Controller components with modes</a></h2>
+<p>Controller components are not modelling physical devices, but a mode scheme is still the best
+way to model most of these components.</p>
+<p>For example, a hypothetical attitude controller might have the following modes:</p>
+<ul>
+<li><code>SAFE</code></li>
+<li><code>TARGET IDLE</code></li>
+<li><code>TARGET POINTING GROUND</code></li>
+<li><code>TARGET POINTING NADIR</code></li>
+</ul>
+<p>We can also introduce the concept of submodes: The <code>SAFE</code> mode can for example have a
+<code>DEFAULT</code> submode and a <code>DETUMBLE</code> submode.</p>
+<h2 id="achieving-system-observability-with-modes"><a class="header" href="#achieving-system-observability-with-modes">Achieving system observability with modes</a></h2>
+<p>If a system component has a mode in some shape or form, this mode should be observable. This means
+that the operator can also retrieve the mode for a particular component. This is especially
+important if these components can change their mode autonomously.</p>
+<p>If a component is able to change its mode autonomously, this is also something which is relevant
+information for the operator or for other software components. This means that a component
+should also be able to announce its mode.</p>
+<p>This concept becomes especially important when applying the mode concept on the whole
+system level. This will also be explained in detail in a dedicated chapter, but the basic idea
+is to model the whole system as a tree where each node has a mode. A new capability is added now:
+A component can announce its mode recursively. This means that the component will announce its
+own mode first before announcing the mode of all its children. Using a scheme like this, the mode
+of the whole system can be retrieved using only one command. The same concept can also be used
+for commanding the whole system, which will be explained in more detail in the dedicated systems
+modelling chapter.</p>
+<p>In summary, a component which has modes has to expose the following 4 capabilities:</p>
+<ol>
+<li>Set a mode</li>
+<li>Read the mode</li>
+<li>Announce the mode</li>
+<li>Announce the mode recursively</li>
+</ol>
+<h2 id="using-ecss-pus-to-perform-mode-commanding"><a class="header" href="#using-ecss-pus-to-perform-mode-commanding">Using ECSS PUS to perform mode commanding</a></h2>
+<h1 id="health"><a class="header" href="#health">Health</a></h1>
+<p>Health is an important concept for systems and components which might fail.
+Oftentimes, the health is tied to the mode of a system component in some shape or form, and
+determines whether a system component is usable. Health is also an extremely useful concept
+to simplify the Fault Detection, Isolation and Recovery (FDIR) concept of a system.</p>
+<p>The following health states are based on the ones used inside the FSFW and are enough to model most
+use-cases:</p>
+<ul>
+<li><code>HEALTHY</code></li>
+<li><code>FAULTY</code></li>
+<li><code>NEEDS RECOVERY</code></li>
+<li><code>EXTERNAL CONTROL</code></li>
+</ul>
+<ol>
+<li><code>HEALTHY</code> means that a component is working nominally, and can perform its task without any issues.</li>
+<li><code>FAULTY</code> means that a component does not work properly. This might also impact other system
+components, so the passivation and isolation of that component is desirable for FDIR purposes.</li>
+<li><code>NEEDS RECOVERY</code> is used to attempt a recovery of a component. For example, a simple sensor
+could be power-cycled if there were multiple communication issues in the last time.</li>
+<li><code>EXTERNAL CONTROL</code> is used to isolate an individual component from the rest of the system. For
+example, on operator might be interested in testing a component in isolation, and the interference
+of the system is not desired. In that case, the <code>EXTERNAL CONTROL</code> health state might be used
+to prevent mode commands from the system while allowing external mode commands.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="actions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="housekeeping.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="actions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="housekeeping.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

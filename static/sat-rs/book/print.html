@@ -1,0 +1,691 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The sat-rs book</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">2.</strong> Design</a></li><li class="chapter-item expanded affix "><li class="part-title">Basic concepts and components</li><li class="chapter-item expanded "><a href="communication.html"><strong aria-hidden="true">3.</strong> Communication with Space Systems</a></li><li class="chapter-item expanded "><a href="constrained-systems.html"><strong aria-hidden="true">4.</strong> Working with Constrained Systems</a></li><li class="chapter-item expanded "><a href="actions.html"><strong aria-hidden="true">5.</strong> Actions</a></li><li class="chapter-item expanded "><a href="modes-and-health.html"><strong aria-hidden="true">6.</strong> Modes and Health</a></li><li class="chapter-item expanded "><a href="housekeeping.html"><strong aria-hidden="true">7.</strong> Housekeeping Data</a></li><li class="chapter-item expanded "><a href="events.html"><strong aria-hidden="true">8.</strong> Events</a></li><li class="chapter-item expanded affix "><li class="part-title">Example project</li><li class="chapter-item expanded "><a href="example.html"><strong aria-hidden="true">9.</strong> The satrs-example application</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The sat-rs book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="the-sat-rs-book"><a class="header" href="#the-sat-rs-book">The sat-rs book</a></h1>
+<p>This book is the primary information resource for the <a href="https://egit.irs.uni-stuttgart.de/rust/sat-rs">sat-rs library</a>
+in addition to the regular API documentation. It contains the following resources:</p>
+<ol>
+<li>Architecture informations and consideration which would exceeds the scope of the regular API.</li>
+<li>General information on how to build on-board Software and how <code>sat-rs</code> can help to fulfill
+the unique requirements of writing software for remote systems.</li>
+</ol>
+<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>The primary goal of the sat-rs library is to provide re-usable components
+to write on-board software for remote systems like rovers or satellites. It is specifically written
+for the special requirements for these systems.</p>
+<p>It should be noted that sat-rs is early-stage software. Important features are missing. New releases
+with breaking changes are released regularly, with all changes documented inside respective
+changelog files. You should only use this library if your are willing to work in this
+environment.</p>
+<p>A lot of the architecture and general design considerations are based on the
+<a href="https://egit.irs.uni-stuttgart.de/fsfw/fsfw">FSFW</a> C++ framework which has flight heritage
+through the 2 missions <a href="https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/flying-laptop/">FLP</a>
+and <a href="https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/">EIVE</a>.</p>
+<h1 id="getting-started-with-the-example"><a class="header" href="#getting-started-with-the-example">Getting started with the example</a></h1>
+<p>The <a href="https://egit.irs.uni-stuttgart.de/rust/sat-rs/src/branch/main/satrs-example"><code>satrs-example</code></a>
+provides various practical usage examples of the <code>sat-rs</code> framework. If you are more interested in
+the practical application of <code>sat-rs</code> inside an application, it is recommended to have a look at
+the example application. The <a href="https://egit.irs.uni-stuttgart.de/rust/sat-rs/src/branch/main/satrs-minisim"><code>satrs-minisim</code></a>
+applicatin complements the example application and can be used to simulate some physical devices
+for the <code>satrs-example</code> device handlers.</p>
+<h1 id="flight-heritage"><a class="header" href="#flight-heritage">Flight Heritage</a></h1>
+<p>There is an active and continuous effort to get early flight heritage for the sat-rs library.
+Currently this library has the following flight heritage:</p>
+<ul>
+<li>Submission as an <a href="https://www.esa.int/Enabling_Support/Operations/OPS-SAT">OPS-SAT experiment</a>
+which has also
+<a href="https://blogs.esa.int/rocketscience/2024/05/21/ops-sat-reentry-tomorrow-final-experiments-continue/">flown on the satellite</a>.
+The application is strongly based on the sat-rs example application. You can find the repository
+of the experiment <a href="https://egit.irs.uni-stuttgart.de/rust/ops-sat-rs">here</a>.</li>
+<li>Development and use of a sat-rs-based <a href="https://egit.irs.uni-stuttgart.de/rust/eurosim-obsw">demonstration on-board software</a>
+alongside a Flight System Simulator in the context of a
+<a href="https://www.researchgate.net/publication/380785984_Design_and_Development_of_a_Hardware-in-the-Loop_EuroSim_Demonstrator">Bachelors Thesis</a>
+at <a href="https://www.airbusdefenceandspacenetherlands.nl/">Airbus Netherlands</a>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="library-design"><a class="header" href="#library-design">Library Design</a></h1>
+<p>Satellites and space systems in general are complex systems with a wide range of requirements for
+both the hardware and the software. Consequently, the general design of the library is centered
+around many light-weight components which try to impose as few restrictions as possible on how to
+solve certain problems. This is also the reason why sat-rs is explicitely called a library
+instead of a framework.</p>
+<p>There are still a lot of common patterns and architectures across these systems where guidance
+of how to solve a problem and a common structure would still be extremely useful to avoid pitfalls
+which were already solved and to avoid boilerplate code. This library tries to provide this
+structure and guidance the following way:</p>
+<ol>
+<li>Providing this book which explains the architecture and design patterns in respect to common
+issues and requirements of space systems.</li>
+<li>Providing an example application. Space systems still commonly have large monolithic
+primary On-Board Softwares, so the choice was made to provide one example software which
+contains the various features provided by sat-rs.</li>
+<li>Providing a good test suite. This includes both unittests and integration tests. The integration
+tests can also serve as smaller usage examples than the large <code>satrs-example</code> application.</li>
+</ol>
+<p>This library has special support for standards used in the space industry. This especially
+includes standards provided by Consultative Committee for Space Data Systems (CCSDS) and European
+Cooperation for Space Standardization (ECSS). It does not enforce using any of those standards,
+but it is always recommended to use some sort of standard for interoperability.</p>
+<p>A lot of the modules and design considerations are based on the Flight Software Framework (FSFW).
+The FSFW has its own <a href="https://documentation.irs.uni-stuttgart.de/fsfw/">documentation</a>, which
+will be referred to when applicable. The FSFW was developed over a period of 10 years for the
+Flying Laptop Project by the University of Stuttgart with Airbus Defence and Space GmbH.
+It has flight heritage through the 2 mssions <a href="https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/flying-laptop/">FLP</a>
+and <a href="https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/">EIVE</a>.
+Therefore, a lot of the design concepts were ported more or less unchanged to the <code>sat-rs</code>
+library.
+FLP is a medium-size small satellite with a higher budget and longer development time than EIVE,
+which allowed to build a highly reliable system while EIVE is a smaller 6U+ cubesat which had a
+shorter development cycle and was built using cheaper COTS components. This library also tries
+to accumulate the knowledge of developing the OBSW and operating the satellite for both these
+different systems and provide a solution for a wider range of small satellite systems.</p>
+<p><code>sat-rs</code> can be seen as a modern port of the FSFW which uses common principles of software
+engineering to provide a reliable and robust basis for space On-Board Software. The choice
+of using the Rust programming language was made for the following reasons:</p>
+<ol>
+<li>Rust has safety guarantees which are a perfect fit for space systems which generally have high
+robustness and reliablity guarantees.</li>
+<li>Rust is suitable for embedded systems. It can also be run on smaller embedded systems like the
+STM32 which have also become common in the space sector. All space systems are embedded systems,
+which makes using large languages like Python challenging even for OBCs with more performance.</li>
+<li>Rust has support for linking C APIs through its excellent FFI support. This is especially
+important because many vendor provided libaries are still C based.</li>
+<li>Modern tooling like a package managers and various development helper, which can further reduce
+development cycles for space systems. <code>cargo</code> provides tools like auto-formatters and linters
+which can immediately ensure a high software quality throughout each development cycle.</li>
+<li>A large ecosystem with excellent libraries which also leverages the excellent tooling provided
+previously. Integrating these libraries is a lot easier compared to languages like C/C++ where
+there is still no standardized way to use packages.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><div id="communication-chapter"/>
+<h1 id="communication-with-sat-rs-based-software"><a class="header" href="#communication-with-sat-rs-based-software">Communication with sat-rs based software</a></h1>
+<p>Communication is a vital topic for remote system which are usually not (directly)
+connected to the internet and only have 1-2 communication links during nominal operation. However,
+most of these systems have internet access during development cycle. There are various standards
+provided by CCSDS and ECSS which can be useful to determine how to communicate with the satellite
+and the primary On-Board Software.</p>
+<h1 id="application-layer"><a class="header" href="#application-layer">Application layer</a></h1>
+<p>Most communication with space systems is usually packet based. For example, the CCSDS space
+packet standard only specifies a 6 byte header with at least 1 byte payload. The PUS packet
+standard is a subset of the space packet standard, which adds some fields and a 16 bit CRC, but
+it is still centered around small packets. <code>sat-rs</code> provides support for these ECSS and CCSDS
+standards and also attempts to fill the gap to the internet protocol by providing the following
+components.</p>
+<ol>
+<li><a href="https://docs.rs/satrs/latest/satrs/hal/std/udp_server/index.html">UDP TMTC Server</a>.
+UDP is already packet based which makes it an excellent fit for exchanging space packets.</li>
+<li><a href="https://docs.rs/satrs/latest/satrs/hal/std/tcp_server/index.html">TCP TMTC Server Components</a>.
+TCP is a stream based protocol, so the library provides building blocks to parse telemetry
+from an arbitrary bytestream. Two concrete implementations are provided:
+<ul>
+<li><a href="https://docs.rs/satrs/latest/satrs/hal/std/tcp_server/struct.TcpSpacepacketsServer.html">TCP spacepackets server</a>
+to parse tightly packed CCSDS Spacepackets.</li>
+<li><a href="https://docs.rs/satrs/latest/satrs/hal/std/tcp_server/struct.TcpTmtcInCobsServer.html">TCP COBS server</a>
+to parse generic frames wrapped with the
+<a href="https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing">COBS protocol</a>.</li>
+</ul>
+</li>
+</ol>
+<h1 id="working-with-telemetry-and-telecommands-tmtc"><a class="header" href="#working-with-telemetry-and-telecommands-tmtc">Working with telemetry and telecommands (TMTC)</a></h1>
+<p>The commands sent to a space system are commonly called telecommands (TC) while the data received
+from it are called telemetry (TM). Keeping in mind the previous section, the concept of a TC source
+and a TM sink can be applied to most satellites. The TM sink is the one entity where all generated
+telemetry arrives in real-time. The most important task of the TM sink usually is to send all
+arriving telemetry to the ground segment of a satellite mission immediately. Another important
+task might be to store all arriving telemetry persistently. This is especially important for
+space systems which do not have permanent contact like low-earth-orbit (LEO) satellites.</p>
+<p>The most important task of a TC source is to deliver the telecommands to the correct recipients.
+For component oriented software using message passing, this usually includes staged demultiplexing
+components to determine where a command needs to be sent.</p>
+<p>Using a generic concept of a TC source and a TM sink as part of the software design simplifies
+the flexibility of the TMTC infrastructure: Newly added TM generators and TC receiver only have to
+forward their generated or received packets to those handler objects.</p>
+<h1 id="low-level-protocols-and-the-bridge-to-the-communcation-subsystem"><a class="header" href="#low-level-protocols-and-the-bridge-to-the-communcation-subsystem">Low-level protocols and the bridge to the communcation subsystem</a></h1>
+<p>Many satellite systems usually use the lower levels of the OSI layer in addition to the application
+layer covered by the PUS standard or the CCSDS space packets standard. This oftentimes requires
+special hardware like dedicated FPGAs to handle forward error correction fast enough. <code>sat-rs</code>
+might provide components to handle standard like the Unified Space Data Link Standard (USLP) in
+software but most of the time the handling of communication is performed through custom
+software and hardware. Still, connecting this custom software and hardware to <code>sat-rs</code> can mostly
+be done by using the concept of TC sources and TM sinks mentioned previously.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-constrained-systems"><a class="header" href="#working-with-constrained-systems">Working with Constrained Systems</a></h1>
+<p>Software for space systems oftentimes has different requirements than the software for host
+systems or servers. Currently, most space systems are considered embedded systems.</p>
+<p>For these systems, the computation power and the available heap are the most important resources
+which are constrained. This might make completeley heap based memory management schemes which
+are oftentimes used on host and server based systems unfeasable. Still, completely forbidding
+heap allocations might make software development unnecessarilly difficult, especially in a
+time where the OBSW might be running on Linux based systems with hundreds of MBs of RAM.</p>
+<p>A useful pattern used commonly in space systems is to limit heap allocations to program
+initialization time and avoid frequent run-time allocations. This prevents issues like
+running out of memory (something even Rust can not protect from) or heap fragmentation on systems
+without a MMU.</p>
+<h1 id="using-pre-allocated-pool-structures"><a class="header" href="#using-pre-allocated-pool-structures">Using pre-allocated pool structures</a></h1>
+<p>A huge candidate for heap allocations is the TMTC and  handling. TC, TMs and IPC data are all
+candidates where the data size might vary greatly. The regular solution for host systems
+might be to send around this data as a <code>Vec&lt;u8&gt;</code> until it is dropped. <code>sat-rs</code> provides
+another solution to avoid run-time allocations by offering pre-allocated static
+pools. These pools are split into subpools where each subpool can have different page sizes.
+For example, a very small telecommand (TC) pool might look like this:</p>
+<p><img src="images/pools/static-pools.png" alt="Example Pool" /></p>
+<p>The core of the pool abstractions is the
+<a href="https://docs.rs/satrs/latest/satrs/pool/trait.PoolProvider.html">PoolProvider trait</a>.
+This trait specifies the general API a pool structure should have without making assumption
+of how the data is stored.</p>
+<p>This trait is implemented by a static memory pool implementation.
+The code to generate this static pool would look like this:</p>
+<!-- Would be nice to test this code sample, but need to wait
+for https://github.com/rust-lang/mdBook/issues/706 to be merged.. -->
+<pre><code class="language-rust  ignore">use satrs::pool::{StaticMemoryPool, StaticPoolConfig};
+
+let tc_pool = StaticMemoryPool::new(StaticPoolConfig::new(vec![
+    (6, 16),
+    (4, 32),
+    (2, 64),
+    (1, 128)
+]));
+</code></pre>
+<p>It should be noted that the buckets only show the maximum size of data being stored inside them.
+The store will keep a separate structure to track the actual size of the data being stored.
+A TC entry inside this pool has a store address which can then be sent around without having
+to dynamically allocate memory. The same principle can also be applied to the telemetry (TM) and
+inter-process communication (IPC) data.</p>
+<p>You can read</p>
+<ul>
+<li><a href="https://docs.rs/satrs/latest/satrs/pool/struct.StaticPoolConfig.html"><code>StaticPoolConfig</code> API</a></li>
+<li><a href="https://docs.rs/satrs/latest/satrs/pool/struct.StaticMemoryPool.html"><code>StaticMemoryPool</code> API</a></li>
+</ul>
+<p>for more details.</p>
+<p>In the future, optimized pool structures which use standard containers or are
+<a href="https://doc.rust-lang.org/std/marker/trait.Sync.html"><code>Sync</code></a> by default might be added as well.</p>
+<h1 id="using-special-crates-to-prevent-smaller-allocations"><a class="header" href="#using-special-crates-to-prevent-smaller-allocations">Using special crates to prevent smaller allocations</a></h1>
+<p>Another common way to use the heap on host systems is using containers like <code>String</code> and <code>Vec&lt;u8&gt;</code>
+to work with data where the size is not known beforehand. The most common solution for embedded
+systems is to determine the maximum expected size and then use a pre-allocated <code>u8</code> buffer and a
+size variable. Alternatively, you can use the following crates for more convenience or a smart
+behaviour which at the very least reduces heap allocations:</p>
+<ol>
+<li><a href="https://docs.rs/smallvec/latest/smallvec/"><code>smallvec</code></a>.</li>
+<li><a href="https://docs.rs/arrayvec/latest/arrayvec/index.html"><code>arrayvec</code></a> which also contains an
+<a href="https://docs.rs/arrayvec/latest/arrayvec/struct.ArrayString.html"><code>ArrayString</code></a> helper type.</li>
+<li><a href="https://docs.rs/tinyvec/latest/tinyvec/"><code>tinyvec</code></a>.</li>
+</ol>
+<h1 id="using-a-fixed-amount-of-threads"><a class="header" href="#using-a-fixed-amount-of-threads">Using a fixed amount of threads</a></h1>
+<p>On host systems, it is a common practice to dynamically spawn new threads to handle workloads.
+On space systems this is generally considered an anti-pattern as this is considered undeterministic
+and might lead to similar issues like when dynamically using the heap. For example, spawning a new
+thread might use up the remaining heap of a system, leading to undeterministic errors.</p>
+<p>The most common way to avoid this is to simply spawn all required threads at program initialization
+time. If a thread is done with its task, it can go back to sleeping regularly, only occasionally
+checking for new jobs. If a system still needs to handle bursty concurrent loads, another possible
+way commonly used for host systems as well would be to use a threadpool, for example by using the
+<a href="https://crates.io/crates/threadpool"><code>threadpool</code></a> crate.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-actions"><a class="header" href="#working-with-actions">Working with Actions</a></h1>
+<p>Space systems generally need to be commanded regularly. This can include commands periodically
+required to ensure a healthy system, or commands to reach the mission goals.</p>
+<p>These commands can be modelled using the concept of Actions. the ECSS PUS standard also provides
+the PUS service 8 for actions, but provides few concrete subservices and specification on how
+action commanding could look like.</p>
+<p><code>sat-rs</code> proposes two recommended ways to perform action commanding:</p>
+<ol>
+<li>Target ID and Action ID based. The target ID is a 32-bit unsigned ID for an OBSW object entity
+which can also accept Actions. The action ID is a 32-bit unsigned ID for each action that a
+target is able to perform.</li>
+<li>Target ID and Action String based. The target ID is the same as in the first proposal, but
+the unique action is identified by a string.</li>
+</ol>
+<p>The library provides an <code>ActionRequest</code> abstraction to model both of these cases.</p>
+<h2 id="commanding-with-ecss-pus-8"><a class="header" href="#commanding-with-ecss-pus-8">Commanding with ECSS PUS 8</a></h2>
+<p><code>sat-rs</code> provides a generic ECSS PUS 8 action command handler. This handler can convert PUS 8
+telecommands which use the commanding scheme 1 explained above to an <code>ActionRequest</code> which is
+then forwarded to the target specified by the Target ID.</p>
+<p>There are 3 requirements for the PUS 8 telecommand:</p>
+<ol>
+<li>The subservice 128 must be used</li>
+<li>Bytes 0 to 4 of application data must contain the target ID in <code>u32</code> big endian format.</li>
+<li>Bytes 4 to 8 of application data must contain the action ID in <code>u32</code> big endian format.</li>
+<li>The rest of the application data are assumed to be command specific additional parameters. They
+will be added to an IPC store and the corresponding store address will be sent as part of the
+<code>ActionRequest</code>.</li>
+</ol>
+<h2 id="sending-back-telemetry"><a class="header" href="#sending-back-telemetry">Sending back telemetry</a></h2>
+<p>There are some cases where the regular verification provided by PUS in response to PUS action
+commands is not sufficient and some additional telemetry needs to be sent to ground. In that
+case, it is recommended to chose some custom subservice for action TM data and then send the
+telemetry using the same scheme as shown above, where the first 8 bytes of the application
+data is reserved for the target ID and action ID.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="modes"><a class="header" href="#modes">Modes</a></h1>
+<p>Modes are an extremely useful concept to model complex systems. They allow simplified
+system reasoning for both system operators and OBSW developers. They also provide a way to alter
+the behaviour of a component and also provide observability of a system. A few examples of how to
+model the mode of different components within a space system with modes will be given.</p>
+<h2 id="pyhsical-device-component-with-modes"><a class="header" href="#pyhsical-device-component-with-modes">Pyhsical device component with modes</a></h2>
+<p>The following simple mode scheme with the following three mode</p>
+<ul>
+<li><code>OFF</code></li>
+<li><code>ON</code></li>
+<li><code>NORMAL</code></li>
+</ul>
+<p>can be applied to a large number of simpler device controllers of a remote system, for example
+sensors.</p>
+<ol>
+<li><code>OFF</code> means that a device is physically switched off, and the corresponding software component
+does not poll the device regularly.</li>
+<li><code>ON</code> means that a device is pyhsically switched on, but the device is not polled perically.</li>
+<li><code>NORMAL</code> means that a device is powered on and polled periodically.</li>
+</ol>
+<p>If a devices is <code>OFF</code>, the device handler will deny commands which include physical communication
+with the connected devices. In <code>NORMAL</code> mode, it will autonomously perform periodic polling
+of a connected physical device in addition to handling remote commands by the operator.
+Using these three basic modes, there are two important transitions which need to be taken care of
+for the majority of devices:</p>
+<ol>
+<li><code>OFF</code> to <code>ON</code> or <code>NORMAL</code>: The device first needs to be powered on. After that, the
+device initial startup configuration must be performed.</li>
+<li><code>NORMAL</code> or <code>ON</code> to <code>OFF</code>: Any important shutdown configuration or handling must be performed
+before powering off the device.</li>
+</ol>
+<h2 id="controller-components-with-modes"><a class="header" href="#controller-components-with-modes">Controller components with modes</a></h2>
+<p>Controller components are not modelling physical devices, but a mode scheme is still the best
+way to model most of these components.</p>
+<p>For example, a hypothetical attitude controller might have the following modes:</p>
+<ul>
+<li><code>SAFE</code></li>
+<li><code>TARGET IDLE</code></li>
+<li><code>TARGET POINTING GROUND</code></li>
+<li><code>TARGET POINTING NADIR</code></li>
+</ul>
+<p>We can also introduce the concept of submodes: The <code>SAFE</code> mode can for example have a
+<code>DEFAULT</code> submode and a <code>DETUMBLE</code> submode.</p>
+<h2 id="achieving-system-observability-with-modes"><a class="header" href="#achieving-system-observability-with-modes">Achieving system observability with modes</a></h2>
+<p>If a system component has a mode in some shape or form, this mode should be observable. This means
+that the operator can also retrieve the mode for a particular component. This is especially
+important if these components can change their mode autonomously.</p>
+<p>If a component is able to change its mode autonomously, this is also something which is relevant
+information for the operator or for other software components. This means that a component
+should also be able to announce its mode.</p>
+<p>This concept becomes especially important when applying the mode concept on the whole
+system level. This will also be explained in detail in a dedicated chapter, but the basic idea
+is to model the whole system as a tree where each node has a mode. A new capability is added now:
+A component can announce its mode recursively. This means that the component will announce its
+own mode first before announcing the mode of all its children. Using a scheme like this, the mode
+of the whole system can be retrieved using only one command. The same concept can also be used
+for commanding the whole system, which will be explained in more detail in the dedicated systems
+modelling chapter.</p>
+<p>In summary, a component which has modes has to expose the following 4 capabilities:</p>
+<ol>
+<li>Set a mode</li>
+<li>Read the mode</li>
+<li>Announce the mode</li>
+<li>Announce the mode recursively</li>
+</ol>
+<h2 id="using-ecss-pus-to-perform-mode-commanding"><a class="header" href="#using-ecss-pus-to-perform-mode-commanding">Using ECSS PUS to perform mode commanding</a></h2>
+<h1 id="health"><a class="header" href="#health">Health</a></h1>
+<p>Health is an important concept for systems and components which might fail.
+Oftentimes, the health is tied to the mode of a system component in some shape or form, and
+determines whether a system component is usable. Health is also an extremely useful concept
+to simplify the Fault Detection, Isolation and Recovery (FDIR) concept of a system.</p>
+<p>The following health states are based on the ones used inside the FSFW and are enough to model most
+use-cases:</p>
+<ul>
+<li><code>HEALTHY</code></li>
+<li><code>FAULTY</code></li>
+<li><code>NEEDS RECOVERY</code></li>
+<li><code>EXTERNAL CONTROL</code></li>
+</ul>
+<ol>
+<li><code>HEALTHY</code> means that a component is working nominally, and can perform its task without any issues.</li>
+<li><code>FAULTY</code> means that a component does not work properly. This might also impact other system
+components, so the passivation and isolation of that component is desirable for FDIR purposes.</li>
+<li><code>NEEDS RECOVERY</code> is used to attempt a recovery of a component. For example, a simple sensor
+could be power-cycled if there were multiple communication issues in the last time.</li>
+<li><code>EXTERNAL CONTROL</code> is used to isolate an individual component from the rest of the system. For
+example, on operator might be interested in testing a component in isolation, and the interference
+of the system is not desired. In that case, the <code>EXTERNAL CONTROL</code> health state might be used
+to prevent mode commands from the system while allowing external mode commands.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="housekeeping-data"><a class="header" href="#housekeeping-data">Housekeeping Data</a></h1>
+<p>Remote systems like satellites and rovers oftentimes generate data autonomously and periodically.
+The most common example for this is temperature or attitude data. Data like this is commonly
+referred to as housekeeping data, and is usually one of the most important and most resource heavy
+data sources received from a satellite. Standards like the PUS Service 3 make recommendation how to
+expose housekeeping data, but the applicability of the interface offered by PUS 3 has proven to be
+partially difficult and clunky for modular systems.</p>
+<p>First, we are going to list some assumption and requirements about Housekeeping (HK) data:</p>
+<ol>
+<li>HK data is generated periodically by various system components throughout the
+systems.</li>
+<li>An autonomous and periodic sampling of that HK data to be stored and sent to Ground is generally
+required. A minimum interface consists of requesting a one-shot sample of HK, enabling and
+disabling the periodic autonomous generation of samples and modifying the collection interval
+of the periodic autonomous generation.</li>
+<li>HK data often needs to be shared to other software components. For example, a thermal controller
+wants to read the data samples of all sensor components.</li>
+</ol>
+<p>A commonly required way to model HK data in a clean way is also to group related HK data into sets,
+which can then dumped via a similar interface.</p>
+<p>TODO: Write down <code>sat-rs</code> recommendations how to expose and work with HK data.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="events"><a class="header" href="#events">Events</a></h1>
+<p>Events are an important mechanism used for remote systems to monitor unexpected
+or expected anomalies and events occuring on these systems. </p>
+<p>One common use case for events on remote systems is to offer a light-weight publish-subscribe
+mechanism and IPC mechanism for software and hardware events which are also packaged as telemetry
+(TM) or can trigger a system response. They can also be tied to
+Fault Detection, Isolation and Recovery (FDIR) operations, which need to happen autonomously.</p>
+<p>The PUS Service 5 standardizes how the ground interface for events might look like, but does not
+specify how other software components might react to those events. There is the PUS Service 19,
+which might be used for that purpose, but the event components recommended by this framework do not
+rely on the present of this service.</p>
+<p>The following images shows how the flow of events could look like in a system where components
+can generate events, and where other system components might be interested in those events:</p>
+<p><img src="images/events/event_man_arch.png" alt="Event flow" /></p>
+<p>For the concrete implementation of your own event management and/or event routing system, you
+can have a look at the event management documentation inside the
+<a href="https://docs.rs/satrs/latest/satrs/event_man/index.html">API documentation</a> where you can also
+find references to all examples.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sat-rs-example-application"><a class="header" href="#sat-rs-example-application">sat-rs Example Application</a></h1>
+<p>The <code>sat-rs</code> library includes a monolithic example application which can be found inside
+the <a href="https://egit.irs.uni-stuttgart.de/rust/sat-rs/src/branch/main/satrs-example"><code>satrs-example</code></a>
+subdirectory of the repository. The primary purpose of this example application is to show how
+the various components of the sat-rs framework could be used as part of a larger on-board
+software application.</p>
+<h2 id="structure-of-the-example-project"><a class="header" href="#structure-of-the-example-project">Structure of the example project</a></h2>
+<p>The example project contains components which could also be expected to be part of a production
+On-Board Software. A structural diagram of the example application is given to provide
+a brief high-level view of the components used inside the example application:</p>
+<p><img src="images/satrs-example/satrs-example-structure.png" alt="satrs-example component structure" /></p>
+<p>The dotted lines are used to denote optional components. In this case, the static pool components
+are optional because the heap can be used as a simpler mechanism to store TMTC packets as well.
+Some additional explanation is provided for the various components.</p>
+<h3 id="tcpip-server-components"><a class="header" href="#tcpip-server-components">TCP/IP server components</a></h3>
+<p>The example includes a UDP and TCP server to receive telecommands and poll telemetry from. This
+might be an optional component for an OBSW which is only used during the development phase on
+ground. The UDP server is strongly based on the
+<a href="https://docs.rs/satrs/latest/satrs/hal/std/udp_server/struct.UdpTcServer.html">UDP TC server</a>.
+This server component is wrapped by a TMTC server which handles all telemetry to the last connected
+client.</p>
+<p>The TCP server is based on the <a href="https://docs.rs/satrs/latest/satrs/hal/std/tcp_server/struct.TcpSpacepacketsServer.html">TCP Spacepacket Server</a>
+class. It parses space packets by using the CCSDS space packet ID as the packet
+start delimiter. All available telemetry will be sent back to a client after having read all
+telecommands from the client.</p>
+<h3 id="tmtc-infrastructure"><a class="header" href="#tmtc-infrastructure">TMTC Infrastructure</a></h3>
+<p>The most important components of the TMTC infrastructure include the following components:</p>
+<ul>
+<li>A TC source component which demultiplexes and routes telecommands based on parameters like
+packet APID or PUS service and subservice type.</li>
+<li>A TM sink sink component which is the target of all sent telemetry and sends it to downlink
+handlers like the UDP and TCP server.</li>
+</ul>
+<p>You can read the <a href="./communication.html">Communications chapter</a> for more
+background information on the chosen TMTC infrastructure approach.</p>
+<h3 id="pus-service-components"><a class="header" href="#pus-service-components">PUS Service Components</a></h3>
+<p>A PUS service stack is provided which exposes some functionality conformant with the ECSS PUS
+services. This currently includes the following services:</p>
+<ul>
+<li>Service 1 for telecommand verification. The verification handling is handled locally: Each
+component which generates verification telemetry in some shape or form receives a
+<a href="https://docs.rs/satrs/latest/satrs/pus/verification/struct.VerificationReporterWithSender.html">reporter</a>
+object which can be used to send PUS 1 verification telemetry to the TM funnel.</li>
+<li>Service 3 for housekeeping telemetry handling.</li>
+<li>Service 5 for management and downlink of on-board events.</li>
+<li>Service 8 for handling on-board actions.</li>
+<li>Service 11 for scheduling telecommands to be released at a specific time. This component
+uses the <a href="https://docs.rs/satrs/latest/satrs/pus/scheduler/alloc_mod/struct.PusScheduler.html">PUS scheduler class</a>
+which performs the core logic of scheduling telecommands. All telecommands released by the
+scheduler are sent to the central TC source using a message.</li>
+<li>Service 17 for test purposes like pings.</li>
+</ul>
+<h3 id="event-management-component"><a class="header" href="#event-management-component">Event Management Component</a></h3>
+<p>An event manager based on the sat-rs
+<a href="https://docs.rs/satrs/latest/satrs/event_man/index.html">event manager component</a>
+is provided to handle the event IPC and FDIR mechanism. The event message are converted to PUS 5
+telemetry by the
+<a href="https://docs.rs/satrs/latest/satrs/pus/event_man/alloc_mod/struct.PusEventDispatcher.html">PUS event dispatcher</a>.</p>
+<p>You can read the <a href="./events.html">events</a> chapter for more in-depth information about event management.</p>
+<h3 id="sample-application-components"><a class="header" href="#sample-application-components">Sample Application Components</a></h3>
+<p>These components are example mission specific. They provide an idea how mission specific modules
+would look like the sat-rs context. It currently includes the following components:</p>
+<ul>
+<li>An Attitute and Orbit Control (AOCS) example task which can also process some PUS commands.</li>
+</ul>
+<h2 id="dataflow"><a class="header" href="#dataflow">Dataflow</a></h2>
+<p>The interaction of the various components is provided in the following diagram:</p>
+<p><img src="images/satrs-example/satrs-example-dataflow.png" alt="satrs-example dataflow diagram" /></p>
+<p>It should be noted that an arrow coming out of a component group refers to multiple components
+in that group. An explanation for important component groups will be given.</p>
+<h4 id="tmtc-component-group"><a class="header" href="#tmtc-component-group">TMTC component group</a></h4>
+<p>This groups is the primary interface for clients to communicate with the on-board software
+using a standardized TMTC protocol. The example uses the
+<a href="https://ecss.nl/standard/ecss-e-st-70-41c-space-engineering-telemetry-and-telecommand-packet-utilization-15-april-2016/">ECSS PUS protocol</a>.
+In the future, this might be extended with the
+<a href="https://public.ccsds.org/Pubs/727x0b5.pdf">CCSDS File Delivery Protocol</a>.</p>
+<p>A client can connect to the UDP or TCP server to send these PUS packets to the on-board software.
+These servers then forward the telecommads to a centralized TC source component using a dedicated
+message abstraction.</p>
+<p>This TC source component then demultiplexes the message and forwards it to the relevant components.
+Right now, it forwards all PUS requests to the respective PUS service handlers using the PUS
+receiver component. The individual PUS services are running in a separate thread. In the future,
+additional forwarding to components like a CFDP handler might be added as well. It should be noted
+that PUS11 commands might contain other PUS commands which should be scheduled in the future.
+These wrapped commands are forwarded to the PUS11 handler. When the schedule releases those
+commands, it forwards the released commands to the TC source again. This allows the scheduler
+and the TC source to run in separate threads and keeps them cleanly separated.</p>
+<p>All telemetry generated by the on-board software is sent to a centralized TM funnel. This component
+also performs a demultiplexing step to forward all telemetry to the relevant TM recipients.
+In the example case, this is the last UDP client, or a connected TCP client. In the future,
+forwarding to a persistent telemetry store and a simulated communication component might be
+added here as well. The centralized TM funnel also takes care of some packet processing steps which
+need to be applied for each ECSS PUS packet, for example CCSDS specific APID incrementation and
+PUS specific message counter incrementation.</p>
+<h4 id="application-group"><a class="header" href="#application-group">Application Group</a></h4>
+<p>The application components generally do not receive raw PUS packets directly, even though
+this is certainly possible. Instead, they receive internalized messages from the PUS service
+handlers. For example, instead of receiving a PUS 8 Action Telecommand directly, an application
+component will receive a special <code>ActionRequest</code> message type reduced to the basic important
+information required to execute a request. These special requests are denoted by the blue arrow
+in the diagram.</p>
+<p>It should be noted that the arrow pointing towards the event manager points in both directions.
+This is because the application components might be interested in events generated by other
+components as well. This mechanism is oftentimes used to implement the FDIR functionality on system
+and component level.</p>
+<h4 id="shared-components-and-functional-interfaces"><a class="header" href="#shared-components-and-functional-interfaces">Shared components and functional interfaces</a></h4>
+<p>It should be noted that sometimes, a functional interface is used instead of a message. This
+is used for the generation of verification telemetry. The verification reporter is a clonable
+component which generates and sends PUS1 verification telemetry directly to the TM funnel. This
+introduces a loose coupling to the PUS standard but was considered the easiest solution for
+a project which utilizes PUS as the main communication protocol. In the future, a generic
+verification abstraction might be introduced to completely decouple the application layer from
+PUS.</p>
+<p>The same concept is applied if the backing store of TMTC packets are shared pools. Every
+component which needs to read telecommands inside that shared pool or generate new telemetry
+into that shared pool will received a clonable shared handle to that pool.</p>
+<p>The same concept could be extended to power or thermal handling. For example, a shared power helper
+component might be used to retrieve power state information and send power switch commands through
+a functional interface. The actual implementation of the functional interface might still use
+shared memory and/or messages, but the functional interface makes using and testing the interaction
+with these components easier.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

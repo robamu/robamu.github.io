@@ -60,6 +60,11 @@ url = "/blog/"
 weight = 3
 
 [[menu.main]]
+name = "sat-rs book"
+url = "/satrs-book/"
+weight = 4
+
+[[menu.main]]
 name = "Contact"
 url = "/contact/"
-weight = 4
+weight = 5

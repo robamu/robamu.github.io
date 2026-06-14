@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>hi, I am robin</title><link>https://robamu.github.io/</link><description>Recent content on hi, I am robin</description><generator>Hugo -- 0.145.0</generator><language>en-us</language><lastBuildDate>Wed, 26 Jun 2024 23:12:59 +0200</lastBuildDate><atom:link href="https://robamu.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Implementing a TCP server for Space Applications in Rust using the Strategy Pattern</title><link>https://robamu.github.io/blog/rust-strategy-pattern/</link><pubDate>Fri, 29 Sep 2023 15:17:13 +0200</pubDate><guid>https://robamu.github.io/blog/rust-strategy-pattern/</guid><description>&lt;p>Even for space systems, TCP/IP is oftentimes an important component in some shape or form because
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>hi, I am robin</title><link>https://robamu.github.io/</link><description>Recent content on hi, I am robin</description><generator>Hugo -- 0.145.0</generator><language>en-us</language><lastBuildDate>Sun, 14 Jun 2026 23:06:45 +0200</lastBuildDate><atom:link href="https://robamu.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Implementing a TCP server for Space Applications in Rust using the Strategy Pattern</title><link>https://robamu.github.io/blog/rust-strategy-pattern/</link><pubDate>Fri, 29 Sep 2023 15:17:13 +0200</pubDate><guid>https://robamu.github.io/blog/rust-strategy-pattern/</guid><description>&lt;p>Even for space systems, TCP/IP is oftentimes an important component in some shape or form because
 the majority of development might still occur on ground where an internet connection is still
 available. The special thing about space is that instead of using newline and/or UTF-8 based
 data, the data is generally in binary format and packet based. The most prevalent of the space
@@ -88,6 +88,9 @@ but I am doing more of a supporting role now that I started working the Universi
 will also be to leverage the incredible language features and the ecosystem of Rust to alleviate
 the weak spots of the FSFW.&lt;/p>
 &lt;h2 id="source-satellite-project">SOURCE satellite project&lt;/h2>
-&lt;p>I worked on the &lt;a href="https://git.ksat-stuttgart.de/source/sourceobsw">on-board software&lt;/a> of the &lt;a href="https://www.ksat-stuttgart.de/en/our-projects/source/">SOURCE student satellite project&lt;/a>
-for a few years and still regularly contribute to the
-project.&lt;/p></description></item></channel></rss>
+&lt;p>I work on the &lt;a href="https://git.ksat-stuttgart.de/source/sourceobsw">on-board software&lt;/a> of the
+&lt;a href="https://www.ksat-stuttgart.de/en/our-projects/source/">SOURCE student satellite project&lt;/a>.&lt;/p>
+&lt;h2 id="eive-satellite-project">EIVE satellite project&lt;/h2>
+&lt;p>I worked on the &lt;a href="https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/">EIVE satellite project&lt;/a> and the corresponding &lt;a href="https://egit.irs.uni-stuttgart.de/eive/eive-obsw/">EIVE On-Board Software&lt;/a>.
+I wrote large parts of the software which satellite which launched in June 2023 and concluded
+its mission successfully in 2025.&lt;/p></description></item></channel></rss>

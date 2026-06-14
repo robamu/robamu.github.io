@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Blinky Exercise - microbit-exercises</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-43397c9e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-47a14aa6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">microbit-exercises</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="blinky-exercise"><a class="header" href="#blinky-exercise">Blinky Exercise</a></h1>
+<p>The end goal of this task is to make the LED D2, which is the LED is the upper left corner
+of the LED matrix, blink with a frequency of 1 second.</p>
+<p>It involves working with a general purpose Input/Output (GPIO) pin which is a very common task on
+microcontrollers. It also involves a timing components to achieve the 1 second blink frequency.
+In this exercise, you are going to build this application.</p>
+<p>Go into the <code>microbit-code/exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
+find the skeleton project that you should edit to work towards the blinky application. It includes
+an explanation of the intermediate steps. Each intermediate step is explained in this document
+in detail, including an intermediate solution which you can see by opening expanding the detail
+segment.</p>
+<p>You can find a full solution inside the <code>blinky_solution.rs</code> file.</p>
+<p>Notice that you can always build and run the current state of your solution using</p>
+<pre><code class="language-sh">cargo run --bin blinky
+</code></pre>
+<h2 id="some-notes-on-the-skeleton"><a class="header" href="#some-notes-on-the-skeleton">Some notes on the skeleton</a></h2>
+<p>Okay, there is not much here in this empty skeleton app, but you might still be interested in what
+it does.</p>
+<p>The <code>#![no_std]</code> directive must be used because we do not have a standard runtime on our
+microcontroller. The <code>#![..]</code> syntax applies this attribute to the whole module, which is our
+whole application in this case. A standard runtime is usually only available on a full host system, for example
+your development laptop. It usually includes components which make use of the operating systems,
+for example filesystem handling, input/output libraries printing to the console, time libraries
+and much more. We do not have an operating system, so this does not exist for our target.</p>
+<p>The <code>#[no_main]</code> directive also applies to the whole module and must be used because we do not want
+to use the default <code>main</code> method, which is the entry point of the program. This <code>main</code> method
+would not exist for our bare-metal target anyway. Instead, we want to use an entry point method
+provided and called by an external library. In this case,
+<a href="https://docs.rs/cortex-m-rt/latest/cortex_m_rt/">cortex-m-rt</a> is used.</p>
+<p>The <code>use exercises as _;</code> line imports everything in the library <code>lib.rs</code>. <code>exercises</code> is the name
+of the library/crate. Inside <code>lib.rs</code>, we are including some important tools:</p>
+<ul>
+<li><code>use defmt_rtt as _;</code>: We want to use <code>defmt</code> as our logging library, and combine it with SEGGER RTT
+as the transport protocol.</li>
+<li><code>use embassy_nrf as _;</code>: We need to include this for the compilation of our run-time library
+to work. It needs access to an interrupt vector structure which is imported as a side-effect of
+importing the HAL.</li>
+<li><code>use panic_probe as _;</code>: We need to provide a <code>panic</code> handler for the compilation to work. This
+includes a panic handler provided by a library.</li>
+</ul>
+<p><code>#[embassy_executor::main]</code> is used to annotate our entry point. It allows that entry point
+to be an <code>async</code> function as well.</p>
+<p>The <code>async fn main(_spawner: Spawner) -&gt; !</code> function prototype contains the following components:</p>
+<ul>
+<li><code>async</code> because this is an asynchronous function. This allows us, among many other things, to
+use other <code>async</code> API inside the function</li>
+<li>The <code>!</code> return type means that this function should never return. A microcontroller software
+generally must run forever, because what would the system do if there is no more code to execute?</li>
+<li>The <code>spawner</code> argument can be used to spawn other <code>async</code> tasks. This is important for
+multi-tasking, but not relevant for us now. To avoid clippy/linter errors, a leading underscore
+was added to mark the unused argument.</li>
+</ul>
+<p>Do not worry if you do not fully understand all of this! It is not necessary for practical programming
+purposes. It is included once for completeness sake, because you will see these directives in
+most <code>embassy</code> based programs.</p>
+<h2 id="first-step-initializing-the-chip"><a class="header" href="#first-step-initializing-the-chip">First step: Initializing the chip</a></h2>
+<p>We are using a hardware abstraction layer (HAL) library to simplify our job. If we did not use this,
+we would have to use low-level register access code to interact with the hardware directly. That
+is not really beginner friendly, so we will start with something more high-level. The HAL
+introduces hardware abstractions, data structures and objects to interact with the hardware.</p>
+<p>The nRF52833 chip which is part of the microbit v2 has some initialization which makes sense for
+most firmware. This can include something like the clock initialization. When writing this HAL, it
+makes sense packaging that configuration inside some initializer function.</p>
+<p>Rust also has a nice type system which allows modelling of our problem domain. We have a
+microcontroller which has <a href="./terminology_glossary.html">peripherals</a> and physical pins. We can model
+these entities in our Rust code to allow ownership checks and resource management. For example,
+the chip has a physical pin called <code>P0_06</code>. We can model this physical pin as a <code>P0_06</code> field
+of a data structure. The we might have some other API which “consumes” this pin to take ownership
+of it and use it for certain purposes. The pin can not be used for some other purpose anymore
+and we prevented one source of a bug using the type system.</p>
+<p>We use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/index.html"><code>embassy-nrf</code></a> HAL which provides an initializer method providing both of these tasks.
+It is already included in the dependency list inside <code>Cargo.toml</code>
+for you so you can import and use it in your code directly. Look at the
+<a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/fn.init.html">docs of the <code>init</code></a>
+method. This is what you want to use to initialize the chip. You can use the <code>default</code> method
+of <code>embassy_nrf::config::Config</code>, it serves our purposes for now. Have a look at the
+<a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/struct.Peripherals.html">documentation of the <code>Peripherals</code></a>
+data structure which is returned by the <code>init</code> function. It models all the peripherals and physical
+pins like we previous metioned.</p>
+<p>Call this method and store the <code>Peripherals</code> object inside a variable called <code>periphs</code>.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let periphs = embassy_nrf::init(embassy_nrf::config::Config::default());
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="second-step-print-something"><a class="header" href="#second-step-print-something">Second step: Print something</a></h2>
+<p>We mentioned that we use the <code>defmt</code> library and the RTT protocol for logging purposes.
+Our flasher takes care of grabbing log frames sent via RTT. Print something to the console so we
+know what program is running. For example, you can use <code>defmt::println!("your string")</code> to print
+something to the RTT pipe.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>defmt::println!("-- microbit v2 Blinky application --");
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="third-step-creating-the-gpio-drivers"><a class="header" href="#third-step-creating-the-gpio-drivers">Third step: Creating the GPIO drivers</a></h2>
+<p>Before we talk about creating the GPIO drivers for switching the LED, let’s talk about the the
+hardware first. This is not a classic LED which can be drive by simply toggling a GPIO pin. Instead,
+it is a matrix where each row and each column has one connected GPIO line.</p>
+<p><img src="../assets/led-matrix.png" alt="LED Matrix"></p>
+<p>There is no reason to be overly scared of electronic schematics. Learning to read them is something
+that can be learnt <em>without</em> having to study electronic engineering, and with schematics you
+usually have the source of truth which is relevant for writing your software.
+This is an excerpt of the full schematics that we have <a href="../../MicroBit_V2.0.0_S_schematic.PDF">also included in the repository</a>.
+There is also a <a href="https://tech.microbit.org/hardware/schematic">pin map table</a> on the website.</p>
+<p>Have a look at D2. This is a LED, and the task is to make that one blink. You can assume that the
+LED will turn on if the ROW1 GPIO is configured as an output pin and then driven high while the
+COL1 GPIO is configured as an output pin and then driven low.</p>
+<p>But what is ROW1 and COL1? Those are actually connected to physical pins of your MCU:</p>
+<p><img src="../assets/mcu-ports-led.png" alt="MCU ports LED"></p>
+<p>Search for the two pins and look for the P0.XY number which is on the chip side (yellow background)
+on the left. This number is relevant for the code.
+Alternatively, open the <a href="MicroBit_V2.0.0_S_schematic.PDF">schematics</a> directly and use the search
+function to find them quickly. If you are struggling with this task, you can also simply
+use the <a href="https://tech.microbit.org/hardware/schematic">pin map table</a> and look at the GPIO name
+for COL1 and ROW1.</p>
+<details>
+<p>COL1 is P0.28 and ROW1 is P0.21</p>
+</details>
+<p>Now we have our physical pins. Have a look at the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/gpio/struct.Output.html#method.new">GPIO Output driver documentation</a>.
+The first argument is a peripheral resource which is a field of the <code>periphs</code> structure we
+created earlier. The initial level is required because Output pins must have a defined state.
+The third argument is the drive strength. You can use the standard value here.
+&lt;35;48;33M
+Create an output driver for ROW1 and store it as a <code>row1</code> object. Also do the same for COL1 and
+store it as a <code>col1</code> object. Remember that you assign the actual physical pin, which is re-presented
+by an ID like P0.XY, and which you extracted earlier, by passing the corresponding field of the
+<code>periphs</code> structure to the <code>Output</code> constructor.</p>
+<p>If this all sounds very confusing to you and you do not really know what to do, look at the
+solution and try to understand it:</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let mut row1 = Output::new(
+        periphs.P0_21,
+        embassy_nrf::gpio::Level::Low,
+        embassy_nrf::gpio::OutputDrive::Standard,
+    );
+    let col1 = Output::new(
+        periphs.P0_28,
+        embassy_nrf::gpio::Level::Low,
+        embassy_nrf::gpio::OutputDrive::Standard,
+    );
+<span class="boring">}</span></code></pre>
+<p>Notice how we pass the physical pin object to the output driver.</p>
+</details>
+<h2 id="fourth-step-toggling-the-led"><a class="header" href="#fourth-step-toggling-the-led">Fourth step: Toggling the LED</a></h2>
+<p>Now, we have all the objects required to fulfill our task. For the remainder of the program
+lifetime, we just want to toggle the LED.</p>
+<p>That is equivalent to a permanent loop, so you can use the Rust <code>loop</code> constructor for this.
+There already is one in the skeleton to avoid a compilation error.
+Use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/gpio/struct.Output.html#method.toggle">toggle</a> method on the correct
+GPIO driver to toggle the LED inside the loop. We actually told you the correct object/driver to use this on before.
+If you forgot, maybe you can also figure it out from the schematic?</p>
+<p>Toggling the LED in a permanent loop would cause the LED to not be on long enough for you
+to see anything. Beside, the tasks was to make it blink with a frequency of 1 second.
+We need to introduce a delay. We are going to use <a href="https://docs.rs/embassy-time/latest/embassy_time/"><code>embassy_time</code></a> for this.</p>
+<p>Again, we included the dependency for you, so you can use it directly. So far, we did not have to use
+any <code>async</code> API. This is because all the code we used so far was strictly synchronous, with no
+need to delay in any shape or form. For example, configuring a GPIO driver usually only
+requires a few writes to certain memory addresses. A delay can actually be modelled as an
+asynchronous operation: We tell the compiler to asynchronously wait for a delay of 1 second to elapse.
+We recommend using the <a href="https://docs.rs/embassy-time/latest/embassy_time/struct.Timer.html#method.after_millis">Timer::after_millis</a> API for this.
+You can also use the <a href="https://docs.rs/embassy-time/latest/embassy_time/struct.Delay.html">Delay API</a> but
+you need to import the <code>embedded_hal_async::delay::DelayNs</code> trait for this to work.</p>
+<p>You can store the timer inside a variable called <code>timer</code>. Notice that this does not perform
+the required delay. For that, you need to <code>await</code> the timer. Use this information to perform
+an asynchronous delay of 1 second or 1000 milliseconds inside the loop.</p>
+<details>
+<p>This could look like this:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let timer = Timer::after_millis(1000);
+timer.await;
+<span class="boring">}</span></code></pre>
+<p>You can also directly write this in one line to avoid the intermediate variable:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Timer::after_millis(1000).await;
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="finishing-up"><a class="header" href="#finishing-up">Finishing up</a></h2>
+<p>When you run <code>cargo run --bin blinky</code>, you should see something like this:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>❯ cargo run --bin blinky
+   Compiling exercises v0.1.0 (/home/muellerr/Rust/embedded-rust-workshop/microbit-code/exercises)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
+     Running `probe-rs run --chip nRF52833_xxAA --allow-erase-all target/thumbv7em-none-eabihf/debug/blinky_solution`
+      Erasing ✔ 100% [####################]  48.00 KiB @  35.91 KiB/s (took 1s)
+  Programming ✔ 100% [####################]  48.00 KiB @  22.82 KiB/s (took 2s)     Finished in 3.54s
+-- microbit v2 Blinky application --
+<span class="boring">}</span></code></pre>
+<p>Also, you should see the LED D2 blinking with a frequency of 1 second. If this is the case, you did it!
+Blinking a LED might seem like a mundane task, but it actually teaches various concepts that can
+be transferred to other tasks because it involes resource management, working with hardware, and
+time handling. Also, you have extracted information from a schematic now! This is very useful skill
+that embedded engineers should have. It allows you to directly use the schematic that is created as
+a side-product of the PCB design process.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="terminology_glossary.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="uart-echo-exercise.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="terminology_glossary.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="uart-echo-exercise.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

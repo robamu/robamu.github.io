@@ -65,6 +65,11 @@ url = "/sat-rs/book/"
 weight = 4
 
 [[menu.main]]
+name = "embedded workshop"
+url = "/embedded-workshop/book"
+weight = 5
+
+[[menu.main]]
 name = "Contact"
 url = "/contact/"
-weight = 5
+weight = 6

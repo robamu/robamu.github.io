@@ -275,7 +275,7 @@ something to the RTT pipe.</p>
 <p>Before we talk about creating the GPIO drivers for switching the LED, let’s talk about the the
 hardware first. This is not a classic LED which can be drive by simply toggling a GPIO pin. Instead,
 it is a matrix where each row and each column has one connected GPIO line.</p>
-<p><img src="../assets/led-matrix.png" alt="LED Matrix"></p>
+<p><img src="./assets/led-matrix.png" alt="LED Matrix"></p>
 <p>There is no reason to be overly scared of electronic schematics. Learning to read them is something
 that can be learnt <em>without</em> having to study electronic engineering, and with schematics you
 usually have the source of truth which is relevant for writing your software.
@@ -285,7 +285,7 @@ There is also a <a href="https://tech.microbit.org/hardware/schematic">pin map t
 LED will turn on if the ROW1 GPIO is configured as an output pin and then driven high while the
 COL1 GPIO is configured as an output pin and then driven low.</p>
 <p>But what is ROW1 and COL1? Those are actually connected to physical pins of your MCU:</p>
-<p><img src="../assets/mcu-ports-led.png" alt="MCU ports LED"></p>
+<p><img src="./assets/mcu-ports-led.png" alt="MCU ports LED"></p>
 <p>Search for the two pins and look for the P0.XY number which is on the chip side (yellow background)
 on the left. This number is relevant for the code.
 Alternatively, open the <a href="MicroBit_V2.0.0_S_schematic.PDF">schematics</a> directly and use the search

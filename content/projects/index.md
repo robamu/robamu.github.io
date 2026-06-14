@@ -15,21 +15,19 @@ the weak spots of the FSFW.
 
 ## SOURCE satellite project
 
-I worked on the [on-board software](https://git.ksat-stuttgart.de/source/sourceobsw) of the [SOURCE student satellite project](https://www.ksat-stuttgart.de/en/our-projects/source/)
-for a few years and still regularly contribute to the
-project.
+I work on the [on-board software](https://git.ksat-stuttgart.de/source/sourceobsw) of the
+[SOURCE student satellite project](https://www.ksat-stuttgart.de/en/our-projects/source/).
 
 ## EIVE satellite project
 
-I worked and I am still working on the
-[EIVE satellite project](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/)
-and the corresponding [EIVE On-Board Software](https://egit.irs.uni-stuttgart.de/eive/eive-obsw/).
-I wrote large parts of the software which are now running on the EIVE satellite launched in June 2023.
+I worked on the [EIVE satellite project](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/) and the corresponding [EIVE On-Board Software](https://egit.irs.uni-stuttgart.de/eive/eive-obsw/).
+I wrote large parts of the software which satellite which launched in June 2023 and concluded
+its mission successfully in 2025.
 
 ## Flight Software Framework (FSFW) Contributor
 
 I contributed a lot to the [FSFW](https://absatsw.irs.uni-stuttgart.de/projects/fsfw.html), a
-framework which is used for both the [SOURCE](https://www.ksat-stuttgart.de/en/our-projects/source/)
+C++ framework which is used for both the [SOURCE](https://www.ksat-stuttgart.de/en/our-projects/source/)
 and [EIVE](https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/) project.
 A lot of the architecture and design of the FSFW will also be transferred to the `sat-rs` Rust
 framework which is part of my PhD thesis.

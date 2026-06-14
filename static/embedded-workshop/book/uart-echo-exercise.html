@@ -188,7 +188,7 @@ pin of the microcontroller UART should be sent back to the sender via the TX pin
 <p>The microbit v2 has a very convenient feature which allows use to talk with one of its UART
 interfaces via the USB interface you already have. Have a look at this hardware block diagram
 taken from the <a href="https://tech.microbit.org/hardware/">website</a>:</p>
-<p><img src="../assets/hw-block-diagram.png" alt="HW block diagram"></p>
+<p><img src="./assets/hw-block-diagram.png" alt="HW block diagram"></p>
 <p>The nRF52833-QIAA block on the left side is the target MCU we are always programming. The
 other microcontroller on the right side is the interface microcontroller. When we talk to the UART
 of the target MCU, or we use <code>probe-rs</code> to flash new software to the target or read/write to its
@@ -225,7 +225,7 @@ lrwxrwxrwx - root 12 Jun 09:39 /dev/serial/by-id/usb-Arm_BBC_micro:bit_CMSIS-DAP
 name you found before.</p>
 <p>You need to use the Serial connection type and specify a speed of 115200. This could look
 something liket his:</p>
-<p><img src="../assets/putty-config.png" alt="PuTTY"></p>
+<p><img src="./assets/putty-config.png" alt="PuTTY"></p>
 <p>You can then open the connection to open a session connected to the serial port of the MCU.</p>
 <h2 id="uart-hardware"><a class="header" href="#uart-hardware">UART hardware</a></h2>
 <p>Before we start writing code, lets look at the hardware first.
@@ -235,7 +235,7 @@ need to be configured so they can be used by the UART hardware block for communi
 of pins to be assigned to the UART. Similarly to the blinky exercise where LED control is mapped
 to certain GPIO pins, there is a pin mapping which depends on the board design.</p>
 <p>You can either look at the <a href="https://tech.microbit.org/hardware/schematic/">pin map</a> or
-the <a href="../assets/MicroBit_V2.0.0_S_schematic.PDF">schematic</a> to find the GPIO pin assignment.
+the <a href="./assets/MicroBit_V2.0.0_S_schematic.PDF">schematic</a> to find the GPIO pin assignment.
 Try to figure the pin mapping out on your own.</p>
 <details>
 <p>The RX pin is mapped to P0.06 while the TX pin is mapped to P1.08.</p>

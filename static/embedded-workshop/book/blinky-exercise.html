@@ -29,16 +29,18 @@
 
         <!-- Custom theme stylesheets -->
 
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-43397c9e.js";
+            window.path_to_searchindex_js = "searchindex-7cedb383.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-47a14aa6.js"></script>
+        <script src="toc-4b3fe330.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -180,7 +182,7 @@ of the LED matrix, blink with a frequency of 1 second.</p>
 <p>It involves working with a general purpose Input/Output (GPIO) pin which is a very common task on
 microcontrollers. It also involves a timing components to achieve the 1 second blink frequency.
 In this exercise, you are going to build this application.</p>
-<p>Go into the <code>microbit-code/exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
+<p>Go into the <code>microbit-exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
 find the skeleton project that you should edit to work towards the blinky application. It includes
 an explanation of the intermediate steps. Each intermediate step is explained in this document
 in detail, including an intermediate solution which you can see by opening expanding the detail
@@ -288,7 +290,7 @@ COL1 GPIO is configured as an output pin and then driven low.</p>
 <p><img src="./assets/mcu-ports-led.png" alt="MCU ports LED"></p>
 <p>Search for the two pins and look for the P0.XY number which is on the chip side (yellow background)
 on the left. This number is relevant for the code.
-Alternatively, open the <a href="MicroBit_V2.0.0_S_schematic.PDF">schematics</a> directly and use the search
+Alternatively, open the <a href="./assets/MicroBit_V2.0.0_S_schematic.PDF">schematics</a> directly and use the search
 function to find them quickly. If you are struggling with this task, you can also simply
 use the <a href="https://tech.microbit.org/hardware/schematic">pin map table</a> and look at the GPIO name
 for COL1 and ROW1.</p>
@@ -299,7 +301,6 @@ for COL1 and ROW1.</p>
 The first argument is a peripheral resource which is a field of the <code>periphs</code> structure we
 created earlier. The initial level is required because Output pins must have a defined state.
 The third argument is the drive strength. You can use the standard value here.
-&lt;35;48;33M
 Create an output driver for ROW1 and store it as a <code>row1</code> object. Also do the same for COL1 and
 store it as a <code>col1</code> object. Remember that you assign the actual physical pin, which is re-presented
 by an ID like P0.XY, and which you extracted earlier, by passing the corresponding field of the

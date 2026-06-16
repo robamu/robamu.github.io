@@ -29,16 +29,18 @@
 
         <!-- Custom theme stylesheets -->
 
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-43397c9e.js";
+            window.path_to_searchindex_js = "searchindex-7cedb383.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-47a14aa6.js"></script>
+        <script src="toc-4b3fe330.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -259,7 +261,7 @@ hardware is designed, you can do a lot of work with interrupts.</p>
 directly. This technique is called direct memory access (DMA). Combining interrupts and DMA
 allows to perform something like large data transfers with minimal CPU intervention.</p>
 <p>The UART driver provided by the HAL that we are going to use combines both of these concepts as well.</p>
-<h2 id="first-step---create-a-uart-driver"><a class="header" href="#first-step---create-a-uart-driver">First step - Create a UART driver</a></h2>
+<h2 id="step-1---create-a-uart-driver"><a class="header" href="#step-1---create-a-uart-driver">Step 1 - Create a UART driver</a></h2>
 <p>In the previous exercise, we created a driver for a GPIO pin. Now, we create a driver for another
 hardware module: The UART. The HAL we are using provides a driver for us.</p>
 <p>Read the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/uarte/index.html"><code>uarte</code> module docs in embassy</a>
@@ -375,7 +377,7 @@ for technical reasons.</p>
 also very complex driver. There are other UART hardware implementations out there that do not
 support DMA but that are also less complex. Generally, most driver constructors will at the minimum consume pin
 resource handles and the UART resource handle while also expecting some UART configuration.</p>
-<h2 id="second-step---split-the-driver-into-an-rx-and-tx-handle"><a class="header" href="#second-step---split-the-driver-into-an-rx-and-tx-handle">Second step - Split the driver into an RX and TX handle</a></h2>
+<h2 id="step-2---split-the-driver-into-an-rx-and-tx-handle"><a class="header" href="#step-2---split-the-driver-into-an-rx-and-tx-handle">Step 2 - Split the driver into an RX and TX handle</a></h2>
 <p>Many Rust UART drivers allow splitting themselves up into separate RX and TX handles. For example,
 you might be interested in handling reception and transmission in separate tasks or doing them
 concurrently. Many hardware implementations can also support this. This driver has
@@ -388,7 +390,7 @@ a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/stru
 <span class="boring">}</span></code></pre>
 <p>These are already mutable because the methods we are going to use require mutable access.</p>
 </details>
-<h2 id="third-step---read-into-a-reception-buffer-inside-a-loop"><a class="header" href="#third-step---read-into-a-reception-buffer-inside-a-loop">Third step - Read into a reception buffer inside a loop</a></h2>
+<h2 id="step-3---read-into-a-reception-buffer-inside-a-loop"><a class="header" href="#step-3---read-into-a-reception-buffer-inside-a-loop">Step 3 - Read into a reception buffer inside a loop</a></h2>
 <p>Now we want to read something from the UART. You can use the <code>uart_rx</code> driver to do this. It has
 an  <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/struct.BufferedUarteRx.html#method.read"><code>async</code> <code>read</code> method</a>
 you can use for this purpose.</p>
@@ -412,7 +414,7 @@ the loop call because there is no need to re-instantiate it for every <code>read
     }
 <span class="boring">}</span></code></pre>
 </details>
-<h2 id="fourth-step---write-back-whatever-was-received"><a class="header" href="#fourth-step---write-back-whatever-was-received">Fourth step - Write back whatever was received</a></h2>
+<h2 id="step-4---write-back-whatever-was-received"><a class="header" href="#step-4---write-back-whatever-was-received">Step 4 - Write back whatever was received</a></h2>
 <p>Now, we want to send back everything we received. In the <code>Ok</code> case, we will have access
 to the number of received bytes. This can also be smaller than the full buffer size!</p>
 <p>In the <code>Ok</code> arm of the match statement on the <code>read</code> call, use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/struct.BufferedUarteTx.html#method.write_all"><code>write_all</code> method</a> of
@@ -435,7 +437,7 @@ Remember that you want to send the number of bytes you actually received back, n
     }
 <span class="boring">}</span></code></pre>
 </details>
-<h2 id="fifth-step---verifying-everything-works"><a class="header" href="#fifth-step---verifying-everything-works">Fifth step - Verifying everything works</a></h2>
+<h2 id="step-5---verifying-everything-works"><a class="header" href="#step-5---verifying-everything-works">Step 5 - Verifying everything works</a></h2>
 <p>Now, after you have flashed this application using <code>cargo run --bin uart_echo</code>, you send
 anything to the MCU and it should be sent back. When you use an application like <code>picocom</code> or
 <code>PuTTY</code>, this has the side effect that it looks like you are typing on a console.</p>

@@ -30,16 +30,18 @@
 
         <!-- Custom theme stylesheets -->
 
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-43397c9e.js";
+            window.path_to_searchindex_js = "searchindex-7cedb383.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-47a14aa6.js"></script>
+        <script src="toc-4b3fe330.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -221,13 +223,41 @@ about various embedded Rust aspects.</li>
 <li><a href="https://rust-training.ferrous-systems.com/latest/slides/">The Ferrous Systems Rust Training slides</a>
 provide high-quality slides about various topics, including embedded Rust and aspects like
 system boot and peripheral access crates.</li>
+<li><a href="https://github.com/lulf/microbit-bsp">Microbit v2 BSP</a> provides a full BSP with drivers for
+the various board components.</li>
 </ul>
 <h2 id="preparation"><a class="header" href="#preparation">Preparation</a></h2>
 <p>We are going to start with the preparation of the software tools in the <a href="#preparation-1">next chapter</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="preparation-1"><a class="header" href="#preparation-1">Preparation</a></h1>
-<h2 id="cloning-the-project"><a class="header" href="#cloning-the-project">Cloning the project</a></h2>
-<p>TODO: git instructions, clone instructions</p>
+<h2 id="windows-terminal"><a class="header" href="#windows-terminal">Windows Terminal</a></h2>
+<p>It is recommended to use a terminal for some parts of this workshop. There will be a lot
+of steps and instructions which show terminal commands. On Windows, you should install
+a proper terminal unless you plan to use something like <a href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL</a>.</p>
+<p>For example, you can <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5#winget">install the PowerShell</a>.</p>
+<h2 id="cloning-the-project-with-git"><a class="header" href="#cloning-the-project-with-git">Cloning the project with <code>git</code></a></h2>
+<p>It is strongly recommended to clone with project with <code>git</code>. If you have never worked with git
+before, you should work through a tutorial online first, for example <a href="https://learngitbranching.js.org/">this interactive one</a>.
+Alternatively, have a look at the <a href="https://git-scm.com/learn">learning resources</a>.
+If you are a <code>git</code> beginner, you can install it using <a href="https://git-scm.com/install/">the website instructions</a>.</p>
+<p>The project is hosted on <a href="https://github.com/us-irs/embedded-rust-workshop">GitHub</a> publicly.
+It is also hosted on the <a href="https://git.irs.uni-stuttgart.de/irs/embedded-rust-workshop">IRS GitLab</a>
+which you can access if you are an IRS employee.</p>
+<p>You can clone this workshop by running the following git command:</p>
+<pre><code class="language-console">git clone https://github.com/us-irs/embedded-rust-workshop.git
+</code></pre>
+<p>or with SSH:</p>
+<pre><code class="language-console">git clone git@github.com:us-irs/embedded-rust-workshop.git
+</code></pre>
+<p>If you are an IRS employee and have access to the IRS GitLab:</p>
+<pre><code class="language-console">git clone https://git.irs.uni-stuttgart.de/irs/embedded-rust-workshop.git
+</code></pre>
+<p>or with SSH:</p>
+<pre><code class="language-console">git clone git@git.irs.uni-stuttgart.de:irs/embedded-rust-workshop.git
+</code></pre>
+<p>Have a look at the README of the repository. It explains the directory structure. The
+most relevant part of the repository for you is the <code>microbit-exercises</code> folder.</p>
+<p>Now that you have cloned the project, you might have to set up some software.</p>
 <h2 id="rust-and-cargo"><a class="header" href="#rust-and-cargo">Rust and <code>cargo</code></a></h2>
 <p>The first thing required is the Rust compiler and the <code>cargo</code> build and dependency management
 tool. The Rust installation includes the <code>cargo</code> tool, so all you need to do is install
@@ -256,15 +286,17 @@ command</p>
 <p>Finally, if you are on Linux, you need to perform some steps related to <code>udev</code> to avoid permission
 issues. <code>probe-rs</code> has a <a href="https://probe.rs/docs/getting-started/probe-setup/">page with steps you can follow</a>.</p>
 <h2 id="ide"><a class="header" href="#ide">IDE</a></h2>
-<p>You can use any IDE of your choice which has good <a href="https://rust-analyzer.github.io/">Rust Analzyer Support</a>.</p>
+<p>You can use any IDE of your choice which has good <a href="https://rust-analyzer.github.io/">Rust Analyzer Support</a>.</p>
 <p>If you are looking for a solid graphical IDE, <a href="https://code.visualstudio.com/&lt;35;127;26M">VS Code</a>
 is an excellent choice. Make sure to install the <a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">rust-analyzer plugin</a> as well.</p>
 <h2 id="testing-everything"><a class="header" href="#testing-everything">Testing everything</a></h2>
+<p>If you are preparing everything for the workshop, and you do not have access to the hardware yet,
+you are done! You can perform this step once you have access to the hardware in the workshop.</p>
 <p>Now you should have everything you need to build and flash some application to the board.
 You can flash a test application now to test everything. We provide some test applications for you.</p>
 <p>Connect the board to your computer using a Micro-USB cable. Make sure that your cable also
 supports the data interface and is not power-only.</p>
-<p>Go into the <code>code/app</code> directory.</p>
+<p>Navigate into the <code>microbit-apps</code> directory.</p>
 <p>Now, you can run the following command to build and flash a blinky application:</p>
 <pre><code class="language-console">cargo run --bin blinky
 </code></pre>
@@ -308,6 +340,8 @@ which only requires two physical pins, one for transmission and one for receptio
 without CPU intervention.</li>
 <li>HAL - Hardware Abstraction Layer: High level library providing drivers for the hardware blocks
 on a microcontroller.</li>
+<li>I2C - Inter-Integrated Circuit: Communication bus commonly used on embedded systems.</li>
+<li>TWI - Two-Write Interface: Other name for I2C.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="blinky-exercise"><a class="header" href="#blinky-exercise">Blinky Exercise</a></h1>
@@ -316,7 +350,7 @@ of the LED matrix, blink with a frequency of 1 second.</p>
 <p>It involves working with a general purpose Input/Output (GPIO) pin which is a very common task on
 microcontrollers. It also involves a timing components to achieve the 1 second blink frequency.
 In this exercise, you are going to build this application.</p>
-<p>Go into the <code>microbit-code/exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
+<p>Go into the <code>microbit-exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
 find the skeleton project that you should edit to work towards the blinky application. It includes
 an explanation of the intermediate steps. Each intermediate step is explained in this document
 in detail, including an intermediate solution which you can see by opening expanding the detail
@@ -424,7 +458,7 @@ COL1 GPIO is configured as an output pin and then driven low.</p>
 <p><img src="assets/mcu-ports-led.png" alt="MCU ports LED"></p>
 <p>Search for the two pins and look for the P0.XY number which is on the chip side (yellow background)
 on the left. This number is relevant for the code.
-Alternatively, open the <a href="MicroBit_V2.0.0_S_schematic.PDF">schematics</a> directly and use the search
+Alternatively, open the <a href="assets/MicroBit_V2.0.0_S_schematic.PDF">schematics</a> directly and use the search
 function to find them quickly. If you are struggling with this task, you can also simply
 use the <a href="https://tech.microbit.org/hardware/schematic">pin map table</a> and look at the GPIO name
 for COL1 and ROW1.</p>
@@ -435,7 +469,6 @@ for COL1 and ROW1.</p>
 The first argument is a peripheral resource which is a field of the <code>periphs</code> structure we
 created earlier. The initial level is required because Output pins must have a defined state.
 The third argument is the drive strength. You can use the standard value here.
-&lt;35;48;33M
 Create an output driver for ROW1 and store it as a <code>row1</code> object. Also do the same for COL1 and
 store it as a <code>col1</code> object. Remember that you assign the actual physical pin, which is re-presented
 by an ID like P0.XY, and which you extracted earlier, by passing the corresponding field of the
@@ -597,7 +630,7 @@ hardware is designed, you can do a lot of work with interrupts.</p>
 directly. This technique is called direct memory access (DMA). Combining interrupts and DMA
 allows to perform something like large data transfers with minimal CPU intervention.</p>
 <p>The UART driver provided by the HAL that we are going to use combines both of these concepts as well.</p>
-<h2 id="first-step---create-a-uart-driver"><a class="header" href="#first-step---create-a-uart-driver">First step - Create a UART driver</a></h2>
+<h2 id="step-1---create-a-uart-driver"><a class="header" href="#step-1---create-a-uart-driver">Step 1 - Create a UART driver</a></h2>
 <p>In the previous exercise, we created a driver for a GPIO pin. Now, we create a driver for another
 hardware module: The UART. The HAL we are using provides a driver for us.</p>
 <p>Read the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/uarte/index.html"><code>uarte</code> module docs in embassy</a>
@@ -713,7 +746,7 @@ for technical reasons.</p>
 also very complex driver. There are other UART hardware implementations out there that do not
 support DMA but that are also less complex. Generally, most driver constructors will at the minimum consume pin
 resource handles and the UART resource handle while also expecting some UART configuration.</p>
-<h2 id="second-step---split-the-driver-into-an-rx-and-tx-handle"><a class="header" href="#second-step---split-the-driver-into-an-rx-and-tx-handle">Second step - Split the driver into an RX and TX handle</a></h2>
+<h2 id="step-2---split-the-driver-into-an-rx-and-tx-handle"><a class="header" href="#step-2---split-the-driver-into-an-rx-and-tx-handle">Step 2 - Split the driver into an RX and TX handle</a></h2>
 <p>Many Rust UART drivers allow splitting themselves up into separate RX and TX handles. For example,
 you might be interested in handling reception and transmission in separate tasks or doing them
 concurrently. Many hardware implementations can also support this. This driver has
@@ -726,7 +759,7 @@ a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/stru
 <span class="boring">}</span></code></pre>
 <p>These are already mutable because the methods we are going to use require mutable access.</p>
 </details>
-<h2 id="third-step---read-into-a-reception-buffer-inside-a-loop"><a class="header" href="#third-step---read-into-a-reception-buffer-inside-a-loop">Third step - Read into a reception buffer inside a loop</a></h2>
+<h2 id="step-3---read-into-a-reception-buffer-inside-a-loop"><a class="header" href="#step-3---read-into-a-reception-buffer-inside-a-loop">Step 3 - Read into a reception buffer inside a loop</a></h2>
 <p>Now we want to read something from the UART. You can use the <code>uart_rx</code> driver to do this. It has
 an  <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/struct.BufferedUarteRx.html#method.read"><code>async</code> <code>read</code> method</a>
 you can use for this purpose.</p>
@@ -750,7 +783,7 @@ the loop call because there is no need to re-instantiate it for every <code>read
     }
 <span class="boring">}</span></code></pre>
 </details>
-<h2 id="fourth-step---write-back-whatever-was-received"><a class="header" href="#fourth-step---write-back-whatever-was-received">Fourth step - Write back whatever was received</a></h2>
+<h2 id="step-4---write-back-whatever-was-received"><a class="header" href="#step-4---write-back-whatever-was-received">Step 4 - Write back whatever was received</a></h2>
 <p>Now, we want to send back everything we received. In the <code>Ok</code> case, we will have access
 to the number of received bytes. This can also be smaller than the full buffer size!</p>
 <p>In the <code>Ok</code> arm of the match statement on the <code>read</code> call, use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/struct.BufferedUarteTx.html#method.write_all"><code>write_all</code> method</a> of
@@ -773,7 +806,7 @@ Remember that you want to send the number of bytes you actually received back, n
     }
 <span class="boring">}</span></code></pre>
 </details>
-<h2 id="fifth-step---verifying-everything-works"><a class="header" href="#fifth-step---verifying-everything-works">Fifth step - Verifying everything works</a></h2>
+<h2 id="step-5---verifying-everything-works"><a class="header" href="#step-5---verifying-everything-works">Step 5 - Verifying everything works</a></h2>
 <p>Now, after you have flashed this application using <code>cargo run --bin uart_echo</code>, you send
 anything to the MCU and it should be sent back. When you use an application like <code>picocom</code> or
 <code>PuTTY</code>, this has the side effect that it looks like you are typing on a console.</p>
@@ -794,15 +827,585 @@ using DMA.</p>
 <p>Practical applications in our domain will oftentimes use binary protocols. In principle, we could
 send binary packets to this application and we would also receive those back. However, using a utility
 like <code>picocom</code> allows for nice visualization that everything is working.</p>
-<p>There is an <a href="#uart-spacepackets">UART Spacepackets</a> exercise where we communicate with an MCU
+<p>There is an <a href="uart-spacepackets.html">UART Spacepackets</a> exercise where we communicate with an MCU
 using standardized <a href="https://ccsds.org/Pubs/133x0b2e2.pdf">CCSDS spacepackets</a> via the serial interface.
 This communication pattern is very commonly used at the IRS!</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="accelerometer-sensor-driver"><a class="header" href="#accelerometer-sensor-driver">Accelerometer Sensor Driver</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="multi-tasking-exercise-and-ipc"><a class="header" href="#multi-tasking-exercise-and-ipc">Multi-tasking exercise and IPC</a></h1>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="uart-spacepackets"><a href="#uart-spacepackets" class="header">UART spacepackets</a></h1>
+<p>The microbit v2 has an on-board LSM303AGR e-compass module. Writing device drivers is a common
+task in our domain, so that is what we are going to do in this exercise. There are open-source
+drivers <a href="https://docs.rs/lsm303agr/latest/lsm303agr/">available</a>, but we are going to write a new
+one so you can actually learn how this process works. This is an on-board <a href="https://en.wikipedia.org/wiki/MEMS">MEMS</a>
+sensor. It’s tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>. Look for the ST LSM303AGR on the board images.</p>
+<p>This is a capable MEMS sensor which has confusing sections in its <a href="https://www.st.com/en/mems-and-sensors/lsm303agr.html">datasheet</a>.
+It uses a lot of abbreviations and expects implicit knowledge. This is unfortunately something that is very
+common in datasheets written by hardware companies. We have looked at the datasheet and extracted the most
+relevant knowledge by also looking at available drivers provided by the community so you do not have
+to do this guesswork anymore.</p>
+<p>The goal of this exercise is to write a very rudimentary driver which can be used to read the
+acceleration values. While it might be a bit more relevant to implement the magnetometer
+reading for our applications (satellite systems without propulsion), the accelerometer gives
+a nice visualization without requiring a rod magnet to verify sensor readings. The basic principles
+of reading and converting raw sensor values remains the same and can be transferred to other
+sensors.</p>
+<h2 id="features-of-the-hardware-sensor"><a class="header" href="#features-of-the-hardware-sensor">Features of the hardware sensor</a></h2>
+<p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">microbit v2 docs</a>:</p>
+<ul>
+<li>e-compass which combines a magnetometer and and accelerometer into one package</li>
+<li>Configurable range of 2/4/8/16g</li>
+<li>Configurable resolution of 8/10/12 bits</li>
+</ul>
+<p>The sensor also has an output data rate (ODR) configuration which specifies how often the sensor
+updates its internal value. Let’s make some requirements for our driver so simplify our task:</p>
+<ul>
+<li>Our simple driver will only support +- 2g.</li>
+<li>Only support normal resolution of 10 bits.</li>
+<li>Configurable ODR settings.</li>
+</ul>
+<p>The sensor has two communication interfaces: I2C and SPI. However, by looking at the
+HW schematic:</p>
+<p><img src="assets/hw-block-diagram.png" alt="HW block diagram"></p>
+<p>We can see that the sensor is connected through I2C. An in-depth explanation of the I2C (or SPI)
+bus would exceed the scope of this exercise, but the most relevant key information from a software
+engineering perspective are summarized here:</p>
+<ul>
+<li>I2C allow communication between multiple devices through two GPIO pins only. One clock is the
+data pin which is called the serial data line (SDA) and the other pin is called the serial clock
+(SCL)</li>
+<li>The most common I2C communication speeds are normal mode with 100 kHz and fast mode with 400 kHz.</li>
+<li>I2C relies of device addressing to allow talking to a single device on a shared bus.</li>
+<li>An I2C transaction can be abstracted with three operations: <code>read</code>, <code>write</code> and <code>read_write</code>.</li>
+</ul>
+<p>The Rust embedded-hal crate provide generic traits that portable device drivers and HAL implementations
+need to agree on. You can have a look at how these basic bus properties were captured in the
+<a href="https://docs.rs/embedded-hal/1.0.0/embedded_hal/i2c/trait.I2c.html">I2C trait</a>. Notice how its
+API functions expect a device address and are named <code>read</code>, <code>write</code> and <code>read_write</code>.</p>
+<p>We are not going to use this trait directly for this exercise, but the trait would be relevant
+if you either want to write a driver which works on multiple hardware platforms, or if you
+want a driver which works with both exclusive bus access and when sharing the bus with multiple
+other devices.</p>
+<p>Looking at the <a href="https://tech.microbit.org/hardware/schematic/#v2-pinmap">pin map</a>, we can figure
+out that the SDA pin is mapped to P0.16 and the SCL pin is mapped to P0.08. There are also
+external I2C pins, but those are routed to the edge connector and are used to connect
+external devices.</p>
+<p>When it comes to writing device drivers, you generally want to wrap the driver object or some
+useful abstraction of it to talk with your device. For this device, you would wrap some
+I2C driver. We can omit some abstraction because we know that we are never going to share the bus,
+and we do not want to write a portable driver. This means we can wrap the bus driver provided
+by the HAL. Nordic uses a different name for the I2C protocol and calls it TWI (two-write interface).
+There is a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/index.html"><code>twim</code></a> providing
+support for the Two Wire Interface in master mode, which is relevant for us.</p>
+<h2 id="step-1---create-the-i2ctwi-driver"><a class="header" href="#step-1---create-the-i2ctwi-driver">Step 1 - Create the I2C/TWI driver</a></h2>
+<p>Open the <code>src/bin/motion_sensor.rs</code> file. Start creating the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/struct.Twim.html"><code>twim</code> driver</a> and storing it into an object named <code>i2c_bus</code>.
+We provided all required information, including the pin mapping for the SDA and SCL pin.
+The default TWI configuration provided by embassy is sufficient for our purposes. The name of
+the peripheral in the library are <code>TWISPI0</code>. You can assume that a TX RAM buffer of 16 or 32 bytes
+is sufficient.</p>
+<p>If you are struggling with this step and you have not worked through the <a href="#blinky-exercise">blinky</a>
+or the <a href="#uart-echo-application">UART echo</a> exercise yet, you should work through those first.</p>
+<p>If you do not remember the exact syntax for creating the interrupt bindings, you can look at
+the <a href="https://github.com/embassy-rs/embassy/blob/main/examples/nrf52840/src/bin/twim.rs">embassy example</a>
+or at the details:</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub use embassy_nrf::{twim, peripherals};
+
+bind_interrupts!(struct Irqs {
+    TWISPI0 =&gt; twim::InterruptHandler&lt;peripherals::TWISPI0&gt;;
+});
+<span class="boring">}</span></code></pre>
+</details>
+<p>Rest of solution:</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let mut tx_ram_buffer: [u8; 32] = [0; 32];
+    let i2c_config = twim::Config::default();
+    let i2c_bus = embassy_nrf::twim::Twim::new(
+        periphs.TWISPI0,
+        Irqs,
+        periphs.P0_16,
+        periphs.P0_08,
+        i2c_config,
+        &amp;mut tx_ram_buffer,
+    );
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="step-2---create-the-basic-driver-object"><a class="header" href="#step-2---create-the-basic-driver-object">Step 2 - Create the basic driver object</a></h2>
+<p>You are now going to create a driver object instead of just re-using existing library code in your
+application. Go into the <code>src/motion_sensor.rs</code> file. This file/module is already included
+in <code>src/lib.rs</code> for you, but it is empty. Start by creating a empty structure named <code>Accelerometer</code> here.</p>
+<p>Then add one field to that structure: The I2C driver you just created. You actually need a lifetime
+of <code>Accelerometer</code> now because the I2C driver has a lifetime as well.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Accelerometer&lt;'d&gt; {
+    i2c: embassy_nrf::twim::Twim&lt;'d&gt;
+}
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="step-3---add-a-constructor"><a class="header" href="#step-3---add-a-constructor">Step 3 - Add a constructor</a></h2>
+<p>Add a constructor to your driver object by adding a <code>new</code> method with returns <code>Self</code>. In the most
+simple form, the constructor could simply take the I2C bus as an input argument and then creates and
+returns itself.</p>
+<p>However, we also want to verify that the communication with out device works properly. Sensors
+from ST microelectronics commonly have a WHO AM I register which you can read to verify
+basic sensor communication. The value read from this register should have a fixed value that
+you can check. Your task is to add a constructor which constructs <code>Accelerometer</code>, checks the
+communication and returns <code>Result::Ok(Self)</code> on success and some error if the I2C communication fails
+or the WHO AM I register value is invalid.</p>
+<p>You can use an <code>enum</code> to model an error which can
+either be an <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/enum.Error.html"><code>embassy_nrf::twim::Error</code></a>
+or some WHO AM I error unit variant. Add an asynchronous constructor function and start with an empty
+<code>todo!()</code> implementation block.</p>
+<p>If you feel confident in your Rust abilities, try to solve this without using hints and
+intermediate solutions.</p>
+<p>The constructor will have a basic form like this, including a suitable initialization error type:</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>
+#[derive(Debug)]
+pub enum InitError {
+    I2c(embassy_nrf::twim::Error),
+    WhoAmIInvalid
+}
+
+impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
+    // Constructor.
+    pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
+        todo!();
+        // Implementation
+        // ...
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>But how do you actually read back this value using I2C? On this device, you can read a register
+by first sending the register ID you want to read and then reading back one byte.</p>
+<p>The register map can be found in the <a href="assets/lsm303agr.pdf">device datasheet</a>. We have
+included an excerpt of the register map on page 43 for you:</p>
+<p><img src="assets/lsm-reg-map.png" alt="Register Map"></p>
+<p>Create a <code>enum</code> which includes the Register IDs, for example one named <code>Register</code>.
+Add the <code>WhoAmI</code> variant with the correct register address value. Derive <code>Debug</code>, <code>Copy</code>, <code>Clone</code>,
+<code>defmt::Format</code>, <code>PartialEq</code> and <code>Eq</code> on it.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>
+#[derive(Debug, Copy, Clone, PartialEq, Eq, defmt::Format)]
+pub enum Register {
+    WhoAmI = 0x0f
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>You can add new values to the <code>enum</code> as you need them. Or you put in a lot of work and create a complete one.
+AI can help with this menial job.</p>
+<p>Now you have everything you need to read the value. You have to use the <code>write_read</code> API.
+We already provided hints what you have to send and how much you have to read back. Read back
+the WHO AM I register and verify its value. From the datasheet, we can determine the expected value
+to be <code>0b00110011</code>. You can create a constant or associated constant on the <code>Accelerometer</code> object
+to store the expected value.</p>
+<p>First of all, we mentioned that you always have to pass the device address when using the I2C driver
+API. For the accelerometer, that address has a fixed value of <code>0x19</code> that you can retrieve
+from the microbit v2 schematic or from the sensor datasheet. Create an associated constant
+<code>ADDR</code> on the <code>Accelerometer</code> driver which has that value.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Accelerometer {
+    pub const ADDR: u8 = 0x19;
+}
+
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now you have everything you need to write the constructor. Finish the implementation for the <code>new</code>
+method. Return some error variant if the read back
+value is not equal to the expected one, and return a driver instance otherwise.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>
+impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
+    pub const ADDR: u8 = 0x19;
+    pub const WHO_AM_I_VALUE: u8 = 0b00110011;
+
+    pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
+        let mut buf = [0; 1];
+        i2c.write_read(Self::ADDR, &amp;[Register::WhoAmIAcc as u8], &amp;mut buf)
+            .await?;
+        if buf[0] != Self::WHO_AM_I_VALUE {
+            return Err(InitError::InvalidWhoAmI);
+        }
+        Ok(Self { i2c })
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>The interaction with other registers is comparable. In general if you want to read registers,
+you still have to use <code>read_write</code> to select the correct registers, while you can just use
+<code>write</code> if you only want to write to a register.</p>
+<h2 id="step-4---configure-the-sensor"><a class="header" href="#step-4---configure-the-sensor">Step 4 - Configure the sensor</a></h2>
+<p>Now you have a driver instance, but you actually want to read some sensor values. We tried
+this for you before, and wondered why the accelerometer readings returned all zero. It turns
+out you need to write some configuration registers to actually enable the device. Let’s do this
+first.</p>
+<p>We extracted the definition of <code>CTRL_REG1_A</code> on page 47 of the datasheet for you:</p>
+<p><img src="assets/ctrl-reg-1.png" alt="Control Register 1"></p>
+<p>The device is in Power-Down mode on startup. This is the most important control register
+because it allows use to set the output data rate (ODR), enabling the device and
+individual axes. The datasheet specifies a 8-bit register configuration.</p>
+<ul>
+<li>Bits 7 down to 4 are the ODR3 to ODR0 configuration bits</li>
+<li>Bit 3 is the low power enable bit</li>
+<li>Bits 2 down to 0 enable the axes Z, Y, and X respectively</li>
+</ul>
+<p>We are going to use a crate called <code>bitbybit</code> which provides a declarative way to specify
+registers and then provides a convenient API to build the register value which avoids
+the need to write bitshifts and masks.</p>
+<p>Have a look at the examples from the <a href="https://github.com/danlehmann/bitfield"><code>bitbybit</code></a>
+crate and try to specify this registeres using <code>bitbybit::bitfield</code>. Adding <code>default = 0x0</code>
+inside proc macro attributes also adds a builder API which is useful for us while <code>debug</code> adds
+an improved <code>Debug</code> implementation. This can be combined with the
+<a href="https://docs.rs/arbitrary-int/latest/arbitrary_int/index.html"><code>arbitrary-int</code></a> library.
+We can also use <code>bitbybit::bitenum</code> to model the ODR configurations with an <code>enum</code>.</p>
+<p>If you have worked with these libraries before, try to create the data structures using
+those libraries. Otherwise, have a look at the solution and try to understand them by
+cross-checking them with the register definition we provided you above:</p>
+<details>
+<p>Inside the <code>src/accelerometer.rs</code> library file:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Output data rate configuration.
+#[bitbybit::bitenum(u4, exhaustive = false)]
+#[derive(Debug)]
+pub enum OdrConfig {
+    PowerDown = 0b0000,
+    Odr1Hz = 0b0001,
+    Odr10Hz = 0b0010,
+    Odr25Hz = 0b0011,
+    Odr50Hz = 0b0100,
+    Odr100Hz = 0b0101,
+    Odr200Hz = 0b0110,
+    Odr400Hz = 0b0111,
+    LowPower1620Hz = 0b1000,
+    HrNormal1344HzLowPower5376Hz = 0b1001,
+}
+
+#[bitbybit::bitfield(u8, default = 0x0, debug)]
+pub struct ControlReg1 {
+    #[bits(4..=7, rw)]
+    odr: Option&lt;OdrConfig&gt;,
+    #[bit(3, rw)]
+    low_power_enable: bool,
+    #[bit(2, rw)]
+    z_enable: bool,
+    #[bit(1, rw)]
+    y_enable: bool,
+    #[bit(0, rw)]
+    x_enable: bool,
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now you have everything you need to update the register. The excerpt of the datasheet also
+shows the register ID, whic his <code>0x20</code>. Add the <code>CtrlReg1</code> variant to the <code>Register</code> enumeration
+you created before. You can now use the <a href="https://github.com/danlehmann/bitfield#setting-all-fields-at-once-using-the-builder-syntax">builder API</a> on <code>ControlReg1</code> to build the target
+configuration.</p>
+<p>Use <code>i2c.write</code> inside the constructor to write the <code>ControlReg1</code> to the right register ID,
+using an ODR of 100 Hz. Remember that you can write a register by sending the register ID as the
+first byte, and the register value as the second byte.</p>
+<details>
+<p>Updated constructor:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
+        let mut buf = [0; 1];
+        i2c.write_read(Self::ADDR, &amp;[Register::WhoAmIAcc as u8], &amp;mut buf)
+            .await?;
+        if buf[0] != Self::WHO_AM_I_VALUE {
+            return Err(InitError::InvalidWhoAmI);
+        }
+        i2c.write(
+            Self::ADDR,
+            &amp;[
+                Register::CtrlReg1 as u8,
+                ControlReg1::builder()
+                    .with_odr(OdrConfig::Odr100Hz)
+                    .with_low_power_enable(false)
+                    .with_z_enable(true)
+                    .with_y_enable(true)
+                    .with_x_enable(true)
+                    .build()
+                    .raw_value(),
+            ],
+        )
+        .await?;
+        Ok(Self { i2c })
+    }
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="step-5---read-the-raw-accelerometer-values"><a class="header" href="#step-5---read-the-raw-accelerometer-values">Step 5 - Read the raw accelerometer values</a></h2>
+<p>Now we can read the raw sensor values. By looking at the register mapping on page 43 of the
+datasheet again, we can figure out the base addresses of the sensor readout:</p>
+<ul>
+<li>OUT_X_L_A at 0x28</li>
+<li>OUT_X_H_A at 0x29</li>
+<li>OUT_Y_L_A at 0x2A</li>
+<li>OUT_Y_H_A at 0x2B</li>
+<li>OUT_Z_L_A at 0x2C</li>
+<li>OUT_Z_H_A at 0x2D</li>
+</ul>
+<p>As you can see, those registers are consecutive. They are also ordered in little endian
+format, where the low byte is at the smaller memory address. This is relevant for creating
+the raw <code>u16</code> binary value from the raw bytes in the correct order.</p>
+<p>We could perform 6 individual reads on the addresses specified above. However, the device
+has a register auto-increment feature that we can use. By setting bit 7 in the register ID
+value to 1, we can tell the device to automatically increment the device address for the next
+read. This allows us to read all 6 registers with one I2C <code>write_read</code> transaction.</p>
+<p>Create a <code>AUTO_INCREMENT_MASK</code> constant or associated constant and set it to <code>0x80</code> or
+<code>0b1000_0000</code>. Now add a method named <code>read_raw</code> to your driver which will return the sensor readout.</p>
+<p>The <code>_raw</code> suffix makes it clear that those are raw sensor values which are not worth much on
+their own and still require some processing and conversion to proper units.</p>
+<p>What do we actually return? A simple way would be to return a <code>(u16, u16, u16)</code> tuple.
+YOu can also create a dedicated named structure and this is what we are going to do.</p>
+<p>Add a structure named <code>ReadoutRaw</code>, which has <code>x</code>, <code>y</code> and <code>z</code> public fields.
+You can add common dervies like <code>Debug</code>, <code>Copy</code>, <code>Clone</code>, <code>defmt::Format</code> as well.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, defmt::Format)]
+pub struct ReadoutRaw {
+    pub x: u16,
+    pub y: u16,
+    pub z: u16,
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now you can specify the <code>async</code> <code>read_raw</code> method for your driver as well.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    pub async fn read_raw(&amp;self) -&gt; Result&lt;ReadoutRaw, Error&gt; {
+        todo!();
+    }
+<span class="boring">}</span></code></pre>
+</details>
+<p>The method we specified in our solution only required a shared reference of the driver.
+This makes sense, because we are not configuring anything in the driver. However, we still require
+mutable access to the wrapped <code>i2c</code> driver because that is just the function prototype of the
+<code>write_read</code> method. We can fix this by using <a href="https://doc.rust-lang.org/book/ch15-05-interior-mutability.html">interior mutability</a>.</p>
+<p>Wrap the <code>i2c</code> field of the structure in a <code>core::cell::RefCell</code>. You also have to update the constructor.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use core::cell::RefCell;
+
+pub struct Accelerometer&lt;'d&gt; {
+    i2c: RefCell&lt;embassy_nrf::twim::Twim&lt;'d&gt;&gt;,
+}
+<span class="boring">}</span></code></pre>
+<p>and inside constructor method, use <code>core::cell::RefCell::new(i2c)</code> to wrap the i2c driver in
+a <code>RefCell</code>.</p>
+</details>
+<p>You can get a mutable reference to the <code>i2c</code> driver using <code>borrow_mut</code> on the
+field without requiring mutable access to the driver now.</p>
+<p>Next, you can write the actual implementation which reads the sensor values. Remember that you can
+read all 6 registers with one transaction by setting the <code>AUTO_INCREMENT_MASK</code> bit on the register
+start ID, which would be the <code>OUT_X_L_A</code> register in our case. Now you just have to specify an
+appropriate receive buffer size to read 6 words starting at that address.</p>
+<p>After you have read the 6 bytes into a raw buffer, you need to extract and convert them into
+a raw <code>i16</code> for further conversion. You can use <code>u16::from_le_bytes</code> to do this conversion.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>
+impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
+    pub const ADDR: u8 = 0x19;
+    pub const WHO_AM_I_VALUE: u8 = 0b00110011;
+    pub const AUTO_INCREMENT_MASK: u8 = 0x80;
+
+    pub async fn read_raw(&amp;self) -&gt; Result&lt;ReadoutRaw, Error&gt; {
+        let mut buf = [0; 6];
+        self.i2c
+            .borrow_mut()
+            .write_read(
+                Self::ADDR,
+                &amp;[Self::AUTO_INCREMENT_MASK | Register::OutXLowAcc as u8],
+                &amp;mut buf,
+            )
+            .await?;
+        Ok(ReadoutRaw {
+            x: u16::from_le_bytes([buf[0], buf[1]]),
+            y: u16::from_le_bytes([buf[2], buf[3]]),
+            z: u16::from_le_bytes([buf[4], buf[5]]),
+        })
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="step-6---convert-and-read-the-values-in-the-si-unit-mg"><a class="header" href="#step-6---convert-and-read-the-values-in-the-si-unit-mg">Step 6 - Convert and read the values in the SI unit mg</a></h2>
+<p>Those raw values are not worth much by themselves. There are some conversion steps that we
+need to do. The datasheet specifies the raw binary format as a left-adjusted signed <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two-complement number</a>.
+There are 2 conversion steps require here:</p>
+<ol>
+<li>Eliminate trailing bytes depending on the selected resolution. We specified that this device has different
+resolution rates represented by bits. We can assume normal resolution (10-bits). This means
+that our relevant value will be placed on bit positions 15 downto 6. The simplest way to
+performing this scaling is by right-shifting by 6.</li>
+<li>Scale the result to achieve our value in SI units. The datasheet specifies the sensitivity
+for a full scale of += 2g in mg per digit. You need to multiply the raw value with that table
+value. However, that table value also need to lineary scale with the full scale.</li>
+</ol>
+<p>A general formula for the acceleration which should have been provided in the datasheet but
+is not for mysterious reasons, can therefore be written as:</p>
+<p>$$
+A_{mg} = (R \gg n) \times \left( S_{2g} \times \frac{FS}{2} \right)
+$$</p>
+<ul>
+<li>R is the raw value</li>
+<li>S is the sensitivity value you can take from the table below. It is called SO in the table, which
+is an abbreviation for scale output.</li>
+<li>n is the resolution shift, which is 16 minus the number of resolution bits, e.g. 6 for 10-bit
+resolution.</li>
+<li>FS is the full scale value, e.g. 2 for +- 2g full scale.</li>
+</ul>
+<p><img src="assets/scale-output.png" alt="Scale output table"></p>
+<p>You can assume FS to be +-2g which is the default full scale for the sensor.</p>
+<p>We would like to write our driver in a way that allows changing the resolution and full scale
+in the future. Introduce two new enumerations which allow modelling this: A <code>Mode</code> enumeration
+and a <code>FullScale</code> enumeration in the library. The <code>Mode</code> enumeration should include the Power Down,
+Low Power, Normal and High Resolution Mode. The <code>FullScale</code> should include all full scales that this
+device supports. You can no specify enum variants with leading numbers, but you can use a
+leading underscore to allow this. In the full scale enumeration, assign the actual full scale
+value as the enum value.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, Clone, Copy, defmt::Format)]
+pub enum FullScale {
+    _2g = 2,
+    _4g = 4,
+    _8g = 8,
+    _16g = 16,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, defmt::Format)]
+pub enum Mode {
+    /// Power down
+    PowerDown,
+    /// Low power (8-bit)
+    LowPower,
+    /// Normal mode (10-bit)
+    Normal,
+    /// High resolution (12-bit)
+    HighResolution,
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now add a <code>resolution_shift</code> method to the <code>Mode</code> structure which returns the right-shift
+value <em>n</em> that you have to apply to the raw value.</p>
+<p>Then, add a <code>scale_multiplier</code> method to the <code>Mode</code> enumeration which also takes a <code>FullScale</code> as
+an argument and calculates the final multiplier which needs to be applied to the shifted raw
+value.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Mode {
+    pub const fn resolution_shift(&amp;self) -&gt; i16 {
+        match self {
+            Mode::PowerDown =&gt; 0,
+            Mode::HighResolution =&gt; 4,
+            Mode::Normal =&gt; 6,
+            Mode::LowPower =&gt; 8,
+        }
+    }
+
+    /// The table 14 specifies the scale output values at += 2g in mg/digit.
+    ///
+    /// At higher full scales, that value needs to be scaled as well. When using a full scale
+    /// of 2, notice how the full scale cancels out with the division and you achieve the table
+    /// values.
+    pub const fn scale_multiplier(&amp;self, full_scale: FullScale) -&gt; u32 {
+        let full_scale = full_scale as u32;
+        match self {
+            Mode::PowerDown =&gt; 1,
+            Mode::LowPower =&gt; (16 * full_scale) / 2,
+            Mode::Normal =&gt; (4 * full_scale) / 2,
+            Mode::HighResolution =&gt; (1 * full_scale) / 2,
+        }
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now add a <code>mode</code> and <code>full_scale</code> field to your driver. Those have fixed values
+for now, but you could make them configurable at a later point.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Driver for the LSM303AGR e-compass.
+pub struct Accelerometer&lt;'d&gt; {
+    i2c: RefCell&lt;embassy_nrf::twim::Twim&lt;'d&gt;&gt;,
+    full_scale: FullScale,
+    mode: Mode,
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>In the constructor, simply hardcode those fields to the default values the device has at startup,
+which is +- 2g full scale and normal resolution mode.</p>
+<p>Now, we will introduce a higher-level type which can be used to read the accelerometer values
+in SI units. Add a new structure to your library called <code>Readout</code>. This structure should
+include a <code>raw</code> field with the <code>ReadoutRaw</code> type, a <code>full_scale</code> and a <code>mode</code> field.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, defmt::Format)]
+pub struct Readout {
+    raw: ReadoutRaw,
+    full_scale: FullScale,
+    mode: Mode,
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now add the following API methods for <code>Readout</code>:</p>
+<ul>
+<li><code>x_mg</code> which returns X axis value in mg as an <code>i32</code>.</li>
+<li><code>y_mg</code> which returns Y axis value in mg as an <code>i32</code>.</li>
+<li><code>z_mg</code> which returns Z axis value in mg as an <code>i32</code>.</li>
+<li><code>xyz_mg</code> which returns the value of all axes in mg as a <code>(i32, i32, i32)</code></li>
+</ul>
+<p>Use the formula we specified above the the methods we added to do this.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Readout {
+    /// X axis readout in mg.
+    pub const fn x_mg(&amp;self) -&gt; i32 {
+        (self.raw.x &gt;&gt; self.mode.resolution_shift()) as i32
+            * self.mode.scale_multiplier(self.full_scale) as i32
+    }
+
+    /// Y axis readout in mg.
+    pub const fn y_mg(&amp;self) -&gt; i32 {
+        (self.raw.y &gt;&gt; self.mode.resolution_shift()) as i32
+            * self.mode.scale_multiplier(self.full_scale) as i32
+    }
+
+    /// Z axis readout in mg.
+    pub const fn z_mg(&amp;self) -&gt; i32 {
+        (self.raw.z &gt;&gt; self.mode.resolution_shift()) as i32
+            * self.mode.scale_multiplier(self.full_scale) as i32
+    }
+
+    /// XYZ axis readout in mg.
+    pub const fn xyz_mg(&amp;self) -&gt; (i32, i32, i32) {
+        (self.x_mg(), self.y_mg(), self.z_mg())
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="step-7---print-the-accelerometer-values-inside-a-loop-periodically"><a class="header" href="#step-7---print-the-accelerometer-values-inside-a-loop-periodically">Step 7 - Print the accelerometer values inside a loop periodically</a></h2>
 
                     </main>
 
@@ -846,7 +1449,9 @@ This communication pattern is very commonly used at the IRS!</p>
 
         <script>
         window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
         });
         </script>
 

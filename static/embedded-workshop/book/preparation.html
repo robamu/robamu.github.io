@@ -29,16 +29,18 @@
 
         <!-- Custom theme stylesheets -->
 
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-43397c9e.js";
+            window.path_to_searchindex_js = "searchindex-7cedb383.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-47a14aa6.js"></script>
+        <script src="toc-4b3fe330.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -175,8 +177,34 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="preparation"><a class="header" href="#preparation">Preparation</a></h1>
-<h2 id="cloning-the-project"><a class="header" href="#cloning-the-project">Cloning the project</a></h2>
-<p>TODO: git instructions, clone instructions</p>
+<h2 id="windows-terminal"><a class="header" href="#windows-terminal">Windows Terminal</a></h2>
+<p>It is recommended to use a terminal for some parts of this workshop. There will be a lot
+of steps and instructions which show terminal commands. On Windows, you should install
+a proper terminal unless you plan to use something like <a href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL</a>.</p>
+<p>For example, you can <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5#winget">install the PowerShell</a>.</p>
+<h2 id="cloning-the-project-with-git"><a class="header" href="#cloning-the-project-with-git">Cloning the project with <code>git</code></a></h2>
+<p>It is strongly recommended to clone with project with <code>git</code>. If you have never worked with git
+before, you should work through a tutorial online first, for example <a href="https://learngitbranching.js.org/">this interactive one</a>.
+Alternatively, have a look at the <a href="https://git-scm.com/learn">learning resources</a>.
+If you are a <code>git</code> beginner, you can install it using <a href="https://git-scm.com/install/">the website instructions</a>.</p>
+<p>The project is hosted on <a href="https://github.com/us-irs/embedded-rust-workshop">GitHub</a> publicly.
+It is also hosted on the <a href="https://git.irs.uni-stuttgart.de/irs/embedded-rust-workshop">IRS GitLab</a>
+which you can access if you are an IRS employee.</p>
+<p>You can clone this workshop by running the following git command:</p>
+<pre><code class="language-console">git clone https://github.com/us-irs/embedded-rust-workshop.git
+</code></pre>
+<p>or with SSH:</p>
+<pre><code class="language-console">git clone git@github.com:us-irs/embedded-rust-workshop.git
+</code></pre>
+<p>If you are an IRS employee and have access to the IRS GitLab:</p>
+<pre><code class="language-console">git clone https://git.irs.uni-stuttgart.de/irs/embedded-rust-workshop.git
+</code></pre>
+<p>or with SSH:</p>
+<pre><code class="language-console">git clone git@git.irs.uni-stuttgart.de:irs/embedded-rust-workshop.git
+</code></pre>
+<p>Have a look at the README of the repository. It explains the directory structure. The
+most relevant part of the repository for you is the <code>microbit-exercises</code> folder.</p>
+<p>Now that you have cloned the project, you might have to set up some software.</p>
 <h2 id="rust-and-cargo"><a class="header" href="#rust-and-cargo">Rust and <code>cargo</code></a></h2>
 <p>The first thing required is the Rust compiler and the <code>cargo</code> build and dependency management
 tool. The Rust installation includes the <code>cargo</code> tool, so all you need to do is install
@@ -205,15 +233,17 @@ command</p>
 <p>Finally, if you are on Linux, you need to perform some steps related to <code>udev</code> to avoid permission
 issues. <code>probe-rs</code> has a <a href="https://probe.rs/docs/getting-started/probe-setup/">page with steps you can follow</a>.</p>
 <h2 id="ide"><a class="header" href="#ide">IDE</a></h2>
-<p>You can use any IDE of your choice which has good <a href="https://rust-analyzer.github.io/">Rust Analzyer Support</a>.</p>
+<p>You can use any IDE of your choice which has good <a href="https://rust-analyzer.github.io/">Rust Analyzer Support</a>.</p>
 <p>If you are looking for a solid graphical IDE, <a href="https://code.visualstudio.com/&lt;35;127;26M">VS Code</a>
 is an excellent choice. Make sure to install the <a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">rust-analyzer plugin</a> as well.</p>
 <h2 id="testing-everything"><a class="header" href="#testing-everything">Testing everything</a></h2>
+<p>If you are preparing everything for the workshop, and you do not have access to the hardware yet,
+you are done! You can perform this step once you have access to the hardware in the workshop.</p>
 <p>Now you should have everything you need to build and flash some application to the board.
 You can flash a test application now to test everything. We provide some test applications for you.</p>
 <p>Connect the board to your computer using a Micro-USB cable. Make sure that your cable also
 supports the data interface and is not power-only.</p>
-<p>Go into the <code>code/app</code> directory.</p>
+<p>Navigate into the <code>microbit-apps</code> directory.</p>
 <p>Now, you can run the following command to build and flash a blinky application:</p>
 <pre><code class="language-console">cargo run --bin blinky
 </code></pre>

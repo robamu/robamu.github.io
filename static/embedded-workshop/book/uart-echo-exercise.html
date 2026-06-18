@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-7cedb383.js";
+            window.path_to_searchindex_js = "searchindex-46155191.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4b3fe330.js"></script>
@@ -177,7 +177,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="uart-echo-application"><a class="header" href="#uart-echo-application">UART echo application</a></h1>
-<p>The end goal of this task is to communicate with the serial port of the microbit v2.
+<p>The end goal of this task is to communicate with the serial port of the micro:bit.
 A very common interface to allow communication with a microcontroller is the
 <a href="https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter">UART protocol</a>.</p>
 <p>This is a protocol which facilitates communication through two physical pins, a transmit pin
@@ -186,8 +186,8 @@ the other side and vice-versa. Both sides have to agree on the communication spe
 is commonly called baudrate.</p>
 <p>The specific task is an echo application: Everything that is received on the RX
 pin of the microcontroller UART should be sent back to the sender via the TX pin.</p>
-<h2 id="the-microbit-v2-uart-interface"><a class="header" href="#the-microbit-v2-uart-interface">The microbit v2 UART interface</a></h2>
-<p>The microbit v2 has a very convenient feature which allows use to talk with one of its UART
+<h2 id="the-microbit-uart-interface"><a class="header" href="#the-microbit-uart-interface">The micro:bit UART interface</a></h2>
+<p>The micro:bit v2 has a very convenient feature which allows use to talk with one of its UART
 interfaces via the USB interface you already have. Have a look at this hardware block diagram
 taken from the <a href="https://tech.microbit.org/hardware/">website</a>:</p>
 <p><img src="./assets/hw-block-diagram.png" alt="HW block diagram"></p>
@@ -200,7 +200,7 @@ Communication Device Class.</p>
 <p>Install the <code>cyme</code> tool using the following command:</p>
 <pre><code class="language-console">cargo install cyme
 </code></pre>
-<p>Then run the command <code>cyme</code> with the microbit v2 connected via USB. You should see a line like
+<p>Then run the command <code>cyme</code> with the micro:bit connected via USB. You should see a line like
 this:</p>
 <pre><code class="language-sh">  3   6  0x0d28 0x0204 BBC micro:bit CMSIS-DAP     9906360200052820ea998ce1eddd4919000000006e052820 -       12.0 Mb/s
 </code></pre>
@@ -231,7 +231,7 @@ something liket his:</p>
 <p>You can then open the connection to open a session connected to the serial port of the MCU.</p>
 <h2 id="uart-hardware"><a class="header" href="#uart-hardware">UART hardware</a></h2>
 <p>Before we start writing code, lets look at the hardware first.
-We mentioned that UART uses 2 physical pins. This means that two of the GPIO pins of the microbit v2
+We mentioned that UART uses 2 physical pins. This means that two of the GPIO pins of the micro:bit
 need to be configured so they can be used by the UART hardware block for communication.</p>
 <p>For a peripheral like UART, it is very common that a microcontroller support a larger selection
 of pins to be assigned to the UART. Similarly to the blinky exercise where LED control is mapped
@@ -242,7 +242,7 @@ Try to figure the pin mapping out on your own.</p>
 <details>
 <p>The RX pin is mapped to P0.06 while the TX pin is mapped to P1.08.</p>
 </details>
-<p>The microbit v2 also has multiple UART instances. It allows using both of them, and we are going
+<p>The micro:bit also has multiple UART instances. It allows using both of them, and we are going
 to use instance 0.</p>
 <h2 id="some-background-information-interrupts-and-direct-memory-access-dma"><a class="header" href="#some-background-information-interrupts-and-direct-memory-access-dma">Some background information: Interrupts and direct memory access (DMA)</a></h2>
 <p>In the next segment, we will mention interrupts. The HAL we are using abstracts a lot of things

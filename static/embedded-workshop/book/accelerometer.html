@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-7cedb383.js";
+            window.path_to_searchindex_js = "searchindex-46155191.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4b3fe330.js"></script>
@@ -177,11 +177,12 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="accelerometer-sensor-driver"><a class="header" href="#accelerometer-sensor-driver">Accelerometer Sensor Driver</a></h1>
-<p>The microbit v2 has an on-board LSM303AGR e-compass module. Writing device drivers is a common
+<p>The micro:bit v2 has an on-board LSM303AGR e-compass module. Writing device drivers is a common
 task in our domain, so that is what we are going to do in this exercise. There are open-source
 drivers <a href="https://docs.rs/lsm303agr/latest/lsm303agr/">available</a>, but we are going to write a new
 one so you can actually learn how this process works. This is an on-board <a href="https://en.wikipedia.org/wiki/MEMS">MEMS</a>
-sensor. It’s tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>. Look for the ST LSM303AGR on the board images.</p>
+sensor. It’s tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>.
+Look for the ST LSM303AGR on the board images.</p>
 <p>This is a capable MEMS sensor which has confusing sections in its <a href="https://www.st.com/en/mems-and-sensors/lsm303agr.html">datasheet</a>.
 It uses a lot of abbreviations and expects implicit knowledge. This is unfortunately something that is very
 common in datasheets written by hardware companies. We have looked at the datasheet and extracted the most
@@ -194,7 +195,7 @@ a nice visualization without requiring a rod magnet to verify sensor readings. T
 of reading and converting raw sensor values remains the same and can be transferred to other
 sensors.</p>
 <h2 id="features-of-the-hardware-sensor"><a class="header" href="#features-of-the-hardware-sensor">Features of the hardware sensor</a></h2>
-<p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">microbit v2 docs</a>:</p>
+<p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">micro:bit docs</a>:</p>
 <ul>
 <li>e-compass which combines a magnetometer and and accelerometer into one package</li>
 <li>Configurable range of 2/4/8/16g</li>
@@ -360,7 +361,7 @@ from the microbit v2 schematic or from the sensor datasheet. Create an associate
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>impl Accelerometer {
+</span>impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
 }
 
@@ -374,9 +375,6 @@ value is not equal to the expected one, and return a driver instance otherwise.<
 </span><span class="boring">fn main() {
 </span>
 impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
-    pub const ADDR: u8 = 0x19;
-    pub const WHO_AM_I_VALUE: u8 = 0b00110011;
-
     pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
         let mut buf = [0; 1];
         i2c.write_read(Self::ADDR, &amp;[Register::WhoAmIAcc as u8], &amp;mut buf)
@@ -386,6 +384,11 @@ impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
         }
         Ok(Self { i2c })
     }
+}
+
+impl Accelerometer&lt;'_&gt; {
+    pub const ADDR: u8 = 0x19;
+    pub const WHO_AM_I_VALUE: u8 = 0b00110011;
 }
 <span class="boring">}</span></code></pre>
 </details>
@@ -566,7 +569,7 @@ a raw <code>i16</code> for further conversion. You can use <code>u16::from_le_by
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>
-impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
+impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
     pub const WHO_AM_I_VALUE: u8 = 0b00110011;
     pub const AUTO_INCREMENT_MASK: u8 = 0x80;
@@ -750,7 +753,72 @@ pub struct Readout {
 }
 <span class="boring">}</span></code></pre>
 </details>
+<p>Finally, we want to have a convenience method called <code>read</code> on our drier which
+returns this <code>Readout</code> structure. Add that method and re-use the <code>read_raw</code> method
+that you have already written to initialize the <code>raw</code> field of the <code>Readout</code> structure.
+You can initialize the <code>full_scale</code> and <code>mode</code> field from the cached values of the driver.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Accelerometer&lt;'_&gt;
+    // (other functions...)
+
+    pub async fn read(&amp;self) -&gt; Result&lt;Readout, Error&gt; {
+        Ok(Readout {
+            raw: self.read_raw().await?,
+            full_scale: self.full_scale,
+            mode: self.mode,
+        })
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
 <h2 id="step-7---print-the-accelerometer-values-inside-a-loop-periodically"><a class="header" href="#step-7---print-the-accelerometer-values-inside-a-loop-periodically">Step 7 - Print the accelerometer values inside a loop periodically</a></h2>
+<p>We finally have everything we need to periodically read the sensor values.
+Go ahead and create the driver you have written inside your example application using the constructor
+you have written.
+The datasheet mentions a start-up time of 1.6 ms for our configuration.
+Call the <code>read</code> method periodically inside a loop and print the xyz values using the
+<code>xyz_mg</code> method and <code>defmt</code>.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let accelerometer = Accelerometer::new(i2c_bus)
+        .await
+        .expect("creating motion sensor driver failed");
+    // For normal mode, 1.6 ms turn-on time.
+    Delay.delay_us(1600).await;
+
+    loop {
+        match accelerometer.read().await {
+            Ok(reading) =&gt; {
+                defmt::info!("Accelerations (mg): {}", &amp;reading.xyz_mg());
+            }
+            Err(e) =&gt; {
+                defmt::error!("i2c error: {}", e);
+            }
+        };
+        Timer::after_millis(50).await;
+    }
+
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="finishing-up"><a class="header" href="#finishing-up">Finishing Up</a></h2>
+<p>If you have done everything correctly, you should see output like this:</p>
+<pre><code class="language-console">-- micro:bit Accelerometer application --
+0.003967 [INFO ] Accelerations (mg): (-48, -232, 980) (accelerometer_solution src/bin/accelerometer_solution.rs:43)
+0.055694 [INFO ] Accelerations (mg): (-44, -228, 984) (accelerometer_solution src/bin/accelerometer_solution.rs:43)
+</code></pre>
+<p>Your acceleration values may vary slightly based on the orientation of your micro:bit. Regardless,
+you should measure an acceleration of around 1g, whic his the normal force that counteracts gravity when the
+device rests on a surface.</p>
+<p>You can now try things like shaking the device to see how the x and y axis react to this.
+If you have something to cushion the fall, you could also do a freefall test, which should make the
+1g counter force you normally see disappear while the device is free-falling. You might also
+see spikes when the micro:bit is suddenly decelerated after hits a surface after free-falling.</p>
+<p>You might wonder why an e-compass module has an accelerometer. You can actually use an accelerometer
+to account for device tilt combined with the magnetometer for the north direction measurement. This is
+a basic form of sensor fusion which can be used to improve the quality of the compass.</p>
 
                     </main>
 

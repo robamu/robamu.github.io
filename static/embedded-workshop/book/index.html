@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-7cedb383.js";
+            window.path_to_searchindex_js = "searchindex-46155191.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4b3fe330.js"></script>
@@ -179,13 +179,13 @@
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>This is the exercise book accompanying the Embedded Rust Workshop.
 The Workshop provides exercises for Embedded Rust which run on the
-<a href="https://microbit.org/new-microbit/">BBC microbit v2</a>.</p>
+<a href="https://microbit.org/new-microbit/">BBC micro:bit v2</a>.</p>
 <p>For this exercises, you only require the following hardware:</p>
 <ul>
-<li>The <a href="https://microbit.org/new-microbit/">microbit v2</a>.</li>
+<li>The <a href="https://microbit.org/new-microbit/">micro:bit v2</a>.</li>
 <li>A Micro-USB cable to power the microbit while also connecting it to your computer.</li>
 </ul>
-<p>This little educational board has everything we need to teach you the practical part of embedded
+<p>This little educational board has everything we need to learn the practical side of embedded
 Rust, including:</p>
 <ul>
 <li>A 5x5 LED matrix.</li>
@@ -193,12 +193,12 @@ Rust, including:</p>
 <li>A serial connection accessible by a USB-CDC device</li>
 </ul>
 <p>This device has even more features and external connectivity, and you can find all
-of this information of the <a href="https://tech.microbit.org/hardware/">microbit website</a>.</p>
+of this information on the <a href="https://tech.microbit.org/hardware/">micro:bit website</a>.</p>
 <h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
-<p>After working through this exercises, you should have the following skills:</p>
+<p>After working through these exercises, you should have the following skills:</p>
 <ul>
 <li>Extract relevant information from datasheets and/or schematics for firmware development.</li>
-<li>Understand and work in embedded code using the the <a href="https://embassy.dev/"><code>embassy</code></a> asynchronous
+<li>Understand and work in embedded code using the <a href="https://embassy.dev/"><code>embassy</code></a> asynchronous
 runtime, which includes using the <code>async</code> / <code>await</code> syntax.</li>
 <li>Schedule concurrent tasks using <code>embassy</code>.</li>
 <li>Work with some components of a provided HAL (or BSP).</li>
@@ -206,23 +206,23 @@ runtime, which includes using the <code>async</code> / <code>await</code> syntax
 periodic operations or measure elapsed time.</li>
 <li>Writing drivers for simple sensors</li>
 </ul>
-<p>However, these exercises do not replace or provide a good theoretic foundation and it also does
+<p>However, these exercises do not replace or provide a good theoretical foundation and do
 not teach general Rust programming. Low-level aspects like working with registers and details about
-system boot are are intentionally skipped. The next section provides some further material
+system boot are intentionally skipped. The next section provides some further material
 recommendations to address this.</p>
 <h2 id="further-materials"><a class="header" href="#further-materials">Further Materials</a></h2>
-<p>If you are a beginner in Rust, it is strongly recommended to work through the <a href="https://doc.rust-lang.org/book/">Rust book</a> or work
-through some other method of your choice to learn the general language.</p>
+<p>If you are a beginner in Rust, it is strongly recommended to work through the <a href="https://doc.rust-lang.org/book/">Rust book</a>
+or work through some other method of your choice to learn the general language.</p>
 <p>The following materials might be valuable for you as well:</p>
 <ul>
 <li><a href="https://embassy.dev/book/">The embassy book</a> provides additional information and documentation
-about the embassy asynchronous run-time.</li>
+about the embassy asynchronous runtime.</li>
 <li><a href="https://www.youtube.com/@therustybits">The Rusty bits</a> provides excellent visual resources
 about various embedded Rust aspects.</li>
 <li><a href="https://rust-training.ferrous-systems.com/latest/slides/">The Ferrous Systems Rust Training slides</a>
 provide high-quality slides about various topics, including embedded Rust and aspects like
 system boot and peripheral access crates.</li>
-<li><a href="https://github.com/lulf/microbit-bsp">Microbit v2 BSP</a> provides a full BSP with drivers for
+<li><a href="https://github.com/lulf/microbit-bsp">micro:bit BSP</a> provides a full BSP with drivers for
 the various board components.</li>
 </ul>
 <h2 id="preparation"><a class="header" href="#preparation">Preparation</a></h2>

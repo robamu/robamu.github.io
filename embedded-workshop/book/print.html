@@ -38,7 +38,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-7cedb383.js";
+            window.path_to_searchindex_js = "searchindex-46155191.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4b3fe330.js"></script>
@@ -180,13 +180,13 @@
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>This is the exercise book accompanying the Embedded Rust Workshop.
 The Workshop provides exercises for Embedded Rust which run on the
-<a href="https://microbit.org/new-microbit/">BBC microbit v2</a>.</p>
+<a href="https://microbit.org/new-microbit/">BBC micro:bit v2</a>.</p>
 <p>For this exercises, you only require the following hardware:</p>
 <ul>
-<li>The <a href="https://microbit.org/new-microbit/">microbit v2</a>.</li>
+<li>The <a href="https://microbit.org/new-microbit/">micro:bit v2</a>.</li>
 <li>A Micro-USB cable to power the microbit while also connecting it to your computer.</li>
 </ul>
-<p>This little educational board has everything we need to teach you the practical part of embedded
+<p>This little educational board has everything we need to learn the practical side of embedded
 Rust, including:</p>
 <ul>
 <li>A 5x5 LED matrix.</li>
@@ -194,12 +194,12 @@ Rust, including:</p>
 <li>A serial connection accessible by a USB-CDC device</li>
 </ul>
 <p>This device has even more features and external connectivity, and you can find all
-of this information of the <a href="https://tech.microbit.org/hardware/">microbit website</a>.</p>
+of this information on the <a href="https://tech.microbit.org/hardware/">micro:bit website</a>.</p>
 <h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
-<p>After working through this exercises, you should have the following skills:</p>
+<p>After working through these exercises, you should have the following skills:</p>
 <ul>
 <li>Extract relevant information from datasheets and/or schematics for firmware development.</li>
-<li>Understand and work in embedded code using the the <a href="https://embassy.dev/"><code>embassy</code></a> asynchronous
+<li>Understand and work in embedded code using the <a href="https://embassy.dev/"><code>embassy</code></a> asynchronous
 runtime, which includes using the <code>async</code> / <code>await</code> syntax.</li>
 <li>Schedule concurrent tasks using <code>embassy</code>.</li>
 <li>Work with some components of a provided HAL (or BSP).</li>
@@ -207,23 +207,23 @@ runtime, which includes using the <code>async</code> / <code>await</code> syntax
 periodic operations or measure elapsed time.</li>
 <li>Writing drivers for simple sensors</li>
 </ul>
-<p>However, these exercises do not replace or provide a good theoretic foundation and it also does
+<p>However, these exercises do not replace or provide a good theoretical foundation and do
 not teach general Rust programming. Low-level aspects like working with registers and details about
-system boot are are intentionally skipped. The next section provides some further material
+system boot are intentionally skipped. The next section provides some further material
 recommendations to address this.</p>
 <h2 id="further-materials"><a class="header" href="#further-materials">Further Materials</a></h2>
-<p>If you are a beginner in Rust, it is strongly recommended to work through the <a href="https://doc.rust-lang.org/book/">Rust book</a> or work
-through some other method of your choice to learn the general language.</p>
+<p>If you are a beginner in Rust, it is strongly recommended to work through the <a href="https://doc.rust-lang.org/book/">Rust book</a>
+or work through some other method of your choice to learn the general language.</p>
 <p>The following materials might be valuable for you as well:</p>
 <ul>
 <li><a href="https://embassy.dev/book/">The embassy book</a> provides additional information and documentation
-about the embassy asynchronous run-time.</li>
+about the embassy asynchronous runtime.</li>
 <li><a href="https://www.youtube.com/@therustybits">The Rusty bits</a> provides excellent visual resources
 about various embedded Rust aspects.</li>
 <li><a href="https://rust-training.ferrous-systems.com/latest/slides/">The Ferrous Systems Rust Training slides</a>
 provide high-quality slides about various topics, including embedded Rust and aspects like
 system boot and peripheral access crates.</li>
-<li><a href="https://github.com/lulf/microbit-bsp">Microbit v2 BSP</a> provides a full BSP with drivers for
+<li><a href="https://github.com/lulf/microbit-bsp">micro:bit BSP</a> provides a full BSP with drivers for
 the various board components.</li>
 </ul>
 <h2 id="preparation"><a class="header" href="#preparation">Preparation</a></h2>
@@ -234,9 +234,9 @@ the various board components.</li>
 <p>It is recommended to use a terminal for some parts of this workshop. There will be a lot
 of steps and instructions which show terminal commands. On Windows, you should install
 a proper terminal unless you plan to use something like <a href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL</a>.</p>
-<p>For example, you can <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5#winget">install the PowerShell</a>.</p>
+<p>For example, you can <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5#winget">install PowerShell</a>.</p>
 <h2 id="cloning-the-project-with-git"><a class="header" href="#cloning-the-project-with-git">Cloning the project with <code>git</code></a></h2>
-<p>It is strongly recommended to clone with project with <code>git</code>. If you have never worked with git
+<p>It is strongly recommended to clone the project with <code>git</code>. If you have never worked with git
 before, you should work through a tutorial online first, for example <a href="https://learngitbranching.js.org/">this interactive one</a>.
 Alternatively, have a look at the <a href="https://git-scm.com/learn">learning resources</a>.
 If you are a <code>git</code> beginner, you can install it using <a href="https://git-scm.com/install/">the website instructions</a>.</p>
@@ -266,7 +266,7 @@ system specific instructions.</p>
 <p>After you have done this, you can verify your installation by running:</p>
 <pre><code class="language-console">cargo version
 </code></pre>
-<p>Normally, you would have to also install the <code>thumbv7em-none-eabihf</code> toolchain and some other
+<p>Normally, you would also have to install the <code>thumbv7em-none-eabihf</code> toolchain and some other
 useful tools, but this is performed automatically for you through the <code>rust-toolchain.toml</code>
 file in the code directory.</p>
 <h2 id="flip-link-linker"><a class="header" href="#flip-link-linker"><code>flip-link</code> linker</a></h2>
@@ -275,8 +275,8 @@ the following command in the terminal:</p>
 <pre><code class="language-console">cargo install flip-link
 </code></pre>
 <h2 id="flasher-tool-probe-rs"><a class="header" href="#flasher-tool-probe-rs">Flasher tool <code>probe-rs</code></a></h2>
-<p>Next, you need some software which allows flashing the microbit v2 via the USB interface.
-We are going to use the <code>probe-rs</code> tool, which is well integrated into the Rust ecosystem:</p>
+<p>Next, you need some software which allows flashing the micro:bit via the USB interface.
+We are going to use the <code>probe-rs</code> tool, which is well integrated into the Rust ecosystem.</p>
 <p>The <code>probe-rs</code> website has <a href="https://probe.rs/docs/getting-started/installation/">install instructions</a>
 for various operating systems. Follow these, and then test your installation using the following
 command</p>
@@ -286,14 +286,14 @@ command</p>
 <p>Finally, if you are on Linux, you need to perform some steps related to <code>udev</code> to avoid permission
 issues. <code>probe-rs</code> has a <a href="https://probe.rs/docs/getting-started/probe-setup/">page with steps you can follow</a>.</p>
 <h2 id="ide"><a class="header" href="#ide">IDE</a></h2>
-<p>You can use any IDE of your choice which has good <a href="https://rust-analyzer.github.io/">Rust Analyzer Support</a>.</p>
-<p>If you are looking for a solid graphical IDE, <a href="https://code.visualstudio.com/&lt;35;127;26M">VS Code</a>
+<p>You can use any IDE of your choice which has good <a href="https://rust-analyzer.github.io/">Rust Analyzer</a> support.</p>
+<p>If you are looking for a solid graphical IDE, <a href="https://code.visualstudio.com/">VS Code</a>
 is an excellent choice. Make sure to install the <a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">rust-analyzer plugin</a> as well.</p>
 <h2 id="testing-everything"><a class="header" href="#testing-everything">Testing everything</a></h2>
 <p>If you are preparing everything for the workshop, and you do not have access to the hardware yet,
 you are done! You can perform this step once you have access to the hardware in the workshop.</p>
 <p>Now you should have everything you need to build and flash some application to the board.
-You can flash a test application now to test everything. We provide some test applications for you.</p>
+You can flash a test application now to verify the setup. We provide some test applications for you.</p>
 <p>Connect the board to your computer using a Micro-USB cable. Make sure that your cable also
 supports the data interface and is not power-only.</p>
 <p>Navigate into the <code>microbit-apps</code> directory.</p>
@@ -306,54 +306,54 @@ supports the data interface and is not power-only.</p>
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
      Running `probe-rs run --chip nRF52833_xxAA --allow-erase-all target/thumbv7em-none-eabihf/debug/blinky`
       Erasing ✔ 100% [####################]  48.00 KiB @  35.81 KiB/s (took 1s)     Finished in 3.55s
--- microbit v2 Blinky application --
+-- micro:bit Blinky application --
 </code></pre>
 <p>If <code>probe-rs</code> can not detect anything, make sure that (a) the board is connected through USB, and
 (b) the <code>udev</code> rules were setup properly if you are on Linux.</p>
 <p>If everything goes right, you should see the LED in the top-left corner blinking with a frequency of 1 second.
-If this is the case, congratulations, you have built and flashed an embedded Rust app and you made if through
+If this is the case, congratulations, you have built and flashed an embedded Rust app and you made it through
 the preparation chapter successfully!</p>
 <p>In the <a href="#blinky-exercise">first exercise</a>, you are going to build most parts of a blinky.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="terminology-and-glossary"><a class="header" href="#terminology-and-glossary">Terminology and Glossary</a></h1>
-<p>You can look up some terms in this terminology chapter if you have never heard them before or
-if they confused you.</p>
+<p>You can look up some terms in this terminology chapter if you have never heard them befor or need
+a brief explanation.</p>
 <ul>
 <li>Peripheral: Dedicated hardware unit. On microcontrollers, this can be something like a UART, SPI
 or timer hardware block.</li>
 <li>Flash: Non-volatile memory which you can use to store your code and constants.</li>
-<li>Stack: Local memory that your program uses as it executes functions</li>
+<li>Stack: Local memory that your program uses as it executes functions.</li>
 <li>Heap: Free memory that can be allocated in blocks. Oftentimes not available on microcontrollers.</li>
 <li>Static: Usually refers to the lifetime of a variable. A static variable is valid for the whole
 program duration.</li>
 <li>RAM: Volatile memory used to store your stack, heap and static variables.</li>
-<li>Processor: Executes your code.</li>
+<li>Processor: Hardware block which executes your code.</li>
 <li>MCU or Microcontroller: Integrates the processor, peripherals, flash, RAM and is usually
 placed on a printed circuit board as part of an embedded system.</li>
-<li>Firmware: Software which interacts a lot with hardware. Usually refers to the finished software
+<li>Firmware: Software which interacts closely with hardware. Usually refers to the finished software
 product on your MCU which runs the embedded system.</li>
-<li>PCB - Printed Circuit Board: This is usually an electronic circuit integrated on a sandwhich
-structure. Oftentimes, chips, sensors and other components will be soldered on top of the PCB.</li>
+<li>PCB - Printed Circuit Board: This is usually an electronic circuit integrated on a sandwich
+structure. Often, chips, sensors, and other components will be soldered on top of the PCB.</li>
 <li>UART - Universal Asynchronous Receiver-Transmitter: Asynchronous serial communication interface
-which only requires two physical pins, one for transmission and one for reception.</li>
-<li>DMA - Direct Memory Access: Hardware subsystems can access the memory of a system directly
+that only requires two physical pins, one for transmission and one for reception.</li>
+<li>DMA - Direct Memory Access: A hardware subsystem can access the memory of a system directly
 without CPU intervention.</li>
 <li>HAL - Hardware Abstraction Layer: High level library providing drivers for the hardware blocks
 on a microcontroller.</li>
 <li>I2C - Inter-Integrated Circuit: Communication bus commonly used on embedded systems.</li>
-<li>TWI - Two-Write Interface: Other name for I2C.</li>
+<li>TWI - Two-Wire Interface: Another name for I2C that vendors sometimes use.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="blinky-exercise"><a class="header" href="#blinky-exercise">Blinky Exercise</a></h1>
-<p>The end goal of this task is to make the LED D2, which is the LED is the upper left corner
+<p>The end goal of this task is to make the LED D2, which is the LED in the upper left corner
 of the LED matrix, blink with a frequency of 1 second.</p>
 <p>It involves working with a general purpose Input/Output (GPIO) pin which is a very common task on
-microcontrollers. It also involves a timing components to achieve the 1 second blink frequency.
+microcontrollers. It also involves a timing component to achieve the 1 second blink frequency.
 In this exercise, you are going to build this application.</p>
 <p>Go into the <code>microbit-exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
 find the skeleton project that you should edit to work towards the blinky application. It includes
 an explanation of the intermediate steps. Each intermediate step is explained in this document
-in detail, including an intermediate solution which you can see by opening expanding the detail
+in detail, including an intermediate solution which you can see by expanding the detail
 segment.</p>
 <p>You can find a full solution inside the <code>blinky_solution.rs</code> file.</p>
 <p>Notice that you can always build and run the current state of your solution using</p>
@@ -389,7 +389,7 @@ to be an <code>async</code> function as well.</p>
 <p>The <code>async fn main(_spawner: Spawner) -&gt; !</code> function prototype contains the following components:</p>
 <ul>
 <li><code>async</code> because this is an asynchronous function. This allows us, among many other things, to
-use other <code>async</code> API inside the function</li>
+use other <code>async</code> API inside the function.</li>
 <li>The <code>!</code> return type means that this function should never return. A microcontroller software
 generally must run forever, because what would the system do if there is no more code to execute?</li>
 <li>The <code>spawner</code> argument can be used to spawn other <code>async</code> tasks. This is important for
@@ -404,14 +404,14 @@ most <code>embassy</code> based programs.</p>
 we would have to use low-level register access code to interact with the hardware directly. That
 is not really beginner friendly, so we will start with something more high-level. The HAL
 introduces hardware abstractions, data structures and objects to interact with the hardware.</p>
-<p>The nRF52833 chip which is part of the microbit v2 has some initialization which makes sense for
+<p>The nRF52833 chip which is part of the micro:bit has some initialization which makes sense for
 most firmware. This can include something like the clock initialization. When writing this HAL, it
 makes sense packaging that configuration inside some initializer function.</p>
 <p>Rust also has a nice type system which allows modelling of our problem domain. We have a
 microcontroller which has <a href="#terminology-and-glossary">peripherals</a> and physical pins. We can model
 these entities in our Rust code to allow ownership checks and resource management. For example,
 the chip has a physical pin called <code>P0_06</code>. We can model this physical pin as a <code>P0_06</code> field
-of a data structure. The we might have some other API which “consumes” this pin to take ownership
+of a data structure. Then we might have some other API which “consumes” this pin to take ownership
 of it and use it for certain purposes. The pin can not be used for some other purpose anymore
 and we prevented one source of a bug using the type system.</p>
 <p>We use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/index.html"><code>embassy-nrf</code></a> HAL which provides an initializer method providing both of these tasks.
@@ -422,7 +422,7 @@ method. This is what you want to use to initialize the chip. You can use the <co
 of <code>embassy_nrf::config::Config</code>, it serves our purposes for now. Have a look at the
 <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/struct.Peripherals.html">documentation of the <code>Peripherals</code></a>
 data structure which is returned by the <code>init</code> function. It models all the peripherals and physical
-pins like we previous metioned.</p>
+pins like we previously metioned.</p>
 <p>Call this method and store the <code>Peripherals</code> object inside a variable called <code>periphs</code>.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -438,12 +438,12 @@ something to the RTT pipe.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>defmt::println!("-- microbit v2 Blinky application --");
+</span>defmt::println!("-- micro:bit Blinky application --");
 <span class="boring">}</span></code></pre>
 </details>
 <h2 id="third-step-creating-the-gpio-drivers"><a class="header" href="#third-step-creating-the-gpio-drivers">Third step: Creating the GPIO drivers</a></h2>
-<p>Before we talk about creating the GPIO drivers for switching the LED, let’s talk about the the
-hardware first. This is not a classic LED which can be drive by simply toggling a GPIO pin. Instead,
+<p>Before we talk about creating the GPIO drivers for switching the LED, let’s talk about the
+hardware first. This is not a classic LED which can be driven by simply toggling a GPIO pin. Instead,
 it is a matrix where each row and each column has one connected GPIO line.</p>
 <p><img src="assets/led-matrix.png" alt="LED Matrix"></p>
 <p>There is no reason to be overly scared of electronic schematics. Learning to read them is something
@@ -470,7 +470,7 @@ The first argument is a peripheral resource which is a field of the <code>periph
 created earlier. The initial level is required because Output pins must have a defined state.
 The third argument is the drive strength. You can use the standard value here.
 Create an output driver for ROW1 and store it as a <code>row1</code> object. Also do the same for COL1 and
-store it as a <code>col1</code> object. Remember that you assign the actual physical pin, which is re-presented
+store it as a <code>col1</code> object. Remember that you assign the actual physical pin, which is represented
 by an ID like P0.XY, and which you extracted earlier, by passing the corresponding field of the
 <code>periphs</code> structure to the <code>Output</code> constructor.</p>
 <p>If this all sounds very confusing to you and you do not really know what to do, look at the
@@ -494,13 +494,13 @@ solution and try to understand it:</p>
 <h2 id="fourth-step-toggling-the-led"><a class="header" href="#fourth-step-toggling-the-led">Fourth step: Toggling the LED</a></h2>
 <p>Now, we have all the objects required to fulfill our task. For the remainder of the program
 lifetime, we just want to toggle the LED.</p>
-<p>That is equivalent to a permanent loop, so you can use the Rust <code>loop</code> constructor for this.
+<p>That is equivalent to a permanent loop, so you can use the Rust <code>loop</code> construct for this.
 There already is one in the skeleton to avoid a compilation error.
 Use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/gpio/struct.Output.html#method.toggle">toggle</a> method on the correct
 GPIO driver to toggle the LED inside the loop. We actually told you the correct object/driver to use this on before.
 If you forgot, maybe you can also figure it out from the schematic?</p>
 <p>Toggling the LED in a permanent loop would cause the LED to not be on long enough for you
-to see anything. Beside, the tasks was to make it blink with a frequency of 1 second.
+to see anything. Besides, the tasks was to make it blink with a frequency of 1 second.
 We need to introduce a delay. We are going to use <a href="https://docs.rs/embassy-time/latest/embassy_time/"><code>embassy_time</code></a> for this.</p>
 <p>Again, we included the dependency for you, so you can use it directly. So far, we did not have to use
 any <code>async</code> API. This is because all the code we used so far was strictly synchronous, with no
@@ -536,17 +536,18 @@ timer.await;
      Running `probe-rs run --chip nRF52833_xxAA --allow-erase-all target/thumbv7em-none-eabihf/debug/blinky_solution`
       Erasing ✔ 100% [####################]  48.00 KiB @  35.91 KiB/s (took 1s)
   Programming ✔ 100% [####################]  48.00 KiB @  22.82 KiB/s (took 2s)     Finished in 3.54s
--- microbit v2 Blinky application --
+-- micro:bit Blinky application --
 <span class="boring">}</span></code></pre>
-<p>Also, you should see the LED D2 blinking with a frequency of 1 second. If this is the case, you did it!
+<p>Also, you should see the LED D2 blinking with a frequency of 1 second. If this is the case, you’ve
+done it!
 Blinking a LED might seem like a mundane task, but it actually teaches various concepts that can
-be transferred to other tasks because it involes resource management, working with hardware, and
-time handling. Also, you have extracted information from a schematic now! This is very useful skill
+be transferred to other tasks because it involves resource management, working with hardware, and
+time handling. Also, you have extracted information from a schematic now! This is a very useful skill
 that embedded engineers should have. It allows you to directly use the schematic that is created as
 a side-product of the PCB design process.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="uart-echo-application"><a class="header" href="#uart-echo-application">UART echo application</a></h1>
-<p>The end goal of this task is to communicate with the serial port of the microbit v2.
+<p>The end goal of this task is to communicate with the serial port of the micro:bit.
 A very common interface to allow communication with a microcontroller is the
 <a href="https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter">UART protocol</a>.</p>
 <p>This is a protocol which facilitates communication through two physical pins, a transmit pin
@@ -555,8 +556,8 @@ the other side and vice-versa. Both sides have to agree on the communication spe
 is commonly called baudrate.</p>
 <p>The specific task is an echo application: Everything that is received on the RX
 pin of the microcontroller UART should be sent back to the sender via the TX pin.</p>
-<h2 id="the-microbit-v2-uart-interface"><a class="header" href="#the-microbit-v2-uart-interface">The microbit v2 UART interface</a></h2>
-<p>The microbit v2 has a very convenient feature which allows use to talk with one of its UART
+<h2 id="the-microbit-uart-interface"><a class="header" href="#the-microbit-uart-interface">The micro:bit UART interface</a></h2>
+<p>The micro:bit v2 has a very convenient feature which allows use to talk with one of its UART
 interfaces via the USB interface you already have. Have a look at this hardware block diagram
 taken from the <a href="https://tech.microbit.org/hardware/">website</a>:</p>
 <p><img src="assets/hw-block-diagram.png" alt="HW block diagram"></p>
@@ -569,7 +570,7 @@ Communication Device Class.</p>
 <p>Install the <code>cyme</code> tool using the following command:</p>
 <pre><code class="language-console">cargo install cyme
 </code></pre>
-<p>Then run the command <code>cyme</code> with the microbit v2 connected via USB. You should see a line like
+<p>Then run the command <code>cyme</code> with the micro:bit connected via USB. You should see a line like
 this:</p>
 <pre><code class="language-sh">  3   6  0x0d28 0x0204 BBC micro:bit CMSIS-DAP     9906360200052820ea998ce1eddd4919000000006e052820 -       12.0 Mb/s
 </code></pre>
@@ -600,7 +601,7 @@ something liket his:</p>
 <p>You can then open the connection to open a session connected to the serial port of the MCU.</p>
 <h2 id="uart-hardware"><a class="header" href="#uart-hardware">UART hardware</a></h2>
 <p>Before we start writing code, lets look at the hardware first.
-We mentioned that UART uses 2 physical pins. This means that two of the GPIO pins of the microbit v2
+We mentioned that UART uses 2 physical pins. This means that two of the GPIO pins of the micro:bit
 need to be configured so they can be used by the UART hardware block for communication.</p>
 <p>For a peripheral like UART, it is very common that a microcontroller support a larger selection
 of pins to be assigned to the UART. Similarly to the blinky exercise where LED control is mapped
@@ -611,7 +612,7 @@ Try to figure the pin mapping out on your own.</p>
 <details>
 <p>The RX pin is mapped to P0.06 while the TX pin is mapped to P1.08.</p>
 </details>
-<p>The microbit v2 also has multiple UART instances. It allows using both of them, and we are going
+<p>The micro:bit also has multiple UART instances. It allows using both of them, and we are going
 to use instance 0.</p>
 <h2 id="some-background-information-interrupts-and-direct-memory-access-dma"><a class="header" href="#some-background-information-interrupts-and-direct-memory-access-dma">Some background information: Interrupts and direct memory access (DMA)</a></h2>
 <p>In the next segment, we will mention interrupts. The HAL we are using abstracts a lot of things
@@ -832,11 +833,12 @@ using standardized <a href="https://ccsds.org/Pubs/133x0b2e2.pdf">CCSDS spacepac
 This communication pattern is very commonly used at the IRS!</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="accelerometer-sensor-driver"><a class="header" href="#accelerometer-sensor-driver">Accelerometer Sensor Driver</a></h1>
-<p>The microbit v2 has an on-board LSM303AGR e-compass module. Writing device drivers is a common
+<p>The micro:bit v2 has an on-board LSM303AGR e-compass module. Writing device drivers is a common
 task in our domain, so that is what we are going to do in this exercise. There are open-source
 drivers <a href="https://docs.rs/lsm303agr/latest/lsm303agr/">available</a>, but we are going to write a new
 one so you can actually learn how this process works. This is an on-board <a href="https://en.wikipedia.org/wiki/MEMS">MEMS</a>
-sensor. It’s tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>. Look for the ST LSM303AGR on the board images.</p>
+sensor. It’s tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>.
+Look for the ST LSM303AGR on the board images.</p>
 <p>This is a capable MEMS sensor which has confusing sections in its <a href="https://www.st.com/en/mems-and-sensors/lsm303agr.html">datasheet</a>.
 It uses a lot of abbreviations and expects implicit knowledge. This is unfortunately something that is very
 common in datasheets written by hardware companies. We have looked at the datasheet and extracted the most
@@ -849,7 +851,7 @@ a nice visualization without requiring a rod magnet to verify sensor readings. T
 of reading and converting raw sensor values remains the same and can be transferred to other
 sensors.</p>
 <h2 id="features-of-the-hardware-sensor"><a class="header" href="#features-of-the-hardware-sensor">Features of the hardware sensor</a></h2>
-<p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">microbit v2 docs</a>:</p>
+<p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">micro:bit docs</a>:</p>
 <ul>
 <li>e-compass which combines a magnetometer and and accelerometer into one package</li>
 <li>Configurable range of 2/4/8/16g</li>
@@ -1015,7 +1017,7 @@ from the microbit v2 schematic or from the sensor datasheet. Create an associate
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>impl Accelerometer {
+</span>impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
 }
 
@@ -1029,9 +1031,6 @@ value is not equal to the expected one, and return a driver instance otherwise.<
 </span><span class="boring">fn main() {
 </span>
 impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
-    pub const ADDR: u8 = 0x19;
-    pub const WHO_AM_I_VALUE: u8 = 0b00110011;
-
     pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
         let mut buf = [0; 1];
         i2c.write_read(Self::ADDR, &amp;[Register::WhoAmIAcc as u8], &amp;mut buf)
@@ -1041,6 +1040,11 @@ impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
         }
         Ok(Self { i2c })
     }
+}
+
+impl Accelerometer&lt;'_&gt; {
+    pub const ADDR: u8 = 0x19;
+    pub const WHO_AM_I_VALUE: u8 = 0b00110011;
 }
 <span class="boring">}</span></code></pre>
 </details>
@@ -1221,7 +1225,7 @@ a raw <code>i16</code> for further conversion. You can use <code>u16::from_le_by
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>
-impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
+impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
     pub const WHO_AM_I_VALUE: u8 = 0b00110011;
     pub const AUTO_INCREMENT_MASK: u8 = 0x80;
@@ -1405,7 +1409,72 @@ pub struct Readout {
 }
 <span class="boring">}</span></code></pre>
 </details>
+<p>Finally, we want to have a convenience method called <code>read</code> on our drier which
+returns this <code>Readout</code> structure. Add that method and re-use the <code>read_raw</code> method
+that you have already written to initialize the <code>raw</code> field of the <code>Readout</code> structure.
+You can initialize the <code>full_scale</code> and <code>mode</code> field from the cached values of the driver.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Accelerometer&lt;'_&gt;
+    // (other functions...)
+
+    pub async fn read(&amp;self) -&gt; Result&lt;Readout, Error&gt; {
+        Ok(Readout {
+            raw: self.read_raw().await?,
+            full_scale: self.full_scale,
+            mode: self.mode,
+        })
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
 <h2 id="step-7---print-the-accelerometer-values-inside-a-loop-periodically"><a class="header" href="#step-7---print-the-accelerometer-values-inside-a-loop-periodically">Step 7 - Print the accelerometer values inside a loop periodically</a></h2>
+<p>We finally have everything we need to periodically read the sensor values.
+Go ahead and create the driver you have written inside your example application using the constructor
+you have written.
+The datasheet mentions a start-up time of 1.6 ms for our configuration.
+Call the <code>read</code> method periodically inside a loop and print the xyz values using the
+<code>xyz_mg</code> method and <code>defmt</code>.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let accelerometer = Accelerometer::new(i2c_bus)
+        .await
+        .expect("creating motion sensor driver failed");
+    // For normal mode, 1.6 ms turn-on time.
+    Delay.delay_us(1600).await;
+
+    loop {
+        match accelerometer.read().await {
+            Ok(reading) =&gt; {
+                defmt::info!("Accelerations (mg): {}", &amp;reading.xyz_mg());
+            }
+            Err(e) =&gt; {
+                defmt::error!("i2c error: {}", e);
+            }
+        };
+        Timer::after_millis(50).await;
+    }
+
+<span class="boring">}</span></code></pre>
+</details>
+<h2 id="finishing-up-2"><a class="header" href="#finishing-up-2">Finishing Up</a></h2>
+<p>If you have done everything correctly, you should see output like this:</p>
+<pre><code class="language-console">-- micro:bit Accelerometer application --
+0.003967 [INFO ] Accelerations (mg): (-48, -232, 980) (accelerometer_solution src/bin/accelerometer_solution.rs:43)
+0.055694 [INFO ] Accelerations (mg): (-44, -228, 984) (accelerometer_solution src/bin/accelerometer_solution.rs:43)
+</code></pre>
+<p>Your acceleration values may vary slightly based on the orientation of your micro:bit. Regardless,
+you should measure an acceleration of around 1g, whic his the normal force that counteracts gravity when the
+device rests on a surface.</p>
+<p>You can now try things like shaking the device to see how the x and y axis react to this.
+If you have something to cushion the fall, you could also do a freefall test, which should make the
+1g counter force you normally see disappear while the device is free-falling. You might also
+see spikes when the micro:bit is suddenly decelerated after hits a surface after free-falling.</p>
+<p>You might wonder why an e-compass module has an accelerometer. You can actually use an accelerometer
+to account for device tilt combined with the magnetometer for the north direction measurement. This is
+a basic form of sensor fusion which can be used to improve the quality of the compass.</p>
 
                     </main>
 

@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-7cedb383.js";
+            window.path_to_searchindex_js = "searchindex-46155191.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4b3fe330.js"></script>
@@ -177,15 +177,15 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="blinky-exercise"><a class="header" href="#blinky-exercise">Blinky Exercise</a></h1>
-<p>The end goal of this task is to make the LED D2, which is the LED is the upper left corner
+<p>The end goal of this task is to make the LED D2, which is the LED in the upper left corner
 of the LED matrix, blink with a frequency of 1 second.</p>
 <p>It involves working with a general purpose Input/Output (GPIO) pin which is a very common task on
-microcontrollers. It also involves a timing components to achieve the 1 second blink frequency.
+microcontrollers. It also involves a timing component to achieve the 1 second blink frequency.
 In this exercise, you are going to build this application.</p>
 <p>Go into the <code>microbit-exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
 find the skeleton project that you should edit to work towards the blinky application. It includes
 an explanation of the intermediate steps. Each intermediate step is explained in this document
-in detail, including an intermediate solution which you can see by opening expanding the detail
+in detail, including an intermediate solution which you can see by expanding the detail
 segment.</p>
 <p>You can find a full solution inside the <code>blinky_solution.rs</code> file.</p>
 <p>Notice that you can always build and run the current state of your solution using</p>
@@ -221,7 +221,7 @@ to be an <code>async</code> function as well.</p>
 <p>The <code>async fn main(_spawner: Spawner) -&gt; !</code> function prototype contains the following components:</p>
 <ul>
 <li><code>async</code> because this is an asynchronous function. This allows us, among many other things, to
-use other <code>async</code> API inside the function</li>
+use other <code>async</code> API inside the function.</li>
 <li>The <code>!</code> return type means that this function should never return. A microcontroller software
 generally must run forever, because what would the system do if there is no more code to execute?</li>
 <li>The <code>spawner</code> argument can be used to spawn other <code>async</code> tasks. This is important for
@@ -236,14 +236,14 @@ most <code>embassy</code> based programs.</p>
 we would have to use low-level register access code to interact with the hardware directly. That
 is not really beginner friendly, so we will start with something more high-level. The HAL
 introduces hardware abstractions, data structures and objects to interact with the hardware.</p>
-<p>The nRF52833 chip which is part of the microbit v2 has some initialization which makes sense for
+<p>The nRF52833 chip which is part of the micro:bit has some initialization which makes sense for
 most firmware. This can include something like the clock initialization. When writing this HAL, it
 makes sense packaging that configuration inside some initializer function.</p>
 <p>Rust also has a nice type system which allows modelling of our problem domain. We have a
 microcontroller which has <a href="./terminology_glossary.html">peripherals</a> and physical pins. We can model
 these entities in our Rust code to allow ownership checks and resource management. For example,
 the chip has a physical pin called <code>P0_06</code>. We can model this physical pin as a <code>P0_06</code> field
-of a data structure. The we might have some other API which “consumes” this pin to take ownership
+of a data structure. Then we might have some other API which “consumes” this pin to take ownership
 of it and use it for certain purposes. The pin can not be used for some other purpose anymore
 and we prevented one source of a bug using the type system.</p>
 <p>We use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/index.html"><code>embassy-nrf</code></a> HAL which provides an initializer method providing both of these tasks.
@@ -254,7 +254,7 @@ method. This is what you want to use to initialize the chip. You can use the <co
 of <code>embassy_nrf::config::Config</code>, it serves our purposes for now. Have a look at the
 <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/struct.Peripherals.html">documentation of the <code>Peripherals</code></a>
 data structure which is returned by the <code>init</code> function. It models all the peripherals and physical
-pins like we previous metioned.</p>
+pins like we previously metioned.</p>
 <p>Call this method and store the <code>Peripherals</code> object inside a variable called <code>periphs</code>.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -270,12 +270,12 @@ something to the RTT pipe.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>defmt::println!("-- microbit v2 Blinky application --");
+</span>defmt::println!("-- micro:bit Blinky application --");
 <span class="boring">}</span></code></pre>
 </details>
 <h2 id="third-step-creating-the-gpio-drivers"><a class="header" href="#third-step-creating-the-gpio-drivers">Third step: Creating the GPIO drivers</a></h2>
-<p>Before we talk about creating the GPIO drivers for switching the LED, let’s talk about the the
-hardware first. This is not a classic LED which can be drive by simply toggling a GPIO pin. Instead,
+<p>Before we talk about creating the GPIO drivers for switching the LED, let’s talk about the
+hardware first. This is not a classic LED which can be driven by simply toggling a GPIO pin. Instead,
 it is a matrix where each row and each column has one connected GPIO line.</p>
 <p><img src="./assets/led-matrix.png" alt="LED Matrix"></p>
 <p>There is no reason to be overly scared of electronic schematics. Learning to read them is something
@@ -302,7 +302,7 @@ The first argument is a peripheral resource which is a field of the <code>periph
 created earlier. The initial level is required because Output pins must have a defined state.
 The third argument is the drive strength. You can use the standard value here.
 Create an output driver for ROW1 and store it as a <code>row1</code> object. Also do the same for COL1 and
-store it as a <code>col1</code> object. Remember that you assign the actual physical pin, which is re-presented
+store it as a <code>col1</code> object. Remember that you assign the actual physical pin, which is represented
 by an ID like P0.XY, and which you extracted earlier, by passing the corresponding field of the
 <code>periphs</code> structure to the <code>Output</code> constructor.</p>
 <p>If this all sounds very confusing to you and you do not really know what to do, look at the
@@ -326,13 +326,13 @@ solution and try to understand it:</p>
 <h2 id="fourth-step-toggling-the-led"><a class="header" href="#fourth-step-toggling-the-led">Fourth step: Toggling the LED</a></h2>
 <p>Now, we have all the objects required to fulfill our task. For the remainder of the program
 lifetime, we just want to toggle the LED.</p>
-<p>That is equivalent to a permanent loop, so you can use the Rust <code>loop</code> constructor for this.
+<p>That is equivalent to a permanent loop, so you can use the Rust <code>loop</code> construct for this.
 There already is one in the skeleton to avoid a compilation error.
 Use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/gpio/struct.Output.html#method.toggle">toggle</a> method on the correct
 GPIO driver to toggle the LED inside the loop. We actually told you the correct object/driver to use this on before.
 If you forgot, maybe you can also figure it out from the schematic?</p>
 <p>Toggling the LED in a permanent loop would cause the LED to not be on long enough for you
-to see anything. Beside, the tasks was to make it blink with a frequency of 1 second.
+to see anything. Besides, the tasks was to make it blink with a frequency of 1 second.
 We need to introduce a delay. We are going to use <a href="https://docs.rs/embassy-time/latest/embassy_time/"><code>embassy_time</code></a> for this.</p>
 <p>Again, we included the dependency for you, so you can use it directly. So far, we did not have to use
 any <code>async</code> API. This is because all the code we used so far was strictly synchronous, with no
@@ -368,12 +368,13 @@ timer.await;
      Running `probe-rs run --chip nRF52833_xxAA --allow-erase-all target/thumbv7em-none-eabihf/debug/blinky_solution`
       Erasing ✔ 100% [####################]  48.00 KiB @  35.91 KiB/s (took 1s)
   Programming ✔ 100% [####################]  48.00 KiB @  22.82 KiB/s (took 2s)     Finished in 3.54s
--- microbit v2 Blinky application --
+-- micro:bit Blinky application --
 <span class="boring">}</span></code></pre>
-<p>Also, you should see the LED D2 blinking with a frequency of 1 second. If this is the case, you did it!
+<p>Also, you should see the LED D2 blinking with a frequency of 1 second. If this is the case, you’ve
+done it!
 Blinking a LED might seem like a mundane task, but it actually teaches various concepts that can
-be transferred to other tasks because it involes resource management, working with hardware, and
-time handling. Also, you have extracted information from a schematic now! This is very useful skill
+be transferred to other tasks because it involves resource management, working with hardware, and
+time handling. Also, you have extracted information from a schematic now! This is a very useful skill
 that embedded engineers should have. It allows you to directly use the schematic that is created as
 a side-product of the PCB design process.</p>
 

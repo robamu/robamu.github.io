@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-7cedb383.js";
+            window.path_to_searchindex_js = "searchindex-46155191.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4b3fe330.js"></script>
@@ -181,9 +181,9 @@
 <p>It is recommended to use a terminal for some parts of this workshop. There will be a lot
 of steps and instructions which show terminal commands. On Windows, you should install
 a proper terminal unless you plan to use something like <a href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL</a>.</p>
-<p>For example, you can <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5#winget">install the PowerShell</a>.</p>
+<p>For example, you can <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5#winget">install PowerShell</a>.</p>
 <h2 id="cloning-the-project-with-git"><a class="header" href="#cloning-the-project-with-git">Cloning the project with <code>git</code></a></h2>
-<p>It is strongly recommended to clone with project with <code>git</code>. If you have never worked with git
+<p>It is strongly recommended to clone the project with <code>git</code>. If you have never worked with git
 before, you should work through a tutorial online first, for example <a href="https://learngitbranching.js.org/">this interactive one</a>.
 Alternatively, have a look at the <a href="https://git-scm.com/learn">learning resources</a>.
 If you are a <code>git</code> beginner, you can install it using <a href="https://git-scm.com/install/">the website instructions</a>.</p>
@@ -213,7 +213,7 @@ system specific instructions.</p>
 <p>After you have done this, you can verify your installation by running:</p>
 <pre><code class="language-console">cargo version
 </code></pre>
-<p>Normally, you would have to also install the <code>thumbv7em-none-eabihf</code> toolchain and some other
+<p>Normally, you would also have to install the <code>thumbv7em-none-eabihf</code> toolchain and some other
 useful tools, but this is performed automatically for you through the <code>rust-toolchain.toml</code>
 file in the code directory.</p>
 <h2 id="flip-link-linker"><a class="header" href="#flip-link-linker"><code>flip-link</code> linker</a></h2>
@@ -222,8 +222,8 @@ the following command in the terminal:</p>
 <pre><code class="language-console">cargo install flip-link
 </code></pre>
 <h2 id="flasher-tool-probe-rs"><a class="header" href="#flasher-tool-probe-rs">Flasher tool <code>probe-rs</code></a></h2>
-<p>Next, you need some software which allows flashing the microbit v2 via the USB interface.
-We are going to use the <code>probe-rs</code> tool, which is well integrated into the Rust ecosystem:</p>
+<p>Next, you need some software which allows flashing the micro:bit via the USB interface.
+We are going to use the <code>probe-rs</code> tool, which is well integrated into the Rust ecosystem.</p>
 <p>The <code>probe-rs</code> website has <a href="https://probe.rs/docs/getting-started/installation/">install instructions</a>
 for various operating systems. Follow these, and then test your installation using the following
 command</p>
@@ -233,14 +233,14 @@ command</p>
 <p>Finally, if you are on Linux, you need to perform some steps related to <code>udev</code> to avoid permission
 issues. <code>probe-rs</code> has a <a href="https://probe.rs/docs/getting-started/probe-setup/">page with steps you can follow</a>.</p>
 <h2 id="ide"><a class="header" href="#ide">IDE</a></h2>
-<p>You can use any IDE of your choice which has good <a href="https://rust-analyzer.github.io/">Rust Analyzer Support</a>.</p>
-<p>If you are looking for a solid graphical IDE, <a href="https://code.visualstudio.com/&lt;35;127;26M">VS Code</a>
+<p>You can use any IDE of your choice which has good <a href="https://rust-analyzer.github.io/">Rust Analyzer</a> support.</p>
+<p>If you are looking for a solid graphical IDE, <a href="https://code.visualstudio.com/">VS Code</a>
 is an excellent choice. Make sure to install the <a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">rust-analyzer plugin</a> as well.</p>
 <h2 id="testing-everything"><a class="header" href="#testing-everything">Testing everything</a></h2>
 <p>If you are preparing everything for the workshop, and you do not have access to the hardware yet,
 you are done! You can perform this step once you have access to the hardware in the workshop.</p>
 <p>Now you should have everything you need to build and flash some application to the board.
-You can flash a test application now to test everything. We provide some test applications for you.</p>
+You can flash a test application now to verify the setup. We provide some test applications for you.</p>
 <p>Connect the board to your computer using a Micro-USB cable. Make sure that your cable also
 supports the data interface and is not power-only.</p>
 <p>Navigate into the <code>microbit-apps</code> directory.</p>
@@ -253,12 +253,12 @@ supports the data interface and is not power-only.</p>
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
      Running `probe-rs run --chip nRF52833_xxAA --allow-erase-all target/thumbv7em-none-eabihf/debug/blinky`
       Erasing ✔ 100% [####################]  48.00 KiB @  35.81 KiB/s (took 1s)     Finished in 3.55s
--- microbit v2 Blinky application --
+-- micro:bit Blinky application --
 </code></pre>
 <p>If <code>probe-rs</code> can not detect anything, make sure that (a) the board is connected through USB, and
 (b) the <code>udev</code> rules were setup properly if you are on Linux.</p>
 <p>If everything goes right, you should see the LED in the top-left corner blinking with a frequency of 1 second.
-If this is the case, congratulations, you have built and flashed an embedded Rust app and you made if through
+If this is the case, congratulations, you have built and flashed an embedded Rust app and you made it through
 the preparation chapter successfully!</p>
 <p>In the <a href="./blinky-exercise.html">first exercise</a>, you are going to build most parts of a blinky.</p>
 

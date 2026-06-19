@@ -38,7 +38,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-46155191.js";
+            window.path_to_searchindex_js = "searchindex-49a71d70.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4b3fe330.js"></script>
@@ -348,8 +348,10 @@ on a microcontroller.</li>
 <p>The end goal of this task is to make the LED D2, which is the LED in the upper left corner
 of the LED matrix, blink with a frequency of 1 second.</p>
 <p>It involves working with a general purpose Input/Output (GPIO) pin which is a very common task on
-microcontrollers. It also involves a timing component to achieve the 1 second blink frequency.
-In this exercise, you are going to build this application.</p>
+microcontrollers. A GPIO pin is a digital signal pin which can be used as an input pin to measure
+the digital level, or as an output pin to set the digital level. GPIO can also source current
+which can be used to drive a LED.</p>
+<p>Writing a blinky also involves a timing component to achieve some blink frequency.</p>
 <p>Go into the <code>microbit-exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
 find the skeleton project that you should edit to work towards the blinky application. It includes
 an explanation of the intermediate steps. Each intermediate step is explained in this document
@@ -513,6 +515,8 @@ you need to import the <code>embedded_hal_async::delay::DelayNs</code> trait for
 <p>You can store the timer inside a variable called <code>timer</code>. Notice that this does not perform
 the required delay. For that, you need to <code>await</code> the timer. Use this information to perform
 an asynchronous delay of 1 second or 1000 milliseconds inside the loop.</p>
+<p>If you have never worked with <code>async</code> before: The <code>await</code> is a suffix statement. For example,
+given the object <code>timer</code>, you would call <code>timer.await;</code> to await the timer.</p>
 <details>
 <p>This could look like this:</p>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]

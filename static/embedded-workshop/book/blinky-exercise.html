@@ -15,8 +15,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/general-0392ca55.css">
+        <link rel="stylesheet" href="css/chrome-fc474251.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-49a71d70.js";
+            window.path_to_searchindex_js = "searchindex-6edc01d0.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-4b3fe330.js"></script>
+        <script src="toc-ab0022af.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -199,7 +199,7 @@ it does.</p>
 <p>The <code>#![no_std]</code> directive must be used because we do not have a standard runtime on our
 microcontroller. The <code>#![..]</code> syntax applies this attribute to the whole module, which is our
 whole application in this case. A standard runtime is usually only available on a full host system, for example
-your development laptop. It usually includes components which make use of the operating systems,
+your development laptop. It usually includes components which make use of the operating system,
 for example filesystem handling, input/output libraries printing to the console, time libraries
 and much more. We do not have an operating system, so this does not exist for our target.</p>
 <p>The <code>#[no_main]</code> directive also applies to the whole module and must be used because we do not want
@@ -240,7 +240,7 @@ is not really beginner friendly, so we will start with something more high-level
 introduces hardware abstractions, data structures and objects to interact with the hardware.</p>
 <p>The nRF52833 chip which is part of the micro:bit has some initialization which makes sense for
 most firmware. This can include something like the clock initialization. When writing this HAL, it
-makes sense packaging that configuration inside some initializer function.</p>
+makes sense to package that configuration inside some initializer function.</p>
 <p>Rust also has a nice type system which allows modelling of our problem domain. We have a
 microcontroller which has <a href="./terminology_glossary.html">peripherals</a> and physical pins. We can model
 these entities in our Rust code to allow ownership checks and resource management. For example,
@@ -256,7 +256,7 @@ method. This is what you want to use to initialize the chip. You can use the <co
 of <code>embassy_nrf::config::Config</code>, it serves our purposes for now. Have a look at the
 <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/struct.Peripherals.html">documentation of the <code>Peripherals</code></a>
 data structure which is returned by the <code>init</code> function. It models all the peripherals and physical
-pins like we previously metioned.</p>
+pins like we previously mentioned.</p>
 <p>Call this method and store the <code>Peripherals</code> object inside a variable called <code>periphs</code>.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -334,7 +334,7 @@ Use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/gpio/struct.O
 GPIO driver to toggle the LED inside the loop. We actually told you the correct object/driver to use this on before.
 If you forgot, maybe you can also figure it out from the schematic?</p>
 <p>Toggling the LED in a permanent loop would cause the LED to not be on long enough for you
-to see anything. Besides, the tasks was to make it blink with a frequency of 1 second.
+to see anything. Besides, the task was to make it blink with a frequency of 1 second.
 We need to introduce a delay. We are going to use <a href="https://docs.rs/embassy-time/latest/embassy_time/"><code>embassy_time</code></a> for this.</p>
 <p>Again, we included the dependency for you, so you can use it directly. So far, we did not have to use
 any <code>async</code> API. This is because all the code we used so far was strictly synchronous, with no
@@ -426,11 +426,11 @@ a side-product of the PCB design process.</p>
 
         <script src="elasticlunr-ef4e11c1.min.js"></script>
         <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="book-c22b7243.js"></script>
 
         <!-- Custom JS scripts -->
 

@@ -15,8 +15,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/general-0392ca55.css">
+        <link rel="stylesheet" href="css/chrome-fc474251.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-49a71d70.js";
+            window.path_to_searchindex_js = "searchindex-6edc01d0.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-4b3fe330.js"></script>
+        <script src="toc-ab0022af.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -187,7 +187,7 @@ is commonly called baudrate.</p>
 <p>The specific task is an echo application: Everything that is received on the RX
 pin of the microcontroller UART should be sent back to the sender via the TX pin.</p>
 <h2 id="the-microbit-uart-interface"><a class="header" href="#the-microbit-uart-interface">The micro:bit UART interface</a></h2>
-<p>The micro:bit v2 has a very convenient feature which allows use to talk with one of its UART
+<p>The micro:bit v2 has a very convenient feature which allows us to talk with one of its UART
 interfaces via the USB interface you already have. Have a look at this hardware block diagram
 taken from the <a href="https://tech.microbit.org/hardware/">website</a>:</p>
 <p><img src="./assets/hw-block-diagram.png" alt="HW block diagram"></p>
@@ -220,17 +220,17 @@ lrwxrwxrwx - root 12 Jun 09:39 /dev/serial/by-id/usb-Arm_BBC_micro:bit_CMSIS-DAP
 <pre><code class="language-console">picocom -b 115200 /dev/ttyACM0
 </code></pre>
 <p>Your device name might be different! It is named <code>/dev/ttyACM0</code> because that was the output of
-<code>ls -l /dev/serial/by-id/*</code>. Change this for you command if necessary.</p>
+<code>ls -l /dev/serial/by-id/*</code>. Change this for your command if necessary.</p>
 <h2 id="connecting-to-the-uart-interface---windows"><a class="header" href="#connecting-to-the-uart-interface---windows">Connecting to the UART interface - Windows</a></h2>
 <p>There are various programs available to connect to a serial port. On Windows, you can install
 <a href="https://putty.org/index.html">PuTTY</a> and then connect to the serial port using the COM port
 name you found before.</p>
 <p>You need to use the Serial connection type and specify a speed of 115200. This could look
-something liket his:</p>
+something like this:</p>
 <p><img src="./assets/putty-config.png" alt="PuTTY"></p>
 <p>You can then open the connection to open a session connected to the serial port of the MCU.</p>
 <h2 id="uart-hardware"><a class="header" href="#uart-hardware">UART hardware</a></h2>
-<p>Before we start writing code, lets look at the hardware first.
+<p>Before we start writing code, let’s look at the hardware first.
 We mentioned that UART uses 2 physical pins. This means that two of the GPIO pins of the micro:bit
 need to be configured so they can be used by the UART hardware block for communication.</p>
 <p>For a peripheral like UART, it is very common that a microcontroller support a larger selection
@@ -250,7 +250,7 @@ away from us, but it does not hurt to have a basic understanding of what is happ
 behind the scenes.</p>
 <p>In computing systems, processing important events in a timely manner is oftentimes done
 using <a href="https://en.wikipedia.org/wiki/Interrupt">interrupts</a>. A really simple analogy: When the
-door bell rings or someone calls you , you will generally drop whatever you are doing right now to
+door bell rings or someone calls you, you will generally drop whatever you are doing right now to
 open the door or answer the phone call.</p>
 <p>Mapping this analogy on a computer system, the delivery man ringing your door bell is the UART
 peripheral informing you about the data delivery, while you are the processor.
@@ -273,7 +273,7 @@ buffered flavor to not lose data between read calls, so that is what we are goin
 <p>Have a look at the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/struct.BufferedUarte.html#method.new">constructor documentation</a>
 of the buffered UART. It has 11 arguments! The driver is relatively complex, and the constructor
 is not spared from that. It allows reliable communication and exposes an elegant API though.</p>
-<p>Remember that the <code>Peri</code> type is always used for resource management types are comes from the
+<p>Remember that the <code>Peri</code> type is always used for resource management types and comes from the
 peripheral singleton field which is named <code>_periphs</code> in our example. Remove the leading underscore,
 because we are going to use this type now.</p>
 <p>Let’s go through the arguments of the constructor one by one. You do not need to understand
@@ -283,7 +283,7 @@ all of the details here but they are mentioned for completeness.</p>
 but the hardware allows to use instance 1 as well.</li>
 <li><code>timer</code> - The driver needs one of the hardware timer blocks to count the number of received bytes.
 You can use any unused timer instance here.</li>
-<li><code>ppi_ch1</code> - This is used to connect the UART hardware to the time hardware for byte counting. Have
+<li><code>ppi_ch1</code> - This is used to connect the UART hardware to the timer hardware for byte counting. Have
 a look at the <a href="https://docs.nordicsemi.com/r/bundle/ps_nrf52840/page/ppi.html">PPI docs</a> if you
 are interested in more information of this hardware feature. You can pass any unused PPI channel
 instance here.</li>
@@ -292,11 +292,11 @@ using DMA and interrupts. You can pass any unused
 PPI channel instance here.</li>
 <li><code>ppi_group</code> - Required so that the PPI channel 2 can disable itself on certain events. You can
 pass any PPI group instance here.</li>
-<li><code>rxd</code> - This is the physical GPIO pin which shold be used as the RX pin. We figured out which pin
-this out in a previous section.</li>
-<li><code>txd</code> - This is the physical GPIO pin which shold be used as the TX pin. We figured out which
+<li><code>rxd</code> - This is the physical GPIO pin which should be used as the RX pin. We figured out which pin
+this is in a previous section.</li>
+<li><code>txd</code> - This is the physical GPIO pin which should be used as the TX pin. We figured out which
 pin this is in a previous section.</li>
-<li><code>irq</code> - This is something embassy HAL specific. The driver relies on a interrupt handler being
+<li><code>irq</code> - This is something embassy HAL specific. The driver relies on an interrupt handler being
 called for the UART. For technical reasons, that handler can not be specified in the HAL itself.
 Instead, the HAL provides a function that you should call on an interrupt, and we need to call
 this function in our own interrupt handler. However, the HAL provides a nice little macro
@@ -397,7 +397,7 @@ you can use for this purpose.</p>
 <p>We need a separate buffer for this again. The buffer that we already declared is used exclusively
 by the driver. You can create a new buffer similarly to the way you created the first one.
 You can use a size like 64 or 128 here. Generally, it often makes sense to determine the
-dimension based on the maxium expected packet size.</p>
+dimension based on the maximum expected packet size.</p>
 <p>Your task is to asynchronously read into a buffer. Do a match call on the resulting
 <code>Result</code> so that you can do clean error handling as well. Keep in mind that you also need to
 call <code>await</code> on the <code>read</code> call because it is an <code>async</code> function. Create the buffer before
@@ -452,7 +452,7 @@ error handling for the <code>Err(e)</code> match arms, which could at the minimu
 <p>Some interesting information: When you asynchronously call <code>read</code> and nothing is arriving on
 the RX pin, the CPU can actually do other stuff! All the reception is handled in the background
 by the dedicated interrupt handler provided by our HAL. Similarly, while you are writing
-data out asynchronously using <code>write</code> and/or <code>write_all</code>, all the driver needs to do it to
+data out asynchronously using <code>write</code> and/or <code>write_all</code>, all the driver needs to do is
 pass the address and the transfer size to the hardware. All the rest is done by the hardware
 using DMA.</p>
 <p>Practical applications in our domain will oftentimes use binary protocols. In principle, we could
@@ -506,11 +506,11 @@ This communication pattern is very commonly used at the IRS!</p>
 
         <script src="elasticlunr-ef4e11c1.min.js"></script>
         <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="book-c22b7243.js"></script>
 
         <!-- Custom JS scripts -->
 

@@ -8,7 +8,7 @@ class MDBookSidebarScrollbox extends HTMLElement {
         super();
     }
     connectedCallback() {
-        this.innerHTML = '<ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="preparation.html"><strong aria-hidden="true">2.</strong> Preparation</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="terminology_glossary.html"><strong aria-hidden="true">3.</strong> Terminology</a></span></li><li class="chapter-item expanded "><li class="part-title">Exercises</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="blinky-exercise.html"><strong aria-hidden="true">4.</strong> Blinky Exercise</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="uart-echo-exercise.html"><strong aria-hidden="true">5.</strong> UART echo application</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="accelerometer.html"><strong aria-hidden="true">6.</strong> Accelerometer Sensor Driver</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="multitasking-ipc-exercise.html"><strong aria-hidden="true">7.</strong> Multi-tasking exercise and IPC</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="uart-spacepackets.html"><strong aria-hidden="true">8.</strong> UART spacepackets</a></span></li></ol>';
+        this.innerHTML = '<ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="preparation.html"><strong aria-hidden="true">2.</strong> Preparation</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="terminology_glossary.html"><strong aria-hidden="true">3.</strong> Terminology</a></span></li><li class="chapter-item expanded "><li class="part-title">Exercises</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="blinky-exercise.html"><strong aria-hidden="true">4.</strong> Blinky Exercise</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="uart-echo-exercise.html"><strong aria-hidden="true">5.</strong> UART echo application</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="accelerometer.html"><strong aria-hidden="true">6.</strong> Accelerometer Sensor Driver</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="multitasking-ipc-exercise.html"><strong aria-hidden="true">7.</strong> Multi-tasking exercise and IPC</a></span></li></ol>';
         // Set the current, active page, and reveal it if it's hidden
         let current_page = document.location.href.toString().split('#')[0].split('?')[0];
         if (current_page.endsWith('/')) {
@@ -23,7 +23,8 @@ class MDBookSidebarScrollbox extends HTMLElement {
                 link.href = path_to_root + href;
             }
             // The 'index' page is supposed to alias the first chapter in the book.
-            if (link.href === current_page
+            // Check both with and without the '.html' suffix to be robust against pretty URLs
+            if (link.href.replace(/\.html$/, '') === current_page.replace(/\.html$/, '')
                 || i === 0
                 && path_to_root === ''
                 && current_page.endsWith('/index.html')) {

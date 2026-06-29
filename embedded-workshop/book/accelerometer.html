@@ -15,8 +15,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/general-0392ca55.css">
+        <link rel="stylesheet" href="css/chrome-fc474251.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-49a71d70.js";
+            window.path_to_searchindex_js = "searchindex-6edc01d0.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-4b3fe330.js"></script>
+        <script src="toc-ab0022af.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -197,12 +197,12 @@ sensors.</p>
 <h2 id="features-of-the-hardware-sensor"><a class="header" href="#features-of-the-hardware-sensor">Features of the hardware sensor</a></h2>
 <p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">micro:bit docs</a>:</p>
 <ul>
-<li>e-compass which combines a magnetometer and and accelerometer into one package</li>
+<li>e-compass which combines a magnetometer and accelerometer into one package</li>
 <li>Configurable range of 2/4/8/16g</li>
 <li>Configurable resolution of 8/10/12 bits</li>
 </ul>
 <p>The sensor also has an output data rate (ODR) configuration which specifies how often the sensor
-updates its internal value. Let’s make some requirements for our driver so simplify our task:</p>
+updates its internal value. Let’s make some requirements for our driver to simplify our task:</p>
 <ul>
 <li>Our simple driver will only support +- 2g.</li>
 <li>Only support normal resolution of 10 bits.</li>
@@ -215,14 +215,14 @@ HW schematic:</p>
 bus would exceed the scope of this exercise, but the most relevant key information from a software
 engineering perspective are summarized here:</p>
 <ul>
-<li>I2C allow communication between multiple devices through two GPIO pins only. One clock is the
+<li>I2C allows communication between multiple devices through two GPIO pins only. One is the
 data pin which is called the serial data line (SDA) and the other pin is called the serial clock
 (SCL)</li>
 <li>The most common I2C communication speeds are normal mode with 100 kHz and fast mode with 400 kHz.</li>
-<li>I2C relies of device addressing to allow talking to a single device on a shared bus.</li>
+<li>I2C relies on device addressing to allow talking to a single device on a shared bus.</li>
 <li>An I2C transaction can be abstracted with three operations: <code>read</code>, <code>write</code> and <code>read_write</code>.</li>
 </ul>
-<p>The Rust embedded-hal crate provide generic traits that portable device drivers and HAL implementations
+<p>The Rust embedded-hal crate provides generic traits that portable device drivers and HAL implementations
 need to agree on. You can have a look at how these basic bus properties were captured in the
 <a href="https://docs.rs/embedded-hal/1.0.0/embedded_hal/i2c/trait.I2c.html">I2C trait</a>. Notice how its
 API functions expect a device address and are named <code>read</code>, <code>write</code> and <code>read_write</code>.</p>
@@ -234,12 +234,12 @@ other devices.</p>
 out that the SDA pin is mapped to P0.16 and the SCL pin is mapped to P0.08. There are also
 external I2C pins, but those are routed to the edge connector and are used to connect
 external devices.</p>
-<p>When it comes to writing device drivers, you generally want to wrap the driver object or some
-useful abstraction of it to talk with your device. For this device, you would wrap some
-I2C driver. We can omit some abstraction because we know that we are never going to share the bus,
+<p>When it comes to writing device drivers, you will generally wrap the communication driver object
+in your driver. For this device, you would wrap some I2C driver. We can omit some abstraction
+because we know that we are never going to share the bus,
 and we do not want to write a portable driver. This means we can wrap the bus driver provided
-by the HAL. Nordic uses a different name for the I2C protocol and calls it TWI (two-write interface).
-There is a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/index.html"><code>twim</code></a> providing
+by the HAL. Nordic uses a different name for the I2C protocol and calls it TWI (two-wire interface).
+There is a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/index.html"><code>twim</code></a> which provides
 support for the Two Wire Interface in master mode, which is relevant for us.</p>
 <h2 id="step-1---create-the-i2ctwi-driver"><a class="header" href="#step-1---create-the-i2ctwi-driver">Step 1 - Create the I2C/TWI driver</a></h2>
 <p>Open the <code>src/bin/motion_sensor.rs</code> file. Start creating the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/struct.Twim.html"><code>twim</code> driver</a> and storing it into an object named <code>i2c_bus</code>.
@@ -280,8 +280,9 @@ bind_interrupts!(struct Irqs {
 </details>
 <h2 id="step-2---create-the-basic-driver-object"><a class="header" href="#step-2---create-the-basic-driver-object">Step 2 - Create the basic driver object</a></h2>
 <p>You are now going to create a driver object instead of just re-using existing library code in your
-application. Go into the <code>src/motion_sensor.rs</code> file. This file/module is already included
-in <code>src/lib.rs</code> for you, but it is empty. Start by creating a empty structure named <code>Accelerometer</code> here.</p>
+application. Go into the <code>src/motion_sensor.rs</code> file which is part of the crate library. This
+file/module is already included in <code>src/lib.rs</code> for you, but it is empty. Start by creating an empty
+structure named <code>Accelerometer</code> here.</p>
 <p>Then add one field to that structure: The I2C driver you just created. You actually need a lifetime
 of <code>Accelerometer</code> now because the I2C driver has a lifetime as well.</p>
 <details>
@@ -293,10 +294,10 @@ of <code>Accelerometer</code> now because the I2C driver has a lifetime as well.
 <span class="boring">}</span></code></pre>
 </details>
 <h2 id="step-3---add-a-constructor"><a class="header" href="#step-3---add-a-constructor">Step 3 - Add a constructor</a></h2>
-<p>Add a constructor to your driver object by adding a <code>new</code> method with returns <code>Self</code>. In the most
-simple form, the constructor could simply take the I2C bus as an input argument and then creates and
-returns itself.</p>
-<p>However, we also want to verify that the communication with out device works properly. Sensors
+<p>Add a constructor to your driver object by adding a <code>new</code> method which returns <code>Self</code>. In the most
+simple form, the constructor could simply take the I2C bus as an input argument and then create and
+return itself.</p>
+<p>However, we also want to verify that the communication with our device works properly. Sensors
 from ST microelectronics commonly have a WHO AM I register which you can read to verify
 basic sensor communication. The value read from this register should have a fixed value that
 you can check. Your task is to add a constructor which constructs <code>Accelerometer</code>, checks the
@@ -354,7 +355,7 @@ We already provided hints what you have to send and how much you have to read ba
 the WHO AM I register and verify its value. From the datasheet, we can determine the expected value
 to be <code>0b00110011</code>. You can create a constant or associated constant on the <code>Accelerometer</code> object
 to store the expected value.</p>
-<p>First of all, we mentioned that you always have to pass the device address when using the I2C driver
+<p>We mentioned that you always have to pass the device address when using the I2C driver
 API. For the accelerometer, that address has a fixed value of <code>0x19</code> that you can retrieve
 from the microbit v2 schematic or from the sensor datasheet. Create an associated constant
 <code>ADDR</code> on the <code>Accelerometer</code> driver which has that value.</p>
@@ -395,6 +396,9 @@ impl Accelerometer&lt;'_&gt; {
 <p>The interaction with other registers is comparable. In general if you want to read registers,
 you still have to use <code>read_write</code> to select the correct registers, while you can just use
 <code>write</code> if you only want to write to a register.</p>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step3.rs</code></p>
+</blockquote>
 <h2 id="step-4---configure-the-sensor"><a class="header" href="#step-4---configure-the-sensor">Step 4 - Configure the sensor</a></h2>
 <p>Now you have a driver instance, but you actually want to read some sensor values. We tried
 this for you before, and wondered why the accelerometer readings returned all zero. It turns
@@ -403,8 +407,8 @@ first.</p>
 <p>We extracted the definition of <code>CTRL_REG1_A</code> on page 47 of the datasheet for you:</p>
 <p><img src="./assets/ctrl-reg-1.png" alt="Control Register 1"></p>
 <p>The device is in Power-Down mode on startup. This is the most important control register
-because it allows use to set the output data rate (ODR), enabling the device and
-individual axes. The datasheet specifies a 8-bit register configuration.</p>
+because it allows us to set the output data rate (ODR), enabling the device and
+individual axes. The datasheet specifies an 8-bit register configuration.</p>
 <ul>
 <li>Bits 7 down to 4 are the ODR3 to ODR0 configuration bits</li>
 <li>Bit 3 is the low power enable bit</li>
@@ -414,7 +418,7 @@ individual axes. The datasheet specifies a 8-bit register configuration.</p>
 registers and then provides a convenient API to build the register value which avoids
 the need to write bitshifts and masks.</p>
 <p>Have a look at the examples from the <a href="https://github.com/danlehmann/bitfield"><code>bitbybit</code></a>
-crate and try to specify this registeres using <code>bitbybit::bitfield</code>. Adding <code>default = 0x0</code>
+crate and try to specify this register using <code>bitbybit::bitfield</code>. Adding <code>default = 0x0</code>
 inside proc macro attributes also adds a builder API which is useful for us while <code>debug</code> adds
 an improved <code>Debug</code> implementation. This can be combined with the
 <a href="https://docs.rs/arbitrary-int/latest/arbitrary_int/index.html"><code>arbitrary-int</code></a> library.
@@ -458,7 +462,7 @@ pub struct ControlReg1 {
 <span class="boring">}</span></code></pre>
 </details>
 <p>Now you have everything you need to update the register. The excerpt of the datasheet also
-shows the register ID, whic his <code>0x20</code>. Add the <code>CtrlReg1</code> variant to the <code>Register</code> enumeration
+shows the register ID, which is <code>0x20</code>. Add the <code>CtrlReg1</code> variant to the <code>Register</code> enumeration
 you created before. You can now use the <a href="https://github.com/danlehmann/bitfield#setting-all-fields-at-once-using-the-builder-syntax">builder API</a> on <code>ControlReg1</code> to build the target
 configuration.</p>
 <p>Use <code>i2c.write</code> inside the constructor to write the <code>ControlReg1</code> to the right register ID,
@@ -494,6 +498,9 @@ first byte, and the register value as the second byte.</p>
     }
 <span class="boring">}</span></code></pre>
 </details>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step4.rs</code></p>
+</blockquote>
 <h2 id="step-5---read-the-raw-accelerometer-values"><a class="header" href="#step-5---read-the-raw-accelerometer-values">Step 5 - Read the raw accelerometer values</a></h2>
 <p>Now we can read the raw sensor values. By looking at the register mapping on page 43 of the
 datasheet again, we can figure out the base addresses of the sensor readout:</p>
@@ -517,9 +524,9 @@ read. This allows us to read all 6 registers with one I2C <code>write_read</code
 <p>The <code>_raw</code> suffix makes it clear that those are raw sensor values which are not worth much on
 their own and still require some processing and conversion to proper units.</p>
 <p>What do we actually return? A simple way would be to return a <code>(u16, u16, u16)</code> tuple.
-YOu can also create a dedicated named structure and this is what we are going to do.</p>
+You can also create a dedicated named structure and this is what we are going to do.</p>
 <p>Add a structure named <code>ReadoutRaw</code>, which has <code>x</code>, <code>y</code> and <code>z</code> public fields.
-You can add common dervies like <code>Debug</code>, <code>Copy</code>, <code>Clone</code>, <code>defmt::Format</code> as well.</p>
+You can add common derives like <code>Debug</code>, <code>Copy</code>, <code>Clone</code>, <code>defmt::Format</code> as well.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -593,18 +600,21 @@ impl Accelerometer&lt;'_&gt; {
 }
 <span class="boring">}</span></code></pre>
 </details>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step5.rs</code></p>
+</blockquote>
 <h2 id="step-6---convert-and-read-the-values-in-the-si-unit-mg"><a class="header" href="#step-6---convert-and-read-the-values-in-the-si-unit-mg">Step 6 - Convert and read the values in the SI unit mg</a></h2>
 <p>Those raw values are not worth much by themselves. There are some conversion steps that we
 need to do. The datasheet specifies the raw binary format as a left-adjusted signed <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two-complement number</a>.
-There are 2 conversion steps require here:</p>
+There are 2 conversion steps required here:</p>
 <ol>
 <li>Eliminate trailing bytes depending on the selected resolution. We specified that this device has different
 resolution rates represented by bits. We can assume normal resolution (10-bits). This means
 that our relevant value will be placed on bit positions 15 downto 6. The simplest way to
-performing this scaling is by right-shifting by 6.</li>
+perform this scaling is by right-shifting by 6.</li>
 <li>Scale the result to achieve our value in SI units. The datasheet specifies the sensitivity
-for a full scale of += 2g in mg per digit. You need to multiply the raw value with that table
-value. However, that table value also need to lineary scale with the full scale.</li>
+for a full scale of +- 2g in mg per digit. You need to multiply the raw value with that table
+value. However, that table value also needs to linearly scale with the full scale.</li>
 </ol>
 <p>A general formula for the acceleration which should have been provided in the datasheet but
 is not for mysterious reasons, can therefore be written as:</p>
@@ -625,7 +635,7 @@ resolution.</li>
 in the future. Introduce two new enumerations which allow modelling this: A <code>Mode</code> enumeration
 and a <code>FullScale</code> enumeration in the library. The <code>Mode</code> enumeration should include the Power Down,
 Low Power, Normal and High Resolution Mode. The <code>FullScale</code> should include all full scales that this
-device supports. You can no specify enum variants with leading numbers, but you can use a
+device supports. You cannot specify enum variants with leading numbers, but you can use a
 leading underscore to allow this. In the full scale enumeration, assign the actual full scale
 value as the enum value.</p>
 <details>
@@ -723,7 +733,7 @@ pub struct Readout {
 <li><code>z_mg</code> which returns Z axis value in mg as an <code>i32</code>.</li>
 <li><code>xyz_mg</code> which returns the value of all axes in mg as a <code>(i32, i32, i32)</code></li>
 </ul>
-<p>Use the formula we specified above the the methods we added to do this.</p>
+<p>Use the formula we specified above and the methods we added to do this.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -753,7 +763,7 @@ pub struct Readout {
 }
 <span class="boring">}</span></code></pre>
 </details>
-<p>Finally, we want to have a convenience method called <code>read</code> on our drier which
+<p>Finally, we want to have a convenience method called <code>read</code> on our driver which
 returns this <code>Readout</code> structure. Add that method and re-use the <code>read_raw</code> method
 that you have already written to initialize the <code>raw</code> field of the <code>Readout</code> structure.
 You can initialize the <code>full_scale</code> and <code>mode</code> field from the cached values of the driver.</p>
@@ -810,12 +820,12 @@ Call the <code>read</code> method periodically inside a loop and print the xyz v
 0.055694 [INFO ] Accelerations (mg): (-44, -228, 984) (accelerometer_solution src/bin/accelerometer_solution.rs:43)
 </code></pre>
 <p>Your acceleration values may vary slightly based on the orientation of your micro:bit. Regardless,
-you should measure an acceleration of around 1g, whic his the normal force that counteracts gravity when the
+you should measure an acceleration of around 1g, which is the normal force that counteracts gravity when the
 device rests on a surface.</p>
 <p>You can now try things like shaking the device to see how the x and y axis react to this.
 If you have something to cushion the fall, you could also do a freefall test, which should make the
 1g counter force you normally see disappear while the device is free-falling. You might also
-see spikes when the micro:bit is suddenly decelerated after hits a surface after free-falling.</p>
+see spikes when the micro:bit is suddenly decelerated after it hits a surface after free-falling.</p>
 <p>You might wonder why an e-compass module has an accelerometer. You can actually use an accelerometer
 to account for device tilt combined with the magnetometer for the north direction measurement. This is
 a basic form of sensor fusion which can be used to improve the quality of the compass.</p>
@@ -828,6 +838,9 @@ a basic form of sensor fusion which can be used to improve the quality of the co
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
+                            <a rel="next prefetch" href="multitasking-ipc-exercise.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -839,6 +852,9 @@ a basic form of sensor fusion which can be used to improve the quality of the co
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="multitasking-ipc-exercise.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
             </nav>
 
         </div>
@@ -858,11 +874,11 @@ a basic form of sensor fusion which can be used to improve the quality of the co
 
         <script src="elasticlunr-ef4e11c1.min.js"></script>
         <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="book-c22b7243.js"></script>
 
         <!-- Custom JS scripts -->
 

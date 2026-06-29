@@ -16,8 +16,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/general-0392ca55.css">
+        <link rel="stylesheet" href="css/chrome-fc474251.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-49a71d70.js";
+            window.path_to_searchindex_js = "searchindex-6edc01d0.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-4b3fe330.js"></script>
+        <script src="toc-ab0022af.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -181,7 +181,7 @@
 <p>This is the exercise book accompanying the Embedded Rust Workshop.
 The Workshop provides exercises for Embedded Rust which run on the
 <a href="https://microbit.org/new-microbit/">BBC micro:bit v2</a>.</p>
-<p>For this exercises, you only require the following hardware:</p>
+<p>For these exercises, you only require the following hardware:</p>
 <ul>
 <li>The <a href="https://microbit.org/new-microbit/">micro:bit v2</a>.</li>
 <li>A Micro-USB cable to power the microbit while also connecting it to your computer.</li>
@@ -316,7 +316,7 @@ the preparation chapter successfully!</p>
 <p>In the <a href="#blinky-exercise">first exercise</a>, you are going to build most parts of a blinky.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="terminology-and-glossary"><a class="header" href="#terminology-and-glossary">Terminology and Glossary</a></h1>
-<p>You can look up some terms in this terminology chapter if you have never heard them befor or need
+<p>You can look up some terms in this terminology chapter if you have never heard them before or need
 a brief explanation.</p>
 <ul>
 <li>Peripheral: Dedicated hardware unit. On microcontrollers, this can be something like a UART, SPI
@@ -338,10 +338,22 @@ structure. Often, chips, sensors, and other components will be soldered on top o
 that only requires two physical pins, one for transmission and one for reception.</li>
 <li>DMA - Direct Memory Access: A hardware subsystem can access the memory of a system directly
 without CPU intervention.</li>
+<li>CPU - Central Processing Unit: The core hardware block of a computer or microcontroller that
+executes instructions.</li>
 <li>HAL - Hardware Abstraction Layer: High level library providing drivers for the hardware blocks
 on a microcontroller.</li>
 <li>I2C - Inter-Integrated Circuit: Communication bus commonly used on embedded systems.</li>
 <li>TWI - Two-Wire Interface: Another name for I2C that vendors sometimes use.</li>
+<li>GPIO - General Purpose Input/Output: A digital signal pin on a microcontroller that can be
+configured as an input to read a digital level or as an output to set a digital level.</li>
+<li>SPI - Serial Peripheral Interface: A synchronous serial communication bus commonly used on
+embedded systems, typically requiring four signals: clock, chip select, MOSI and MISO.</li>
+<li>RTT - Real-Time Transfer: A SEGGER protocol for transferring data between a host computer and
+an embedded target, commonly used for logging output during development.</li>
+<li>BSP - Board Support Package: A library that provides drivers and abstractions specific to a
+particular hardware board, building on top of a HAL.</li>
+<li>IPC - Inter-Process Communication: Mechanisms that allow concurrent tasks or processes to
+exchange data and synchronize with each other.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="blinky-exercise"><a class="header" href="#blinky-exercise">Blinky Exercise</a></h1>
@@ -367,7 +379,7 @@ it does.</p>
 <p>The <code>#![no_std]</code> directive must be used because we do not have a standard runtime on our
 microcontroller. The <code>#![..]</code> syntax applies this attribute to the whole module, which is our
 whole application in this case. A standard runtime is usually only available on a full host system, for example
-your development laptop. It usually includes components which make use of the operating systems,
+your development laptop. It usually includes components which make use of the operating system,
 for example filesystem handling, input/output libraries printing to the console, time libraries
 and much more. We do not have an operating system, so this does not exist for our target.</p>
 <p>The <code>#[no_main]</code> directive also applies to the whole module and must be used because we do not want
@@ -408,7 +420,7 @@ is not really beginner friendly, so we will start with something more high-level
 introduces hardware abstractions, data structures and objects to interact with the hardware.</p>
 <p>The nRF52833 chip which is part of the micro:bit has some initialization which makes sense for
 most firmware. This can include something like the clock initialization. When writing this HAL, it
-makes sense packaging that configuration inside some initializer function.</p>
+makes sense to package that configuration inside some initializer function.</p>
 <p>Rust also has a nice type system which allows modelling of our problem domain. We have a
 microcontroller which has <a href="#terminology-and-glossary">peripherals</a> and physical pins. We can model
 these entities in our Rust code to allow ownership checks and resource management. For example,
@@ -424,7 +436,7 @@ method. This is what you want to use to initialize the chip. You can use the <co
 of <code>embassy_nrf::config::Config</code>, it serves our purposes for now. Have a look at the
 <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/struct.Peripherals.html">documentation of the <code>Peripherals</code></a>
 data structure which is returned by the <code>init</code> function. It models all the peripherals and physical
-pins like we previously metioned.</p>
+pins like we previously mentioned.</p>
 <p>Call this method and store the <code>Peripherals</code> object inside a variable called <code>periphs</code>.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -502,7 +514,7 @@ Use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52840/gpio/struct.O
 GPIO driver to toggle the LED inside the loop. We actually told you the correct object/driver to use this on before.
 If you forgot, maybe you can also figure it out from the schematic?</p>
 <p>Toggling the LED in a permanent loop would cause the LED to not be on long enough for you
-to see anything. Besides, the tasks was to make it blink with a frequency of 1 second.
+to see anything. Besides, the task was to make it blink with a frequency of 1 second.
 We need to introduce a delay. We are going to use <a href="https://docs.rs/embassy-time/latest/embassy_time/"><code>embassy_time</code></a> for this.</p>
 <p>Again, we included the dependency for you, so you can use it directly. So far, we did not have to use
 any <code>async</code> API. This is because all the code we used so far was strictly synchronous, with no
@@ -561,7 +573,7 @@ is commonly called baudrate.</p>
 <p>The specific task is an echo application: Everything that is received on the RX
 pin of the microcontroller UART should be sent back to the sender via the TX pin.</p>
 <h2 id="the-microbit-uart-interface"><a class="header" href="#the-microbit-uart-interface">The micro:bit UART interface</a></h2>
-<p>The micro:bit v2 has a very convenient feature which allows use to talk with one of its UART
+<p>The micro:bit v2 has a very convenient feature which allows us to talk with one of its UART
 interfaces via the USB interface you already have. Have a look at this hardware block diagram
 taken from the <a href="https://tech.microbit.org/hardware/">website</a>:</p>
 <p><img src="assets/hw-block-diagram.png" alt="HW block diagram"></p>
@@ -594,17 +606,17 @@ lrwxrwxrwx - root 12 Jun 09:39 /dev/serial/by-id/usb-Arm_BBC_micro:bit_CMSIS-DAP
 <pre><code class="language-console">picocom -b 115200 /dev/ttyACM0
 </code></pre>
 <p>Your device name might be different! It is named <code>/dev/ttyACM0</code> because that was the output of
-<code>ls -l /dev/serial/by-id/*</code>. Change this for you command if necessary.</p>
+<code>ls -l /dev/serial/by-id/*</code>. Change this for your command if necessary.</p>
 <h2 id="connecting-to-the-uart-interface---windows"><a class="header" href="#connecting-to-the-uart-interface---windows">Connecting to the UART interface - Windows</a></h2>
 <p>There are various programs available to connect to a serial port. On Windows, you can install
 <a href="https://putty.org/index.html">PuTTY</a> and then connect to the serial port using the COM port
 name you found before.</p>
 <p>You need to use the Serial connection type and specify a speed of 115200. This could look
-something liket his:</p>
+something like this:</p>
 <p><img src="assets/putty-config.png" alt="PuTTY"></p>
 <p>You can then open the connection to open a session connected to the serial port of the MCU.</p>
 <h2 id="uart-hardware"><a class="header" href="#uart-hardware">UART hardware</a></h2>
-<p>Before we start writing code, lets look at the hardware first.
+<p>Before we start writing code, let’s look at the hardware first.
 We mentioned that UART uses 2 physical pins. This means that two of the GPIO pins of the micro:bit
 need to be configured so they can be used by the UART hardware block for communication.</p>
 <p>For a peripheral like UART, it is very common that a microcontroller support a larger selection
@@ -624,7 +636,7 @@ away from us, but it does not hurt to have a basic understanding of what is happ
 behind the scenes.</p>
 <p>In computing systems, processing important events in a timely manner is oftentimes done
 using <a href="https://en.wikipedia.org/wiki/Interrupt">interrupts</a>. A really simple analogy: When the
-door bell rings or someone calls you , you will generally drop whatever you are doing right now to
+door bell rings or someone calls you, you will generally drop whatever you are doing right now to
 open the door or answer the phone call.</p>
 <p>Mapping this analogy on a computer system, the delivery man ringing your door bell is the UART
 peripheral informing you about the data delivery, while you are the processor.
@@ -647,7 +659,7 @@ buffered flavor to not lose data between read calls, so that is what we are goin
 <p>Have a look at the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/struct.BufferedUarte.html#method.new">constructor documentation</a>
 of the buffered UART. It has 11 arguments! The driver is relatively complex, and the constructor
 is not spared from that. It allows reliable communication and exposes an elegant API though.</p>
-<p>Remember that the <code>Peri</code> type is always used for resource management types are comes from the
+<p>Remember that the <code>Peri</code> type is always used for resource management types and comes from the
 peripheral singleton field which is named <code>_periphs</code> in our example. Remove the leading underscore,
 because we are going to use this type now.</p>
 <p>Let’s go through the arguments of the constructor one by one. You do not need to understand
@@ -657,7 +669,7 @@ all of the details here but they are mentioned for completeness.</p>
 but the hardware allows to use instance 1 as well.</li>
 <li><code>timer</code> - The driver needs one of the hardware timer blocks to count the number of received bytes.
 You can use any unused timer instance here.</li>
-<li><code>ppi_ch1</code> - This is used to connect the UART hardware to the time hardware for byte counting. Have
+<li><code>ppi_ch1</code> - This is used to connect the UART hardware to the timer hardware for byte counting. Have
 a look at the <a href="https://docs.nordicsemi.com/r/bundle/ps_nrf52840/page/ppi.html">PPI docs</a> if you
 are interested in more information of this hardware feature. You can pass any unused PPI channel
 instance here.</li>
@@ -666,11 +678,11 @@ using DMA and interrupts. You can pass any unused
 PPI channel instance here.</li>
 <li><code>ppi_group</code> - Required so that the PPI channel 2 can disable itself on certain events. You can
 pass any PPI group instance here.</li>
-<li><code>rxd</code> - This is the physical GPIO pin which shold be used as the RX pin. We figured out which pin
-this out in a previous section.</li>
-<li><code>txd</code> - This is the physical GPIO pin which shold be used as the TX pin. We figured out which
+<li><code>rxd</code> - This is the physical GPIO pin which should be used as the RX pin. We figured out which pin
+this is in a previous section.</li>
+<li><code>txd</code> - This is the physical GPIO pin which should be used as the TX pin. We figured out which
 pin this is in a previous section.</li>
-<li><code>irq</code> - This is something embassy HAL specific. The driver relies on a interrupt handler being
+<li><code>irq</code> - This is something embassy HAL specific. The driver relies on an interrupt handler being
 called for the UART. For technical reasons, that handler can not be specified in the HAL itself.
 Instead, the HAL provides a function that you should call on an interrupt, and we need to call
 this function in our own interrupt handler. However, the HAL provides a nice little macro
@@ -771,7 +783,7 @@ you can use for this purpose.</p>
 <p>We need a separate buffer for this again. The buffer that we already declared is used exclusively
 by the driver. You can create a new buffer similarly to the way you created the first one.
 You can use a size like 64 or 128 here. Generally, it often makes sense to determine the
-dimension based on the maxium expected packet size.</p>
+dimension based on the maximum expected packet size.</p>
 <p>Your task is to asynchronously read into a buffer. Do a match call on the resulting
 <code>Result</code> so that you can do clean error handling as well. Keep in mind that you also need to
 call <code>await</code> on the <code>read</code> call because it is an <code>async</code> function. Create the buffer before
@@ -826,7 +838,7 @@ error handling for the <code>Err(e)</code> match arms, which could at the minimu
 <p>Some interesting information: When you asynchronously call <code>read</code> and nothing is arriving on
 the RX pin, the CPU can actually do other stuff! All the reception is handled in the background
 by the dedicated interrupt handler provided by our HAL. Similarly, while you are writing
-data out asynchronously using <code>write</code> and/or <code>write_all</code>, all the driver needs to do it to
+data out asynchronously using <code>write</code> and/or <code>write_all</code>, all the driver needs to do is
 pass the address and the transfer size to the hardware. All the rest is done by the hardware
 using DMA.</p>
 <p>Practical applications in our domain will oftentimes use binary protocols. In principle, we could
@@ -857,12 +869,12 @@ sensors.</p>
 <h2 id="features-of-the-hardware-sensor"><a class="header" href="#features-of-the-hardware-sensor">Features of the hardware sensor</a></h2>
 <p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">micro:bit docs</a>:</p>
 <ul>
-<li>e-compass which combines a magnetometer and and accelerometer into one package</li>
+<li>e-compass which combines a magnetometer and accelerometer into one package</li>
 <li>Configurable range of 2/4/8/16g</li>
 <li>Configurable resolution of 8/10/12 bits</li>
 </ul>
 <p>The sensor also has an output data rate (ODR) configuration which specifies how often the sensor
-updates its internal value. Let’s make some requirements for our driver so simplify our task:</p>
+updates its internal value. Let’s make some requirements for our driver to simplify our task:</p>
 <ul>
 <li>Our simple driver will only support +- 2g.</li>
 <li>Only support normal resolution of 10 bits.</li>
@@ -875,14 +887,14 @@ HW schematic:</p>
 bus would exceed the scope of this exercise, but the most relevant key information from a software
 engineering perspective are summarized here:</p>
 <ul>
-<li>I2C allow communication between multiple devices through two GPIO pins only. One clock is the
+<li>I2C allows communication between multiple devices through two GPIO pins only. One is the
 data pin which is called the serial data line (SDA) and the other pin is called the serial clock
 (SCL)</li>
 <li>The most common I2C communication speeds are normal mode with 100 kHz and fast mode with 400 kHz.</li>
-<li>I2C relies of device addressing to allow talking to a single device on a shared bus.</li>
+<li>I2C relies on device addressing to allow talking to a single device on a shared bus.</li>
 <li>An I2C transaction can be abstracted with three operations: <code>read</code>, <code>write</code> and <code>read_write</code>.</li>
 </ul>
-<p>The Rust embedded-hal crate provide generic traits that portable device drivers and HAL implementations
+<p>The Rust embedded-hal crate provides generic traits that portable device drivers and HAL implementations
 need to agree on. You can have a look at how these basic bus properties were captured in the
 <a href="https://docs.rs/embedded-hal/1.0.0/embedded_hal/i2c/trait.I2c.html">I2C trait</a>. Notice how its
 API functions expect a device address and are named <code>read</code>, <code>write</code> and <code>read_write</code>.</p>
@@ -894,12 +906,12 @@ other devices.</p>
 out that the SDA pin is mapped to P0.16 and the SCL pin is mapped to P0.08. There are also
 external I2C pins, but those are routed to the edge connector and are used to connect
 external devices.</p>
-<p>When it comes to writing device drivers, you generally want to wrap the driver object or some
-useful abstraction of it to talk with your device. For this device, you would wrap some
-I2C driver. We can omit some abstraction because we know that we are never going to share the bus,
+<p>When it comes to writing device drivers, you will generally wrap the communication driver object
+in your driver. For this device, you would wrap some I2C driver. We can omit some abstraction
+because we know that we are never going to share the bus,
 and we do not want to write a portable driver. This means we can wrap the bus driver provided
-by the HAL. Nordic uses a different name for the I2C protocol and calls it TWI (two-write interface).
-There is a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/index.html"><code>twim</code></a> providing
+by the HAL. Nordic uses a different name for the I2C protocol and calls it TWI (two-wire interface).
+There is a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/index.html"><code>twim</code></a> which provides
 support for the Two Wire Interface in master mode, which is relevant for us.</p>
 <h2 id="step-1---create-the-i2ctwi-driver"><a class="header" href="#step-1---create-the-i2ctwi-driver">Step 1 - Create the I2C/TWI driver</a></h2>
 <p>Open the <code>src/bin/motion_sensor.rs</code> file. Start creating the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/struct.Twim.html"><code>twim</code> driver</a> and storing it into an object named <code>i2c_bus</code>.
@@ -940,8 +952,9 @@ bind_interrupts!(struct Irqs {
 </details>
 <h2 id="step-2---create-the-basic-driver-object"><a class="header" href="#step-2---create-the-basic-driver-object">Step 2 - Create the basic driver object</a></h2>
 <p>You are now going to create a driver object instead of just re-using existing library code in your
-application. Go into the <code>src/motion_sensor.rs</code> file. This file/module is already included
-in <code>src/lib.rs</code> for you, but it is empty. Start by creating a empty structure named <code>Accelerometer</code> here.</p>
+application. Go into the <code>src/motion_sensor.rs</code> file which is part of the crate library. This
+file/module is already included in <code>src/lib.rs</code> for you, but it is empty. Start by creating an empty
+structure named <code>Accelerometer</code> here.</p>
 <p>Then add one field to that structure: The I2C driver you just created. You actually need a lifetime
 of <code>Accelerometer</code> now because the I2C driver has a lifetime as well.</p>
 <details>
@@ -953,10 +966,10 @@ of <code>Accelerometer</code> now because the I2C driver has a lifetime as well.
 <span class="boring">}</span></code></pre>
 </details>
 <h2 id="step-3---add-a-constructor"><a class="header" href="#step-3---add-a-constructor">Step 3 - Add a constructor</a></h2>
-<p>Add a constructor to your driver object by adding a <code>new</code> method with returns <code>Self</code>. In the most
-simple form, the constructor could simply take the I2C bus as an input argument and then creates and
-returns itself.</p>
-<p>However, we also want to verify that the communication with out device works properly. Sensors
+<p>Add a constructor to your driver object by adding a <code>new</code> method which returns <code>Self</code>. In the most
+simple form, the constructor could simply take the I2C bus as an input argument and then create and
+return itself.</p>
+<p>However, we also want to verify that the communication with our device works properly. Sensors
 from ST microelectronics commonly have a WHO AM I register which you can read to verify
 basic sensor communication. The value read from this register should have a fixed value that
 you can check. Your task is to add a constructor which constructs <code>Accelerometer</code>, checks the
@@ -1014,7 +1027,7 @@ We already provided hints what you have to send and how much you have to read ba
 the WHO AM I register and verify its value. From the datasheet, we can determine the expected value
 to be <code>0b00110011</code>. You can create a constant or associated constant on the <code>Accelerometer</code> object
 to store the expected value.</p>
-<p>First of all, we mentioned that you always have to pass the device address when using the I2C driver
+<p>We mentioned that you always have to pass the device address when using the I2C driver
 API. For the accelerometer, that address has a fixed value of <code>0x19</code> that you can retrieve
 from the microbit v2 schematic or from the sensor datasheet. Create an associated constant
 <code>ADDR</code> on the <code>Accelerometer</code> driver which has that value.</p>
@@ -1055,6 +1068,9 @@ impl Accelerometer&lt;'_&gt; {
 <p>The interaction with other registers is comparable. In general if you want to read registers,
 you still have to use <code>read_write</code> to select the correct registers, while you can just use
 <code>write</code> if you only want to write to a register.</p>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step3.rs</code></p>
+</blockquote>
 <h2 id="step-4---configure-the-sensor"><a class="header" href="#step-4---configure-the-sensor">Step 4 - Configure the sensor</a></h2>
 <p>Now you have a driver instance, but you actually want to read some sensor values. We tried
 this for you before, and wondered why the accelerometer readings returned all zero. It turns
@@ -1063,8 +1079,8 @@ first.</p>
 <p>We extracted the definition of <code>CTRL_REG1_A</code> on page 47 of the datasheet for you:</p>
 <p><img src="assets/ctrl-reg-1.png" alt="Control Register 1"></p>
 <p>The device is in Power-Down mode on startup. This is the most important control register
-because it allows use to set the output data rate (ODR), enabling the device and
-individual axes. The datasheet specifies a 8-bit register configuration.</p>
+because it allows us to set the output data rate (ODR), enabling the device and
+individual axes. The datasheet specifies an 8-bit register configuration.</p>
 <ul>
 <li>Bits 7 down to 4 are the ODR3 to ODR0 configuration bits</li>
 <li>Bit 3 is the low power enable bit</li>
@@ -1074,7 +1090,7 @@ individual axes. The datasheet specifies a 8-bit register configuration.</p>
 registers and then provides a convenient API to build the register value which avoids
 the need to write bitshifts and masks.</p>
 <p>Have a look at the examples from the <a href="https://github.com/danlehmann/bitfield"><code>bitbybit</code></a>
-crate and try to specify this registeres using <code>bitbybit::bitfield</code>. Adding <code>default = 0x0</code>
+crate and try to specify this register using <code>bitbybit::bitfield</code>. Adding <code>default = 0x0</code>
 inside proc macro attributes also adds a builder API which is useful for us while <code>debug</code> adds
 an improved <code>Debug</code> implementation. This can be combined with the
 <a href="https://docs.rs/arbitrary-int/latest/arbitrary_int/index.html"><code>arbitrary-int</code></a> library.
@@ -1118,7 +1134,7 @@ pub struct ControlReg1 {
 <span class="boring">}</span></code></pre>
 </details>
 <p>Now you have everything you need to update the register. The excerpt of the datasheet also
-shows the register ID, whic his <code>0x20</code>. Add the <code>CtrlReg1</code> variant to the <code>Register</code> enumeration
+shows the register ID, which is <code>0x20</code>. Add the <code>CtrlReg1</code> variant to the <code>Register</code> enumeration
 you created before. You can now use the <a href="https://github.com/danlehmann/bitfield#setting-all-fields-at-once-using-the-builder-syntax">builder API</a> on <code>ControlReg1</code> to build the target
 configuration.</p>
 <p>Use <code>i2c.write</code> inside the constructor to write the <code>ControlReg1</code> to the right register ID,
@@ -1154,6 +1170,9 @@ first byte, and the register value as the second byte.</p>
     }
 <span class="boring">}</span></code></pre>
 </details>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step4.rs</code></p>
+</blockquote>
 <h2 id="step-5---read-the-raw-accelerometer-values"><a class="header" href="#step-5---read-the-raw-accelerometer-values">Step 5 - Read the raw accelerometer values</a></h2>
 <p>Now we can read the raw sensor values. By looking at the register mapping on page 43 of the
 datasheet again, we can figure out the base addresses of the sensor readout:</p>
@@ -1177,9 +1196,9 @@ read. This allows us to read all 6 registers with one I2C <code>write_read</code
 <p>The <code>_raw</code> suffix makes it clear that those are raw sensor values which are not worth much on
 their own and still require some processing and conversion to proper units.</p>
 <p>What do we actually return? A simple way would be to return a <code>(u16, u16, u16)</code> tuple.
-YOu can also create a dedicated named structure and this is what we are going to do.</p>
+You can also create a dedicated named structure and this is what we are going to do.</p>
 <p>Add a structure named <code>ReadoutRaw</code>, which has <code>x</code>, <code>y</code> and <code>z</code> public fields.
-You can add common dervies like <code>Debug</code>, <code>Copy</code>, <code>Clone</code>, <code>defmt::Format</code> as well.</p>
+You can add common derives like <code>Debug</code>, <code>Copy</code>, <code>Clone</code>, <code>defmt::Format</code> as well.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1253,18 +1272,21 @@ impl Accelerometer&lt;'_&gt; {
 }
 <span class="boring">}</span></code></pre>
 </details>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step5.rs</code></p>
+</blockquote>
 <h2 id="step-6---convert-and-read-the-values-in-the-si-unit-mg"><a class="header" href="#step-6---convert-and-read-the-values-in-the-si-unit-mg">Step 6 - Convert and read the values in the SI unit mg</a></h2>
 <p>Those raw values are not worth much by themselves. There are some conversion steps that we
 need to do. The datasheet specifies the raw binary format as a left-adjusted signed <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two-complement number</a>.
-There are 2 conversion steps require here:</p>
+There are 2 conversion steps required here:</p>
 <ol>
 <li>Eliminate trailing bytes depending on the selected resolution. We specified that this device has different
 resolution rates represented by bits. We can assume normal resolution (10-bits). This means
 that our relevant value will be placed on bit positions 15 downto 6. The simplest way to
-performing this scaling is by right-shifting by 6.</li>
+perform this scaling is by right-shifting by 6.</li>
 <li>Scale the result to achieve our value in SI units. The datasheet specifies the sensitivity
-for a full scale of += 2g in mg per digit. You need to multiply the raw value with that table
-value. However, that table value also need to lineary scale with the full scale.</li>
+for a full scale of +- 2g in mg per digit. You need to multiply the raw value with that table
+value. However, that table value also needs to linearly scale with the full scale.</li>
 </ol>
 <p>A general formula for the acceleration which should have been provided in the datasheet but
 is not for mysterious reasons, can therefore be written as:</p>
@@ -1285,7 +1307,7 @@ resolution.</li>
 in the future. Introduce two new enumerations which allow modelling this: A <code>Mode</code> enumeration
 and a <code>FullScale</code> enumeration in the library. The <code>Mode</code> enumeration should include the Power Down,
 Low Power, Normal and High Resolution Mode. The <code>FullScale</code> should include all full scales that this
-device supports. You can no specify enum variants with leading numbers, but you can use a
+device supports. You cannot specify enum variants with leading numbers, but you can use a
 leading underscore to allow this. In the full scale enumeration, assign the actual full scale
 value as the enum value.</p>
 <details>
@@ -1383,7 +1405,7 @@ pub struct Readout {
 <li><code>z_mg</code> which returns Z axis value in mg as an <code>i32</code>.</li>
 <li><code>xyz_mg</code> which returns the value of all axes in mg as a <code>(i32, i32, i32)</code></li>
 </ul>
-<p>Use the formula we specified above the the methods we added to do this.</p>
+<p>Use the formula we specified above and the methods we added to do this.</p>
 <details>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1413,7 +1435,7 @@ pub struct Readout {
 }
 <span class="boring">}</span></code></pre>
 </details>
-<p>Finally, we want to have a convenience method called <code>read</code> on our drier which
+<p>Finally, we want to have a convenience method called <code>read</code> on our driver which
 returns this <code>Readout</code> structure. Add that method and re-use the <code>read_raw</code> method
 that you have already written to initialize the <code>raw</code> field of the <code>Readout</code> structure.
 You can initialize the <code>full_scale</code> and <code>mode</code> field from the cached values of the driver.</p>
@@ -1470,15 +1492,630 @@ Call the <code>read</code> method periodically inside a loop and print the xyz v
 0.055694 [INFO ] Accelerations (mg): (-44, -228, 984) (accelerometer_solution src/bin/accelerometer_solution.rs:43)
 </code></pre>
 <p>Your acceleration values may vary slightly based on the orientation of your micro:bit. Regardless,
-you should measure an acceleration of around 1g, whic his the normal force that counteracts gravity when the
+you should measure an acceleration of around 1g, which is the normal force that counteracts gravity when the
 device rests on a surface.</p>
 <p>You can now try things like shaking the device to see how the x and y axis react to this.
 If you have something to cushion the fall, you could also do a freefall test, which should make the
 1g counter force you normally see disappear while the device is free-falling. You might also
-see spikes when the micro:bit is suddenly decelerated after hits a surface after free-falling.</p>
+see spikes when the micro:bit is suddenly decelerated after it hits a surface after free-falling.</p>
 <p>You might wonder why an e-compass module has an accelerometer. You can actually use an accelerometer
 to account for device tilt combined with the magnetometer for the north direction measurement. This is
 a basic form of sensor fusion which can be used to improve the quality of the compass.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="multi-tasking-exercise-and-ipc"><a class="header" href="#multi-tasking-exercise-and-ipc">Multi-tasking exercise and IPC</a></h1>
+<p>In this exercise, you will learn how to do pre-emptive multi-tasking with embassy. You will also
+learn some basic ways to do communication between tasks, which is commonly called inter-process
+communication (IPC).</p>
+<h2 id="multi-tasking-on-embedded-systems"><a class="header" href="#multi-tasking-on-embedded-systems">Multi-tasking on embedded systems</a></h2>
+<p>Most non-trivial embedded applications have to perform multiple tasks at once. Some
+of these tasks might have real-time constraints which means that the tasks need to be performed
+within a certain time frame.</p>
+<p>You could write a super loop firmware, where a custom state machine takes care of performing
+all tasks at once. However, this quickly gets unwieldy as the number of tasks grows. Furthermore,
+it is error-prone when trying to fulfill real-time constraints because a CPU intensive task
+in your state machine could violate those constraints.</p>
+<p>In the C/C++ world, you would use a real-time operating system instead, which will always
+include some way to schedule tasks which run concurrently. Concurrency is the general term
+of performing multi-tasking on a computing system. It also works on single-core systems by
+letting a scheduler switch between multiple tasks quickly.</p>
+<p>There is a distinction between scheduling types:</p>
+<ul>
+<li>Pre-emptive scheduling - This type is more suitable for real-time requirements. Tasks can have
+priorities. If a higher-priority task needs work to be done, it will pre-empt a lower priority
+task to ensure the task gets done as quickly as possible. Pre-emption means that the scheduler
+will switch from the low priority tasks to the high priority task to service it as quickly
+as possible.</li>
+<li>Cooperative scheduling - Each task will run until completion or until the work is done. After
+that, the task will yield to the operating system, which means ceding control to the scheduler
+so it can start running other (higher-priority) tasks. This means that a low priority task could
+stop another high priority task from being executed in time.</li>
+</ul>
+<p>Interrupts are a special case here. On Cortex-M <a href="#terminology-and-glossary">MCUs</a> like the one
+we have on the micro:bit, there is a distinction between thread mode and interrupt mode. Thread mode
+is the default mode where the CPU executes your regular code. Interrupt mode is used when an
+interrupt occurs and the CPU executes an interrupt handler. An interrupt will always pre-empt the
+thread mode and can be treated like a pre-emptive task as well.</p>
+<p>The default embassy executor runs all <code>async</code> tasks in cooperative mode. You need to cede control
+in your <code>async</code> tasks by using <code>await</code> somewhere or a task might monopolize all the CPU time. This
+makes it harder to ensure your system meets real-time requirements. Moreover, a task with a bug could
+monopolize all the CPU time
+and stop other tasks from running. Doing this is a bug on a pre-emptive system as well, but the
+consequences are more direct on a system like this. You could use interrupts to allow fulfilling real-time
+requirements on important tasks. However, for technical reasons, interrupt handlers must
+be regular synchronous functions. Is it possible to have pre-emptive tasks while still being
+able to use <code>async</code>? embassy provides the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.InterruptExecutor.html"><code>InterruptExecutor</code></a>
+feature as the answer.</p>
+<p>You can still have your regular <code>async</code> tasks, but they will now be scheduled by the interrupt mode
+of the processor. The processor also allows assigning priorities to an interrupt handler, which
+means that all the tasks scheduled by a certain interrupt handler inherit that handler’s priority.</p>
+<h2 id="step-1---create-a-second-task"><a class="header" href="#step-1---create-a-second-task">Step 1 - Create a second task</a></h2>
+<p>The first step is to create a second task which prints something when the left user button (A)
+is pressed. We actually provided a component that you can use for this. The <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/gpiote/struct.InputChannel.html">InputChannel</a>
+can be used to listen for events on GPIO input channels, which includes voltage transitions
+on those channels which occur when the button is pressed.</p>
+<p>It is really simple to add a new task in <code>embassy</code>: Create a new <code>async fn &lt;task_name&gt;()</code>
+and annotate it with the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/attr.task.html"><code>embassy_executor::task</code></a>
+attribute. You can even pass input arguments to the function, but you can not use lifetimes or
+generics on the task function itself.</p>
+<p>A task also needs to be spawned so the executor will schedule and run it. You can use the
+<a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.Spawner.html"><code>spawner</code></a> for this
+which is passed as an input argument to your main method. You need to pass the call of your new
+<code>async</code> task to the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.Spawner.html#method.spawn"><code>spawn</code></a>
+method for this to work.</p>
+<details>
+<p>Declaration of the new task:</p>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[embassy_executor::task]
+async fn new_task() {
+    loop {
+        defmt::info!("my new task");
+        embassy::time::Timer::after(Duration::from_secs(1)).await;
+    }
+}
+<span class="boring">}</span></code></pre>
+<p>and somewhere in your <code>main</code> function:</p>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>spawner.spawn(new_task().expect("spawning task failed"));
+<span class="boring">}</span></code></pre>
+<p>The <code>expect</code> or <code>unwrap</code> is okay here. The only case where spawning a function may fail is when
+you are spawning multiple instances of the same task.</p>
+</details>
+<p>Now we want to actually check for edges (voltage transitions) on the GPIO input connected to the
+button. For this, you need to pass the <code>button_left_async</code> driver object we provided for you
+to the task. The type of this driver is <code>gpiote::InputChannel&lt;'static&gt;</code>. You can transfer this
+driver to the task by declaring it as an input argument to your new task.</p>
+<details>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn left_button_task(left_button: gpiote::InputChannel&lt;'static&gt;) {
+    loop {
+        defmt::info!("my new task");
+        embassy::time::Timer::after(Duration::from_secs(1)).await;
+    }
+}
+<span class="boring">}</span></code></pre>
+<p>and in your main:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>spawner.spawn(new_task(button_left_async).expect("spawning task failed"));
+<span class="boring">}</span></code></pre>
+</details>
+<h3 id="debouncing-a-gpio-line"><a class="header" href="#debouncing-a-gpio-line">Debouncing a GPIO line</a></h3>
+<p>Before we talk about how you can check for button presses in software, we need to talk a bit about some
+things that can happen on the GPIO digital line when you press the button.</p>
+<p>A button is implemented as a mechanical switch. When you press the button, you are actually
+closing the contacts of a circuit. You can have a look at how this is wired up in the following
+image extracted from the schematic:</p>
+<p><img src="assets/button-connection.png" alt="Button Schematic"></p>
+<p>This is a really common way to connect a button to an input pin using a <a href="https://en.wikipedia.org/wiki/Pull-up_resistor">pull-up resistor</a>.
+The Wikipedia link provides some more information, but we will provide a simplified explanation
+here: Without the connection of the input pin to the supply voltage through a resistor, you would
+have a floating pin without a determined state when the switch is open.
+The pull-up resistor pulls the voltage on the pin up to the supply voltage when the switch is open
+(button is not pressed), so you will measure a digital high when reading the input pin.
+When the switch is closed (button pressed), you have a voltage divider, where all the voltage drops
+across the pull-up resistor. Consequently, you will read a digital low when reading the input pin.</p>
+<p>The problem with mechanical switches is that they can bounce, which means that you might see
+fluctuations on the digital line when you press the button. The following image provides a nice
+visualization:</p>
+<p><img src="assets/debouce-graph.png" alt="Bouncing state"></p>
+<p>These bounces can make the measurement of edges imprecise. You might measure multiple edge events
+in software even when you only press the button once. To avoid this, you can debounce the button.
+A really simple way to do this would be to perform the following sequence:</p>
+<ol>
+<li>Wait for a high-to-low edge to occur</li>
+<li>Wait for a small delay, for example 10 to 20 milliseconds</li>
+<li>Wait for a low-to-high edge to occur. This might already be the case.</li>
+<li>Wait for a small delay, for example 10 to 20 milliseconds</li>
+<li>Go back to step 1.</li>
+</ol>
+<p>Usually, you want to do something when you detect a button press. You can do this between step
+3 and 4 or after step 4.</p>
+<h2 id="detecting-edges-on-a-gpio-line"><a class="header" href="#detecting-edges-on-a-gpio-line">Detecting edges on a GPIO line</a></h2>
+<p>You should have all the information you need now. The <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/gpiote/struct.InputChannel.html"><code>InputChannel</code></a> driver provides an
+<code>async</code> <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/gpiote/struct.InputChannel.html#method.wait_for_high"><code>wait_for_high</code></a>
+and <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/gpiote/struct.InputChannel.html#method.wait_for_low"><code>wait_for_low</code></a>
+method. Use these functions and implement a debounced button press detection.</p>
+<details>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[embassy_executor::task]
+async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
+    loop {
+        button_a.wait_for_low().await;
+        // Debounce the button.
+        embassy_time::Timer::after(Duration::from_millis(20)).await;
+        button_a.wait_for_high().await;
+        // Debounce the button.
+        embassy_time::Timer::after(Duration::from_millis(20)).await;
+        defmt::info!("The left button was pressed");
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>When you have implemented this, test this by flashing the app using <code>cargo run --bin multitasking_ipc</code>,
+pressing the left button and observing the program output.</p>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step1.rs</code></p>
+</blockquote>
+<h2 id="step-2---third-task-scheduled-by-an-interrupt-scheduler"><a class="header" href="#step-2---third-task-scheduled-by-an-interrupt-scheduler">Step 2 - Third task scheduled by an interrupt scheduler</a></h2>
+<p>Now, we want to run a third task which is responsible for doing the same process for the
+right button. You can declare the task similarly to how you declared the second task. The only
+thing that changes when using another scheduler is how the task is spawned.</p>
+<p>Add the declaration of the third task which does the same logic, but for the right button
+<code>right_button_async</code>.</p>
+<details>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[embassy_executor::task]
+async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
+    loop {
+        button_b.wait_for_low().await;
+        // Debounce the button.
+        embassy_time::Timer::after(Duration::from_millis(20)).await;
+        button_b.wait_for_high().await;
+        // Debounce the button.
+        embassy_time::Timer::after(Duration::from_millis(20)).await;
+        defmt::info!("The right button was pressed");
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>We mentioned that you can use the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.InterruptExecutor.html"><code>InterruptExecutor</code></a>
+provided by embassy. You have to activate support for it with a feature, but we already did this for
+you for the <code>embassy-executor</code> dependency. If you look at the API of the executor, you can see
+that its methods are only available for instances with a <code>'static</code> lifetime. This means
+that you have to create the executor as a global static. This is necessary anyway so you can
+use it inside an interrupt handler.</p>
+<p>Create a static variable <code>INTERRUPT_EXECUTOR</code> as a global. If you are not sure how the syntax
+of this works: You can declare a static variable by using <code>static &lt;VAR_NAME&gt;: &lt;VarType&gt; = &lt;Construction/Instantiation&gt;</code>
+In this case, the constructor is a call of the <code>new</code> method of the executor.</p>
+<details>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>static INTERRUPT_EXECUTOR: embassy_executor::InterruptExecutor = embassy_executor::InterruptExecutor::new();
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now, you can use <code>start</code> method of the executor to start it. You need to assign an interrupt by
+passing an <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/interrupt/enum.Interrupt.html"><code>Interrupt</code> enum variant</a>
+to the method. The <code>start</code> method will pend the interrupt, causing it to fire immediately. It will also return
+a spawner object that you can use to assign tasks to that executor.
+You can use any interrupt normally dedicated for a hardware unit that we are not using, for example
+the <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/interrupt/enum.Interrupt.html#variant.QDEC"><code>QDEC</code> variant</a>.
+Some CPU architectures offer dedicated software interrupts, but this one does not.</p>
+<p>Call the <code>start</code> method in your main routine and store the spawner inside a <code>interrupt_exec_spawner</code>
+object. Use the <code>QDEC</code> interrupt variant as the input argument. Do not run the code just yet!</p>
+<details>
+<p>Inside your main method:</p>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let interrupt_exec_spawner = INTERRUPT_EXECUTOR.start(embassy_nrf::interrupt::Interrupt::QDEC);
+<span class="boring">}</span></code></pre>
+</details>
+<p>You also need to declare an interrupt handler. If you did not do that, a default handler which is
+an empty loop would be executed. Inside the interrupt handler, you need to call the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.InterruptExecutor.html#method.on_interrupt"><code>on_interrupt</code> method</a>
+of the interrupt executor. The <code>cortex-m-rt</code> run-time library takes care of exposing a mechanism
+which allows us to declare interrupt handlers. You have to use the following import statement
+to get access to the <code>interrupt</code> macro:</p>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use embassy_nrf::interrupt;
+<span class="boring">}</span></code></pre>
+<p>Then, you can annotate a regular function with that exact macro. The function must have
+the exact name of the enum variant we showed you earlier, in our case <code>QDEC</code>.</p>
+<p>So this would look like:</p>
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use embassy_nrf::interrupt;
+
+#[interrupt]
+fn QDEC() {
+    // Interrupt handler code here.
+}
+<span class="boring">}</span></code></pre>
+<p>The special property of this function is that it is not called by software regularly.
+Instead, this function is called by the hardware when the QDEC interrupt fires. Normally,
+it would be used to service the QDEC peripheral, but we are using it to run our interrupt
+scheduler now instead.</p>
+<p>Call the interrupt executor <code>on_interrupt</code> method inside the interrupt handler. It is an <code>unsafe</code>
+method because calling it has safety constraints that the compiler can not prove. In this
+case, we can fulfill the constraints by only calling this function once in the correct
+interrupt handler. It is good practice to document your unsafe code blocks with a <code>// Safety:</code>
+note, so you should do that as well.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use embassy_nrf::interrupt;
+
+#[interrupt]
+fn QDEC() {
+    // Safety: We only call this once inside the interrupt handler.
+    unsafe {
+        INTERRUPT_EXECUTOR.on_interrupt();
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Finally, you can use the <code>interrupt_exec_spawner</code> object inside your main method to spawn the third
+task that you created.</p>
+<details>
+<p>Inside your main method:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let interrupt_exec_spawner = INTERRUPT_EXECUTOR.start(embassy_nrf::interrupt::Interrupt::QDEC);
+interrupt_exec_spawner.spawn(right_button_task(button_right_async)).expect("spawning task failed");
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now verify that everything is working by running the application, pressing the right button (B)
+and observing the program output.</p>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step2.rs</code></p>
+</blockquote>
+<h2 id="step-3---signalling-our-main-application"><a class="header" href="#step-3---signalling-our-main-application">Step 3 - Signalling our main application</a></h2>
+<p>One common task in complex applications is the communication between concurrent tasks. This
+is called inter-process communication (IPC). The <code>embassy</code> framework provides the
+<a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/index.html"><code>embassy-sync</code></a> library which
+is an embedded and async friendly IPC library. We are going to use this library to facilitate
+communication between the main task and the button tasks.</p>
+<p>The <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/signal/struct.Signal.html"><code>Signal</code></a>
+object provides a simple signalling mechanism which can be used to allow one task to notify
+another one. In this case, your task will be to use this mechanism to notify the main task
+about the button press. In the main task, you should listen to the signalling mechanism
+and switch between two modes: An <code>On</code> mode where the LED is toggled periodically, and an <code>Off</code>
+mode where it is off. You can create some enumeration to model these states, or you can just
+use a boolean.</p>
+<p>The signal mechanism is shared between tasks. The intended way to share it is to create
+a static instance of it which can be used by both tasks. You can have a look at the
+<a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/signal/struct.Signal.html"><code>Signal</code> example code</a>.</p>
+<p>Notice the first generic argument, which is a <code>CriticalSectionRawMutex</code> in this case. The
+<code>Signal</code> abstraction takes care of synchronization internally to avoid data races, and allows
+configuring the lock mechanism for that. In our case, we can use a cheaper synchronization
+mechanism by using the <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/blocking_mutex/raw/struct.ThreadModeRawMutex.html"><code>ThreadModeRawMutex</code></a>
+instead. It is valid to use this lock because we are on a single-core system and both of our tasks
+are regular cooperative tasks running in thread-mode.</p>
+<p>Create a static instance called <code>SIGNAL_LEFT_BUTTON</code>. The signal mechanism also allows
+specifying some signal type as the second generic argument, which can be sent during a notification.
+In this case, there is no additional information required, so a unit value <code>()</code> can be used.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>static SIGNAL_LEFT_BUTTON: Signal&lt;ThreadModeRawMutex, ()&gt; = Signal::new();
+<span class="boring">}</span></code></pre>
+</details>
+<p>All the <a href="https://docs.embassy.dev/embassy-sync/git/default/signal/struct.Signal.html">API</a> on signal
+only requires a shared reference, and you can use the <code>signal</code>, <code>wait</code> and <code>try_take</code> function to
+signal from the button task and wait in the main task respectively.</p>
+<p>In your task which waits for button A presses, add a call to the <code>signal</code> function after detecting
+a button press.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[embassy_executor::task]
+async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
+    loop {
+        button_a.wait_for_low().await;
+        // Debounce the button.
+        embassy_time::Timer::after(Duration::from_millis(20)).await;
+        button_a.wait_for_high().await;
+        // Debounce the button.
+        embassy_time::Timer::after(Duration::from_millis(20)).await;
+        SIGNAL_LEFT_BUTTON.signal(());
+        defmt::info!("The left button was pressed");
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step3.rs</code></p>
+</blockquote>
+<h2 id="step-4---using-the-signal-in-the-main-task"><a class="header" href="#step-4---using-the-signal-in-the-main-task">Step 4 - Using the signal in the main task</a></h2>
+<p>In the main task, you also have the issue that you have to perform two tasks now: Handling the
+blinking of the first task periodically while also doing the same for the second LED in combination
+with checking the signal state. You could fix this with an additional task, but then you would have
+to add some lock mechanism to share the LED strip across both tasks. Asynchronous Rust
+also allows an alternative way to perform multiple tasks in the same <code>async</code> task.</p>
+<p>The <a href="https://docs.rs/embassy-futures/latest/embassy_futures/select/fn.select.html"><code>select</code></a> API
+allows polling two asynchronous tasks in the same loop. We have already imported the required
+<code>embassy-futures</code> API for you. Concerning the application logic, it is usually still best
+from a readability standpoint to have distinct <code>async</code> functions which perform their specialized
+task. You can wrap the <code>LedStrip</code> driver in a <a href="https://doc.rust-lang.org/core/cell/struct.RefCell.html"><code>core::cell::RefCell</code></a>
+and then pass a shared reference to that structure to each <code>async</code> function to share the driver
+safely across multiple <code>async</code> functions. This is valid because the <code>async</code> functions are all
+part of the same <code>async</code> task, so there is no way for one <code>async</code> function to pre-empt another,
+which could cause multiple borrows of the driver. We are going to take care of creating
+these <code>async</code> functions first.</p>
+<p>Extract the existing task which toggles the top left LED into a distinct <code>async</code> task called
+<code>main_led_task</code> first. Pass a shared reference to <code>RefCell&lt;LedStrip&lt;'a&gt;&gt;</code> to it. Also note that
+the limitation that you are not allowed to use lifetimes only applies to <code>async</code> tasks
+annotated by the <code>embassy_executor::task</code> macro.
+You have to update the main task and call <code>borrow_mut</code> on the wrapper driver object to actually
+retrieve and toggle the LED in the task now.</p>
+<details>
+<pre class="playground"><code class="language-rust">async fn main_led_task&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
+    loop {
+        led_strip.borrow_mut().toggle(0);
+        Timer::after(Duration::from_millis(500)).await;
+    }
+}</code></pre>
+</details>
+<p>We will now create the new <code>async</code> task for toggling the left LED and implementing the target logic.
+We actually need two states now: A <code>TOGGLING</code> state and an <code>OFF</code> state, which is toggled when we are
+signalled by the button task.</p>
+<p>Create a boolean or an enumeration for modelling the state now. We recommend an explicit state
+enumeration: It is more readable and allows easier extension. It makes sense to add a <code>toggle</code>
+implementation to the enumeration as well for an even more readable API.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, Clone, Copy)]
+pub enum BlinkState {
+    Toggling,
+    Off,
+}
+
+impl BlinkState {
+    pub fn toggle(&amp;mut self) {
+        *self = match self {
+            BlinkState::Toggling =&gt; BlinkState::Off,
+            BlinkState::Off =&gt; BlinkState::Toggling,
+        }
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now create the second <code>async</code> task. Pass in the driver similarly to how you did it in the main LED
+task. Create a new instance of your state variable and initialize it to the logical <code>OFF</code> state.</p>
+<p>Start with a simple implementation which toggles the LED every 250 milliseconds if
+the blink state is in the <code>TOGGLING</code> state.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn left_led_task&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
+    let blink_state = BlinkState::Off;
+    loop {
+        if blink_state == BlinkState::Toggling {
+            led_strip.borrow_mut().toggle(1);
+        }
+        Timer::after(Duration::from_millis(250)).await;
+    }
+}
+<span class="boring">}</span></code></pre>
+<p>Now, you actually need to add the logic to wait for a signal from the button task while also
+performing the periodic waiting. You can use the same <code>select</code> API you used earlier to select
+between two asynchronous tasks and stop on the first one which is resolved to completion.
+In this case, you can <code>select</code> between the timer elapsing after 250 ms and the <code>wait</code> call
+on the signal. Implement and use it in your task like explained. Calling the <code>select</code> method
+creates a new future which you can <code>await</code>. It will return the <a href="https://docs.rs/embassy-futures/latest/embassy_futures/select/enum.Either.html"><code>Either</code></a>
+object which notifies you which <code>async</code> event was resolved to completion.</p>
+<p>Change your left blinky <code>async</code> function and call the <code>select</code> API to wait on both
+the periodic delay and the wait method of the signal, whichever finishes first. Match on the
+<code>await</code>ed select call.</p>
+<p>In the branch for the periodic delay, toggle the LED if you are in the <code>TOGGLING</code> state.
+In the branch for the signal handling, toggle the blink state variable. It makes sense to
+also turn the LED off when going to the <code>OFF</code> state.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn left_blinky&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
+    let mut blink_state = BlinkState::Off;
+    loop {
+        match embassy_futures::select::select(
+            SIGNAL_LEFT_BUTTON.wait(),
+            Timer::after(Duration::from_millis(250)),
+        )
+        .await
+        {
+            embassy_futures::select::Either::First(_) =&gt; {
+                blink_state.toggle();
+                if let BlinkState::Off = blink_state {
+                    led_strip.borrow_mut().off(1);
+                }
+            }
+            embassy_futures::select::Either::Second(_) =&gt; {
+                if let BlinkState::Toggling = blink_state {
+                    led_strip.borrow_mut().toggle(1);
+                }
+            }
+        }
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Now, all that is left to do is to execute both the <code>left_blinky</code> and the <code>main_led_task</code>
+inside your <code>main</code> task. As already mentioned, you can also use the <code>select</code> API for this, but
+you do not need to match on the output of the <code>select</code> call. Instead, you can poll both of these
+async tasks in a permanent loop.</p>
+<details>
+<p>At the end of your main task:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let line_strip_shared = core::cell::RefCell::new(line_strip);
+    loop {
+        embassy_futures::select::select(
+            main_led_task(&amp;line_strip_shared),
+            left_blinky(&amp;line_strip_shared),
+        )
+        .await;
+    }
+<span class="boring">}</span></code></pre>
+</details>
+<p>You can now test this using <code>cargo run --bin multitasking_ipc</code>.</p>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step4.rs</code></p>
+</blockquote>
+<h2 id="step-5---send-a-message-from-the-third-task-on-a-button-press"><a class="header" href="#step-5---send-a-message-from-the-third-task-on-a-button-press">Step 5 - Send a message from the third task on a button press</a></h2>
+<p>We now want to teach another common IPC mechanism: Message queues. The embassy <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/channel/struct.Channel.html"><code>Channel</code></a>
+provides a static and typed message with async support. We are going to use this channel
+to send information from the right button task to the main task.</p>
+<p>We want to measure the amount of time the button was pressed in the button task and send that
+duration to the main task. Then we can blink the button with that updated frequency.
+Similarly to the channel abstractions offered by the Rust standard library, most channel libraries
+targeting embedded systems offer some way to be split up into a sender and receiver driver object.
+The <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/channel/struct.Channel.html#method.sender"><code>sender</code></a>
+and <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/channel/struct.Channel.html#method.receiver"><code>receiver</code></a>
+allow this.</p>
+<p>Similarly to the <code>Signal</code> object we used earlier, one of the easiest ways to share this channel
+is to declare it as a global static object. Moreover, the lock object <code>M</code> required to avoid data
+races needs to be specified again. This time, we can not use the <code>ThreadModeRawMutex</code> because the
+sender is scheduled inside an interrupt handler and not in thread-mode. The
+<code>CriticalSectionRawMutex</code> is the correct lock now. You also have to specify the size of the queue
+statically as the <code>N</code> generic.</p>
+<p>Create a static <code>CHANNEL_RIGHT_BUTTON</code> instance using the
+<code>embassy_sync::channel::Channel&lt;CriticalSectionRawMutex, embassy_time::Duration, 4&gt;</code> type.</p>
+<details>
+<p>Above your main:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>static CHANNEL_RIGHT_BUTTON: embassy_sync::channel::Channel&lt;
+    CriticalSectionRawMutex,
+    embassy_time::Duration,
+    4,
+&gt; = embassy_sync::channel::Channel::new();
+<span class="boring">}</span></code></pre>
+</details>
+<p>The next step is to measure the duration of the button press. It is very easy to measure
+durations using <code>embassy_time</code> because it offers abstractions similar to the standard library.
+You can retrieve an <code>embassy_time::Duration</code> for the difference between two time points by
+subtracting one embassy <a href="https://docs.rs/embassy-time/latest/embassy_time/struct.Instant.html"><code>Instant</code></a>
+from another:</p>
+<pre class="playground"><code class="language-rust no-run"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let start = embassy_time::Instant::now();
+// Some operation which takes time
+// (...)
+// `elapsed` has the `embassy_time::Duration` type.
+let elapsed = embassy_time::Instant::now() - start;
+<span class="boring">}</span></code></pre>
+<p>Use this to measure the button press duration in your right button task. Then use the
+<code>CHANNEL_RIGHT_BUTTON</code> <code>sender</code> method to retrieve a sender handle and use its <code>send</code> method
+to send the duration to the main task. The <code>send</code> method is an <code>async</code> function that needs
+to be awaited.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[embassy_executor::task]
+async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
+    loop {
+        button_b.wait_for_low().await;
+        let now = embassy_time::Instant::now();
+        // Debounce the button.
+        embassy_time::Timer::after(Duration::from_millis(20)).await;
+        button_b.wait_for_high().await;
+        let elapsed = embassy_time::Instant::now() - now;
+        // Debounce the button.
+        embassy_time::Timer::after(Duration::from_millis(20)).await;
+
+        CHANNEL_RIGHT_BUTTON.sender().send(elapsed).await;
+        defmt::info!("The right button was pressed");
+    }
+}
+<span class="boring">}</span></code></pre>
+</details>
+<blockquote>
+<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step5.rs</code></p>
+</blockquote>
+<h2 id="step-6---handle-blinky-duration-messages-in-main-task"><a class="header" href="#step-6---handle-blinky-duration-messages-in-main-task">Step 6 - Handle blinky duration messages in main task</a></h2>
+<p>As the final step, process the received messages by using the <code>receiver</code> method of
+<code>CHANNEL_RIGHT_BUTTON</code> and its <code>receive</code> method to receive the messages from the right button
+task. You need a state variable to track the current blink frequency which is then updated
+by the messages. You can start with a periodic frequency of 1000 milliseconds.</p>
+<p>One way to cleanly do this is to extract this into a dedicated <code>async</code> function similarly to how
+it was done for handling the signal of the left button task.</p>
+<p><code>embassy-futures</code> offers methods like <a href="https://docs.embassy.dev/embassy-futures/0.1.2/default/select/fn.select3.html"><code>select3</code></a> to allow selecting between more than 2 tasks.</p>
+<details>
+<p>Right blinky task:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn right_blinky&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
+    let mut blink_freq = Duration::from_millis(1000);
+    loop {
+        match embassy_futures::select::select(
+            CHANNEL_RIGHT_BUTTON.receiver().receive(),
+            Timer::after(blink_freq),
+        )
+        .await
+        {
+            embassy_futures::select::Either::First(new_duration) =&gt; {
+                defmt::info!("New blink frequency: {:?} ms", new_duration.as_millis());
+                blink_freq = new_duration;
+            }
+            embassy_futures::select::Either::Second(_) =&gt; {
+                led_strip.borrow_mut().toggle(2);
+            }
+        }
+    }
+}
+<span class="boring">}</span></code></pre>
+<p>main loop:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let line_strip_shared = core::cell::RefCell::new(line_strip);
+    loop {
+        embassy_futures::select::select3(
+            main_led_task(&amp;line_strip_shared),
+            left_blinky(&amp;line_strip_shared),
+            right_blinky(&amp;line_strip_shared),
+        )
+        .await;
+    }
+<span class="boring">}</span></code></pre>
+</details>
+<blockquote>
+<p>Full reference solution file: <code>microbit-exercises/src/bin/multitasking_ipc_solution.rs</code></p>
+</blockquote>
+<h2 id="finishing-up-3"><a class="header" href="#finishing-up-3">Finishing Up</a></h2>
+<p>Run <code>cargo run --bin multitasking_ipc</code> and try pressing the right button down for different
+times. You should see the blink frequency change depending on how long you pressed the button.</p>
+<p>You might have noticed that there are actually multiple ways to specify tasks. You can either
+use <code>async</code> functions annotated with <code>#[embassy_executor::task]</code> or you use methods like
+<code>join</code> or <code>select</code> provided by the <a href="https://docs.embassy.dev/embassy-futures/0.1.2/default/index.html"><code>embassy-futures</code></a>
+crate. Which one is actually better? The <a href="https://embassy.dev/book/index.html#_multiple_tasks_or_one_task_with_multiple_futures"><code>embassy</code> book provides some notes on this</a>.
+Generally, each separate task will require its own (static) RAM allocation, but using <code>select</code> or
+<code>join</code> might require a little bit of more CPU time juggling futures.
+The general recommendation is to use the easier solution because there is no large difference.
+In our case, it made sense to handle the LED strip driver in one task because it is relatively
+easy to share resources across <code>async</code> functions safely using <code>RefCell</code> and <code>Cell</code>.</p>
+<p>You also saw the two primary schedulers that you can use in <code>embassy</code>. If you have deadlines
+on a task or need priorities on tasks, you can use the <a href="https://docs.embassy.dev/embassy-executor/0.10.0/cortex-m/struct.InterruptExecutor.html"><code>InterruptScheduler</code></a> for this.</p>
+<p>There are a lot more abstractions inside the <code>embassy-sync</code> crate that you might find useful.
+For example, you can use the <a href="https://docs.embassy.dev/embassy-sync/git/default/pipe/struct.Pipe.html"><code>Pipe</code></a>
+structure for byte-oriented data like the one received on a UART peripheral.</p>
+<p>You also specified an interrupt handler using the <code>interrupt</code> macro provided by <code>cortex-m-rt</code> and
+re-exported by the HAL. Interrupt handlers actually do not allow input arguments for technical
+reasons. How do you share data with them when you actually need to or want to write your own?
+Unfortunately, the only way here is to use global shared data. Considering that most interrupt
+handlers have the primary purpose to service hardware peripherals, it is okay to also
+instantiate low level device drivers for the assigned peripheral that interrupt handler serves
+directly without any sharing or lock mechanism. Most PACs and HALs will provide that API. Then, you
+can combine it with the data structures provided
+by <code>embassy-sync</code> or with lock objects like <a href="https://docs.embassy.dev/embassy-sync/git/default/mutex/struct.Mutex.html">the embassy <code>Mutex</code></a>
+or the <a href="https://docs.rs/critical-section/latest/critical_section/struct.Mutex.html"><code>critical-section</code> <code>Mutex</code></a>
+to safely share or send data to your regular software tasks. Most <code>async</code> APIs for hardware drivers
+rely on interrupt handlers to function properly. Luckily, most modern HALs offer
+interrupt handlers with explicit support for <code>async</code>. <code>embassy</code> even goes one step further and
+provides a convenient <code>bind_interrupts!</code> macro which declares this function for you so you can not
+forget to do this.</p>
 
                     </main>
 
@@ -1512,11 +2149,11 @@ a basic form of sensor fusion which can be used to improve the quality of the co
 
         <script src="elasticlunr-ef4e11c1.min.js"></script>
         <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="book-c22b7243.js"></script>
 
         <!-- Custom JS scripts -->
 

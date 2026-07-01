@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light sidebar-visible" dir="ltr">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,58 +8,44 @@
 
         <!-- Custom HTML head -->
 
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff">
+        <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
         <!-- MathJax -->
-        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-        <!-- Provide site root and default themes to javascript -->
-        <script>
-            const path_to_root = "";
-            const default_light_theme = "light";
-            const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-6edc01d0.js";
-        </script>
-        <!-- Start loading toc.js asap -->
-        <script src="toc-ab0022af.js"></script>
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
-    <div id="mdbook-help-container">
-        <div id="mdbook-help-popup">
-            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
-            <div>
-                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
-                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
-                <p>Press <kbd>?</kbd> to show this help</p>
-                <p>Press <kbd>Esc</kbd> to hide this help</p>
-            </div>
-        </div>
-    </div>
-    <div id="mdbook-body-container">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script>
+        <script type="text/javascript">
             try {
-                let theme = localStorage.getItem('mdbook-theme');
-                let sidebar = localStorage.getItem('mdbook-sidebar');
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -72,70 +58,57 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script>
-            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
-            let theme;
+        <script type="text/javascript">
+            var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            const html = document.documentElement;
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add("js");
+            html.classList.add('js');
         </script>
 
-        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
-
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script>
-            let sidebar = null;
-            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
-            } else {
-                sidebar = 'hidden';
-                sidebar_toggle.checked = false;
             }
-            if (sidebar === 'visible') {
-                sidebar_toggle.checked = true;
-            } else {
-                html.classList.remove('sidebar-visible');
-            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
-        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
-            <!-- populated by js -->
-            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
-            <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
-            </noscript>
-            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
-                <div class="sidebar-resize-indicator"></div>
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="preparation.html"><strong aria-hidden="true">2.</strong> Preparation</a></li><li class="chapter-item expanded "><a href="terminology_glossary.html"><strong aria-hidden="true">3.</strong> Terminology</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercises</li><li class="chapter-item expanded "><a href="blinky-exercise.html"><strong aria-hidden="true">4.</strong> Blinky Exercise</a></li><li class="chapter-item expanded "><a href="uart-echo-exercise.html"><strong aria-hidden="true">5.</strong> UART echo application</a></li><li class="chapter-item expanded "><a href="accelerometer.html" class="active"><strong aria-hidden="true">6.</strong> Accelerometer Sensor Driver</a></li><li class="chapter-item expanded "><a href="multitasking-ipc-exercise.html"><strong aria-hidden="true">7.</strong> Multi-tasking exercise and IPC</a></li></ol>
             </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <div id="mdbook-page-wrapper" class="page-wrapper">
+        <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="mdbook-menu-bar-hover-placeholder"></div>
-                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
-                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
-                        </label>
-                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
                         </button>
-                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
                         </button>
                     </div>
 
@@ -143,45 +116,40 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                            <i id="print-button" class="fa fa-print"></i>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="mdbook-search-wrapper" class="hidden">
-                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
-                        <div class="search-wrapper">
-                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
-                            <div class="spinner-wrapper">
-                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
-                            </div>
-                        </div>
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
-                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
-                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
-                        <ul id="mdbook-searchresults">
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script>
-                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="mdbook-content" class="content">
+                <div id="content" class="content">
                     <main>
                         <h1 id="accelerometer-sensor-driver"><a class="header" href="#accelerometer-sensor-driver">Accelerometer Sensor Driver</a></h1>
 <p>The micro:bit v2 has an on-board LSM303AGR e-compass module. Writing device drivers is a common
 task in our domain, so that is what we are going to do in this exercise. There are open-source
 drivers <a href="https://docs.rs/lsm303agr/latest/lsm303agr/">available</a>, but we are going to write a new
 one so you can actually learn how this process works. This is an on-board <a href="https://en.wikipedia.org/wiki/MEMS">MEMS</a>
-sensor. It’s tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>.
+sensor. It's tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>.
 Look for the ST LSM303AGR on the board images.</p>
 <p>This is a capable MEMS sensor which has confusing sections in its <a href="https://www.st.com/en/mems-and-sensors/lsm303agr.html">datasheet</a>.
 It uses a lot of abbreviations and expects implicit knowledge. This is unfortunately something that is very
@@ -195,14 +163,14 @@ a nice visualization without requiring a rod magnet to verify sensor readings. T
 of reading and converting raw sensor values remains the same and can be transferred to other
 sensors.</p>
 <h2 id="features-of-the-hardware-sensor"><a class="header" href="#features-of-the-hardware-sensor">Features of the hardware sensor</a></h2>
-<p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">micro:bit docs</a>:</p>
+<p>Let's have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">micro:bit docs</a>:</p>
 <ul>
 <li>e-compass which combines a magnetometer and accelerometer into one package</li>
 <li>Configurable range of 2/4/8/16g</li>
 <li>Configurable resolution of 8/10/12 bits</li>
 </ul>
 <p>The sensor also has an output data rate (ODR) configuration which specifies how often the sensor
-updates its internal value. Let’s make some requirements for our driver to simplify our task:</p>
+updates its internal value. Let's make some requirements for our driver to simplify our task:</p>
 <ul>
 <li>Our simple driver will only support +- 2g.</li>
 <li>Only support normal resolution of 10 bits.</li>
@@ -210,7 +178,7 @@ updates its internal value. Let’s make some requirements for our driver to sim
 </ul>
 <p>The sensor has two communication interfaces: I2C and SPI. However, by looking at the
 HW schematic:</p>
-<p><img src="./assets/hw-block-diagram.png" alt="HW block diagram"></p>
+<p><img src="./assets/hw-block-diagram.png" alt="HW block diagram" /></p>
 <p>We can see that the sensor is connected through I2C. An in-depth explanation of the I2C (or SPI)
 bus would exceed the scope of this exercise, but the most relevant key information from a software
 engineering perspective are summarized here:</p>
@@ -234,7 +202,7 @@ other devices.</p>
 out that the SDA pin is mapped to P0.16 and the SCL pin is mapped to P0.08. There are also
 external I2C pins, but those are routed to the edge connector and are used to connect
 external devices.</p>
-<p>When it comes to writing device drivers, you will generally wrap the communication driver object
+<p>When it comes to writing device drivers, you will generally wrap the communication driver object 
 in your driver. For this device, you would wrap some I2C driver. We can omit some abstraction
 because we know that we are never going to share the bus,
 and we do not want to write a portable driver. This means we can wrap the bus driver provided
@@ -253,18 +221,21 @@ or the <a href="./uart-echo-exercise.html">UART echo</a> exercise yet, you shoul
 the <a href="https://github.com/embassy-rs/embassy/blob/main/examples/nrf52840/src/bin/twim.rs">embassy example</a>
 or at the details:</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub use embassy_nrf::{twim, peripherals};
 
 bind_interrupts!(struct Irqs {
     TWISPI0 =&gt; twim::InterruptHandler&lt;peripherals::TWISPI0&gt;;
 });
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Rest of solution:</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut tx_ram_buffer: [u8; 32] = [0; 32];
     let i2c_config = twim::Config::default();
@@ -276,7 +247,8 @@ bind_interrupts!(struct Irqs {
         i2c_config,
         &amp;mut tx_ram_buffer,
     );
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <h2 id="step-2---create-the-basic-driver-object"><a class="header" href="#step-2---create-the-basic-driver-object">Step 2 - Create the basic driver object</a></h2>
 <p>You are now going to create a driver object instead of just re-using existing library code in your
@@ -286,12 +258,14 @@ structure named <code>Accelerometer</code> here.</p>
 <p>Then add one field to that structure: The I2C driver you just created. You actually need a lifetime
 of <code>Accelerometer</code> now because the I2C driver has a lifetime as well.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub struct Accelerometer&lt;'d&gt; {
     i2c: embassy_nrf::twim::Twim&lt;'d&gt;
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <h2 id="step-3---add-a-constructor"><a class="header" href="#step-3---add-a-constructor">Step 3 - Add a constructor</a></h2>
 <p>Add a constructor to your driver object by adding a <code>new</code> method which returns <code>Self</code>. In the most
@@ -311,10 +285,11 @@ or some WHO AM I error unit variant. Add an asynchronous constructor function an
 intermediate solutions.</p>
 <p>The constructor will have a basic form like this, including a suitable initialization error type:</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span>
-#[derive(Debug)]
+<span class="boring">fn main() {
+</span>#[derive(Debug)]
 pub enum InitError {
     I2c(embassy_nrf::twim::Error),
     WhoAmIInvalid
@@ -328,25 +303,28 @@ impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
         // ...
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>But how do you actually read back this value using I2C? On this device, you can read a register
 by first sending the register ID you want to read and then reading back one byte.</p>
 <p>The register map can be found in the <a href="./assets/lsm303agr.pdf">device datasheet</a>. We have
 included an excerpt of the register map on page 43 for you:</p>
-<p><img src="./assets/lsm-reg-map.png" alt="Register Map"></p>
+<p><img src="./assets/lsm-reg-map.png" alt="Register Map" /></p>
 <p>Create a <code>enum</code> which includes the Register IDs, for example one named <code>Register</code>.
 Add the <code>WhoAmI</code> variant with the correct register address value. Derive <code>Debug</code>, <code>Copy</code>, <code>Clone</code>,
 <code>defmt::Format</code>, <code>PartialEq</code> and <code>Eq</code> on it.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span>
-#[derive(Debug, Copy, Clone, PartialEq, Eq, defmt::Format)]
+<span class="boring">fn main() {
+</span>#[derive(Debug, Copy, Clone, PartialEq, Eq, defmt::Format)]
 pub enum Register {
     WhoAmI = 0x0f
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>You can add new values to the <code>enum</code> as you need them. Or you put in a lot of work and create a complete one.
 AI can help with this menial job.</p>
@@ -360,22 +338,25 @@ API. For the accelerometer, that address has a fixed value of <code>0x19</code> 
 from the microbit v2 schematic or from the sensor datasheet. Create an associated constant
 <code>ADDR</code> on the <code>Accelerometer</code> driver which has that value.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
 }
 
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now you have everything you need to write the constructor. Finish the implementation for the <code>new</code>
 method. Return some error variant if the read back
 value is not equal to the expected one, and return a driver instance otherwise.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span>
-impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
+<span class="boring">fn main() {
+</span>impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
     pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
         let mut buf = [0; 1];
         i2c.write_read(Self::ADDR, &amp;[Register::WhoAmIAcc as u8], &amp;mut buf)
@@ -391,7 +372,8 @@ impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
     pub const WHO_AM_I_VALUE: u8 = 0b00110011;
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>The interaction with other registers is comparable. In general if you want to read registers,
 you still have to use <code>read_write</code> to select the correct registers, while you can just use
@@ -402,10 +384,10 @@ you still have to use <code>read_write</code> to select the correct registers, w
 <h2 id="step-4---configure-the-sensor"><a class="header" href="#step-4---configure-the-sensor">Step 4 - Configure the sensor</a></h2>
 <p>Now you have a driver instance, but you actually want to read some sensor values. We tried
 this for you before, and wondered why the accelerometer readings returned all zero. It turns
-out you need to write some configuration registers to actually enable the device. Let’s do this
+out you need to write some configuration registers to actually enable the device. Let's do this
 first.</p>
 <p>We extracted the definition of <code>CTRL_REG1_A</code> on page 47 of the datasheet for you:</p>
-<p><img src="./assets/ctrl-reg-1.png" alt="Control Register 1"></p>
+<p><img src="./assets/ctrl-reg-1.png" alt="Control Register 1" /></p>
 <p>The device is in Power-Down mode on startup. This is the most important control register
 because it allows us to set the output data rate (ODR), enabling the device and
 individual axes. The datasheet specifies an 8-bit register configuration.</p>
@@ -428,7 +410,8 @@ those libraries. Otherwise, have a look at the solution and try to understand th
 cross-checking them with the register definition we provided you above:</p>
 <details>
 <p>Inside the <code>src/accelerometer.rs</code> library file:</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Output data rate configuration.
 #[bitbybit::bitenum(u4, exhaustive = false)]
@@ -459,7 +442,8 @@ pub struct ControlReg1 {
     #[bit(0, rw)]
     x_enable: bool,
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now you have everything you need to update the register. The excerpt of the datasheet also
 shows the register ID, which is <code>0x20</code>. Add the <code>CtrlReg1</code> variant to the <code>Register</code> enumeration
@@ -470,7 +454,8 @@ using an ODR of 100 Hz. Remember that you can write a register by sending the re
 first byte, and the register value as the second byte.</p>
 <details>
 <p>Updated constructor:</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
         let mut buf = [0; 1];
@@ -496,7 +481,8 @@ first byte, and the register value as the second byte.</p>
         .await?;
         Ok(Self { i2c })
     }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <blockquote>
 <p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step4.rs</code></p>
@@ -528,7 +514,8 @@ You can also create a dedicated named structure and this is what we are going to
 <p>Add a structure named <code>ReadoutRaw</code>, which has <code>x</code>, <code>y</code> and <code>z</code> public fields.
 You can add common derives like <code>Debug</code>, <code>Copy</code>, <code>Clone</code>, <code>defmt::Format</code> as well.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, defmt::Format)]
 pub struct ReadoutRaw {
@@ -536,16 +523,19 @@ pub struct ReadoutRaw {
     pub y: u16,
     pub z: u16,
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now you can specify the <code>async</code> <code>read_raw</code> method for your driver as well.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    pub async fn read_raw(&amp;self) -&gt; Result&lt;ReadoutRaw, Error&gt; {
         todo!();
     }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>The method we specified in our solution only required a shared reference of the driver.
 This makes sense, because we are not configuring anything in the driver. However, we still require
@@ -553,14 +543,16 @@ mutable access to the wrapped <code>i2c</code> driver because that is just the f
 <code>write_read</code> method. We can fix this by using <a href="https://doc.rust-lang.org/book/ch15-05-interior-mutability.html">interior mutability</a>.</p>
 <p>Wrap the <code>i2c</code> field of the structure in a <code>core::cell::RefCell</code>. You also have to update the constructor.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use core::cell::RefCell;
 
 pub struct Accelerometer&lt;'d&gt; {
     i2c: RefCell&lt;embassy_nrf::twim::Twim&lt;'d&gt;&gt;,
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>and inside constructor method, use <code>core::cell::RefCell::new(i2c)</code> to wrap the i2c driver in
 a <code>RefCell</code>.</p>
 </details>
@@ -573,10 +565,11 @@ appropriate receive buffer size to read 6 words starting at that address.</p>
 <p>After you have read the 6 bytes into a raw buffer, you need to extract and convert them into
 a raw <code>i16</code> for further conversion. You can use <code>u16::from_le_bytes</code> to do this conversion.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span>
-impl Accelerometer&lt;'_&gt; {
+<span class="boring">fn main() {
+</span>impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
     pub const WHO_AM_I_VALUE: u8 = 0b00110011;
     pub const AUTO_INCREMENT_MASK: u8 = 0x80;
@@ -598,7 +591,8 @@ impl Accelerometer&lt;'_&gt; {
         })
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <blockquote>
 <p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step5.rs</code></p>
@@ -629,7 +623,7 @@ is an abbreviation for scale output.</li>
 resolution.</li>
 <li>FS is the full scale value, e.g. 2 for +- 2g full scale.</li>
 </ul>
-<p><img src="./assets/scale-output.png" alt="Scale output table"></p>
+<p><img src="./assets/scale-output.png" alt="Scale output table" /></p>
 <p>You can assume FS to be +-2g which is the default full scale for the sensor.</p>
 <p>We would like to write our driver in a way that allows changing the resolution and full scale
 in the future. Introduce two new enumerations which allow modelling this: A <code>Mode</code> enumeration
@@ -639,7 +633,8 @@ device supports. You cannot specify enum variants with leading numbers, but you 
 leading underscore to allow this. In the full scale enumeration, assign the actual full scale
 value as the enum value.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, Clone, Copy, defmt::Format)]
 pub enum FullScale {
@@ -660,7 +655,8 @@ pub enum Mode {
     /// High resolution (12-bit)
     HighResolution,
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now add a <code>resolution_shift</code> method to the <code>Mode</code> structure which returns the right-shift
 value <em>n</em> that you have to apply to the raw value.</p>
@@ -668,7 +664,8 @@ value <em>n</em> that you have to apply to the raw value.</p>
 an argument and calculates the final multiplier which needs to be applied to the shifted raw
 value.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Mode {
     pub const fn resolution_shift(&amp;self) -&gt; i16 {
@@ -695,12 +692,14 @@ value.</p>
         }
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now add a <code>mode</code> and <code>full_scale</code> field to your driver. Those have fixed values
 for now, but you could make them configurable at a later point.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Driver for the LSM303AGR e-compass.
 pub struct Accelerometer&lt;'d&gt; {
@@ -708,7 +707,8 @@ pub struct Accelerometer&lt;'d&gt; {
     full_scale: FullScale,
     mode: Mode,
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>In the constructor, simply hardcode those fields to the default values the device has at startup,
 which is +- 2g full scale and normal resolution mode.</p>
@@ -716,7 +716,8 @@ which is +- 2g full scale and normal resolution mode.</p>
 in SI units. Add a new structure to your library called <code>Readout</code>. This structure should
 include a <code>raw</code> field with the <code>ReadoutRaw</code> type, a <code>full_scale</code> and a <code>mode</code> field.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, defmt::Format)]
 pub struct Readout {
@@ -724,7 +725,8 @@ pub struct Readout {
     full_scale: FullScale,
     mode: Mode,
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now add the following API methods for <code>Readout</code>:</p>
 <ul>
@@ -735,7 +737,8 @@ pub struct Readout {
 </ul>
 <p>Use the formula we specified above and the methods we added to do this.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Readout {
     /// X axis readout in mg.
@@ -761,14 +764,16 @@ pub struct Readout {
         (self.x_mg(), self.y_mg(), self.z_mg())
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Finally, we want to have a convenience method called <code>read</code> on our driver which
 returns this <code>Readout</code> structure. Add that method and re-use the <code>read_raw</code> method
 that you have already written to initialize the <code>raw</code> field of the <code>Readout</code> structure.
 You can initialize the <code>full_scale</code> and <code>mode</code> field from the cached values of the driver.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Accelerometer&lt;'_&gt;
     // (other functions...)
@@ -781,7 +786,8 @@ You can initialize the <code>full_scale</code> and <code>mode</code> field from 
         })
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <h2 id="step-7---print-the-accelerometer-values-inside-a-loop-periodically"><a class="header" href="#step-7---print-the-accelerometer-values-inside-a-loop-periodically">Step 7 - Print the accelerometer values inside a loop periodically</a></h2>
 <p>We finally have everything we need to periodically read the sensor values.
@@ -791,27 +797,29 @@ The datasheet mentions a start-up time of 1.6 ms for our configuration.
 Call the <code>read</code> method periodically inside a loop and print the xyz values using the
 <code>xyz_mg</code> method and <code>defmt</code>.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let accelerometer = Accelerometer::new(i2c_bus)
         .await
-        .expect("creating motion sensor driver failed");
+        .expect(&quot;creating motion sensor driver failed&quot;);
     // For normal mode, 1.6 ms turn-on time.
     Delay.delay_us(1600).await;
 
     loop {
         match accelerometer.read().await {
             Ok(reading) =&gt; {
-                defmt::info!("Accelerations (mg): {}", &amp;reading.xyz_mg());
+                defmt::info!(&quot;Accelerations (mg): {}&quot;, &amp;reading.xyz_mg());
             }
             Err(e) =&gt; {
-                defmt::error!("i2c error: {}", e);
+                defmt::error!(&quot;i2c error: {}&quot;, e);
             }
         };
         Timer::after_millis(50).await;
     }
 
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <h2 id="finishing-up"><a class="header" href="#finishing-up">Finishing Up</a></h2>
 <p>If you have done everything correctly, you should see output like this:</p>
@@ -835,11 +843,11 @@ a basic form of sensor fusion which can be used to improve the quality of the co
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="uart-echo-exercise.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                                <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="multitasking-ipc-exercise.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            <a rel="next" href="multitasking-ipc-exercise.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
                             </a>
 
                         <div style="clear: both"></div>
@@ -849,41 +857,34 @@ a basic form of sensor fusion which can be used to improve the quality of the co
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="uart-echo-exercise.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                        <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="multitasking-ipc-exercise.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    <a rel="next" href="multitasking-ipc-exercise.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
-        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
-        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
-        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
-        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
-        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
-        <script>
+        <script type="text/javascript">
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-09f2665d.js"></script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
 
 
-
-    </div>
     </body>
 </html>

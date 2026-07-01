@@ -1,52 +1,66 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>microbit-exercises</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
 
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
         <!-- MathJax -->
-        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-5b6cd755.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-b91a8f59.js"></script>
     </head>
     <body>
-        <!-- Provide site root to javascript -->
-        <script type="text/javascript">
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -59,57 +73,70 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
-            var theme;
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            html.classList.add("js");
         </script>
 
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="preparation.html"><strong aria-hidden="true">2.</strong> Preparation</a></li><li class="chapter-item expanded "><a href="terminology_glossary.html"><strong aria-hidden="true">3.</strong> Terminology</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercises</li><li class="chapter-item expanded "><a href="blinky-exercise.html"><strong aria-hidden="true">4.</strong> Blinky Exercise</a></li><li class="chapter-item expanded "><a href="uart-echo-exercise.html"><strong aria-hidden="true">5.</strong> UART echo application</a></li><li class="chapter-item expanded "><a href="accelerometer.html"><strong aria-hidden="true">6.</strong> Accelerometer Sensor Driver</a></li><li class="chapter-item expanded "><a href="multitasking-ipc-exercise.html"><strong aria-hidden="true">7.</strong> Multi-tasking exercise and IPC</a></li></ol>
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -117,33 +144,38 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>This is the exercise book accompanying the Embedded Rust Workshop.
@@ -195,8 +227,9 @@ system boot and peripheral access crates.</li>
 the various board components.</li>
 </ul>
 <h2 id="preparation"><a class="header" href="#preparation">Preparation</a></h2>
-<p>We are going to start with the preparation of the software tools in the <a href="./preparation.html">next chapter</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="preparation-1"><a class="header" href="#preparation-1">Preparation</a></h1>
+<p>We are going to start with the preparation of the software tools in the <a href="#preparation-1">next chapter</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="preparation-1"><a class="header" href="#preparation-1">Preparation</a></h1>
 <h2 id="windows-terminal"><a class="header" href="#windows-terminal">Windows Terminal</a></h2>
 <p>It is recommended to use a terminal for some parts of this workshop. There will be a lot
 of steps and instructions which show terminal commands. On Windows, you should install
@@ -223,7 +256,7 @@ which you can access if you are an IRS employee.</p>
 <pre><code class="language-console">git clone git@git.irs.uni-stuttgart.de:irs/embedded-rust-workshop.git
 </code></pre>
 <p>Have a look at the README of the repository. It explains the directory structure. The
-most relevant part of the repository for you is the <code>microbit-exercises</code> folder.</p>
+most relevant part of the repository for you is the <code>firmware/exercises</code> folder.</p>
 <p>Now that you have cloned the project, you might have to set up some software.</p>
 <h2 id="rust-and-cargo"><a class="header" href="#rust-and-cargo">Rust and <code>cargo</code></a></h2>
 <p>The first thing required is the Rust compiler and the <code>cargo</code> build and dependency management
@@ -263,7 +296,7 @@ you are done! You can perform this step once you have access to the hardware in 
 You can flash a test application now to verify the setup. We provide some test applications for you.</p>
 <p>Connect the board to your computer using a Micro-USB cable. Make sure that your cable also
 supports the data interface and is not power-only.</p>
-<p>Navigate into the <code>microbit-apps</code> directory.</p>
+<p>Navigate into the <code>firmware/apps</code> directory.</p>
 <p>Now, you can run the following command to build and flash a blinky application:</p>
 <pre><code class="language-console">cargo run --bin blinky
 </code></pre>
@@ -280,8 +313,9 @@ supports the data interface and is not power-only.</p>
 <p>If everything goes right, you should see the LED in the top-left corner blinking with a frequency of 1 second.
 If this is the case, congratulations, you have built and flashed an embedded Rust app and you made it through
 the preparation chapter successfully!</p>
-<p>In the <a href="./blinky-exercise.html">first exercise</a>, you are going to build most parts of a blinky.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="terminology-and-glossary"><a class="header" href="#terminology-and-glossary">Terminology and Glossary</a></h1>
+<p>In the <a href="#blinky-exercise">first exercise</a>, you are going to build most parts of a blinky.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="terminology-and-glossary"><a class="header" href="#terminology-and-glossary">Terminology and Glossary</a></h1>
 <p>You can look up some terms in this terminology chapter if you have never heard them before or need
 a brief explanation.</p>
 <ul>
@@ -321,7 +355,8 @@ particular hardware board, building on top of a HAL.</li>
 <li>IPC - Inter-Process Communication: Mechanisms that allow concurrent tasks or processes to
 exchange data and synchronize with each other.</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="blinky-exercise"><a class="header" href="#blinky-exercise">Blinky Exercise</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="blinky-exercise"><a class="header" href="#blinky-exercise">Blinky Exercise</a></h1>
 <p>The end goal of this task is to make the LED D2, which is the LED in the upper left corner
 of the LED matrix, blink with a frequency of 1 second.</p>
 <p>It involves working with a general purpose Input/Output (GPIO) pin which is a very common task on
@@ -329,18 +364,20 @@ microcontrollers. A GPIO pin is a digital signal pin which can be used as an inp
 the digital level, or as an output pin to set the digital level. GPIO can also source current
 which can be used to drive a LED.</p>
 <p>Writing a blinky also involves a timing component to achieve some blink frequency.</p>
-<p>Go into the <code>microbit-exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
+<p>Go into the <code>firmware/exercises</code> directory. Inside the <code>src/bin/blinky.rs</code> file, you can
 find the skeleton project that you should edit to work towards the blinky application. It includes
 an explanation of the intermediate steps. Each intermediate step is explained in this document
 in detail, including an intermediate solution which you can see by expanding the detail
 segment.</p>
 <p>You can find a full solution inside the <code>blinky_solution.rs</code> file.</p>
 <p>Notice that you can always build and run the current state of your solution using</p>
-<pre><code class="language-sh">cargo run --bin blinky
+<pre><code class="language-sh">cargo run --bin blinky --release
 </code></pre>
+<p>It is generally recommended to use <code>--release</code> for embedded applications because the debug image
+is very slow, which might lead to bugs when using timing-sensitive hardware like UARTs.</p>
 <h2 id="some-notes-on-the-skeleton"><a class="header" href="#some-notes-on-the-skeleton">Some notes on the skeleton</a></h2>
 <p>Okay, there is not much here in this empty skeleton app, but you might still be interested in what
-it does. </p>
+it does.</p>
 <p>The <code>#![no_std]</code> directive must be used because we do not have a standard runtime on our
 microcontroller. The <code>#![..]</code> syntax applies this attribute to the whole module, which is our
 whole application in this case. A standard runtime is usually only available on a full host system, for example
@@ -387,10 +424,10 @@ introduces hardware abstractions, data structures and objects to interact with t
 most firmware. This can include something like the clock initialization. When writing this HAL, it
 makes sense to package that configuration inside some initializer function.</p>
 <p>Rust also has a nice type system which allows modelling of our problem domain. We have a
-microcontroller which has <a href="./terminology_glossary.html">peripherals</a> and physical pins. We can model
+microcontroller which has <a href="#terminology-and-glossary">peripherals</a> and physical pins. We can model
 these entities in our Rust code to allow ownership checks and resource management. For example,
 the chip has a physical pin called <code>P0_06</code>. We can model this physical pin as a <code>P0_06</code> field
-of a data structure. Then we might have some other API which &quot;consumes&quot; this pin to take ownership
+of a data structure. Then we might have some other API which “consumes” this pin to take ownership
 of it and use it for certain purposes. The pin can not be used for some other purpose anymore
 and we prevented one source of a bug using the type system.</p>
 <p>We use the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/index.html"><code>embassy-nrf</code></a> HAL which provides an initializer method providing both of these tasks.
@@ -404,31 +441,27 @@ data structure which is returned by the <code>init</code> function. It models al
 pins like we previously mentioned.</p>
 <p>Call this method and store the <code>Peripherals</code> object inside a variable called <code>periphs</code>.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let periphs = embassy_nrf::init(embassy_nrf::config::Config::default());
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="second-step-print-something"><a class="header" href="#second-step-print-something">Second step: Print something</a></h2>
 <p>We mentioned that we use the <code>defmt</code> library and the RTT protocol for logging purposes.
 Our flasher takes care of grabbing log frames sent via RTT. Print something to the console so we
-know what program is running. For example, you can use <code>defmt::println!(&quot;your string&quot;)</code> to print
+know what program is running. For example, you can use <code>defmt::println!("your string")</code> to print
 something to the RTT pipe.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>defmt::println!(&quot;-- micro:bit Blinky application --&quot;);
-<span class="boring">}
-</span></code></pre></pre>
+</span>defmt::println!("-- micro:bit Blinky application --");
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="third-step-creating-the-gpio-drivers"><a class="header" href="#third-step-creating-the-gpio-drivers">Third step: Creating the GPIO drivers</a></h2>
-<p>Before we talk about creating the GPIO drivers for switching the LED, let's talk about the
+<p>Before we talk about creating the GPIO drivers for switching the LED, let’s talk about the
 hardware first. This is not a classic LED which can be driven by simply toggling a GPIO pin. Instead,
 it is a matrix where each row and each column has one connected GPIO line.</p>
-<p><img src="./assets/led-matrix.png" alt="LED Matrix" /></p>
+<p><img src="assets/led-matrix.png" alt="LED Matrix"></p>
 <p>There is no reason to be overly scared of electronic schematics. Learning to read them is something
 that can be learnt <em>without</em> having to study electronic engineering, and with schematics you
 usually have the source of truth which is relevant for writing your software.
@@ -438,10 +471,10 @@ There is also a <a href="https://tech.microbit.org/hardware/schematic">pin map t
 LED will turn on if the ROW1 GPIO is configured as an output pin and then driven high while the
 COL1 GPIO is configured as an output pin and then driven low.</p>
 <p>But what is ROW1 and COL1? Those are actually connected to physical pins of your MCU:</p>
-<p><img src="./assets/mcu-ports-led.png" alt="MCU ports LED" /></p>
+<p><img src="assets/mcu-ports-led.png" alt="MCU ports LED"></p>
 <p>Search for the two pins and look for the P0.XY number which is on the chip side (yellow background)
 on the left. This number is relevant for the code.
-Alternatively, open the <a href="./assets/MicroBit_V2.0.0_S_schematic.PDF">schematics</a> directly and use the search
+Alternatively, open the <a href="assets/MicroBit_V2.0.0_S_schematic.PDF">schematics</a> directly and use the search
 function to find them quickly. If you are struggling with this task, you can also simply
 use the <a href="https://tech.microbit.org/hardware/schematic">pin map table</a> and look at the GPIO name
 for COL1 and ROW1.</p>
@@ -459,8 +492,7 @@ by an ID like P0.XY, and which you extracted earlier, by passing the correspondi
 <p>If this all sounds very confusing to you and you do not really know what to do, look at the
 solution and try to understand it:</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut row1 = Output::new(
         periphs.P0_21,
@@ -472,8 +504,7 @@ solution and try to understand it:</p>
         embassy_nrf::gpio::Level::Low,
         embassy_nrf::gpio::OutputDrive::Standard,
     );
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>Notice how we pass the physical pin object to the output driver.</p>
 </details>
 <h2 id="fourth-step-toggling-the-led"><a class="header" href="#fourth-step-toggling-the-led">Fourth step: Toggling the LED</a></h2>
@@ -502,43 +533,38 @@ an asynchronous delay of 1 second or 1000 milliseconds inside the loop.</p>
 given the object <code>timer</code>, you would call <code>timer.await;</code> to await the timer.</p>
 <details>
 <p>This could look like this:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let timer = Timer::after_millis(1000);
 timer.await;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>You can also directly write this in one line to avoid the intermediate variable:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>Timer::after_millis(1000).await;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="finishing-up"><a class="header" href="#finishing-up">Finishing up</a></h2>
-<p>When you run <code>cargo run --bin blinky</code>, you should see something like this:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<p>When you run <code>cargo run --bin blinky --release</code>, you should see something like this:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>❯ cargo run --bin blinky
-   Compiling exercises v0.1.0 (/home/muellerr/Rust/embedded-rust-workshop/microbit-code/exercises)
+</span>❯ cargo run --bin blinky --release
+   Compiling exercises v0.1.0 (/home/muellerr/Rust/embedded-rust-workshop/firmware/exercises)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
      Running `probe-rs run --chip nRF52833_xxAA --allow-erase-all target/thumbv7em-none-eabihf/debug/blinky_solution`
       Erasing ✔ 100% [####################]  48.00 KiB @  35.91 KiB/s (took 1s)
   Programming ✔ 100% [####################]  48.00 KiB @  22.82 KiB/s (took 2s)     Finished in 3.54s
 -- micro:bit Blinky application --
-<span class="boring">}
-</span></code></pre></pre>
-<p>Also, you should see the LED D2 blinking with a frequency of 1 second. If this is the case, you've
+<span class="boring">}</span></code></pre>
+<p>Also, you should see the LED D2 blinking with a frequency of 1 second. If this is the case, you’ve
 done it!
 Blinking a LED might seem like a mundane task, but it actually teaches various concepts that can
 be transferred to other tasks because it involves resource management, working with hardware, and
 time handling. Also, you have extracted information from a schematic now! This is a very useful skill
 that embedded engineers should have. It allows you to directly use the schematic that is created as
 a side-product of the PCB design process.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="uart-echo-application"><a class="header" href="#uart-echo-application">UART echo application</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="uart-echo-application"><a class="header" href="#uart-echo-application">UART echo application</a></h1>
 <p>The end goal of this task is to communicate with the serial port of the micro:bit.
 A very common interface to allow communication with a microcontroller is the
 <a href="https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter">UART protocol</a>.</p>
@@ -552,7 +578,7 @@ pin of the microcontroller UART should be sent back to the sender via the TX pin
 <p>The micro:bit v2 has a very convenient feature which allows us to talk with one of its UART
 interfaces via the USB interface you already have. Have a look at this hardware block diagram
 taken from the <a href="https://tech.microbit.org/hardware/">website</a>:</p>
-<p><img src="./assets/hw-block-diagram.png" alt="HW block diagram" /></p>
+<p><img src="assets/hw-block-diagram.png" alt="HW block diagram"></p>
 <p>The nRF52833-QIAA block on the left side is the target MCU we are always programming. The
 other microcontroller on the right side is the interface microcontroller. When we talk to the UART
 of the target MCU, or we use <code>probe-rs</code> to flash new software to the target or read/write to its
@@ -589,20 +615,21 @@ lrwxrwxrwx - root 12 Jun 09:39 /dev/serial/by-id/usb-Arm_BBC_micro:bit_CMSIS-DAP
 name you found before.</p>
 <p>You need to use the Serial connection type and specify a speed of 115200. This could look
 something like this:</p>
-<p><img src="./assets/putty-config.png" alt="PuTTY" /></p>
+<p><img src="assets/putty-config.png" alt="PuTTY"></p>
 <p>You can then open the connection to open a session connected to the serial port of the MCU.</p>
 <h2 id="uart-hardware"><a class="header" href="#uart-hardware">UART hardware</a></h2>
-<p>Before we start writing code, let's look at the hardware first.
+<p>Before we start writing code, let’s look at the hardware first.
 We mentioned that UART uses 2 physical pins. This means that two of the GPIO pins of the micro:bit
 need to be configured so they can be used by the UART hardware block for communication.</p>
 <p>For a peripheral like UART, it is very common that a microcontroller support a larger selection
 of pins to be assigned to the UART. Similarly to the blinky exercise where LED control is mapped
 to certain GPIO pins, there is a pin mapping which depends on the board design.</p>
 <p>You can either look at the <a href="https://tech.microbit.org/hardware/schematic/">pin map</a> or
-the <a href="./assets/MicroBit_V2.0.0_S_schematic.PDF">schematic</a> to find the GPIO pin assignment.
-Try to figure the pin mapping out on your own.</p>
+the <a href="assets/MicroBit_V2.0.0_S_schematic.PDF">schematic</a> to find the GPIO pin assignment.
+Please note that the pin assignment in the pin map is inverted (so RX in actually TX for your driver and vice-versa) because it is done from the view of the interface MCU, not the target MCU. Try to
+figure the pin mapping out on your own.</p>
 <details>
-<p>The RX pin is mapped to P0.06 while the TX pin is mapped to P1.08.</p>
+<p>The TX target MCU pin is mapped to P0.06 while the RX target MCU pin is mapped to P1.08.</p>
 </details>
 <p>The micro:bit also has multiple UART instances. It allows using both of them, and we are going
 to use instance 0.</p>
@@ -638,7 +665,7 @@ is not spared from that. It allows reliable communication and exposes an elegant
 <p>Remember that the <code>Peri</code> type is always used for resource management types and comes from the
 peripheral singleton field which is named <code>_periphs</code> in our example. Remove the leading underscore,
 because we are going to use this type now.</p>
-<p>Let's go through the arguments of the constructor one by one. You do not need to understand
+<p>Let’s go through the arguments of the constructor one by one. You do not need to understand
 all of the details here but they are mentioned for completeness.</p>
 <ul>
 <li><code>uarte</code> - This is the UART instance we want to use. For our solution we are going to use instance 0
@@ -681,8 +708,7 @@ Use this macro to declare an interrupt handler for the UARTE. Keep in mind that 
 to declare an interrupt handler. The hardware takes care of calling it when required.</p>
 <details>
 <p>Write this above your <code>main</code> method.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use embassy_nrf::{buffered_uarte, peripherals};
 
@@ -691,39 +717,33 @@ embassy_nrf::bind_interrupts!(
         UARTE0 =&gt; buffered_uarte::InterruptHandler&lt;peripherals::UARTE0&gt;;
     }
 );
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>If you are struggling with figuring out the UART configuration, remember that we want to use
 a baudrate of 115200 and that we can use the <code>default</code> configuration otherwise.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use embassy_nrf::uarte;
 
 let mut uarte_config = uarte::Config::default();
 uarte_config.baudrate = uarte::Baudrate::BAUD115200;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>If you can not figure out how the buffers are specified:</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut driver_rx_buf: [u8; 256] = [0; 256];
     let mut driver_tx_buf: [u8; 256] = [0; 256];
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>Of course, other sizes work as well, but multiples of 128 are common. The size MUST be even
 for technical reasons.</p>
 </details>
 <p>For all other arguments, you have to pass in fields of the <code>periphs</code> structure.</p>
 <p>The full solution of this step:</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut uarte_config = uarte::Config::default();
     uarte_config.baudrate = Baudrate::BAUD115200;
@@ -743,8 +763,7 @@ for technical reasons.</p>
         &amp;mut driver_tx_buf,
     );
 
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Not all UART driver initialization will be that complex! This is actually a very capable, but
 also very complex driver. There are other UART hardware implementations out there that do not
@@ -757,12 +776,10 @@ concurrently. Many hardware implementations can also support this. This driver h
 a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/buffered_uarte/struct.BufferedUarte.html#method.split"><code>split</code> method</a>.</p>
 <p>Create distinct <code>uart_rx</code> and <code>uart_tx</code> driver handles.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let (mut uart_rx, mut uart_tx) = uart.split();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>These are already mutable because the methods we are going to use require mutable access.</p>
 </details>
 <h2 id="step-3---read-into-a-reception-buffer-inside-a-loop"><a class="header" href="#step-3---read-into-a-reception-buffer-inside-a-loop">Step 3 - Read into a reception buffer inside a loop</a></h2>
@@ -778,8 +795,7 @@ dimension based on the maximum expected packet size.</p>
 call <code>await</code> on the <code>read</code> call because it is an <code>async</code> function. Create the buffer before
 the loop call because there is no need to re-instantiate it for every <code>read</code> call.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut rx_buf: [u8; 64] = [0; 64];
     loop {
@@ -788,8 +804,7 @@ the loop call because there is no need to re-instantiate it for every <code>read
             Err(_e) =&gt; ()
         }
     }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="step-4---write-back-whatever-was-received"><a class="header" href="#step-4---write-back-whatever-was-received">Step 4 - Write back whatever was received</a></h2>
 <p>Now, we want to send back everything we received. In the <code>Ok</code> case, we will have access
@@ -798,8 +813,7 @@ to the number of received bytes. This can also be smaller than the full buffer s
 <code>uart_tx</code>. You also need to import the <code>embedded_io_async::Write</code> trait for this to work.
 Remember that you want to send the number of bytes you actually received back, not the full buffer.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut rx_buf: [u8; 64] = [0; 64];
     loop {
@@ -813,18 +827,20 @@ Remember that you want to send the number of bytes you actually received back, n
             Err(_e) =&gt; ()
         }
     }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="step-5---verifying-everything-works"><a class="header" href="#step-5---verifying-everything-works">Step 5 - Verifying everything works</a></h2>
-<p>Now, after you have flashed this application using <code>cargo run --bin uart_echo</code>, you send
-anything to the MCU and it should be sent back. When you use an application like <code>picocom</code> or
-<code>PuTTY</code>, this has the side effect that it looks like you are typing on a console.</p>
+<p>Now, after you have flashed this application using <code>cargo run --bin uart_echo --release</code>, you send
+anything to the MCU and it should be sent back. It is recommended to use the optimized variant
+because the non-optimized code is very slow and might miss out bytes. When you use an application
+like <code>picocom</code> or <code>PuTTY</code>, this has the side effect that it looks like you are typing on a console.</p>
 <p>Test that your echo application works properly by connecting to the serial port like
-we explained earlier and typing anything.</p>
+we explained earlier and typing anything. You should now see everything you type appear on
+your terminal application, because your terminal app just displays what it received back
+from the MCU, which is what you typed.</p>
 <h2 id="finishing-up-1"><a class="header" href="#finishing-up-1">Finishing Up</a></h2>
 <p>You are able to send and receive data to the MCU from your computer via UART now! The UART echo application
-is oftentimes the &quot;Hello World&quot; of UART applications. This one is actually quite capable.
+is oftentimes the “Hello World” of UART applications. This one is actually quite capable.
 There are some things that can be improved in our app. For example, you could add proper
 error handling for the <code>Err(e)</code> match arms, which could at the minimum include a <code>defmt::warn!</code> or
 <code>defmt::error!</code> log.</p>
@@ -837,15 +853,16 @@ using DMA.</p>
 <p>Practical applications in our domain will oftentimes use binary protocols. In principle, we could
 send binary packets to this application and we would also receive those back. However, using a utility
 like <code>picocom</code> allows for nice visualization that everything is working.</p>
-<p>There is an <a href="./uart-spacepackets.html">UART Spacepackets</a> exercise where we communicate with an MCU
+<p>There is an <a href="uart-spacepackets.html">UART Spacepackets</a> exercise where we communicate with an MCU
 using standardized <a href="https://ccsds.org/Pubs/133x0b2e2.pdf">CCSDS spacepackets</a> via the serial interface.
 This communication pattern is very commonly used at the IRS!</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="accelerometer-sensor-driver"><a class="header" href="#accelerometer-sensor-driver">Accelerometer Sensor Driver</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="accelerometer-sensor-driver"><a class="header" href="#accelerometer-sensor-driver">Accelerometer Sensor Driver</a></h1>
 <p>The micro:bit v2 has an on-board LSM303AGR e-compass module. Writing device drivers is a common
 task in our domain, so that is what we are going to do in this exercise. There are open-source
 drivers <a href="https://docs.rs/lsm303agr/latest/lsm303agr/">available</a>, but we are going to write a new
 one so you can actually learn how this process works. This is an on-board <a href="https://en.wikipedia.org/wiki/MEMS">MEMS</a>
-sensor. It's tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>.
+sensor. It’s tiny! You can see where it is located on the board on the <a href="https://tech.microbit.org/hardware/#overview">website</a>.
 Look for the ST LSM303AGR on the board images.</p>
 <p>This is a capable MEMS sensor which has confusing sections in its <a href="https://www.st.com/en/mems-and-sensors/lsm303agr.html">datasheet</a>.
 It uses a lot of abbreviations and expects implicit knowledge. This is unfortunately something that is very
@@ -859,14 +876,14 @@ a nice visualization without requiring a rod magnet to verify sensor readings. T
 of reading and converting raw sensor values remains the same and can be transferred to other
 sensors.</p>
 <h2 id="features-of-the-hardware-sensor"><a class="header" href="#features-of-the-hardware-sensor">Features of the hardware sensor</a></h2>
-<p>Let's have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">micro:bit docs</a>:</p>
+<p>Let’s have a look at the feature set of that sensor first by looking at the <a href="https://tech.microbit.org/hardware/#motion-sensor">micro:bit docs</a>:</p>
 <ul>
 <li>e-compass which combines a magnetometer and accelerometer into one package</li>
 <li>Configurable range of 2/4/8/16g</li>
 <li>Configurable resolution of 8/10/12 bits</li>
 </ul>
 <p>The sensor also has an output data rate (ODR) configuration which specifies how often the sensor
-updates its internal value. Let's make some requirements for our driver to simplify our task:</p>
+updates its internal value. Let’s make some requirements for our driver to simplify our task:</p>
 <ul>
 <li>Our simple driver will only support +- 2g.</li>
 <li>Only support normal resolution of 10 bits.</li>
@@ -874,7 +891,7 @@ updates its internal value. Let's make some requirements for our driver to simpl
 </ul>
 <p>The sensor has two communication interfaces: I2C and SPI. However, by looking at the
 HW schematic:</p>
-<p><img src="./assets/hw-block-diagram.png" alt="HW block diagram" /></p>
+<p><img src="assets/hw-block-diagram.png" alt="HW block diagram"></p>
 <p>We can see that the sensor is connected through I2C. An in-depth explanation of the I2C (or SPI)
 bus would exceed the scope of this exercise, but the most relevant key information from a software
 engineering perspective are summarized here:</p>
@@ -884,12 +901,12 @@ data pin which is called the serial data line (SDA) and the other pin is called 
 (SCL)</li>
 <li>The most common I2C communication speeds are normal mode with 100 kHz and fast mode with 400 kHz.</li>
 <li>I2C relies on device addressing to allow talking to a single device on a shared bus.</li>
-<li>An I2C transaction can be abstracted with three operations: <code>read</code>, <code>write</code> and <code>read_write</code>.</li>
+<li>An I2C transaction can be abstracted with three operations: <code>read</code>, <code>write</code> and <code>write_read</code>.</li>
 </ul>
 <p>The Rust embedded-hal crate provides generic traits that portable device drivers and HAL implementations
 need to agree on. You can have a look at how these basic bus properties were captured in the
 <a href="https://docs.rs/embedded-hal/1.0.0/embedded_hal/i2c/trait.I2c.html">I2C trait</a>. Notice how its
-API functions expect a device address and are named <code>read</code>, <code>write</code> and <code>read_write</code>.</p>
+API functions expect a device address and are named <code>read</code>, <code>write</code> and <code>write_read</code>.</p>
 <p>We are not going to use this trait directly for this exercise, but the trait would be relevant
 if you either want to write a driver which works on multiple hardware platforms, or if you
 want a driver which works with both exclusive bus access and when sharing the bus with multiple
@@ -898,7 +915,7 @@ other devices.</p>
 out that the SDA pin is mapped to P0.16 and the SCL pin is mapped to P0.08. There are also
 external I2C pins, but those are routed to the edge connector and are used to connect
 external devices.</p>
-<p>When it comes to writing device drivers, you will generally wrap the communication driver object 
+<p>When it comes to writing device drivers, you will generally wrap the communication driver object
 in your driver. For this device, you would wrap some I2C driver. We can omit some abstraction
 because we know that we are never going to share the bus,
 and we do not want to write a portable driver. This means we can wrap the bus driver provided
@@ -906,32 +923,29 @@ by the HAL. Nordic uses a different name for the I2C protocol and calls it TWI (
 There is a <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/index.html"><code>twim</code></a> which provides
 support for the Two Wire Interface in master mode, which is relevant for us.</p>
 <h2 id="step-1---create-the-i2ctwi-driver"><a class="header" href="#step-1---create-the-i2ctwi-driver">Step 1 - Create the I2C/TWI driver</a></h2>
-<p>Open the <code>src/bin/motion_sensor.rs</code> file. Start creating the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/struct.Twim.html"><code>twim</code> driver</a> and storing it into an object named <code>i2c_bus</code>.
+<p>Open the <code>src/bin/accelerometer.rs</code> file. Start creating the <a href="https://docs.embassy.dev/embassy-nrf/git/nrf52833/twim/struct.Twim.html"><code>twim</code> driver</a> and storing it into an object named <code>i2c_bus</code>.
 We provided all required information, including the pin mapping for the SDA and SCL pin.
 The default TWI configuration provided by embassy is sufficient for our purposes. The name of
 the peripheral in the library are <code>TWISPI0</code>. You can assume that a TX RAM buffer of 16 or 32 bytes
 is sufficient.</p>
-<p>If you are struggling with this step and you have not worked through the <a href="./blinky-exercise.html">blinky</a>
-or the <a href="./uart-echo-exercise.html">UART echo</a> exercise yet, you should work through those first.</p>
+<p>If you are struggling with this step and you have not worked through the <a href="#blinky-exercise">blinky</a>
+or the <a href="#uart-echo-application">UART echo</a> exercise yet, you should work through those first.</p>
 <p>If you do not remember the exact syntax for creating the interrupt bindings, you can look at
 the <a href="https://github.com/embassy-rs/embassy/blob/main/examples/nrf52840/src/bin/twim.rs">embassy example</a>
 or at the details:</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub use embassy_nrf::{twim, peripherals};
 
 bind_interrupts!(struct Irqs {
     TWISPI0 =&gt; twim::InterruptHandler&lt;peripherals::TWISPI0&gt;;
 });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Rest of solution:</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut tx_ram_buffer: [u8; 32] = [0; 32];
     let i2c_config = twim::Config::default();
@@ -943,25 +957,22 @@ bind_interrupts!(struct Irqs {
         i2c_config,
         &amp;mut tx_ram_buffer,
     );
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="step-2---create-the-basic-driver-object"><a class="header" href="#step-2---create-the-basic-driver-object">Step 2 - Create the basic driver object</a></h2>
 <p>You are now going to create a driver object instead of just re-using existing library code in your
-application. Go into the <code>src/motion_sensor.rs</code> file which is part of the crate library. This
+application. Go into the <code>src/accelerometer.rs</code> file which is part of the crate library. This
 file/module is already included in <code>src/lib.rs</code> for you, but it is empty. Start by creating an empty
 structure named <code>Accelerometer</code> here.</p>
 <p>Then add one field to that structure: The I2C driver you just created. You actually need a lifetime
 of <code>Accelerometer</code> now because the I2C driver has a lifetime as well.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub struct Accelerometer&lt;'d&gt; {
     i2c: embassy_nrf::twim::Twim&lt;'d&gt;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="step-3---add-a-constructor"><a class="header" href="#step-3---add-a-constructor">Step 3 - Add a constructor</a></h2>
 <p>Add a constructor to your driver object by adding a <code>new</code> method which returns <code>Self</code>. In the most
@@ -981,11 +992,10 @@ or some WHO AM I error unit variant. Add an asynchronous constructor function an
 intermediate solutions.</p>
 <p>The constructor will have a basic form like this, including a suitable initialization error type:</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
 </span>
-<span class="boring">fn main() {
-</span>#[derive(Debug)]
+#[derive(Debug)]
 pub enum InitError {
     I2c(embassy_nrf::twim::Error),
     WhoAmIInvalid
@@ -999,28 +1009,25 @@ impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
         // ...
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>But how do you actually read back this value using I2C? On this device, you can read a register
 by first sending the register ID you want to read and then reading back one byte.</p>
-<p>The register map can be found in the <a href="./assets/lsm303agr.pdf">device datasheet</a>. We have
+<p>The register map can be found in the <a href="assets/lsm303agr.pdf">device datasheet</a>. We have
 included an excerpt of the register map on page 43 for you:</p>
-<p><img src="./assets/lsm-reg-map.png" alt="Register Map" /></p>
+<p><img src="assets/lsm-reg-map.png" alt="Register Map"></p>
 <p>Create a <code>enum</code> which includes the Register IDs, for example one named <code>Register</code>.
 Add the <code>WhoAmI</code> variant with the correct register address value. Derive <code>Debug</code>, <code>Copy</code>, <code>Clone</code>,
 <code>defmt::Format</code>, <code>PartialEq</code> and <code>Eq</code> on it.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
 </span>
-<span class="boring">fn main() {
-</span>#[derive(Debug, Copy, Clone, PartialEq, Eq, defmt::Format)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, defmt::Format)]
 pub enum Register {
     WhoAmI = 0x0f
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>You can add new values to the <code>enum</code> as you need them. Or you put in a lot of work and create a complete one.
 AI can help with this menial job.</p>
@@ -1034,25 +1041,22 @@ API. For the accelerometer, that address has a fixed value of <code>0x19</code> 
 from the microbit v2 schematic or from the sensor datasheet. Create an associated constant
 <code>ADDR</code> on the <code>Accelerometer</code> driver which has that value.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
 }
 
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now you have everything you need to write the constructor. Finish the implementation for the <code>new</code>
 method. Return some error variant if the read back
 value is not equal to the expected one, and return a driver instance otherwise.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
 </span>
-<span class="boring">fn main() {
-</span>impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
+impl&lt;'d&gt; Accelerometer&lt;'d&gt; {
     pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
         let mut buf = [0; 1];
         i2c.write_read(Self::ADDR, &amp;[Register::WhoAmIAcc as u8], &amp;mut buf)
@@ -1068,22 +1072,21 @@ impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
     pub const WHO_AM_I_VALUE: u8 = 0b00110011;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>The interaction with other registers is comparable. In general if you want to read registers,
-you still have to use <code>read_write</code> to select the correct registers, while you can just use
+you still have to use <code>write_read</code> to select the correct registers, while you can just use
 <code>write</code> if you only want to write to a register.</p>
 <blockquote>
-<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step3.rs</code></p>
+<p>Intermediate solution file: <code>firmware/exercises/src/accelerometer_step3.rs</code></p>
 </blockquote>
 <h2 id="step-4---configure-the-sensor"><a class="header" href="#step-4---configure-the-sensor">Step 4 - Configure the sensor</a></h2>
 <p>Now you have a driver instance, but you actually want to read some sensor values. We tried
 this for you before, and wondered why the accelerometer readings returned all zero. It turns
-out you need to write some configuration registers to actually enable the device. Let's do this
+out you need to write some configuration registers to actually enable the device. Let’s do this
 first.</p>
 <p>We extracted the definition of <code>CTRL_REG1_A</code> on page 47 of the datasheet for you:</p>
-<p><img src="./assets/ctrl-reg-1.png" alt="Control Register 1" /></p>
+<p><img src="assets/ctrl-reg-1.png" alt="Control Register 1"></p>
 <p>The device is in Power-Down mode on startup. This is the most important control register
 because it allows us to set the output data rate (ODR), enabling the device and
 individual axes. The datasheet specifies an 8-bit register configuration.</p>
@@ -1106,8 +1109,7 @@ those libraries. Otherwise, have a look at the solution and try to understand th
 cross-checking them with the register definition we provided you above:</p>
 <details>
 <p>Inside the <code>src/accelerometer.rs</code> library file:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Output data rate configuration.
 #[bitbybit::bitenum(u4, exhaustive = false)]
@@ -1138,8 +1140,7 @@ pub struct ControlReg1 {
     #[bit(0, rw)]
     x_enable: bool,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now you have everything you need to update the register. The excerpt of the datasheet also
 shows the register ID, which is <code>0x20</code>. Add the <code>CtrlReg1</code> variant to the <code>Register</code> enumeration
@@ -1150,8 +1151,7 @@ using an ODR of 100 Hz. Remember that you can write a register by sending the re
 first byte, and the register value as the second byte.</p>
 <details>
 <p>Updated constructor:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    pub async fn new(mut i2c: embassy_nrf::twim::Twim&lt;'d&gt;) -&gt; Result&lt;Self, InitError&gt; {
         let mut buf = [0; 1];
@@ -1177,11 +1177,10 @@ first byte, and the register value as the second byte.</p>
         .await?;
         Ok(Self { i2c })
     }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <blockquote>
-<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step4.rs</code></p>
+<p>Intermediate solution file: <code>firmware/exercises/src/accelerometer_step4.rs</code></p>
 </blockquote>
 <h2 id="step-5---read-the-raw-accelerometer-values"><a class="header" href="#step-5---read-the-raw-accelerometer-values">Step 5 - Read the raw accelerometer values</a></h2>
 <p>Now we can read the raw sensor values. By looking at the register mapping on page 43 of the
@@ -1194,9 +1193,10 @@ datasheet again, we can figure out the base addresses of the sensor readout:</p>
 <li>OUT_Z_L_A at 0x2C</li>
 <li>OUT_Z_H_A at 0x2D</li>
 </ul>
-<p>As you can see, those registers are consecutive. They are also ordered in little endian
+<p>As you can see, those registers are consecutive. The datasheet mentions that the data is provided
+as a signed two-complemented number which is left-adjusted. They are also ordered in little endian
 format, where the low byte is at the smaller memory address. This is relevant for creating
-the raw <code>u16</code> binary value from the raw bytes in the correct order.</p>
+the raw <code>i16</code> binary value from the raw bytes in the correct order.</p>
 <p>We could perform 6 individual reads on the addresses specified above. However, the device
 has a register auto-increment feature that we can use. By setting bit 7 in the register ID
 value to 1, we can tell the device to automatically increment the device address for the next
@@ -1205,33 +1205,29 @@ read. This allows us to read all 6 registers with one I2C <code>write_read</code
 <code>0b1000_0000</code>. Now add a method named <code>read_raw</code> to your driver which will return the sensor readout.</p>
 <p>The <code>_raw</code> suffix makes it clear that those are raw sensor values which are not worth much on
 their own and still require some processing and conversion to proper units.</p>
-<p>What do we actually return? A simple way would be to return a <code>(u16, u16, u16)</code> tuple.
+<p>What do we actually return? A simple way would be to return a <code>(i16, i16, i16)</code> tuple.
 You can also create a dedicated named structure and this is what we are going to do.</p>
 <p>Add a structure named <code>ReadoutRaw</code>, which has <code>x</code>, <code>y</code> and <code>z</code> public fields.
 You can add common derives like <code>Debug</code>, <code>Copy</code>, <code>Clone</code>, <code>defmt::Format</code> as well.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, defmt::Format)]
 pub struct ReadoutRaw {
-    pub x: u16,
-    pub y: u16,
-    pub z: u16,
+    pub x: i16,
+    pub y: i16,
+    pub z: i16,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now you can specify the <code>async</code> <code>read_raw</code> method for your driver as well.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    pub async fn read_raw(&amp;self) -&gt; Result&lt;ReadoutRaw, Error&gt; {
         todo!();
     }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>The method we specified in our solution only required a shared reference of the driver.
 This makes sense, because we are not configuring anything in the driver. However, we still require
@@ -1239,16 +1235,14 @@ mutable access to the wrapped <code>i2c</code> driver because that is just the f
 <code>write_read</code> method. We can fix this by using <a href="https://doc.rust-lang.org/book/ch15-05-interior-mutability.html">interior mutability</a>.</p>
 <p>Wrap the <code>i2c</code> field of the structure in a <code>core::cell::RefCell</code>. You also have to update the constructor.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use core::cell::RefCell;
 
 pub struct Accelerometer&lt;'d&gt; {
     i2c: RefCell&lt;embassy_nrf::twim::Twim&lt;'d&gt;&gt;,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>and inside constructor method, use <code>core::cell::RefCell::new(i2c)</code> to wrap the i2c driver in
 a <code>RefCell</code>.</p>
 </details>
@@ -1261,11 +1255,10 @@ appropriate receive buffer size to read 6 words starting at that address.</p>
 <p>After you have read the 6 bytes into a raw buffer, you need to extract and convert them into
 a raw <code>i16</code> for further conversion. You can use <code>u16::from_le_bytes</code> to do this conversion.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
 </span>
-<span class="boring">fn main() {
-</span>impl Accelerometer&lt;'_&gt; {
+impl Accelerometer&lt;'_&gt; {
     pub const ADDR: u8 = 0x19;
     pub const WHO_AM_I_VALUE: u8 = 0b00110011;
     pub const AUTO_INCREMENT_MASK: u8 = 0x80;
@@ -1287,11 +1280,10 @@ a raw <code>i16</code> for further conversion. You can use <code>u16::from_le_by
         })
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <blockquote>
-<p>Intermediate solution file: <code>microbit-exercises/src/accelerometer_step5.rs</code></p>
+<p>Intermediate solution file: <code>firmware/exercises/src/accelerometer_step5.rs</code></p>
 </blockquote>
 <h2 id="step-6---convert-and-read-the-values-in-the-si-unit-mg"><a class="header" href="#step-6---convert-and-read-the-values-in-the-si-unit-mg">Step 6 - Convert and read the values in the SI unit mg</a></h2>
 <p>Those raw values are not worth much by themselves. There are some conversion steps that we
@@ -1319,7 +1311,7 @@ is an abbreviation for scale output.</li>
 resolution.</li>
 <li>FS is the full scale value, e.g. 2 for +- 2g full scale.</li>
 </ul>
-<p><img src="./assets/scale-output.png" alt="Scale output table" /></p>
+<p><img src="assets/scale-output.png" alt="Scale output table"></p>
 <p>You can assume FS to be +-2g which is the default full scale for the sensor.</p>
 <p>We would like to write our driver in a way that allows changing the resolution and full scale
 in the future. Introduce two new enumerations which allow modelling this: A <code>Mode</code> enumeration
@@ -1329,8 +1321,7 @@ device supports. You cannot specify enum variants with leading numbers, but you 
 leading underscore to allow this. In the full scale enumeration, assign the actual full scale
 value as the enum value.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, Clone, Copy, defmt::Format)]
 pub enum FullScale {
@@ -1351,8 +1342,7 @@ pub enum Mode {
     /// High resolution (12-bit)
     HighResolution,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now add a <code>resolution_shift</code> method to the <code>Mode</code> structure which returns the right-shift
 value <em>n</em> that you have to apply to the raw value.</p>
@@ -1360,8 +1350,7 @@ value <em>n</em> that you have to apply to the raw value.</p>
 an argument and calculates the final multiplier which needs to be applied to the shifted raw
 value.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Mode {
     pub const fn resolution_shift(&amp;self) -&gt; i16 {
@@ -1388,14 +1377,12 @@ value.</p>
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now add a <code>mode</code> and <code>full_scale</code> field to your driver. Those have fixed values
 for now, but you could make them configurable at a later point.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Driver for the LSM303AGR e-compass.
 pub struct Accelerometer&lt;'d&gt; {
@@ -1403,8 +1390,7 @@ pub struct Accelerometer&lt;'d&gt; {
     full_scale: FullScale,
     mode: Mode,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>In the constructor, simply hardcode those fields to the default values the device has at startup,
 which is +- 2g full scale and normal resolution mode.</p>
@@ -1412,8 +1398,7 @@ which is +- 2g full scale and normal resolution mode.</p>
 in SI units. Add a new structure to your library called <code>Readout</code>. This structure should
 include a <code>raw</code> field with the <code>ReadoutRaw</code> type, a <code>full_scale</code> and a <code>mode</code> field.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, defmt::Format)]
 pub struct Readout {
@@ -1421,8 +1406,7 @@ pub struct Readout {
     full_scale: FullScale,
     mode: Mode,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now add the following API methods for <code>Readout</code>:</p>
 <ul>
@@ -1433,8 +1417,7 @@ pub struct Readout {
 </ul>
 <p>Use the formula we specified above and the methods we added to do this.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Readout {
     /// X axis readout in mg.
@@ -1460,16 +1443,14 @@ pub struct Readout {
         (self.x_mg(), self.y_mg(), self.z_mg())
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Finally, we want to have a convenience method called <code>read</code> on our driver which
 returns this <code>Readout</code> structure. Add that method and re-use the <code>read_raw</code> method
 that you have already written to initialize the <code>raw</code> field of the <code>Readout</code> structure.
 You can initialize the <code>full_scale</code> and <code>mode</code> field from the cached values of the driver.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Accelerometer&lt;'_&gt;
     // (other functions...)
@@ -1482,8 +1463,7 @@ You can initialize the <code>full_scale</code> and <code>mode</code> field from 
         })
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="step-7---print-the-accelerometer-values-inside-a-loop-periodically"><a class="header" href="#step-7---print-the-accelerometer-values-inside-a-loop-periodically">Step 7 - Print the accelerometer values inside a loop periodically</a></h2>
 <p>We finally have everything we need to periodically read the sensor values.
@@ -1493,29 +1473,27 @@ The datasheet mentions a start-up time of 1.6 ms for our configuration.
 Call the <code>read</code> method periodically inside a loop and print the xyz values using the
 <code>xyz_mg</code> method and <code>defmt</code>.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let accelerometer = Accelerometer::new(i2c_bus)
         .await
-        .expect(&quot;creating motion sensor driver failed&quot;);
+        .expect("creating motion sensor driver failed");
     // For normal mode, 1.6 ms turn-on time.
     Delay.delay_us(1600).await;
 
     loop {
         match accelerometer.read().await {
             Ok(reading) =&gt; {
-                defmt::info!(&quot;Accelerations (mg): {}&quot;, &amp;reading.xyz_mg());
+                defmt::info!("Accelerations (mg): {}", &amp;reading.xyz_mg());
             }
             Err(e) =&gt; {
-                defmt::error!(&quot;i2c error: {}&quot;, e);
+                defmt::error!("i2c error: {}", e);
             }
         };
         Timer::after_millis(50).await;
     }
 
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <h2 id="finishing-up-2"><a class="header" href="#finishing-up-2">Finishing Up</a></h2>
 <p>If you have done everything correctly, you should see output like this:</p>
@@ -1533,7 +1511,8 @@ see spikes when the micro:bit is suddenly decelerated after it hits a surface af
 <p>You might wonder why an e-compass module has an accelerometer. You can actually use an accelerometer
 to account for device tilt combined with the magnetometer for the north direction measurement. This is
 a basic form of sensor fusion which can be used to improve the quality of the compass.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="multi-tasking-exercise-and-ipc"><a class="header" href="#multi-tasking-exercise-and-ipc">Multi-tasking exercise and IPC</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="multi-tasking-exercise-and-ipc"><a class="header" href="#multi-tasking-exercise-and-ipc">Multi-tasking exercise and IPC</a></h1>
 <p>In this exercise, you will learn how to do pre-emptive multi-tasking with embassy. You will also
 learn some basic ways to do communication between tasks, which is commonly called inter-process
 communication (IPC).</p>
@@ -1561,7 +1540,7 @@ that, the task will yield to the operating system, which means ceding control to
 so it can start running other (higher-priority) tasks. This means that a low priority task could
 stop another high priority task from being executed in time.</li>
 </ul>
-<p>Interrupts are a special case here. On Cortex-M <a href="./terminology_glossary.html">MCUs</a> like the one
+<p>Interrupts are a special case here. On Cortex-M <a href="#terminology-and-glossary">MCUs</a> like the one
 we have on the micro:bit, there is a distinction between thread mode and interrupt mode. Thread mode
 is the default mode where the CPU executes your regular code. Interrupt mode is used when an
 interrupt occurs and the CPU executes an interrupt handler. An interrupt will always pre-empt the
@@ -1578,7 +1557,7 @@ able to use <code>async</code>? embassy provides the <a href="https://docs.rs/em
 feature as the answer.</p>
 <p>You can still have your regular <code>async</code> tasks, but they will now be scheduled by the interrupt mode
 of the processor. The processor also allows assigning priorities to an interrupt handler, which
-means that all the tasks scheduled by a certain interrupt handler inherit that handler's priority.</p>
+means that all the tasks scheduled by a certain interrupt handler inherit that handler’s priority.</p>
 <h2 id="step-1---create-a-second-task"><a class="header" href="#step-1---create-a-second-task">Step 1 - Create a second task</a></h2>
 <p>The first step is to create a second task which prints something when the left user button (A)
 is pressed. We actually provided a component that you can use for this. The <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/gpiote/struct.InputChannel.html">InputChannel</a>
@@ -1595,25 +1574,21 @@ which is passed as an input argument to your main method. You need to pass the c
 method for this to work.</p>
 <details>
 <p>Declaration of the new task:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn new_task() {
     loop {
-        defmt::info!(&quot;my new task&quot;);
+        defmt::info!("my new task");
         embassy::time::Timer::after(Duration::from_secs(1)).await;
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>and somewhere in your <code>main</code> function:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>spawner.spawn(new_task().expect(&quot;spawning task failed&quot;));
-<span class="boring">}
-</span></code></pre></pre>
+</span>spawner.spawn(new_task().expect("spawning task failed"));
+<span class="boring">}</span></code></pre>
 <p>The <code>expect</code> or <code>unwrap</code> is okay here. The only case where spawning a function may fail is when
 you are spawning multiple instances of the same task.</p>
 </details>
@@ -1622,24 +1597,20 @@ button. For this, you need to pass the <code>button_left_async</code> driver obj
 to the task. The type of this driver is <code>gpiote::InputChannel&lt;'static&gt;</code>. You can transfer this
 driver to the task by declaring it as an input argument to your new task.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn left_button_task(left_button: gpiote::InputChannel&lt;'static&gt;) {
     loop {
-        defmt::info!(&quot;my new task&quot;);
+        defmt::info!("my new task");
         embassy::time::Timer::after(Duration::from_secs(1)).await;
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>and in your main:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>spawner.spawn(new_task(button_left_async).expect(&quot;spawning task failed&quot;));
-<span class="boring">}
-</span></code></pre></pre>
+</span>spawner.spawn(new_task(button_left_async).expect("spawning task failed"));
+<span class="boring">}</span></code></pre>
 </details>
 <h3 id="debouncing-a-gpio-line"><a class="header" href="#debouncing-a-gpio-line">Debouncing a GPIO line</a></h3>
 <p>Before we talk about how you can check for button presses in software, we need to talk a bit about some
@@ -1647,7 +1618,7 @@ things that can happen on the GPIO digital line when you press the button.</p>
 <p>A button is implemented as a mechanical switch. When you press the button, you are actually
 closing the contacts of a circuit. You can have a look at how this is wired up in the following
 image extracted from the schematic:</p>
-<p><img src="./assets/button-connection.png" alt="Button Schematic" /></p>
+<p><img src="assets/button-connection.png" alt="Button Schematic"></p>
 <p>This is a really common way to connect a button to an input pin using a <a href="https://en.wikipedia.org/wiki/Pull-up_resistor">pull-up resistor</a>.
 The Wikipedia link provides some more information, but we will provide a simplified explanation
 here: Without the connection of the input pin to the supply voltage through a resistor, you would
@@ -1659,7 +1630,7 @@ across the pull-up resistor. Consequently, you will read a digital low when read
 <p>The problem with mechanical switches is that they can bounce, which means that you might see
 fluctuations on the digital line when you press the button. The following image provides a nice
 visualization:</p>
-<p><img src="./assets/debouce-graph.png" alt="Bouncing state" /></p>
+<p><img src="assets/debouce-graph.png" alt="Bouncing state"></p>
 <p>These bounces can make the measurement of edges imprecise. You might measure multiple edge events
 in software even when you only press the button once. To avoid this, you can debounce the button.
 A really simple way to do this would be to perform the following sequence:</p>
@@ -1678,8 +1649,7 @@ A really simple way to do this would be to perform the following sequence:</p>
 and <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/gpiote/struct.InputChannel.html#method.wait_for_low"><code>wait_for_low</code></a>
 method. Use these functions and implement a debounced button press detection.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
@@ -1690,16 +1660,15 @@ async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
         button_a.wait_for_high().await;
         // Debounce the button.
         embassy_time::Timer::after(Duration::from_millis(20)).await;
-        defmt::info!(&quot;The left button was pressed&quot;);
+        defmt::info!("The left button was pressed");
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
-<p>When you have implemented this, test this by flashing the app using <code>cargo run --bin multitasking_ipc</code>,
+<p>When you have implemented this, test this by flashing the app using <code>cargo run --bin multitasking_ipc --release</code>,
 pressing the left button and observing the program output.</p>
 <blockquote>
-<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step1.rs</code></p>
+<p>Intermediate solution file: <code>firmware/exercises/src/bin/multitasking_ipc_step1.rs</code></p>
 </blockquote>
 <h2 id="step-2---third-task-scheduled-by-an-interrupt-scheduler"><a class="header" href="#step-2---third-task-scheduled-by-an-interrupt-scheduler">Step 2 - Third task scheduled by an interrupt scheduler</a></h2>
 <p>Now, we want to run a third task which is responsible for doing the same process for the
@@ -1709,8 +1678,7 @@ task. The only thing that changes when using another scheduler is how the task i
 <p>Add the declaration of the third task which does the same logic, but for the right button
 <code>right_button_async</code>.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
@@ -1721,11 +1689,10 @@ async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
         button_b.wait_for_high().await;
         // Debounce the button.
         embassy_time::Timer::after(Duration::from_millis(20)).await;
-        defmt::info!(&quot;The right button was pressed&quot;);
+        defmt::info!("The right button was pressed");
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>We mentioned that you can use the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.InterruptExecutor.html"><code>InterruptExecutor</code></a>
 provided by embassy. You have to activate support for it with a feature, but we already did this for
@@ -1737,12 +1704,10 @@ use it inside an interrupt handler.</p>
 of this works: You can declare a static variable by using <code>static &lt;VAR_NAME&gt;: &lt;VarType&gt; = &lt;Construction/Instantiation&gt;</code>
 In this case, the constructor is a call of the <code>new</code> method of the executor.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>static INTERRUPT_EXECUTOR: embassy_executor::InterruptExecutor = embassy_executor::InterruptExecutor::new();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now, you can use <code>start</code> method of the executor to start it. You need to assign an interrupt by
 passing an <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/interrupt/enum.Interrupt.html"><code>Interrupt</code> enum variant</a>
@@ -1755,29 +1720,24 @@ Some CPU architectures offer dedicated software interrupts, but this one does no
 object. Use the <code>QDEC</code> interrupt variant as the input argument. Do not run the code just yet!</p>
 <details>
 <p>Inside your main method:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let interrupt_exec_spawner = INTERRUPT_EXECUTOR.start(embassy_nrf::interrupt::Interrupt::QDEC);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>You also need to declare an interrupt handler. If you did not do that, a default handler which is
 an empty loop would be executed. Inside the interrupt handler, you need to call the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.InterruptExecutor.html#method.on_interrupt"><code>on_interrupt</code> method</a>
 of the interrupt executor. The <code>cortex-m-rt</code> run-time library takes care of exposing a mechanism
 which allows us to declare interrupt handlers. You have to use the following import statement
 to get access to the <code>interrupt</code> macro:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use embassy_nrf::interrupt;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>Then, you can annotate a regular function with that exact macro. The function must have
 the exact name of the enum variant we showed you earlier, in our case <code>QDEC</code>.</p>
 <p>So this would look like:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use embassy_nrf::interrupt;
 
@@ -1785,8 +1745,7 @@ the exact name of the enum variant we showed you earlier, in our case <code>QDEC
 fn QDEC() {
     // Interrupt handler code here.
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>The special property of this function is that it is not called by software regularly.
 Instead, this function is called by the hardware when the QDEC interrupt fires. Normally,
 it would be used to service the QDEC peripheral, but we are using it to run our interrupt
@@ -1797,8 +1756,7 @@ case, we can fulfill the constraints by only calling this function once in the c
 interrupt handler. It is good practice to document your unsafe code blocks with a <code>// Safety:</code>
 note, so you should do that as well.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use embassy_nrf::interrupt;
 
@@ -1809,25 +1767,22 @@ fn QDEC() {
         INTERRUPT_EXECUTOR.on_interrupt();
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Finally, you can use the <code>interrupt_exec_spawner</code> object inside your main method to spawn the third
 task that you created.</p>
 <details>
 <p>Inside your main method:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let interrupt_exec_spawner = INTERRUPT_EXECUTOR.start(embassy_nrf::interrupt::Interrupt::QDEC);
-interrupt_exec_spawner.spawn(right_button_task(button_right_async)).expect(&quot;spawning task failed&quot;);
-<span class="boring">}
-</span></code></pre></pre>
+interrupt_exec_spawner.spawn(right_button_task(button_right_async)).expect("spawning task failed");
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now verify that everything is working by running the application, pressing the right button (B)
 and observing the program output.</p>
 <blockquote>
-<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step2.rs</code></p>
+<p>Intermediate solution file: <code>firmware/exercises/src/bin/multitasking_ipc_step2.rs</code></p>
 </blockquote>
 <h2 id="step-3---signalling-our-main-application"><a class="header" href="#step-3---signalling-our-main-application">Step 3 - Signalling our main application</a></h2>
 <p>One common task in complex applications is the communication between concurrent tasks. This
@@ -1855,12 +1810,10 @@ are regular cooperative tasks running in thread-mode.</p>
 specifying some signal type as the second generic argument, which can be sent during a notification.
 In this case, there is no additional information required, so a unit value <code>()</code> can be used.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>static SIGNAL_LEFT_BUTTON: Signal&lt;ThreadModeRawMutex, ()&gt; = Signal::new();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>All the <a href="https://docs.embassy.dev/embassy-sync/git/default/signal/struct.Signal.html">API</a> on signal
 only requires a shared reference, and you can use the <code>signal</code>, <code>wait</code> and <code>try_take</code> function to
@@ -1868,8 +1821,7 @@ signal from the button task and wait in the main task respectively.</p>
 <p>In your task which waits for button A presses, add a call to the <code>signal</code> function after detecting
 a button press.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
@@ -1881,14 +1833,13 @@ async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
         // Debounce the button.
         embassy_time::Timer::after(Duration::from_millis(20)).await;
         SIGNAL_LEFT_BUTTON.signal(());
-        defmt::info!(&quot;The left button was pressed&quot;);
+        defmt::info!("The left button was pressed");
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <blockquote>
-<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step3.rs</code></p>
+<p>Intermediate solution file: <code>firmware/exercises/src/bin/multitasking_ipc_step3.rs</code></p>
 </blockquote>
 <h2 id="step-4---using-the-signal-in-the-main-task"><a class="header" href="#step-4---using-the-signal-in-the-main-task">Step 4 - Using the signal in the main task</a></h2>
 <p>In the main task, you also have the issue that you have to perform two tasks now: Handling the
@@ -1913,13 +1864,12 @@ annotated by the <code>embassy_executor::task</code> macro.
 You have to update the main task and call <code>borrow_mut</code> on the wrapper driver object to actually
 retrieve and toggle the LED in the task now.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">async fn main_led_task&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
+<pre class="playground"><code class="language-rust">async fn main_led_task&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
     loop {
         led_strip.borrow_mut().toggle(0);
         Timer::after(Duration::from_millis(500)).await;
     }
-}
-</code></pre></pre>
+}</code></pre>
 </details>
 <p>We will now create the new <code>async</code> task for toggling the left LED and implementing the target logic.
 We actually need two states now: A <code>TOGGLING</code> state and an <code>OFF</code> state, which is toggled when we are
@@ -1928,8 +1878,7 @@ signalled by the button task.</p>
 enumeration: It is more readable and allows easier extension. It makes sense to add a <code>toggle</code>
 implementation to the enumeration as well for an even more readable API.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, Clone, Copy)]
 pub enum BlinkState {
@@ -1945,15 +1894,13 @@ impl BlinkState {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now create the second <code>async</code> task. Pass in the driver similarly to how you did it in the main LED
 task. Create a new instance of your state variable and initialize it to the logical <code>OFF</code> state.</p>
 <p>Start with a simple implementation which toggles the LED every 250 milliseconds if
 the blink state is in the <code>TOGGLING</code> state.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn left_led_task&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
     let blink_state = BlinkState::Off;
@@ -1964,8 +1911,7 @@ the blink state is in the <code>TOGGLING</code> state.</p>
         Timer::after(Duration::from_millis(250)).await;
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>Now, you actually need to add the logic to wait for a signal from the button task while also
 performing the periodic waiting. You can use the same <code>select</code> API you used earlier to select
 between two asynchronous tasks and stop on the first one which is resolved to completion.
@@ -1980,8 +1926,7 @@ the periodic delay and the wait method of the signal, whichever finishes first. 
 In the branch for the signal handling, toggle the blink state variable. It makes sense to
 also turn the LED off when going to the <code>OFF</code> state.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn left_blinky&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
     let mut blink_state = BlinkState::Off;
@@ -2006,8 +1951,7 @@ also turn the LED off when going to the <code>OFF</code> state.</p>
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>Now, all that is left to do is to execute both the <code>left_blinky</code> and the <code>main_led_task</code>
 inside your <code>main</code> task. As already mentioned, you can also use the <code>select</code> API for this, but
@@ -2015,8 +1959,7 @@ you do not need to match on the output of the <code>select</code> call. Instead,
 async tasks in a permanent loop.</p>
 <details>
 <p>At the end of your main task:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let line_strip_shared = core::cell::RefCell::new(line_strip);
     loop {
@@ -2026,12 +1969,11 @@ async tasks in a permanent loop.</p>
         )
         .await;
     }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
-<p>You can now test this using <code>cargo run --bin multitasking_ipc</code>.</p>
+<p>You can now test this using <code>cargo run --bin multitasking_ipc --release</code>.</p>
 <blockquote>
-<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step4.rs</code></p>
+<p>Intermediate solution file: <code>firmware/exercises/src/bin/multitasking_ipc_step4.rs</code></p>
 </blockquote>
 <h2 id="step-5---send-a-message-from-the-third-task-on-a-button-press"><a class="header" href="#step-5---send-a-message-from-the-third-task-on-a-button-press">Step 5 - Send a message from the third task on a button press</a></h2>
 <p>We now want to teach another common IPC mechanism: Message queues. The embassy <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/channel/struct.Channel.html"><code>Channel</code></a>
@@ -2039,7 +1981,7 @@ provides a static and typed message with async support. We are going to use this
 to send information from the right button task to the main task.</p>
 <p>We want to measure the amount of time the button was pressed in the button task and send that
 duration to the main task. Then we can blink the button with that updated frequency.
-Similarly to the channel abstractions offered by the Rust standard library, most channel libraries 
+Similarly to the channel abstractions offered by the Rust standard library, most channel libraries
 targeting embedded systems offer some way to be split up into a sender and receiver driver object.
 The <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/channel/struct.Channel.html#method.sender"><code>sender</code></a>
 and <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/channel/struct.Channel.html#method.receiver"><code>receiver</code></a>
@@ -2054,39 +1996,34 @@ statically as the <code>N</code> generic.</p>
 <code>embassy_sync::channel::Channel&lt;CriticalSectionRawMutex, embassy_time::Duration, 4&gt;</code> type.</p>
 <details>
 <p>Above your main:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>static CHANNEL_RIGHT_BUTTON: embassy_sync::channel::Channel&lt;
     CriticalSectionRawMutex,
     embassy_time::Duration,
     4,
 &gt; = embassy_sync::channel::Channel::new();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <p>The next step is to measure the duration of the button press. It is very easy to measure
 durations using <code>embassy_time</code> because it offers abstractions similar to the standard library.
 You can retrieve an <code>embassy_time::Duration</code> for the difference between two time points by
 subtracting one embassy <a href="https://docs.rs/embassy-time/latest/embassy_time/struct.Instant.html"><code>Instant</code></a>
 from another:</p>
-<pre><pre class="playground"><code class="language-rust no-run">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust no-run"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let start = embassy_time::Instant::now();
 // Some operation which takes time
 // (...)
 // `elapsed` has the `embassy_time::Duration` type.
 let elapsed = embassy_time::Instant::now() - start;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>Use this to measure the button press duration in your right button task. Then use the
 <code>CHANNEL_RIGHT_BUTTON</code> <code>sender</code> method to retrieve a sender handle and use its <code>send</code> method
 to send the duration to the main task. The <code>send</code> method is an <code>async</code> function that needs
 to be awaited.</p>
 <details>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
@@ -2101,14 +2038,13 @@ async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
         embassy_time::Timer::after(Duration::from_millis(20)).await;
 
         CHANNEL_RIGHT_BUTTON.sender().send(elapsed).await;
-        defmt::info!(&quot;The right button was pressed&quot;);
+        defmt::info!("The right button was pressed");
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <blockquote>
-<p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step5.rs</code></p>
+<p>Intermediate solution file: <code>firmware/exercises/src/bin/multitasking_ipc_step5.rs</code></p>
 </blockquote>
 <h2 id="step-6---handle-blinky-duration-messages-in-main-task"><a class="header" href="#step-6---handle-blinky-duration-messages-in-main-task">Step 6 - Handle blinky duration messages in main task</a></h2>
 <p>As the final step, process the received messages by using the <code>receiver</code> method of
@@ -2120,8 +2056,7 @@ it was done for handling the signal of the left button task.</p>
 <p><code>embassy-futures</code> offers methods like <a href="https://docs.embassy.dev/embassy-futures/0.1.2/default/select/fn.select3.html"><code>select3</code></a> to allow selecting between more than 2 tasks.</p>
 <details>
 <p>Right blinky task:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn right_blinky&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
     let mut blink_freq = Duration::from_millis(1000);
@@ -2133,7 +2068,7 @@ it was done for handling the signal of the left button task.</p>
         .await
         {
             embassy_futures::select::Either::First(new_duration) =&gt; {
-                defmt::info!(&quot;New blink frequency: {:?} ms&quot;, new_duration.as_millis());
+                defmt::info!("New blink frequency: {:?} ms", new_duration.as_millis());
                 blink_freq = new_duration;
             }
             embassy_futures::select::Either::Second(_) =&gt; {
@@ -2142,11 +2077,9 @@ it was done for handling the signal of the left button task.</p>
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 <p>main loop:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let line_strip_shared = core::cell::RefCell::new(line_strip);
     loop {
@@ -2157,14 +2090,13 @@ it was done for handling the signal of the left button task.</p>
         )
         .await;
     }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre>
 </details>
 <blockquote>
-<p>Full reference solution file: <code>microbit-exercises/src/bin/multitasking_ipc_solution.rs</code></p>
+<p>Full reference solution file: <code>firmware/exercises/src/bin/multitasking_ipc_solution.rs</code></p>
 </blockquote>
 <h2 id="finishing-up-3"><a class="header" href="#finishing-up-3">Finishing Up</a></h2>
-<p>Run <code>cargo run --bin multitasking_ipc</code> and try pressing the right button down for different
+<p>Run <code>cargo run --bin multitasking_ipc --release</code> and try pressing the right button down for different
 times. You should see the blink frequency change depending on how long you pressed the button.</p>
 <p>You might have noticed that there are actually multiple ways to specify tasks. You can either
 use <code>async</code> functions annotated with <code>#[embassy_executor::task]</code> or you use methods like
@@ -2213,25 +2145,30 @@ forget to do this.</p>
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             MathJax.Hub.Register.StartupHook('End', function() {
                 window.setTimeout(window.print, 100);
@@ -2239,5 +2176,7 @@ forget to do this.</p>
         });
         </script>
 
+
+    </div>
     </body>
 </html>

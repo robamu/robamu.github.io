@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light sidebar-visible" dir="ltr">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,58 +8,44 @@
 
         <!-- Custom HTML head -->
 
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff">
+        <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
         <!-- MathJax -->
-        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-        <!-- Provide site root and default themes to javascript -->
-        <script>
-            const path_to_root = "";
-            const default_light_theme = "light";
-            const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-6edc01d0.js";
-        </script>
-        <!-- Start loading toc.js asap -->
-        <script src="toc-ab0022af.js"></script>
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
-    <div id="mdbook-help-container">
-        <div id="mdbook-help-popup">
-            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
-            <div>
-                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
-                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
-                <p>Press <kbd>?</kbd> to show this help</p>
-                <p>Press <kbd>Esc</kbd> to hide this help</p>
-            </div>
-        </div>
-    </div>
-    <div id="mdbook-body-container">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script>
+        <script type="text/javascript">
             try {
-                let theme = localStorage.getItem('mdbook-theme');
-                let sidebar = localStorage.getItem('mdbook-sidebar');
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -72,70 +58,57 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script>
-            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
-            let theme;
+        <script type="text/javascript">
+            var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            const html = document.documentElement;
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add("js");
+            html.classList.add('js');
         </script>
 
-        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
-
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script>
-            let sidebar = null;
-            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
-            } else {
-                sidebar = 'hidden';
-                sidebar_toggle.checked = false;
             }
-            if (sidebar === 'visible') {
-                sidebar_toggle.checked = true;
-            } else {
-                html.classList.remove('sidebar-visible');
-            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
-        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
-            <!-- populated by js -->
-            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
-            <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
-            </noscript>
-            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
-                <div class="sidebar-resize-indicator"></div>
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="preparation.html"><strong aria-hidden="true">2.</strong> Preparation</a></li><li class="chapter-item expanded "><a href="terminology_glossary.html"><strong aria-hidden="true">3.</strong> Terminology</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercises</li><li class="chapter-item expanded "><a href="blinky-exercise.html"><strong aria-hidden="true">4.</strong> Blinky Exercise</a></li><li class="chapter-item expanded "><a href="uart-echo-exercise.html"><strong aria-hidden="true">5.</strong> UART echo application</a></li><li class="chapter-item expanded "><a href="accelerometer.html"><strong aria-hidden="true">6.</strong> Accelerometer Sensor Driver</a></li><li class="chapter-item expanded "><a href="multitasking-ipc-exercise.html" class="active"><strong aria-hidden="true">7.</strong> Multi-tasking exercise and IPC</a></li></ol>
             </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <div id="mdbook-page-wrapper" class="page-wrapper">
+        <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="mdbook-menu-bar-hover-placeholder"></div>
-                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
-                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
-                        </label>
-                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
                         </button>
-                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
-                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
                         </button>
                     </div>
 
@@ -143,38 +116,33 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                            <i id="print-button" class="fa fa-print"></i>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="mdbook-search-wrapper" class="hidden">
-                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
-                        <div class="search-wrapper">
-                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
-                            <div class="spinner-wrapper">
-                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
-                            </div>
-                        </div>
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
-                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
-                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
-                        <ul id="mdbook-searchresults">
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script>
-                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="mdbook-content" class="content">
+                <div id="content" class="content">
                     <main>
                         <h1 id="multi-tasking-exercise-and-ipc"><a class="header" href="#multi-tasking-exercise-and-ipc">Multi-tasking exercise and IPC</a></h1>
 <p>In this exercise, you will learn how to do pre-emptive multi-tasking with embassy. You will also
@@ -221,7 +189,7 @@ able to use <code>async</code>? embassy provides the <a href="https://docs.rs/em
 feature as the answer.</p>
 <p>You can still have your regular <code>async</code> tasks, but they will now be scheduled by the interrupt mode
 of the processor. The processor also allows assigning priorities to an interrupt handler, which
-means that all the tasks scheduled by a certain interrupt handler inherit that handler’s priority.</p>
+means that all the tasks scheduled by a certain interrupt handler inherit that handler's priority.</p>
 <h2 id="step-1---create-a-second-task"><a class="header" href="#step-1---create-a-second-task">Step 1 - Create a second task</a></h2>
 <p>The first step is to create a second task which prints something when the left user button (A)
 is pressed. We actually provided a component that you can use for this. The <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/gpiote/struct.InputChannel.html">InputChannel</a>
@@ -238,21 +206,25 @@ which is passed as an input argument to your main method. You need to pass the c
 method for this to work.</p>
 <details>
 <p>Declaration of the new task:</p>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn new_task() {
     loop {
-        defmt::info!("my new task");
+        defmt::info!(&quot;my new task&quot;);
         embassy::time::Timer::after(Duration::from_secs(1)).await;
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>and somewhere in your <code>main</code> function:</p>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>spawner.spawn(new_task().expect("spawning task failed"));
-<span class="boring">}</span></code></pre>
+</span>spawner.spawn(new_task().expect(&quot;spawning task failed&quot;));
+<span class="boring">}
+</span></code></pre></pre>
 <p>The <code>expect</code> or <code>unwrap</code> is okay here. The only case where spawning a function may fail is when
 you are spawning multiple instances of the same task.</p>
 </details>
@@ -261,20 +233,24 @@ button. For this, you need to pass the <code>button_left_async</code> driver obj
 to the task. The type of this driver is <code>gpiote::InputChannel&lt;'static&gt;</code>. You can transfer this
 driver to the task by declaring it as an input argument to your new task.</p>
 <details>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn left_button_task(left_button: gpiote::InputChannel&lt;'static&gt;) {
     loop {
-        defmt::info!("my new task");
+        defmt::info!(&quot;my new task&quot;);
         embassy::time::Timer::after(Duration::from_secs(1)).await;
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>and in your main:</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>spawner.spawn(new_task(button_left_async).expect("spawning task failed"));
-<span class="boring">}</span></code></pre>
+</span>spawner.spawn(new_task(button_left_async).expect(&quot;spawning task failed&quot;));
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <h3 id="debouncing-a-gpio-line"><a class="header" href="#debouncing-a-gpio-line">Debouncing a GPIO line</a></h3>
 <p>Before we talk about how you can check for button presses in software, we need to talk a bit about some
@@ -282,7 +258,7 @@ things that can happen on the GPIO digital line when you press the button.</p>
 <p>A button is implemented as a mechanical switch. When you press the button, you are actually
 closing the contacts of a circuit. You can have a look at how this is wired up in the following
 image extracted from the schematic:</p>
-<p><img src="./assets/button-connection.png" alt="Button Schematic"></p>
+<p><img src="./assets/button-connection.png" alt="Button Schematic" /></p>
 <p>This is a really common way to connect a button to an input pin using a <a href="https://en.wikipedia.org/wiki/Pull-up_resistor">pull-up resistor</a>.
 The Wikipedia link provides some more information, but we will provide a simplified explanation
 here: Without the connection of the input pin to the supply voltage through a resistor, you would
@@ -294,7 +270,7 @@ across the pull-up resistor. Consequently, you will read a digital low when read
 <p>The problem with mechanical switches is that they can bounce, which means that you might see
 fluctuations on the digital line when you press the button. The following image provides a nice
 visualization:</p>
-<p><img src="./assets/debouce-graph.png" alt="Bouncing state"></p>
+<p><img src="./assets/debouce-graph.png" alt="Bouncing state" /></p>
 <p>These bounces can make the measurement of edges imprecise. You might measure multiple edge events
 in software even when you only press the button once. To avoid this, you can debounce the button.
 A really simple way to do this would be to perform the following sequence:</p>
@@ -313,7 +289,8 @@ A really simple way to do this would be to perform the following sequence:</p>
 and <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/gpiote/struct.InputChannel.html#method.wait_for_low"><code>wait_for_low</code></a>
 method. Use these functions and implement a debounced button press detection.</p>
 <details>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
@@ -324,10 +301,11 @@ async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
         button_a.wait_for_high().await;
         // Debounce the button.
         embassy_time::Timer::after(Duration::from_millis(20)).await;
-        defmt::info!("The left button was pressed");
+        defmt::info!(&quot;The left button was pressed&quot;);
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>When you have implemented this, test this by flashing the app using <code>cargo run --bin multitasking_ipc</code>,
 pressing the left button and observing the program output.</p>
@@ -336,12 +314,14 @@ pressing the left button and observing the program output.</p>
 </blockquote>
 <h2 id="step-2---third-task-scheduled-by-an-interrupt-scheduler"><a class="header" href="#step-2---third-task-scheduled-by-an-interrupt-scheduler">Step 2 - Third task scheduled by an interrupt scheduler</a></h2>
 <p>Now, we want to run a third task which is responsible for doing the same process for the
-right button. You can declare the task similarly to how you declared the second task. The only
-thing that changes when using another scheduler is how the task is spawned.</p>
+right button, but we actually want to run it with a higher priority. We are going to use the
+interrupt scheduler for this. You can declare the task similarly to how you declared the second
+task. The only thing that changes when using another scheduler is how the task is spawned.</p>
 <p>Add the declaration of the third task which does the same logic, but for the right button
 <code>right_button_async</code>.</p>
 <details>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
@@ -352,10 +332,11 @@ async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
         button_b.wait_for_high().await;
         // Debounce the button.
         embassy_time::Timer::after(Duration::from_millis(20)).await;
-        defmt::info!("The right button was pressed");
+        defmt::info!(&quot;The right button was pressed&quot;);
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>We mentioned that you can use the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.InterruptExecutor.html"><code>InterruptExecutor</code></a>
 provided by embassy. You have to activate support for it with a feature, but we already did this for
@@ -367,10 +348,12 @@ use it inside an interrupt handler.</p>
 of this works: You can declare a static variable by using <code>static &lt;VAR_NAME&gt;: &lt;VarType&gt; = &lt;Construction/Instantiation&gt;</code>
 In this case, the constructor is a call of the <code>new</code> method of the executor.</p>
 <details>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>static INTERRUPT_EXECUTOR: embassy_executor::InterruptExecutor = embassy_executor::InterruptExecutor::new();
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now, you can use <code>start</code> method of the executor to start it. You need to assign an interrupt by
 passing an <a href="https://docs.embassy.dev/embassy-nrf/0.10.0/nrf52833/interrupt/enum.Interrupt.html"><code>Interrupt</code> enum variant</a>
@@ -383,24 +366,29 @@ Some CPU architectures offer dedicated software interrupts, but this one does no
 object. Use the <code>QDEC</code> interrupt variant as the input argument. Do not run the code just yet!</p>
 <details>
 <p>Inside your main method:</p>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let interrupt_exec_spawner = INTERRUPT_EXECUTOR.start(embassy_nrf::interrupt::Interrupt::QDEC);
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>You also need to declare an interrupt handler. If you did not do that, a default handler which is
 an empty loop would be executed. Inside the interrupt handler, you need to call the <a href="https://docs.rs/embassy-executor/latest/embassy_executor/struct.InterruptExecutor.html#method.on_interrupt"><code>on_interrupt</code> method</a>
 of the interrupt executor. The <code>cortex-m-rt</code> run-time library takes care of exposing a mechanism
 which allows us to declare interrupt handlers. You have to use the following import statement
 to get access to the <code>interrupt</code> macro:</p>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use embassy_nrf::interrupt;
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Then, you can annotate a regular function with that exact macro. The function must have
 the exact name of the enum variant we showed you earlier, in our case <code>QDEC</code>.</p>
 <p>So this would look like:</p>
-<pre class="playground"><code class="language-rust no_run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use embassy_nrf::interrupt;
 
@@ -408,7 +396,8 @@ the exact name of the enum variant we showed you earlier, in our case <code>QDEC
 fn QDEC() {
     // Interrupt handler code here.
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The special property of this function is that it is not called by software regularly.
 Instead, this function is called by the hardware when the QDEC interrupt fires. Normally,
 it would be used to service the QDEC peripheral, but we are using it to run our interrupt
@@ -419,7 +408,8 @@ case, we can fulfill the constraints by only calling this function once in the c
 interrupt handler. It is good practice to document your unsafe code blocks with a <code>// Safety:</code>
 note, so you should do that as well.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use embassy_nrf::interrupt;
 
@@ -430,17 +420,20 @@ fn QDEC() {
         INTERRUPT_EXECUTOR.on_interrupt();
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Finally, you can use the <code>interrupt_exec_spawner</code> object inside your main method to spawn the third
 task that you created.</p>
 <details>
 <p>Inside your main method:</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let interrupt_exec_spawner = INTERRUPT_EXECUTOR.start(embassy_nrf::interrupt::Interrupt::QDEC);
-interrupt_exec_spawner.spawn(right_button_task(button_right_async)).expect("spawning task failed");
-<span class="boring">}</span></code></pre>
+interrupt_exec_spawner.spawn(right_button_task(button_right_async)).expect(&quot;spawning task failed&quot;);
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now verify that everything is working by running the application, pressing the right button (B)
 and observing the program output.</p>
@@ -473,10 +466,12 @@ are regular cooperative tasks running in thread-mode.</p>
 specifying some signal type as the second generic argument, which can be sent during a notification.
 In this case, there is no additional information required, so a unit value <code>()</code> can be used.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>static SIGNAL_LEFT_BUTTON: Signal&lt;ThreadModeRawMutex, ()&gt; = Signal::new();
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>All the <a href="https://docs.embassy.dev/embassy-sync/git/default/signal/struct.Signal.html">API</a> on signal
 only requires a shared reference, and you can use the <code>signal</code>, <code>wait</code> and <code>try_take</code> function to
@@ -484,7 +479,8 @@ signal from the button task and wait in the main task respectively.</p>
 <p>In your task which waits for button A presses, add a call to the <code>signal</code> function after detecting
 a button press.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
@@ -496,10 +492,11 @@ async fn left_button_task(mut button_a: gpiote::InputChannel&lt;'static&gt;) {
         // Debounce the button.
         embassy_time::Timer::after(Duration::from_millis(20)).await;
         SIGNAL_LEFT_BUTTON.signal(());
-        defmt::info!("The left button was pressed");
+        defmt::info!(&quot;The left button was pressed&quot;);
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <blockquote>
 <p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step3.rs</code></p>
@@ -527,12 +524,13 @@ annotated by the <code>embassy_executor::task</code> macro.
 You have to update the main task and call <code>borrow_mut</code> on the wrapper driver object to actually
 retrieve and toggle the LED in the task now.</p>
 <details>
-<pre class="playground"><code class="language-rust">async fn main_led_task&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
+<pre><pre class="playground"><code class="language-rust">async fn main_led_task&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
     loop {
         led_strip.borrow_mut().toggle(0);
         Timer::after(Duration::from_millis(500)).await;
     }
-}</code></pre>
+}
+</code></pre></pre>
 </details>
 <p>We will now create the new <code>async</code> task for toggling the left LED and implementing the target logic.
 We actually need two states now: A <code>TOGGLING</code> state and an <code>OFF</code> state, which is toggled when we are
@@ -541,7 +539,8 @@ signalled by the button task.</p>
 enumeration: It is more readable and allows easier extension. It makes sense to add a <code>toggle</code>
 implementation to the enumeration as well for an even more readable API.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, Clone, Copy)]
 pub enum BlinkState {
@@ -557,13 +556,15 @@ impl BlinkState {
         }
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now create the second <code>async</code> task. Pass in the driver similarly to how you did it in the main LED
 task. Create a new instance of your state variable and initialize it to the logical <code>OFF</code> state.</p>
 <p>Start with a simple implementation which toggles the LED every 250 milliseconds if
 the blink state is in the <code>TOGGLING</code> state.</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn left_led_task&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
     let blink_state = BlinkState::Off;
@@ -574,7 +575,8 @@ the blink state is in the <code>TOGGLING</code> state.</p>
         Timer::after(Duration::from_millis(250)).await;
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Now, you actually need to add the logic to wait for a signal from the button task while also
 performing the periodic waiting. You can use the same <code>select</code> API you used earlier to select
 between two asynchronous tasks and stop on the first one which is resolved to completion.
@@ -589,7 +591,8 @@ the periodic delay and the wait method of the signal, whichever finishes first. 
 In the branch for the signal handling, toggle the blink state variable. It makes sense to
 also turn the LED off when going to the <code>OFF</code> state.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn left_blinky&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
     let mut blink_state = BlinkState::Off;
@@ -614,7 +617,8 @@ also turn the LED off when going to the <code>OFF</code> state.</p>
         }
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>Now, all that is left to do is to execute both the <code>left_blinky</code> and the <code>main_led_task</code>
 inside your <code>main</code> task. As already mentioned, you can also use the <code>select</code> API for this, but
@@ -622,7 +626,8 @@ you do not need to match on the output of the <code>select</code> call. Instead,
 async tasks in a permanent loop.</p>
 <details>
 <p>At the end of your main task:</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let line_strip_shared = core::cell::RefCell::new(line_strip);
     loop {
@@ -632,7 +637,8 @@ async tasks in a permanent loop.</p>
         )
         .await;
     }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>You can now test this using <code>cargo run --bin multitasking_ipc</code>.</p>
 <blockquote>
@@ -644,7 +650,7 @@ provides a static and typed message with async support. We are going to use this
 to send information from the right button task to the main task.</p>
 <p>We want to measure the amount of time the button was pressed in the button task and send that
 duration to the main task. Then we can blink the button with that updated frequency.
-Similarly to the channel abstractions offered by the Rust standard library, most channel libraries
+Similarly to the channel abstractions offered by the Rust standard library, most channel libraries 
 targeting embedded systems offer some way to be split up into a sender and receiver driver object.
 The <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/channel/struct.Channel.html#method.sender"><code>sender</code></a>
 and <a href="https://docs.embassy.dev/embassy-sync/0.8.0/default/channel/struct.Channel.html#method.receiver"><code>receiver</code></a>
@@ -659,34 +665,39 @@ statically as the <code>N</code> generic.</p>
 <code>embassy_sync::channel::Channel&lt;CriticalSectionRawMutex, embassy_time::Duration, 4&gt;</code> type.</p>
 <details>
 <p>Above your main:</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>static CHANNEL_RIGHT_BUTTON: embassy_sync::channel::Channel&lt;
     CriticalSectionRawMutex,
     embassy_time::Duration,
     4,
 &gt; = embassy_sync::channel::Channel::new();
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <p>The next step is to measure the duration of the button press. It is very easy to measure
 durations using <code>embassy_time</code> because it offers abstractions similar to the standard library.
 You can retrieve an <code>embassy_time::Duration</code> for the difference between two time points by
 subtracting one embassy <a href="https://docs.rs/embassy-time/latest/embassy_time/struct.Instant.html"><code>Instant</code></a>
 from another:</p>
-<pre class="playground"><code class="language-rust no-run"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust no-run">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let start = embassy_time::Instant::now();
 // Some operation which takes time
 // (...)
 // `elapsed` has the `embassy_time::Duration` type.
 let elapsed = embassy_time::Instant::now() - start;
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Use this to measure the button press duration in your right button task. Then use the
 <code>CHANNEL_RIGHT_BUTTON</code> <code>sender</code> method to retrieve a sender handle and use its <code>send</code> method
 to send the duration to the main task. The <code>send</code> method is an <code>async</code> function that needs
 to be awaited.</p>
 <details>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[embassy_executor::task]
 async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
@@ -701,10 +712,11 @@ async fn right_button_task(mut button_b: gpiote::InputChannel&lt;'static&gt;) {
         embassy_time::Timer::after(Duration::from_millis(20)).await;
 
         CHANNEL_RIGHT_BUTTON.sender().send(elapsed).await;
-        defmt::info!("The right button was pressed");
+        defmt::info!(&quot;The right button was pressed&quot;);
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <blockquote>
 <p>Intermediate solution file: <code>microbit-exercises/src/bin/multitasking_ipc_step5.rs</code></p>
@@ -719,7 +731,8 @@ it was done for handling the signal of the left button task.</p>
 <p><code>embassy-futures</code> offers methods like <a href="https://docs.embassy.dev/embassy-futures/0.1.2/default/select/fn.select3.html"><code>select3</code></a> to allow selecting between more than 2 tasks.</p>
 <details>
 <p>Right blinky task:</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>async fn right_blinky&lt;'a&gt;(led_strip: &amp;RefCell&lt;LedStrip&lt;'a&gt;&gt;) {
     let mut blink_freq = Duration::from_millis(1000);
@@ -731,7 +744,7 @@ it was done for handling the signal of the left button task.</p>
         .await
         {
             embassy_futures::select::Either::First(new_duration) =&gt; {
-                defmt::info!("New blink frequency: {:?} ms", new_duration.as_millis());
+                defmt::info!(&quot;New blink frequency: {:?} ms&quot;, new_duration.as_millis());
                 blink_freq = new_duration;
             }
             embassy_futures::select::Either::Second(_) =&gt; {
@@ -740,9 +753,11 @@ it was done for handling the signal of the left button task.</p>
         }
     }
 }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>main loop:</p>
-<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let line_strip_shared = core::cell::RefCell::new(line_strip);
     loop {
@@ -753,7 +768,8 @@ it was done for handling the signal of the left button task.</p>
         )
         .await;
     }
-<span class="boring">}</span></code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 </details>
 <blockquote>
 <p>Full reference solution file: <code>microbit-exercises/src/bin/multitasking_ipc_solution.rs</code></p>
@@ -796,7 +812,7 @@ forget to do this.</p>
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="accelerometer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                                <i class="fa fa-angle-left"></i>
                             </a>
 
 
@@ -807,38 +823,31 @@ forget to do this.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="accelerometer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                        <i class="fa fa-angle-left"></i>
                     </a>
 
             </nav>
 
         </div>
 
-        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
-        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
-        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
-        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
-        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
-        <script>
+        <script type="text/javascript">
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-09f2665d.js"></script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
 
 
-
-    </div>
     </body>
 </html>

@@ -1,0 +1,31 @@
+<mxfile host="Electron">
+  <diagram name="Page-1" id="adWma8CQTAWjjyFael2y">
+    <mxGraphModel dx="692" dy="415" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rH19tAYTwhWd9SnpTdFX-1" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 18px;&quot;&gt;MSB X&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="200" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="rH19tAYTwhWd9SnpTdFX-2" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;span style=&quot;font-family: &amp;quot;Lucida Console&amp;quot;; font-size: 18px;&quot;&gt;LSB X&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="280" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="rH19tAYTwhWd9SnpTdFX-3" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;span style=&quot;font-family: &amp;quot;Lucida Console&amp;quot;; font-size: 18px;&quot;&gt;MSB Y&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="360" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="rH19tAYTwhWd9SnpTdFX-4" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;span style=&quot;font-family: &amp;quot;Lucida Console&amp;quot;; font-size: 18px;&quot;&gt;LSB Y&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="440" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="rH19tAYTwhWd9SnpTdFX-5" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;span style=&quot;font-family: &amp;quot;Lucida Console&amp;quot;; font-size: 18px;&quot;&gt;MSB Z&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="520" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="rH19tAYTwhWd9SnpTdFX-6" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;span style=&quot;font-family: &amp;quot;Lucida Console&amp;quot;; font-size: 18px;&quot;&gt;LSB Z&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="600" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="rH19tAYTwhWd9SnpTdFX-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;p&gt;&lt;font style=&quot;font-size: 19px;&quot; face=&quot;Lucida Console&quot;&gt;6 byte payload&lt;/font&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="30" width="280" x="300" y="230" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

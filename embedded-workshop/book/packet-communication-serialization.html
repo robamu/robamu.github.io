@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-c4caa3bd.js";
+            window.path_to_searchindex_js = "searchindex-3dfc6815.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-2e1c5e04.js"></script>
@@ -669,6 +669,108 @@ method. Send a ping request if <code>cli.ping</code> is <code>true</code>.</p>
 <span class="boring">}</span></code></pre>
 </details>
 <h2 id="step-3---processing-telemetry-in-the-client"><a class="header" href="#step-3---processing-telemetry-in-the-client">Step 3 - Processing telemetry in the client</a></h2>
+<p>We are now able to send requests to the firmware, but we also have to add telemetry handling to
+the client. Every payload we receive is represented by the <code>models::response::Response</code> type.</p>
+<p>The first thing you can do is to create a function called <code>parse_response</code> which expects
+a <code>spacepackets::CcsdsPacketReader</code> as input and returns a
+<code>anyhow::Result&lt;models::response::Response&gt;</code>.</p>
+<p>Create the function prototype first.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn parse_response(
+    reader: CcsdsPacketReader,
+) -&gt; anyhow::Result&lt;models::response::Response&gt; {
+    todo!();
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>The <code>reader</code> object has a function called <code>packet_data</code> that you can use to extract the actual
+packet data payload from the full packet.
+Then, you can parse the response by using the <code>postcard::from_bytes</code> API.
+Use <code>with_context(|| "my error text")?</code> to return an <code>anyhow::Error</code> on a postcard error.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn parse_response(
+    reader: CcsdsPacketReader,
+) -&gt; anyhow::Result&lt;models::response::Response&gt; {
+    let user_data = reader.packet_data();
+    let response = postcard::from_bytes(user_data).with_context(|| "parsing TM response")?;
+    Ok(response)
+}
+<span class="boring">}</span></code></pre>
+</details>
+<p>Next, we have to update the <code>receive</code> method content to handle the raw decoded frames.
+The <code>CcsdsPacketReader::new_with_checksum</code> allows to create a packet reader from the raw byte
+representation, assuming that a 16-bit checksum is present at the end of the packet.</p>
+<p>Inside the packet handling closure of the <code>receive</code> call, use and match on this function.
+In the <code>Ok(..)</code> arm, call the <code>parse_response</code> method we created earlier.
+On the error arm, print some error using the <code>log</code> library.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    loop {
+        serial_transport
+            .receive(
+                |packet| match CcsdsPacketReader::new_with_checksum(packet) {
+                    Ok(packet) =&gt; match parse_response(packet) {
+                        Ok(response) =&gt; todo!(),
+                        Err(e) =&gt; todo!()
+                    },
+                    Err(e) =&gt; {
+                        log::error!("Failed to read packet: {:?}", e);
+                    }
+                },
+            )
+            .with_context(|| "serial reception failed")?;
+        if kill_signal.load(Ordering::Relaxed) {
+            log::info!("Shutting down...");
+            break;
+        }
+        std::thread::sleep(std::time::Duration::from_millis(100));
+    }
+
+<span class="boring">}</span></code></pre>
+</details>
+<p>As the final step, simply print the response using the <code>log</code> library. We implemented <code>Debug</code> on
+the response structure. We could even implement <code>Display</code> for an even better human readable
+structure, but the <code>Debug</code> implementation is okay for now.</p>
+<p>For the error arm, print some suitable error message and the error itself.</p>
+<details>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    loop {
+        serial_transport
+            .receive(
+                |packet| match CcsdsPacketReader::new_with_checksum(packet) {
+                    Ok(packet) =&gt; match parse_response(packet) {
+                        Ok(response) =&gt; {
+                            log::info!("RX response: {:?}", response);
+                        }
+                        Err(e) =&gt; {
+                            log::error!("Failed to parse response: {:?}", e);
+                        }
+                    },
+                    Err(e) =&gt; {
+                        log::error!("Failed to read packet: {:?}", e);
+                    }
+                },
+            )
+            .with_context(|| "serial reception failed")?;
+        if kill_signal.load(Ordering::Relaxed) {
+            log::info!("Shutting down...");
+            break;
+        }
+        std::thread::sleep(std::time::Duration::from_millis(100));
+    }
+<span class="boring">}</span></code></pre>
+</details>
+<p>With that, we have a basic client we can use to send telecommands and handle telemetry.</p>
+<p>You can now use the <code>cargo run -- --help</code> command to display the help text for your command line
+application or the <code>cargo run -- --ping</code> command to send a ping.
+The client will always go to a listener mode after it has done all TC handling, where it
+periodically scans for telemetry packets and prints them.</p>
 <h2 id="step-4---extract-the-requests-from-the-uart-data-stream-inside-the-firmware"><a class="header" href="#step-4---extract-the-requests-from-the-uart-data-stream-inside-the-firmware">Step 4 - Extract the requests from the UART data stream inside the firmware</a></h2>
 <h2 id="step-5---process-requests-and-send-telemetry-inside-the-firmware"><a class="header" href="#step-5---process-requests-and-send-telemetry-inside-the-firmware">Step 5 - Process requests and send telemetry inside the firmware</a></h2>
 

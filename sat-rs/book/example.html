@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-0c17edf6.js";
+            window.path_to_searchindex_js = "searchindex-27f0876d.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-046d9cbf.js"></script>
+        <script src="toc-d3431f96.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -184,9 +184,58 @@ software application.</p>
 <p>The example project contains components which could also be expected to be part of a production
 On-Board Software. A structural diagram of the example application is given to provide
 a brief high-level view of the components used inside the example application:</p>
-<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="images/satrs-example/satrs-example-structure.png" alt="satrs-example component structure"><span class="img-wrapper"><img src="images/satrs-example/satrs-example-structure.png" alt="satrs-example component structure"></span></label></p>
-<p>The dotted lines are used to denote optional components. In this case, the static pool components
-are optional because the heap can be used as a simpler mechanism to store TMTC packets as well.
+<pre class="mermaid">flowchart TD
+    subgraph TMTC[TMTC Infrastructure]
+        subgraph TMTCRow1[ ]
+            direction LR
+            Udp[UDP Server]
+            Tcp[TCP Server]
+        end
+        subgraph TMTCRow2[ ]
+            direction LR
+            Source[TC Source]
+            Sink[TM Sink]
+        end
+    end
+
+    subgraph AOCS[AOCS Stack]
+        subgraph AOCSRow1[ ]
+            direction LR
+            Mgm0[MGM 0 Handler]
+            Mgm1[MGM 1 Handler]
+            Assy[MGM Assembly]
+        end
+        subgraph AOCSRow2[ ]
+            direction LR
+            AcsCtrl[ACS Controller]
+            Mgt[MGT Handler]
+            AcsSub[ACS Subsystem]
+        end
+    end
+
+    subgraph EPS[EPS Stack]
+        Pcdu[PCDU Handler]
+    end
+
+    subgraph Core[Core]
+        direction LR
+        Ctrl[Core Controller]
+        Evt[Event Manager]
+    end
+
+    Sim[Sim Client]:::optional
+
+    TMTC ~~~ EPS
+    AOCS ~~~ Core
+    Core ~~~ Sim
+
+    classDef optional stroke-dasharray: 5 5;
+    classDef invisible fill:none,stroke:none;
+    class TMTCRow1,TMTCRow2,AOCSRow1,AOCSRow2 invisible;
+</pre>
+
+<p>The dotted lines are used to denote optional components. In this case, the simulation client is
+optional because a dummy interface can be used instead to run the example without the simulator.
 Some additional explanation is provided for the various components.</p>
 <h3 id="tcpip-server-components"><a class="header" href="#tcpip-server-components">TCP/IP server components</a></h3>
 <p>The example includes a UDP and TCP server to receive telecommands and poll telemetry from. This
@@ -203,110 +252,39 @@ telecommands from the client.</p>
 <p>The most important components of the TMTC infrastructure include the following components:</p>
 <ul>
 <li>A TC source component which demultiplexes and routes telecommands based on parameters like
-packet APID or PUS service and subservice type.</li>
+packet APID and a target ID which is part of the packet payload.</li>
 <li>A TM sink sink component which is the target of all sent telemetry and sends it to downlink
 handlers like the UDP and TCP server.</li>
 </ul>
 <p>You can read the <a href="./communication.html">Communications chapter</a> for more
 background information on the chosen TMTC infrastructure approach.</p>
-<h3 id="pus-service-components"><a class="header" href="#pus-service-components">PUS Service Components</a></h3>
-<p>A PUS service stack is provided which exposes some functionality conformant with the ECSS PUS
-services. This currently includes the following services:</p>
-<ul>
-<li>Service 1 for telecommand verification. The verification handling is handled locally: Each
-component which generates verification telemetry in some shape or form receives a
-<a href="https://docs.rs/satrs/latest/satrs/pus/verification/struct.VerificationReporterWithSender.html">reporter</a>
-object which can be used to send PUS 1 verification telemetry to the TM funnel.</li>
-<li>Service 3 for housekeeping telemetry handling.</li>
-<li>Service 5 for management and downlink of on-board events.</li>
-<li>Service 8 for handling on-board actions.</li>
-<li>Service 11 for scheduling telecommands to be released at a specific time. This component
-uses the <a href="https://docs.rs/satrs/latest/satrs/pus/scheduler/alloc_mod/struct.PusScheduler.html">PUS scheduler class</a>
-which performs the core logic of scheduling telecommands. All telecommands released by the
-scheduler are sent to the central TC source using a message.</li>
-<li>Service 17 for test purposes like pings.</li>
-</ul>
-<h3 id="event-management-component"><a class="header" href="#event-management-component">Event Management Component</a></h3>
-<p>An event manager based on the sat-rs
-<a href="https://docs.rs/satrs/latest/satrs/event_man/index.html">event manager component</a>
-is provided to handle the event IPC and FDIR mechanism. The event message are converted to PUS 5
-telemetry by the
-<a href="https://docs.rs/satrs/latest/satrs/pus/event_man/alloc_mod/struct.PusEventDispatcher.html">PUS event dispatcher</a>.</p>
-<p>You can read the <a href="./events.html">events</a> chapter for more in-depth information about event management.</p>
-<h3 id="sample-application-components"><a class="header" href="#sample-application-components">Sample Application Components</a></h3>
-<p>These components are example mission specific. They provide an idea how mission specific modules
-would look like the sat-rs context. It currently includes the following components:</p>
-<ul>
-<li>An Attitute and Orbit Control (AOCS) example task which can also process some PUS commands.</li>
-</ul>
 <h2 id="dataflow"><a class="header" href="#dataflow">Dataflow</a></h2>
-<p>The interaction of the various components is provided in the following diagram:</p>
-<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="images/satrs-example/satrs-example-dataflow.png" alt="satrs-example dataflow diagram"><span class="img-wrapper"><img src="images/satrs-example/satrs-example-dataflow.png" alt="satrs-example dataflow diagram"></span></label></p>
-<p>It should be noted that an arrow coming out of a component group refers to multiple components
-in that group. An explanation for important component groups will be given.</p>
-<h4 id="tmtc-component-group"><a class="header" href="#tmtc-component-group">TMTC component group</a></h4>
-<p>This groups is the primary interface for clients to communicate with the on-board software
-using a standardized TMTC protocol. The example uses the
-<a href="https://ecss.nl/standard/ecss-e-st-70-41c-space-engineering-telemetry-and-telecommand-packet-utilization-15-april-2016/">ECSS PUS protocol</a>.
+<h3 id="tmtc-component-group"><a class="header" href="#tmtc-component-group">TMTC component group</a></h3>
+<p>This group is the primary interface for clients to communicate with the on-board software
+using the combination of CCSDS space packets and <code>serde</code> serialized payloads.
 In the future, this might be extended with the
 <a href="https://public.ccsds.org/Pubs/727x0b5.pdf">CCSDS File Delivery Protocol</a>.</p>
-<p>A client can connect to the UDP or TCP server to send these PUS packets to the on-board software.
-These servers then forward the telecommads to a centralized TC source component using a dedicated
-message abstraction.</p>
-<p>This TC source component then demultiplexes the message and forwards it to the relevant components.
-Right now, it forwards all PUS requests to the respective PUS service handlers using the PUS
-receiver component. The individual PUS services are running in a separate thread. In the future,
-additional forwarding to components like a CFDP handler might be added as well. It should be noted
-that PUS11 commands might contain other PUS commands which should be scheduled in the future.
-These wrapped commands are forwarded to the PUS11 handler. When the schedule releases those
-commands, it forwards the released commands to the TC source again. This allows the scheduler
-and the TC source to run in separate threads and keeps them cleanly separated.</p>
-<p>All telemetry generated by the on-board software is sent to a centralized TM funnel. This component
-also performs a demultiplexing step to forward all telemetry to the relevant TM recipients.
-In the example case, this is the last UDP client, or a connected TCP client. In the future,
-forwarding to a persistent telemetry store and a simulated communication component might be
-added here as well. The centralized TM funnel also takes care of some packet processing steps which
-need to be applied for each ECSS PUS packet, for example CCSDS specific APID incrementation and
-PUS specific message counter incrementation.</p>
-<h4 id="application-group"><a class="header" href="#application-group">Application Group</a></h4>
-<p>The application components generally do not receive raw PUS packets directly, even though
-this is certainly possible. Instead, they receive internalized messages from the PUS service
-handlers. For example, instead of receiving a PUS 8 Action Telecommand directly, an application
-component will receive a special <code>ActionRequest</code> message type reduced to the basic important
-information required to execute a request. These special requests are denoted by the blue arrow
-in the diagram.</p>
-<p>It should be noted that the arrow pointing towards the event manager points in both directions.
-This is because the application components might be interested in events generated by other
-components as well. This mechanism is oftentimes used to implement the FDIR functionality on system
-and component level.</p>
-<h4 id="shared-components-and-functional-interfaces"><a class="header" href="#shared-components-and-functional-interfaces">Shared components and functional interfaces</a></h4>
-<p>It should be noted that sometimes, a functional interface is used instead of a message. This
-is used for the generation of verification telemetry. The verification reporter is a clonable
-component which generates and sends PUS1 verification telemetry directly to the TM funnel. This
-introduces a loose coupling to the PUS standard but was considered the easiest solution for
-a project which utilizes PUS as the main communication protocol. In the future, a generic
-verification abstraction might be introduced to completely decouple the application layer from
-PUS.</p>
-<p>The same concept is applied if the backing store of TMTC packets are shared pools. Every
-component which needs to read telecommands inside that shared pool or generate new telemetry
-into that shared pool will received a clonable shared handle to that pool.</p>
-<p>The same concept could be extended to power or thermal handling. For example, a shared power helper
-component might be used to retrieve power state information and send power switch commands through
-a functional interface. The actual implementation of the functional interface might still use
-shared memory and/or messages, but the functional interface makes using and testing the interaction
-with these components easier.</p>
+<p>A client can connect to the UDP or TCP server to send telecommands to the on-board software.
+These servers forward all telecommands to a centralized TC source component, which demultiplexes
+them and routes each one to its target component.</p>
+<p>All telemetry generated by the on-board software is sent to a centralized TM sink. The core
+controller also forwards events to the event manager, which converts them into telemetry and
+sends it to the TM sink as well. The TM sink performs a demultiplexing step to forward all
+telemetry to the relevant recipients, which in the example case are the last connected UDP
+client and any connected TCP client.</p>
+<h3 id="application-group"><a class="header" href="#application-group">Application Group</a></h3>
+<p>The application group contain some components you might also find in a real satellite software.
+This includes an AOCS stack with various device handlers and system level objects.</p>
+<h3 id="shared-components-and-functional-interfaces"><a class="header" href="#shared-components-and-functional-interfaces">Shared components and functional interfaces</a></h3>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="events.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="design.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="design.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -314,13 +292,10 @@ with these components easier.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="events.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="design.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="design.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                    </a>
             </nav>
 
         </div>

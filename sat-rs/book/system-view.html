@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Design - The sat-rs book</title>
+        <title>System View - The sat-rs book</title>
 
 
         <!-- Custom HTML head -->
@@ -174,69 +174,55 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="library-design"><a class="header" href="#library-design">Library Design</a></h1>
-<p>Satellites and space systems in general are complex systems with a wide range of requirements for
-both the hardware and the software. Consequently, the general design of the library is centered
-around many light-weight components which try to impose as few restrictions as possible on how to
-solve certain problems.</p>
-<p>There are still a lot of common patterns and architectures across these systems where guidance
-of how to solve a problem and a common structure would still be extremely useful to avoid pitfalls
-which were already solved and to avoid boilerplate code. This library tries to provide this
-structure and guidance the following way:</p>
-<ol>
-<li>Providing this book which explains the architecture and design patterns in respect to common
-issues and requirements of space systems.</li>
-<li>Providing an example application. Space systems still commonly have large monolithic
-primary On-Board Softwares, so the choice was made to provide one example software which
-contains the various features provided by sat-rs.</li>
-<li>Providing a good test suite. This includes both unittests and integration tests. The integration
-tests can also serve as smaller usage examples than the large <code>satrs-example</code> application.</li>
-</ol>
-<p>This library has special support for standards used in the space industry. This especially
-includes standards provided by Consultative Committee for Space Data Systems (CCSDS) and European
-Cooperation for Space Standardization (ECSS). It does not enforce using any of those standards,
-but it is always recommended to use some sort of standard for interoperability.</p>
-<p>A lot of the modules and design considerations are based on the Flight Software Framework (FSFW).
-The FSFW has its own <a href="https://documentation.irs.uni-stuttgart.de/fsfw/">documentation</a>, which
-will be referred to when applicable. The FSFW was developed over a period of 10 years for the
-Flying Laptop Project by the University of Stuttgart with Airbus Defence and Space GmbH.
-It has flight heritage through the 2 mssions <a href="https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/flying-laptop/">FLP</a>
-and <a href="https://www.irs.uni-stuttgart.de/en/research/satellitetechnology-and-instruments/smallsatelliteprogram/EIVE/">EIVE</a>.
-Therefore, a lot of the design concepts were ported more or less unchanged to the <code>sat-rs</code>
-library.
-FLP is a medium-size small satellite with a higher budget and longer development time than EIVE,
-which allowed to build a highly reliable system while EIVE is a smaller 6U+ cubesat which had a
-shorter development cycle and was built using cheaper COTS components. This library also tries
-to accumulate the knowledge of developing the OBSW and operating the satellite for both these
-different systems and provide a solution for a wider range of small satellite systems.</p>
-<p><code>sat-rs</code> can be seen as a modern port of the FSFW which uses common principles of software
-engineering to provide a reliable and robust basis for space On-Board Software. The choice
-of using the Rust programming language was made for the following reasons:</p>
-<ol>
-<li>Rust has safety guarantees which are a perfect fit for space systems which generally have high
-robustness and reliablity guarantees.</li>
-<li>Rust is suitable for embedded systems. It can also be run on smaller embedded systems like the
-STM32 which have also become common in the space sector. All space systems are embedded systems,
-which makes using large languages like Python challenging even for OBCs with more performance.</li>
-<li>Rust has support for linking C APIs through its excellent FFI support. This is especially
-important because many vendor provided libaries are still C based.</li>
-<li>Modern tooling like a package managers and various development helper, which can further reduce
-development cycles for space systems. <code>cargo</code> provides tools like auto-formatters and linters
-which can immediately ensure a high software quality throughout each development cycle.</li>
-<li>A large ecosystem with excellent libraries which also leverages the excellent tooling provided
-previously. Integrating these libraries is a lot easier compared to languages like C/C++ where
-there is still no standardized way to use packages.</li>
-</ol>
+                        <h1 id="system-view"><a class="header" href="#system-view">System View</a></h1>
+<p>This chapter gives a system level view of how a typical flight software built with <code>sat-rs</code>,
+<a href="https://egit.irs.uni-stuttgart.de/rust/spacepackets"><code>spacepackets</code></a> and
+<a href="https://egit.irs.uni-stuttgart.de/rust/cfdp"><code>cfdp</code></a> is layered. It complements the previous
+chapters, which focus on individual components, by showing how those components fit together
+and where the line between application and platform is usually drawn.</p>
+<h2 id="generic-layering"><a class="header" href="#generic-layering">Generic layering</a></h2>
+<p>Flight software built with <code>sat-rs</code> is generally structured into three layers.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./images/satrs-arch-generic.drawio.png" alt="Generic architecture"><span class="img-wrapper"><img src="./images/satrs-arch-generic.drawio.png" alt="Generic architecture"></span></label></p>
+<ul>
+<li><strong>Application</strong>: The mission specific logic. This is the code a developer writes for a
+particular mission. It covers mission logic, TMTC handling, event handling, FDIR and command
+scheduling. <code>sat-rs</code> provides re-usable building blocks for all of these, but the concrete
+wiring and mission behaviour lives here.</li>
+<li><strong>System / platform</strong>: The set of services the application is built on. This covers
+concepts like logging, serialization, IPC, task and memory management, hardware
+access, filesystem access and time. Most of these components are provided by external libraries
+and APIs.</li>
+<li><strong>Hardware</strong>: The physical target the software runs on.</li>
+</ul>
+<p>The application layer stays largely the same across missions and targets. The system / platform
+layer is where the target environment determines which concrete crates and mechanisms are used.</p>
+<h2 id="embedded-linux"><a class="header" href="#embedded-linux">Embedded Linux</a></h2>
+<p>On an embedded Linux target, the platform layer is provided by the Rust standard library and a
+small set of additional crates.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./images/satrs-arch-linux.drawio.png" alt="Linux architecture"><span class="img-wrapper"><img src="./images/satrs-arch-linux.drawio.png" alt="Linux architecture"></span></label></p>
+<p>The application layer uses <code>sat-rs</code> together with <code>spacepackets</code> for CCSDS/ECSS packet handling
+and <code>cfdp</code> for file transfer. The platform layer relies on <code>std</code> for tasks, IPC, memory, time and
+filesystem access, <code>serde</code> and <code>postcard</code> for serialization and <code>log</code>/<code>fern</code> for logging. Hardware
+access typically goes through Linux mechanisms like <code>uio</code>.</p>
+<h2 id="embedded-async-targets-embassy--rtic"><a class="header" href="#embedded-async-targets-embassy--rtic">Embedded async targets (Embassy / RTIC)</a></h2>
+<p>On smaller microcontrollers without an operating system, the platform layer looks quite
+different, even though the application layer stays the same.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./images/satrs-arch-embassy.drawio.png" alt="Embassy/RTIC architecture"><span class="img-wrapper"><img src="./images/satrs-arch-embassy.drawio.png" alt="Embassy/RTIC architecture"></span></label></p>
+<p>Here the platform layer is built around an async-centric executor, either
+<a href="https://embassy.dev/">Embassy</a> or <a href="https://rtic.rs/">RTICv2</a>. <code>alloc</code>-based crates like
+<code>heapless</code> and <code>embedded-alloc</code> replace <code>std</code> collections and allocation, <code>defmt</code> replaces <code>log</code>
+for logging and hardware access goes through a board support package (BSP), a hardware
+abstraction layer (HAL) and a peripheral access crate (PAC) instead of the OS.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="system-view.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="events.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="example.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="design.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -246,11 +232,11 @@ there is still no standardized way to use packages.</li>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="system-view.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="events.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="example.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="design.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

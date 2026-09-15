@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-0c17edf6.js";
+            window.path_to_searchindex_js = "searchindex-27f0876d.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-046d9cbf.js"></script>
+        <script src="toc-d3431f96.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -245,13 +245,12 @@ multiplexing</li>
 <li>Basic sequence counter which can be used to determine missed packets</li>
 </ul>
 <p>However, how does the actual payload that we want to send to or from the satellite actually look
-like? While there are standards like the Packet Utilisation Standard (PUS), we recommend a payload
-format which is created with the excellent <a href="https://serde.rs/"><code>serde</code></a> library. The
-<a href="./tmtc-modelling.html">TMTC modelling</a> chapter provides more information.</p>
+like? We recommend a payload format which is created with the excellent <a href="https://serde.rs/"><code>serde</code></a>
+library. The <a href="./tmtc-modelling.html">TMTC modelling</a> chapter provides more information.</p>
 <h1 id="low-level-protocols-and-the-bridge-to-the-communcation-subsystem"><a class="header" href="#low-level-protocols-and-the-bridge-to-the-communcation-subsystem">Low-level protocols and the bridge to the communcation subsystem</a></h1>
 <p>Many satellite systems usually use the lower levels of the OSI layer in addition to the application
-layer covered by the PUS standard or the CCSDS space packets standard. This oftentimes requires
-special hardware like dedicated FPGAs to handle forward error correction fast enough. <code>sat-rs</code>
+layer. This oftentimes requires special hardware like dedicated FPGAs to handle forward error
+correction fast enough. <code>sat-rs</code>
 might provide components to handle standard like the Unified Space Data Link Standard (USLP) in
 software but most of the time the handling of communication is performed through custom
 software and hardware. Still, connecting this custom software and hardware to <code>sat-rs</code> can mostly

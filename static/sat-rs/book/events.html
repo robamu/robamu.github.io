@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-27f0876d.js";
+            window.path_to_searchindex_js = "searchindex-4031a6b5.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-d3431f96.js"></script>
@@ -176,7 +176,91 @@
                     <main>
                         <h1 id="events"><a class="header" href="#events">Events</a></h1>
 <p>Events are an important mechanism used for remote systems to monitor unexpected
-or expected anomalies and events occuring on these systems.</p>
+or expected anomalies and events occuring on these systems.
+They can improve the observability of a system significantly and provide a
+“paper trail” of what is happening or has happened on a satellite where regular
+housekeeping packets might not be sufficient. They can also be used for fault
+detection, isolation and recovery (FDIR) purposes. For example, higher level
+system objects can listen on certain high criticality events to initiate
+custom system responses.</p>
+<h2 id="event-severity"><a class="header" href="#event-severity">Event Severity</a></h2>
+<p>Generally, it also makes sense to classify events according to a severity system
+so operators can quickly judge the importance of an event. <code>sat-rs</code> does not
+constrain the severity classes or enforce their usage, but a severity
+classification like this can make sense:</p>
+<ul>
+<li>INFO</li>
+<li>LOW ERROR</li>
+<li>MEDIUM ERROR</li>
+<li>HIGH ERROR</li>
+</ul>
+<h2 id="modelling-events-with-rust"><a class="header" href="#modelling-events-with-rust">Modelling Events with Rust</a></h2>
+<p>Usually, events will be associated with certain software objects or handlers.
+Oftentimes, developers and operators want to supply parameters or metadata
+associated with an event. This can all be done using the Rust <code>enum</code> type.</p>
+<p>Let’s start with an example: a camera device
+handler might have the following events:</p>
+<ul>
+<li>Image taken event</li>
+<li>Communication error event including an error classifier</li>
+<li>Communication timeout event with the configured timeout</li>
+<li>Overheating event</li>
+</ul>
+<p>You can model these events using the following data structure, also including
+a <code>severity</code> method.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, serde::Serialize, serde::Deserialize, Clone)]
+pub enum Event {
+    ImageTaken,
+    CommunicationError(ErrorType),
+    CommunicationTimeout(core::time::Duration),
+    Overheating
+}
+
+impl Event {
+    pub fn severity(&amp;self) -&gt; Severity {
+        match self {
+            Event::ImageTaken =&gt; Severity::Info,
+            Event::CommunicationError(_) =&gt; Severity::Low,
+            Event::CommunicationTimeout(_) =&gt; Severity::Low,
+            Event::Overheating =&gt; Severity::High,
+        } 
+    }
+}
+<span class="boring">}</span></code></pre>
+<p>Depending on the requirements of your system, you might want to filter which
+events are packaged and sent as telemetry. This requires an identification
+system. A simple scheme would be to add something like this:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Event {
+    pub fn id(&amp;self) -&gt; u32 {
+        match self {
+            Event::ImageTaken =&gt; 0,
+            Event::CommunicationError(_) =&gt; 1,
+            Event::CommunicationTimeout(_) =&gt; 2,
+            Event::Overheating =&gt; 3,
+        } 
+    }
+}
+
+<span class="boring">}</span></code></pre>
+<h2 id="handling-events"><a class="header" href="#handling-events">Handling events</a></h2>
+<p>When an event occurs in the system, you want to trigger the event.
+This usually includes sending the event to a centralized event funnel. The funnel
+takes care of packing the event into a telemetry packet as well as forwarding
+the event to any other objects which are interested in the event. A message
+queue system is the best solution for this. For example, on an embedded Linux
+system, you might have an event sender handle like this inside your camera
+device handler:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct CameraHandler {
+    // (...)
+    event_sender: std::sync::mpsc::SyncSender&lt;Event&gt;
+}
+<span class="boring">}</span></code></pre>
 
                     </main>
 

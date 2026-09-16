@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-27f0876d.js";
+            window.path_to_searchindex_js = "searchindex-4031a6b5.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-d3431f96.js"></script>
@@ -185,9 +185,7 @@ and where the line between application and platform is usually drawn.</p>
 <p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./images/satrs-arch-generic.drawio.png" alt="Generic architecture"><span class="img-wrapper"><img src="./images/satrs-arch-generic.drawio.png" alt="Generic architecture"></span></label></p>
 <ul>
 <li><strong>Application</strong>: The mission specific logic. This is the code a developer writes for a
-particular mission. It covers mission logic, TMTC handling, event handling, FDIR and command
-scheduling. <code>sat-rs</code> provides re-usable building blocks for all of these, but the concrete
-wiring and mission behaviour lives here.</li>
+particular mission.</li>
 <li><strong>System / platform</strong>: The set of services the application is built on. This covers
 concepts like logging, serialization, IPC, task and memory management, hardware
 access, filesystem access and time. Most of these components are provided by external libraries
@@ -196,6 +194,12 @@ and APIs.</li>
 </ul>
 <p>The application layer stays largely the same across missions and targets. The system / platform
 layer is where the target environment determines which concrete crates and mechanisms are used.</p>
+<p>The book has specified chapters for some of the topics:</p>
+<ul>
+<li><a href="./tmtc-modelling.html">TMTC handling and Serialization</a></li>
+<li><a href="./events.html">Events</a></li>
+<li><a href="./modes-and-health.html">Modes</a></li>
+</ul>
 <h2 id="embedded-linux"><a class="header" href="#embedded-linux">Embedded Linux</a></h2>
 <p>On an embedded Linux target, the platform layer is provided by the Rust standard library and a
 small set of additional crates.</p>
